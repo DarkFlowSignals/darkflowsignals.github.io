@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DarkFlow -- Performance Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-primary: #0D0D0D;
+  --bg-secondary: #111118;
+  --bg-card: #16161f;
+  --bg-card-hover: #1c1c28;
+  --border: #23232f;
+  --border-accent: #2a2a3a;
+  --text-primary: #e8e8ed;
+  --text-secondary: #8888a0;
+  --text-muted: #55556a;
+  --green: #00E676;
+  --green-dim: #065f27;
+  --green-glow: rgba(0, 230, 118, 0.12);
+  --red: #ef4444;
+  --red-dim: #7f1d1d;
+  --red-glow: rgba(239, 68, 68, 0.12);
+  --amber: #f59e0b;  --amber: #f59e0b;
+  --amber-dim: rgba(245, 158, 11, 0.15);
+  --blue: #3b82f6;
+  --blue-dim: rgba(59, 130, 246, 0.15);
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --gap: 16px;
+  --radius: 6px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-display);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- LAYOUT ---- */
+.dashboard-container { max-width: 1320px; margin: 0 auto; padding: var(--gap); }
+
+/* ---- HEADER ---- */
+.dashboard-header {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 20px 28px;
+  border-radius: var(--radius);
+  margin-bottom: var(--gap);  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.header-left { display: flex; align-items: center; gap: 16px; }
+
+.logo {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+.logo-dark { color: #fff; }
+.logo-flow { color: var(--green); }
+
+.header-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  border-left: 1px solid var(--border);
+  padding-left: 16px;
+}
+
+.live-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  background: var(--green);
+  border-radius: 50%;  margin-right: 6px;
+  box-shadow: 0 0 6px var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ---- FILTERS ---- */
+.filters {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-group label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filter-group select,
+.filter-group input[type="date"] {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.filter-group select:hover,
+.filter-group input[type="date"]:hover {
+  border-color: var(--border-accent);
+}
+
+.filter-group select:focus,
+.filter-group input[type="date"]:focus {
+  border-color: var(--green);
+}
+
+.filter-group select option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* ---- KPI ROW ---- */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+.kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  transition: border-color 0.2s;
+}
+
+.kpi-card:hover { border-color: var(--border-accent); }
+
+.kpi-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+}
+
+.kpi-value {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+.kpi-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.kpi-value.positive { color: var(--green); }
+.kpi-value.negative { color: var(--red); }
+.kpi-value.neutral { color: var(--text-primary); }
+.kpi-value.amber { color: var(--amber); }
+
+/* ---- CHART ROW ---- */
+.chart-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+.chart-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+}
+
+.chart-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  font-family: var(--font-mono);
+}
+
+.chart-container canvas { max-height: 280px; }
+
+/* ---- SIGNAL LOG TABLE ---- */
+.table-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  overflow-x: auto;
+  margin-bottom: var(--gap);
+}
+
+.table-section h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  font-family: var(--font-mono);}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-family: var(--font-mono);
+}
+
+.data-table thead th {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-accent);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.data-table thead th:hover { color: var(--text-primary); }
+
+.data-table tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  color: var(--text-secondary);
+}
+
+.data-table tbody tr:hover td { background: var(--bg-card-hover); }
+.data-table tbody tr:last-child td { border-bottom: none; }
+
+/* Status badges */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-open { background: var(--blue-dim); color: var(--blue); }
+.badge-win { background: var(--green-glow); color: var(--green); }
+.badge-loss { background: var(--red-glow); color: var(--red); }
+.badge-bullish { background: var(--green-glow); color: var(--green); }
+.badge-bearish { background: var(--red-glow); color: var(--red); }
+.pnl-positive { color: var(--green); font-weight: 600; }
+.pnl-negative { color: var(--red); font-weight: 600; }
+
+/* ---- SIGNAL OF THE DAY ---- */
+.signal-highlight {
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(0, 230, 118, 0.06) 100%);
+  border: 1px solid var(--green-dim);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: var(--gap);
+  box-shadow: 0 0 20px rgba(0, 230, 118, 0.08), inset 0 1px 0 rgba(0, 230, 118, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+.signal-highlight::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  opacity: 0.6;
+}
+.signal-highlight-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.signal-highlight-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--green);
+  background: var(--green-glow);
+  border: 1px solid var(--green-dim);
+  padding: 4px 12px;
+  letter-spacing: 1.5px;
+}
+.signal-highlight-ticker {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.signal-highlight-meta {
+  display: flex;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.signal-highlight-score { color: var(--amber); font-weight: 600; }
+.signal-highlight-type { color: var(--green); }
+
+/* ---- AUTO-REFRESH ---- */
+.refresh-indicator {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.refresh-indicator .dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s infinite;
+}
+
+/* ---- FOOTER ---- */
+.dashboard-footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-family: var(--font-mono);
+}
+
+.dashboard-footer a { color: var(--green); }
+
+/* ---- EMPTY STATE ---- */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-muted);
+}
+
+.empty-state .icon { font-size: 36px; margin-bottom: 12px; }
+.empty-state p { font-size: 14px; max-width: 400px; margin: 0 auto; }
+
+/* ---- CLICKABLE TICKER ---- */
+.ticker-link {
+  color: var(--green);
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s, text-shadow 0.15s;
+}
+.ticker-link:hover {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0, 230, 118, 0.5);
+}
+
+/* ---- LIVE PRICE CELL ---- */
+.live-price {
+  font-weight: 600;
+  transition: color 0.3s;
+}
+.live-price.flash-up {
+  color: var(--green);
+  animation: flashUp 0.6s ease-out;
+}
+.live-price.flash-down {
+  color: var(--red);
+  animation: flashDown 0.6s ease-out;
+}
+.live-price-loading {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+@keyframes flashUp {
+  0% { background: rgba(0, 230, 118, 0.25); }
+  100% { background: transparent; }
+}
+@keyframes flashDown {
+  0% { background: rgba(239, 68, 68, 0.25); }
+  100% { background: transparent; }
+}
+
+/* ---- TRADINGVIEW CHART MODAL ---- */
+.tv-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.tv-modal-overlay.active {
+  display: flex;
+}
+.tv-modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border-accent);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 1100px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+}
+.tv-modal-header {
+  display: flex;  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.tv-modal-ticker {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.tv-modal-ticker span {
+  color: var(--green);
+}
+.tv-modal-close {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-family: var(--font-mono);
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.tv-modal-close:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border-color: var(--border-accent);
+}
+.tv-modal-body {
+  flex: 1;
+  min-height: 500px;
+  position: relative;
+}
+.tv-modal-body iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  border: none;
+}
+
+/* ---- FINNHUB STATUS INDICATOR ---- */
+.ws-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-left: 12px;
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+.ws-status-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+.ws-status-dot.connected {
+  background: var(--green);
+  box-shadow: 0 0 4px var(--green);
+}
+.ws-status-dot.error {
+  background: var(--red);
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  .dashboard-header { flex-direction: column; align-items: flex-start; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .chart-row { grid-template-columns: 1fr; }
+  .filters { flex-direction: column; align-items: flex-start; }
+  .tv-modal { max-width: 100%; }
+  .tv-modal-body { min-height: 350px; }
+  .tv-modal-body iframe { min-height: 350px; }
+}
+
+@media print {
+  body { background: #111; }
+  .filters { display: none; }
+  .chart-container { break-inside: avoid; }
+  .tv-modal-overlay { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="dashboard-container">
+
+  <!-- HEADER -->
+  <header class="dashboard-header">
+    <div class="header-left">
+      <a href="/" class="logo" style="text-decoration:none;color:inherit;"><span class="logo-dark">DARK</span><span class="logo-flow">FLOW</span></a>
+      <div class="header-subtitle"><span class="live-dot"></span>Performance Dashboard</div>
+      <div class="ws-status" id="ws-status">
+        <span class="ws-status-dot" id="ws-dot"></span>
+        <span id="ws-label">PRICES OFFLINE</span>
+      </div>
+    </div>
+    <div class="filters">
+      <div class="filter-group">
+        <label>Status</label>
+        <select id="filter-status" onchange="dashboard.applyFilters()">
+          <option value="all">All</option>
+          <option value="open">Open</option>
+          <option value="closed">Closed</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Direction</label>
+        <select id="filter-direction" onchange="dashboard.applyFilters()">
+          <option value="all">All</option>
+          <option value="BULLISH">Bullish</option>
+          <option value="BEARISH">Bearish</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Category</label>
+        <select id="filter-category" onchange="dashboard.applyFilters()">
+          <option value="all">All</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Score</label>
+        <select id="filter-score" onchange="dashboard.applyFilters()">
+          <option value="all">All</option>
+          <option value="85">85+ (High Conviction)</option>
+          <option value="75">75+ (Actionable)</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- SIGNAL OF THE DAY -->
+  <section class="signal-highlight" id="signal-of-day" style="display:none;">
+    <div class="signal-highlight-inner">
+      <div class="signal-highlight-badge">SIGNAL OF THE DAY</div>
+      <div class="signal-highlight-ticker" id="sotd-ticker"></div>
+      <div class="signal-highlight-meta">
+        <span class="signal-highlight-score" id="sotd-score"></span>
+        <span class="signal-highlight-type" id="sotd-type"></span>
+        <span class="signal-highlight-entry" id="sotd-entry"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPI ROW -->
+  <section class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-label">Total Signals</div>
+      <div class="kpi-value neutral" id="kpi-total">--</div>
+      <div class="kpi-sub" id="kpi-total-sub"></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Win Rate</div>
+      <div class="kpi-value neutral" id="kpi-winrate">--</div>
+      <div class="kpi-sub" id="kpi-winrate-sub"></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Avg Return</div>
+      <div class="kpi-value neutral" id="kpi-avgpnl">--</div>
+      <div class="kpi-sub" id="kpi-avgpnl-sub"></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Best Trade</div>
+      <div class="kpi-value neutral" id="kpi-best">--</div>
+      <div class="kpi-sub" id="kpi-best-sub"></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Worst Trade</div>
+      <div class="kpi-value neutral" id="kpi-worst">--</div>
+      <div class="kpi-sub" id="kpi-worst-sub"></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Avg Conviction</div>
+      <div class="kpi-value amber" id="kpi-conviction">--</div>
+      <div class="kpi-sub" id="kpi-conviction-sub"></div>
+    </div>
+  </section>
+
+  <!-- CHARTS ROW 1 -->
+  <section class="chart-row">
+    <div class="chart-container">
+      <div class="chart-title">Cumulative P&L Curve</div>
+      <canvas id="chart-equity"></canvas>
+      <div class="empty-state" id="equity-empty" style="display:none;">
+        <div class="icon">&#x1f4c8;</div>
+        <p>P&L curve will populate as trades close. Log outcomes in trade_log.csv to see this chart come alive.</p>
+      </div>
+    </div>
+    <div class="chart-container">
+      <div class="chart-title">Win / Loss Breakdown</div>
+      <canvas id="chart-winloss"></canvas>
+      <div class="empty-state" id="winloss-empty" style="display:none;">
+        <div class="icon">&#x1f3af;</div>
+        <p>No closed trades yet. Your win/loss ratio will appear here once outcomes are recorded.</p>
+      </div>
+    </div>  </section>
+
+  <!-- CHARTS ROW 2 -->
+  <section class="chart-row">
+    <div class="chart-container">
+      <div class="chart-title">Conviction Score vs Outcome</div>
+      <canvas id="chart-scatter"></canvas>
+      <div class="empty-state" id="scatter-empty" style="display:none;">
+        <div class="icon">&#x1f9e0;</div>
+        <p>This scatter plot maps conviction score to realized P&L. Close some trades to see if higher conviction = better returns.</p>
+      </div>
+    </div>
+    <div class="chart-container">
+      <div class="chart-title">Signal Direction Distribution</div>
+      <canvas id="chart-direction"></canvas>
+    </div>
+  </section>
+
+  <!-- CHARTS ROW 3 -->
+  <section class="chart-row">
+    <div class="chart-container">
+      <div class="chart-title">Conviction Score Distribution</div>
+      <canvas id="chart-conviction"></canvas>
+    </div>
+    <div class="chart-container">
+      <div class="chart-title">Signals by Ticker</div>
+      <canvas id="chart-tickers"></canvas>
+    </div>
+  </section>
+
+  <!-- TRADE LOG TABLE -->
+  <section class="table-section">
+    <h3>Signal Log <span style="font-weight:400;font-size:10px;color:var(--text-muted);margin-left:8px;">Click any ticker to view chart</span></h3>
+    <div id="trade-table-container"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="dashboard-footer">
+    <span class="logo-dark">DARK</span><span class="logo-flow">FLOW</span> &middot; Data as of <span id="data-date"></span> &middot; Signals are not financial advice
+  </footer>
+
+</div>
+
+<!-- TRADINGVIEW CHART MODAL -->
+<div class="tv-modal-overlay" id="tv-modal-overlay">
+  <div class="tv-modal">
+    <div class="tv-modal-header">
+      <div class="tv-modal-ticker" id="tv-modal-ticker"></div>
+      <button class="tv-modal-close" id="tv-modal-close">ESC &times;</button>
+    </div>
+    <div class="tv-modal-body" id="tv-modal-body"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// EXTERNAL DATA -- Loaded from signals.json
+// No personal trades, no portfolio data. Signals only.
+// ============================================================
+let DATA = [];
+// Fallback empty array. Primary data loaded from signals.json via fetch().
+
+// ============================================================
+// CHART.JS DEFAULTS
+// ============================================================
+Chart.defaults.color = '#8888a0';
+Chart.defaults.borderColor = '#23232f';
+Chart.defaults.font.family = "'JetBrains Mono', 'Fira Code', monospace";
+Chart.defaults.font.size = 11;
+
+const COLORS = {
+  green: '#00E676',
+  red: '#ef4444',
+  amber: '#f59e0b',
+  blue: '#3b82f6',
+  purple: '#a855f7',
+  cyan: '#06b6d4',
+  greenGlow: 'rgba(0, 230, 118, 0.15)',
+  redGlow: 'rgba(239, 68, 68, 0.15)',
+};
+
+// ============================================================
+// FINNHUB WEBSOCKET - Live Price Streaming (Free Tier)
+// ============================================================
+const FinnhubPrices = {
+  // Replace with your Finnhub API key from finnhub.io (free tier)
+  API_KEY: 'demo',
+  ws: null,
+  prices: {},       // { AAPL: { price: 150.25, prevPrice: 150.10, timestamp: ... } }
+  subscribers: new Set(),
+  connected: false,
+  reconnectTimer: null,
+  reconnectDelay: 5000,
+
+  init() {
+    if (this.API_KEY === 'demo') {
+      console.log('[Finnhub] Using demo key. Get your free API key at https://finnhub.io');
+      this.updateStatusUI('offline');
+      return;
+    }
+    this.connect();
+  },
+
+  connect() {
+    if (this.ws && (this.ws.readyState === WebSocket.OPEN || this.ws.readyState === WebSocket.CONNECTING)) {
+      return;
+    }
+
+    try {
+      this.ws = new WebSocket('wss://ws.finnhub.io?token=' + this.API_KEY);
+
+      this.ws.onopen = () => {
+        console.log('[Finnhub] WebSocket connected');
+        this.connected = true;
+        this.updateStatusUI('connected');
+        // Subscribe to all tickers currently in the data
+        this.subscribers.forEach(symbol => {
+          this.ws.send(JSON.stringify({ type: 'subscribe', symbol: symbol }));
+        });
+      };
+
+      this.ws.onmessage = (event) => {
+        const msg = JSON.parse(event.data);
+        if (msg.type === 'trade' && msg.data) {
+          msg.data.forEach(trade => {
+            const symbol = trade.s;
+            const price = trade.p;
+            const prevPrice = this.prices[symbol] ? this.prices[symbol].price : price;
+            this.prices[symbol] = {
+              price: price,
+              prevPrice: prevPrice,
+              timestamp: trade.t,
+              direction: price > prevPrice ? 'up' : price < prevPrice ? 'down' : 'flat'
+            };
+            this.updatePriceCell(symbol);
+          });
+        }
+      };
+
+      this.ws.onclose = () => {
+        console.log('[Finnhub] WebSocket disconnected');
+        this.connected = false;
+        this.updateStatusUI('offline');
+        // Auto-reconnect
+        if (!this.reconnectTimer) {
+          this.reconnectTimer = setTimeout(() => {
+            this.reconnectTimer = null;
+            this.connect();
+          }, this.reconnectDelay);
+        }
+      };
+
+      this.ws.onerror = (err) => {
+        console.warn('[Finnhub] WebSocket error:', err);
+        this.updateStatusUI('error');
+      };
+
+    } catch (e) {
+      console.warn('[Finnhub] Failed to create WebSocket:', e);
+      this.updateStatusUI('error');
+    }
+  },
+
+  subscribe(symbol) {
+    if (!symbol) return;
+    this.subscribers.add(symbol);
+    if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+      this.ws.send(JSON.stringify({ type: 'subscribe', symbol: symbol }));
+    }
+  },
+
+  subscribeAll(tickers) {
+    const unique = [...new Set(tickers.filter(Boolean))];
+    unique.forEach(t => this.subscribe(t));
+  },
+
+  updatePriceCell(symbol) {
+    const cells = document.querySelectorAll(`[data-live-price="${symbol}"]`);
+    const info = this.prices[symbol];
+    if (!info) return;
+
+    cells.forEach(cell => {
+      cell.textContent = '$' + info.price.toFixed(2);
+      cell.classList.remove('flash-up', 'flash-down');
+      // Force reflow to restart animation
+      void cell.offsetWidth;
+      if (info.direction === 'up') {
+        cell.classList.add('flash-up');
+      } else if (info.direction === 'down') {
+        cell.classList.add('flash-down');
+      }
+    });
+  },
+
+  getPrice(symbol) {
+    return this.prices[symbol] || null;
+  },
+
+  updateStatusUI(status) {
+    const dot = document.getElementById('ws-dot');    const label = document.getElementById('ws-label');
+    if (!dot || !label) return;
+
+    dot.className = 'ws-status-dot';
+    if (status === 'connected') {
+      dot.classList.add('connected');
+      label.textContent = 'LIVE PRICES';
+    } else if (status === 'error') {
+      dot.classList.add('error');
+      label.textContent = 'PRICE ERROR';
+    } else {
+      label.textContent = this.API_KEY === 'demo' ? 'ADD API KEY' : 'PRICES OFFLINE';
+    }
+  },
+
+  disconnect() {
+    if (this.ws) {
+      this.ws.close();
+      this.ws = null;
+    }
+    if (this.reconnectTimer) {
+      clearTimeout(this.reconnectTimer);
+      this.reconnectTimer = null;
+    }
+  }
+};
+
+// ============================================================
+// TRADINGVIEW CHART MODAL
+// ============================================================
+const TVChart = {
+  overlay: null,
+  body: null,
+  tickerEl: null,
+
+  init() {
+    this.overlay = document.getElementById('tv-modal-overlay');
+    this.body = document.getElementById('tv-modal-body');
+    this.tickerEl = document.getElementById('tv-modal-ticker');
+
+    // Close button
+    document.getElementById('tv-modal-close').addEventListener('click', () => this.close());
+
+    // Click overlay background to close
+    this.overlay.addEventListener('click', (e) => {
+      if (e.target === this.overlay) this.close();
+    });
+
+    // ESC key to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.overlay.classList.contains('active')) {
+        this.close();
+      }
+    });
+  },
+
+  open(ticker) {
+    if (!ticker) return;
+
+    // Clean ticker (remove $ if present)
+    ticker = ticker.replace('$', '').toUpperCase();
+
+    this.tickerEl.innerHTML = '<span>$</span>' + ticker;
+
+    // Build TradingView Advanced Chart widget URL
+    // Using TradingView's free embeddable widget (no API key needed)
+    const widgetHTML = `
+      <iframe
+        src="https://s.tradingview.com/widgetembed/?hideideas=1&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en#%7B%22symbol%22%3A%22${encodeURIComponent(ticker)}%22%2C%22frameElementId%22%3A%22tradingview_darkflow%22%2C%22interval%22%3A%22D%22%2C%22hide_side_toolbar%22%3A%220%22%2C%22allow_symbol_change%22%3A%221%22%2C%22save_image%22%3A%220%22%2C%22studies%22%3A%22MACD%40tv-basicstudies%22%2C%22theme%22%3A%22dark%22%2C%22style%22%3A%221%22%2C%22timezone%22%3A%22America%2FNew_York%22%2C%22studies_overrides%22%3A%22%7B%7D%22%2C%22utm_source%22%3A%22darkflowsignals.github.io%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22chart%22%2C%22page-hierarchicalUri%22%3A%22%2Fdashboard%22%7D"
+        style="width:100%;height:100%;min-height:500px;"
+        frameborder="0"
+        allowtransparency="true"
+        scrolling="no"
+        allowfullscreen>
+      </iframe>`;
+
+    this.body.innerHTML = widgetHTML;
+    this.overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  },
+
+  close() {
+    this.overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    // Clear iframe to stop loading
+    setTimeout(() => { this.body.innerHTML = ''; }, 300);
+  }
+};
+
+// ============================================================
+// DASHBOARD CLASS
+// ============================================================
+class DarkFlowDashboard {
+  constructor(data) {
+    this.rawData = data;
+    this.filteredData = [...data];
+    this.charts = {};
+    this.sortCol = 'conviction_score';
+    this.sortDir = 'desc';
+    this.init();
+  }
+
+  init() {
+    this.populateFilters();
+    this.renderKPIs();
+    this.renderCharts();
+    this.renderTable();
+    document.getElementById('data-date').textContent = new Date().toLocaleDateString('en-US', {
+      year: 'numeric', month: 'short', day: 'numeric'
+    });
+
+    // Subscribe all tickers to Finnhub live prices
+    const tickers = [...new Set(this.rawData.map(d => d.ticker).filter(Boolean))];
+    FinnhubPrices.subscribeAll(tickers);
+  }
+
+  // ---- FILTERS ----
+  populateFilters() {
+    const categories = [...new Set(this.rawData.map(d => d.category))].sort();
+    const sel = document.getElementById('filter-category');
+    categories.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c;
+      opt.textContent = c.charAt(0).toUpperCase() + c.slice(1);
+      sel.appendChild(opt);
+    });
+  }
+
+  applyFilters() {
+    const status = document.getElementById('filter-status').value;
+    const direction = document.getElementById('filter-direction').value;
+    const category = document.getElementById('filter-category').value;
+    const scoreMin = document.getElementById('filter-score').value;
+
+    this.filteredData = this.rawData.filter(row => {
+      if (status !== 'all') {
+        const isClosed = row.result !== null || row.result !== null;
+        if (status === 'closed' && !isClosed) return false;
+        if (status === 'open' && isClosed) return false;
+      }
+      if (direction !== 'all' && row.direction !== direction) return false;
+      if (category !== 'all' && row.category !== category) return false;
+      if (scoreMin !== 'all' && row.conviction_score < parseInt(scoreMin)) return false;
+      return true;
+    });
+
+    this.renderKPIs();
+    this.updateCharts();
+    this.renderTable();
+  }
+
+  // ---- KPIs ----
+  renderKPIs() {
+    const d = this.filteredData;
+    const closed = d.filter(r => r.result !== null);
+    const wins = closed.filter(r => r.result === 'win');
+    const losses = closed.filter(r => r.result === 'loss');
+    const openCount = d.filter(r => r.result === null).length;
+
+    // Total signals
+    document.getElementById('kpi-total').textContent = d.length;
+    document.getElementById('kpi-total-sub').textContent =
+      `${openCount} open / ${closed.length} closed`;
+
+    // Win rate
+    if (closed.length > 0) {
+      const wr = (wins.length / closed.length * 100);
+      const el = document.getElementById('kpi-winrate');
+      el.textContent = wr.toFixed(1) + '%';
+      el.className = 'kpi-value ' + (wr >= 50 ? 'positive' : 'negative');
+      document.getElementById('kpi-winrate-sub').textContent =
+        `${wins.length}W / ${losses.length}L`;
+    } else {
+      document.getElementById('kpi-winrate').textContent = '--';
+      document.getElementById('kpi-winrate').className = 'kpi-value neutral';
+      document.getElementById('kpi-winrate-sub').textContent = 'No closed trades yet';
+    }
+
+    // Avg return
+    const pnls = closed.map(r => r.pnl_pct).filter(p => p !== null);
+    if (pnls.length > 0) {
+      const avg = pnls.reduce((a, b) => a + b, 0) / pnls.length;
+      const el = document.getElementById('kpi-avgpnl');
+      el.textContent = (avg >= 0 ? '+' : '') + avg.toFixed(1) + '%';
+      el.className = 'kpi-value ' + (avg >= 0 ? 'positive' : 'negative');
+      document.getElementById('kpi-avgpnl-sub').textContent = `across ${pnls.length} trades`;
+    } else {
+      document.getElementById('kpi-avgpnl').textContent = '--';
+      document.getElementById('kpi-avgpnl').className = 'kpi-value neutral';
+      document.getElementById('kpi-avgpnl-sub').textContent = 'Awaiting outcomes';
+    }
+
+    // Best trade
+    if (pnls.length > 0) {
+      const best = Math.max(...pnls);
+      const bestTrade = closed.find(r => r.pnl_pct === best);
+      const el = document.getElementById('kpi-best');
+      el.textContent = '+' + best.toFixed(1) + '%';
+      el.className = 'kpi-value positive';
+      document.getElementById('kpi-best-sub').textContent = bestTrade ? bestTrade.ticker : '';    } else {
+      document.getElementById('kpi-best').textContent = '--';
+      document.getElementById('kpi-best').className = 'kpi-value neutral';
+      document.getElementById('kpi-best-sub').textContent = '';
+    }
+
+    // Worst trade
+    if (pnls.length > 0) {
+      const worst = Math.min(...pnls);
+      const worstTrade = closed.find(r => r.pnl_pct === worst);
+      const el = document.getElementById('kpi-worst');
+      el.textContent = worst.toFixed(1) + '%';
+      el.className = 'kpi-value ' + (worst >= 0 ? 'positive' : 'negative');
+      document.getElementById('kpi-worst-sub').textContent = worstTrade ? worstTrade.ticker : '';
+    } else {
+      document.getElementById('kpi-worst').textContent = '--';
+      document.getElementById('kpi-worst').className = 'kpi-value neutral';
+      document.getElementById('kpi-worst-sub').textContent = '';
+    }
+
+    // Avg conviction
+    const convictions = d.map(r => {
+      if (r.score_max && r.score_max !== 100) {
+        return (r.conviction_score / r.score_max) * 100;
+      }
+      return r.conviction_score;
+    });
+    if (convictions.length > 0) {
+      const avg = convictions.reduce((a, b) => a + b, 0) / convictions.length;
+      document.getElementById('kpi-conviction').textContent = avg.toFixed(0);
+      document.getElementById('kpi-conviction-sub').textContent = 'out of 100';
+    }
+  }
+
+  // ---- CHARTS ----
+  renderCharts() {
+    this.renderEquityChart();
+    this.renderWinLossChart();
+    this.renderScatterChart();
+    this.renderDirectionChart();
+    this.renderConvictionChart();
+    this.renderTickerChart();
+  }
+
+  updateCharts() {
+    // Destroy and re-render (simpler for filtered data)
+    Object.values(this.charts).forEach(c => { if (c) c.destroy(); });
+    this.charts = {};
+    this.renderCharts();
+  }
+
+  renderEquityChart() {
+    const closed = this.filteredData
+      .filter(r => r.pnl_pct !== null && r.outcome_date)
+      .sort((a, b) => a.outcome_date.localeCompare(b.outcome_date));
+
+    const canvas = document.getElementById('chart-equity');
+    const empty = document.getElementById('equity-empty');
+
+    if (closed.length === 0) {
+      canvas.style.display = 'none';
+      empty.style.display = 'block';
+      return;
+    }
+
+    canvas.style.display = 'block';
+    empty.style.display = 'none';
+
+    let cumulative = 0;
+    const labels = [];
+    const data = [];
+
+    closed.forEach(r => {
+      cumulative += r.pnl_pct;
+      labels.push(r.ticker + ' ' + r.outcome_date);
+      data.push(cumulative);
+    });
+
+    this.charts.equity = new Chart(canvas.getContext('2d'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Cumulative P&L %',
+          data,
+          borderColor: COLORS.green,
+          backgroundColor: COLORS.greenGlow,
+          borderWidth: 2,
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: data.map(v => v >= 0 ? COLORS.green : COLORS.red),
+          pointBorderColor: 'transparent',
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => `Cumulative: ${ctx.parsed.y >= 0 ? '+' : ''}${ctx.parsed.y.toFixed(1)}%`
+            }
+          }
+        },
+        scales: {
+          x: { display: true, grid: { display: false } },
+          y: {
+            grid: { color: '#23232f' },
+            ticks: { callback: v => (v >= 0 ? '+' : '') + v + '%' }
+          }
+        }
+      }
+    });
+  }
+
+  renderWinLossChart() {
+    const closed = this.filteredData.filter(r => r.result !== null);
+    const canvas = document.getElementById('chart-winloss');
+    const empty = document.getElementById('winloss-empty');
+
+    if (closed.length === 0) {
+      canvas.style.display = 'none';
+      empty.style.display = 'block';
+      return;
+    }
+
+    canvas.style.display = 'block';
+    empty.style.display = 'none';
+
+    const wins = closed.filter(r => r.result === 'win').length;
+    const losses = closed.filter(r => r.result === 'loss').length;
+
+    this.charts.winloss = new Chart(canvas.getContext('2d'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Wins', 'Losses'],
+        datasets: [{
+          data: [wins, losses],
+          backgroundColor: [COLORS.green, COLORS.red],
+          borderColor: '#16161f',
+          borderWidth: 3,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '65%',
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { usePointStyle: true, padding: 20, color: '#8888a0' }
+          },
+          tooltip: {
+            callbacks: {
+              label: ctx => {
+                const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                const pct = ((ctx.parsed / total) * 100).toFixed(1);
+                return `${ctx.label}: ${ctx.parsed} (${pct}%)`;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  renderScatterChart() {
+    const closed = this.filteredData.filter(r => r.pnl_pct !== null);
+    const canvas = document.getElementById('chart-scatter');
+    const empty = document.getElementById('scatter-empty');
+
+    if (closed.length === 0) {
+      canvas.style.display = 'none';
+      empty.style.display = 'block';
+      return;
+    }
+
+    canvas.style.display = 'block';
+    empty.style.display = 'none';
+
+    const points = closed.map(r => ({
+      x: r.score_max && r.score_max !== 100
+        ? (r.conviction_score / r.score_max) * 100
+        : r.conviction_score,
+      y: r.pnl_pct
+    }));
+
+    this.charts.scatter = new Chart(canvas.getContext('2d'), {
+      type: 'scatter',
+      data: {
+        datasets: [{
+          label: 'Conviction vs P&L',
+          data: points,
+          backgroundColor: points.map(p => p.y >= 0 ? COLORS.green + 'AA' : COLORS.red + 'AA'),
+          borderColor: points.map(p => p.y >= 0 ? COLORS.green : COLORS.red),
+          borderWidth: 1,
+          pointRadius: 6,
+        }]      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => `Score: ${ctx.parsed.x.toFixed(0)} | P&L: ${ctx.parsed.y >= 0 ? '+' : ''}${ctx.parsed.y.toFixed(1)}%`
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: { display: true, text: 'Conviction Score (normalized)', color: '#55556a' },
+            grid: { color: '#23232f' }
+          },
+          y: {
+            title: { display: true, text: 'P&L %', color: '#55556a' },
+            grid: { color: '#23232f' },
+            ticks: { callback: v => (v >= 0 ? '+' : '') + v + '%' }
+          }
+        }
+      }
+    });
+  }
+
+  renderDirectionChart() {
+    const d = this.filteredData;
+    const bullish = d.filter(r => r.direction === 'BULLISH').length;
+    const bearish = d.filter(r => r.direction === 'BEARISH').length;
+
+    this.charts.direction = new Chart(document.getElementById('chart-direction').getContext('2d'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Bullish', 'Bearish'],
+        datasets: [{
+          data: [bullish, bearish],
+          backgroundColor: [COLORS.green, COLORS.red],
+          borderColor: '#16161f',
+          borderWidth: 3,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '65%',
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { usePointStyle: true, padding: 20, color: '#8888a0' }
+          }
+        }
+      }
+    });
+  }
+
+  renderConvictionChart() {
+    const d = this.filteredData;
+    // Buckets: 60-69, 70-79, 80-89, 90-100
+    const buckets = { '60-69': 0, '70-79': 0, '80-89': 0, '90-100': 0 };
+    d.forEach(r => {
+      const norm = r.score_max && r.score_max !== 100
+        ? (r.conviction_score / r.score_max) * 100
+        : r.conviction_score;
+      if (norm >= 90) buckets['90-100']++;
+      else if (norm >= 80) buckets['80-89']++;
+      else if (norm >= 70) buckets['70-79']++;
+      else buckets['60-69']++;
+    });
+
+    this.charts.conviction = new Chart(document.getElementById('chart-conviction').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: Object.keys(buckets),
+        datasets: [{
+          label: 'Signals',
+          data: Object.values(buckets),
+          backgroundColor: [
+            COLORS.blue + '99',
+            COLORS.cyan + '99',
+            COLORS.amber + '99',
+            COLORS.green + '99',
+          ],
+          borderColor: [COLORS.blue, COLORS.cyan, COLORS.amber, COLORS.green],
+          borderWidth: 1,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false } },
+          y: {
+            beginAtZero: true,
+            grid: { color: '#23232f' },
+            ticks: { stepSize: 1 }
+          }
+        }
+      }
+    });
+  }
+
+  renderTickerChart() {
+    const counts = {};
+    this.filteredData.forEach(r => {
+      counts[r.ticker] = (counts[r.ticker] || 0) + 1;
+    });
+
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const labels = sorted.map(s => s[0]);
+    const data = sorted.map(s => s[1]);
+
+    this.charts.tickers = new Chart(document.getElementById('chart-tickers').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Signals',
+          data,
+          backgroundColor: COLORS.green + '66',
+          borderColor: COLORS.green,
+          borderWidth: 1,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: labels.length > 8 ? 'y' : 'x',
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: labels.length > 8 }, beginAtZero: true, ticks: { stepSize: 1 } },
+          y: { grid: { display: labels.length <= 8 }, beginAtZero: true, ticks: { stepSize: 1 } }
+        }
+      }
+    });
+  }
+
+  // ---- TABLE ----
+  renderTable() {
+    const container = document.getElementById('trade-table-container');
+    const data = [...this.filteredData];
+
+    // Sort
+    data.sort((a, b) => {
+      let aVal = a[this.sortCol];
+      let bVal = b[this.sortCol];
+      if (aVal === null || aVal === undefined) aVal = this.sortDir === 'asc' ? Infinity : -Infinity;
+      if (bVal === null || bVal === undefined) bVal = this.sortDir === 'asc' ? Infinity : -Infinity;
+      const cmp = aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
+      return this.sortDir === 'asc' ? cmp : -cmp;
+    });
+
+    const columns = [
+      { field: 'signal_date', label: 'Date' },
+      { field: 'ticker', label: 'Ticker' },
+      { field: 'live_price', label: 'Live Price' },
+      { field: 'direction', label: 'Direction' },
+      { field: 'conviction_score', label: 'Score' },
+      { field: 'option_type', label: 'Type' },
+      { field: 'strike', label: 'Strike' },
+      { field: 'expiry', label: 'Expiry' },
+      { field: 'entry_range', label: 'Entry Range' },
+      { field: 'flow_score', label: 'Flow' },
+      { field: 'chart_score', label: 'Chart' },
+      { field: 'category', label: 'Cat.' },
+      { field: 'status', label: 'Status' },
+      { field: 'pnl_pct', label: 'P&L %' },
+      { field: 'result', label: 'Result' },
+    ];
+
+    let html = '<table class="data-table"><thead><tr>';
+    columns.forEach(col => {
+      const isSortable = col.field !== 'live_price';
+      const arrow = this.sortCol === col.field
+        ? (this.sortDir === 'asc' ? ' &#9650;' : ' &#9660;')
+        : '';
+      html += `<th ${isSortable ? 'data-field="' + col.field + '"' : 'style="cursor:default;"'}>${col.label}${arrow}</th>`;
+    });
+    html += '</tr></thead><tbody>';
+
+    data.forEach(row => {
+      html += '<tr>';
+      columns.forEach(col => {
+        let val = row[col.field];
+        let cellClass = '';
+
+        if (col.field === 'ticker') {
+          // Clickable ticker that opens TradingView chart
+          val = `<span class="ticker-link" onclick="TVChart.open('${row.ticker}')" title="View ${row.ticker} chart">${row.ticker}</span>`;
+        } else if (col.field === 'live_price') {
+          // Live price cell updated by Finnhub WebSocket
+          const priceInfo = FinnhubPrices.getPrice(row.ticker);
+          if (priceInfo) {
+            const cls = priceInfo.direction === 'up' ? 'flash-up' : priceInfo.direction === 'down' ? 'flash-down' : '';
+            val = `<span class="live-price ${cls}" data-live-price="${row.ticker}">$${priceInfo.price.toFixed(2)}</span>`;
+          } else {            val = `<span class="live-price live-price-loading" data-live-price="${row.ticker}">--</span>`;
+          }
+        } else if (col.field === 'direction') {
+          const cls = val === 'BULLISH' ? 'badge-bullish' : 'badge-bearish';
+          val = `<span class="badge ${cls}">${val}</span>`;
+        } else if (col.field === 'status') {
+          const cls = val === 'open' ? 'badge-open' : (row.result === 'win' ? 'badge-win' : 'badge-loss');
+          val = `<span class="badge ${cls}">${val}</span>`;
+        } else if (col.field === 'result' && val) {
+          const cls = val === 'win' ? 'badge-win' : 'badge-loss';
+          val = `<span class="badge ${cls}">${val.toUpperCase()}</span>`;
+        } else if (col.field === 'pnl_pct' && val !== null) {
+          cellClass = val >= 0 ? 'pnl-positive' : 'pnl-negative';
+          val = (val >= 0 ? '+' : '') + val.toFixed(1) + '%';
+        } else if (col.field === 'conviction_score') {
+          const score = parseInt(val);
+          const cls = score >= 85 ? 'pnl-positive' : (score >= 75 ? 'amber' : '');
+          val = `<span class="${cls}">${val}</span>`;
+        } else if (col.field === 'entry_range') {
+          if (row.entry_low && row.entry_high) {
+            val = '$' + row.entry_low.toFixed(2) + ' - $' + row.entry_high.toFixed(2);
+          } else {
+            val = '<span style="color:var(--text-muted);">--</span>';
+          }
+        } else if (col.field === 'flow_score' || col.field === 'chart_score') {
+          if (val !== null && val !== undefined) {
+            const cls = val >= 85 ? 'pnl-positive' : (val >= 70 ? 'amber' : '');
+            val = `<span class="${cls}">${val}</span>`;
+          } else {
+            val = '<span style="color:var(--text-muted);">--</span>';
+          }
+        } else if (val === null || val === undefined) {
+          val = '<span style="color:var(--text-muted);">--</span>';
+        }
+
+        html += `<td class="${cellClass}">${val}</td>`;
+      });
+      html += '</tr>';
+    });
+
+    html += '</tbody></table>';
+    container.innerHTML = html;
+
+    // Attach sort handlers
+    container.querySelectorAll('th[data-field]').forEach(th => {
+      th.addEventListener('click', () => {
+        const field = th.getAttribute('data-field');
+        if (this.sortCol === field) {
+          this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc';
+        } else {
+          this.sortCol = field;
+          this.sortDir = 'desc';
+        }
+        this.renderTable();
+      });
+    });
+  }
+}
+
+// ============================================================
+// SIGNAL OF THE DAY
+// ============================================================
+function renderSignalOfDay(data) {
+  const today = new Date().toISOString().split('T')[0];
+  const todaySignals = data
+    .filter(d => d.conviction_score >= 75)
+    .sort((a, b) => b.conviction_score - a.conviction_score);
+
+  if (todaySignals.length === 0) return;
+
+  const top = todaySignals[0];
+  const el = document.getElementById('signal-of-day');
+  el.style.display = 'block';
+  document.getElementById('sotd-ticker').textContent = '$' + top.ticker;
+  document.getElementById('sotd-score').textContent = top.conviction_score + '/100';
+  document.getElementById('sotd-type').textContent =
+    top.direction + (top.option_type ? ' ' + top.option_type : '');
+  document.getElementById('sotd-entry').textContent =
+    top.entry_low && top.entry_high
+      ? 'Entry: $' + top.entry_low.toFixed(2) + ' - $' + top.entry_high.toFixed(2)
+      : top.strike ? '$' + top.strike + ' ' + (top.option_type || '') + ' ' + (top.expiry || '') : '';
+}
+
+// ============================================================
+// INITIALIZE -- Load from external JSON, fallback to embedded
+// ============================================================
+let dashboard;
+
+async function loadDashboard() {
+  try {
+    const resp = await fetch('signals.json?t=' + Date.now());
+    if (resp.ok) {
+      DATA = await resp.json();
+    }
+  } catch (e) {
+    console.log('Using embedded data fallback');
+  }
+
+  // Initialize TradingView modal
+  TVChart.init();
+
+  // Initialize Finnhub WebSocket for live prices
+  FinnhubPrices.init();
+
+  dashboard = new DarkFlowDashboard(DATA);
+  renderSignalOfDay(DATA);
+}
+
+loadDashboard();
+
+// Auto-refresh every 5 minutes
+setInterval(async () => {
+  try {
+    const resp = await fetch('signals.json?t=' + Date.now());
+    if (resp.ok) {
+      DATA = await resp.json();
+      dashboard = new DarkFlowDashboard(DATA);
+      renderSignalOfDay(DATA);
+    }
+  } catch (e) {}
+}, 300000);
+</script>
+</body>
+</html>

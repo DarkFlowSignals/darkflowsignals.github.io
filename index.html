@@ -848,8 +848,8 @@ footer p { font-size: 13px; color: var(--text-muted); }
         Every week: what the smart money bought, what hit, what missed, and what we're watching next.
         No spam. No fluff. Just the data.
       </p>
-      <form class="newsletter-form" action="https://darkflowsignals.substack.com/subscribe" method="post" target="_blank">
-        <input type="email" name="email" placeholder="Enter your email" required>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); var e=this.querySelector('input[type=email]').value; window.open('https://darkflowsignals.substack.com/subscribe?email='+encodeURIComponent(e),'_blank');">
+        <input type="email" placeholder="Enter your email" required>
         <button type="submit">Subscribe Free</button>
       </form>
       <p class="newsletter-note">Delivered weekly via Substack. Unsubscribe anytime.</p>

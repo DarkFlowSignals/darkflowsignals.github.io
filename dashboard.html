@@ -765,9 +765,10 @@ body {
           <th data-sort="ticker">Ticker <span class="sort-arrow"></span></th>
           <th data-sort="direction">Dir <span class="sort-arrow"></span></th>
           <th data-sort="conviction_score">Score <span class="sort-arrow"></span></th>
+          <th data-sort="entry_premium">Entry <span class="sort-arrow"></span></th>
+          <th data-sort="current_return_pct">Current <span class="sort-arrow"></span></th>
+          <th data-sort="max_return_pct">Peak <span class="sort-arrow"></span></th>
           <th data-sort="status">Status <span class="sort-arrow"></span></th>
-          <th data-sort="pnl_pct">P&amp;L % <span class="sort-arrow"></span></th>
-          <th data-sort="max_return_pct">Max Return <span class="sort-arrow"></span></th>
           <th data-sort="result">Result <span class="sort-arrow"></span></th>
         </tr>
       </thead>
@@ -1008,7 +1009,7 @@ body {
         sym.textContent = '$' + esc(s.ticker);
         item.appendChild(sym);
 
-        var val = s.max_return_pct != null ? s.max_return_pct : (s.pnl_pct != null ? s.pnl_pct : null);
+        var val = s.current_return_pct != null ? s.current_return_pct : (s.pnl_pct != null ? s.pnl_pct : null);
         if (val != null) {
           var pnlSpan = document.createElement('span');
           pnlSpan.className = val >= 0 ? 'ticker-pnl-up' : 'ticker-pnl-down';
@@ -1126,6 +1127,13 @@ body {
           cardRight.appendChild(maxDiv);
         }
       } else {
+        // Show current return % if available
+        if (s.current_return_pct != null) {
+          var retDiv = document.createElement('div');
+          retDiv.className = 'card-pnl ' + (s.current_return_pct >= 0 ? 'positive' : 'negative');
+          retDiv.textContent = (s.current_return_pct >= 0 ? '+' : '') + s.current_return_pct.toFixed(1) + '%';
+          cardRight.appendChild(retDiv);
+        }
         var openDiv = document.createElement('div');
         openDiv.className = 'card-status-open';
         var dot = document.createElement('span');
@@ -1133,11 +1141,11 @@ body {
         openDiv.appendChild(dot);
         openDiv.appendChild(document.createTextNode(' OPEN'));
         cardRight.appendChild(openDiv);
-        if (s.max_return_pct != null && s.max_return_pct > 0) {
+        if (s.max_return_pct != null) {
           var runDiv = document.createElement('div');
           runDiv.className = 'card-max-return';
-          runDiv.style.color = 'var(--green)';
-          runDiv.textContent = 'running: +' + s.max_return_pct.toFixed(1) + '%';
+          runDiv.style.color = s.max_return_pct >= 0 ? 'var(--green)' : 'var(--text-muted)';
+          runDiv.textContent = 'peak: ' + (s.max_return_pct >= 0 ? '+' : '') + s.max_return_pct.toFixed(1) + '%';
           cardRight.appendChild(runDiv);
         }
       }
@@ -1190,6 +1198,7 @@ body {
       var detailRow = document.createElement('div');
       detailRow.className = 'card-detail-row';
 
+      // Row 1: dates
       var dateItem = document.createElement('span');
       dateItem.className = 'detail-item';
       dateItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Signal: ' }));
@@ -1204,15 +1213,56 @@ body {
         detailRow.appendChild(closeItem);
       }
 
+      detail.appendChild(detailRow);
+
+      // Row 2: premium prices (transparency)
+      if (s.entry_premium != null) {
+        var premRow = document.createElement('div');
+        premRow.className = 'card-detail-row';
+
+        var entryItem = document.createElement('span');
+        entryItem.className = 'detail-item';
+        entryItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Entry: ' }));
+        entryItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-value', textContent: '$' + s.entry_premium.toFixed(2) }));
+        premRow.appendChild(entryItem);
+
+        if (s.current_premium != null) {
+          var curItem = document.createElement('span');
+          curItem.className = 'detail-item';
+          curItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Current: ' }));
+          var curVal = document.createElement('span');
+          curVal.className = 'detail-value';
+          curVal.style.color = s.current_premium >= s.entry_premium ? 'var(--green)' : 'var(--red)';
+          curVal.textContent = '$' + s.current_premium.toFixed(2);
+          curItem.appendChild(curVal);
+          premRow.appendChild(curItem);
+        }
+
+        if (s.peak_premium != null) {
+          var peakItem = document.createElement('span');
+          peakItem.className = 'detail-item';
+          peakItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Peak: ' }));
+          var peakVal = document.createElement('span');
+          peakVal.className = 'detail-value';
+          peakVal.style.color = 'var(--green)';
+          peakVal.textContent = '$' + s.peak_premium.toFixed(2);
+          peakItem.appendChild(peakVal);
+          premRow.appendChild(peakItem);
+        }
+
+        detail.appendChild(premRow);
+      }
+
       if (s.notes) {
+        var noteRow = document.createElement('div');
+        noteRow.className = 'card-detail-row';
         var noteItem = document.createElement('span');
         noteItem.className = 'detail-item';
         noteItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Note: ' }));
         noteItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-value', textContent: esc(s.notes) }));
-        detailRow.appendChild(noteItem);
+        noteRow.appendChild(noteItem);
+        detail.appendChild(noteRow);
       }
-
-      detail.appendChild(detailRow);
 
       var chartFrame = document.createElement('iframe');
       chartFrame.className = 'card-chart-frame';
@@ -1276,6 +1326,33 @@ body {
       tdScore.textContent = Math.round(s.conviction_score);
       tr.appendChild(tdScore);
 
+      // Entry Premium
+      var tdEntry = document.createElement('td');
+      tdEntry.textContent = s.entry_premium != null ? '$' + s.entry_premium.toFixed(2) : '--';
+      tr.appendChild(tdEntry);
+
+      // Current Return
+      var tdCur = document.createElement('td');
+      tdCur.className = 'col-pnl';
+      if (s.current_return_pct != null) {
+        tdCur.textContent = (s.current_return_pct >= 0 ? '+' : '') + s.current_return_pct.toFixed(1) + '%';
+        tdCur.classList.add(s.current_return_pct >= 0 ? 'positive' : 'negative');
+      } else {
+        tdCur.textContent = '--';
+      }
+      tr.appendChild(tdCur);
+
+      // Peak Return
+      var tdMax = document.createElement('td');
+      tdMax.className = 'col-pnl';
+      if (s.max_return_pct != null) {
+        tdMax.textContent = (s.max_return_pct >= 0 ? '+' : '') + s.max_return_pct.toFixed(1) + '%';
+        tdMax.classList.add(s.max_return_pct >= 0 ? 'positive' : 'negative');
+      } else {
+        tdMax.textContent = '--';
+      }
+      tr.appendChild(tdMax);
+
       // Status
       var tdStatus = document.createElement('td');
       var statusSpan = document.createElement('span');
@@ -1288,28 +1365,6 @@ body {
       }
       tdStatus.appendChild(statusSpan);
       tr.appendChild(tdStatus);
-
-      // P&L
-      var tdPnl = document.createElement('td');
-      tdPnl.className = 'col-pnl';
-      if (s.pnl_pct != null) {
-        tdPnl.textContent = (s.pnl_pct >= 0 ? '+' : '') + s.pnl_pct.toFixed(1) + '%';
-        tdPnl.classList.add(s.pnl_pct >= 0 ? 'positive' : 'negative');
-      } else {
-        tdPnl.textContent = '--';
-      }
-      tr.appendChild(tdPnl);
-
-      // Max Return
-      var tdMax = document.createElement('td');
-      tdMax.className = 'col-pnl';
-      if (s.max_return_pct != null) {
-        tdMax.textContent = (s.max_return_pct >= 0 ? '+' : '') + s.max_return_pct.toFixed(1) + '%';
-        tdMax.classList.add(s.max_return_pct >= 0 ? 'positive' : 'negative');
-      } else {
-        tdMax.textContent = '--';
-      }
-      tr.appendChild(tdMax);
 
       // Result
       var tdResult = document.createElement('td');

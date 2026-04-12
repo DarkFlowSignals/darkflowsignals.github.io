@@ -661,7 +661,7 @@ nav {
         sym.textContent = '$' + esc(s.ticker);
         item.appendChild(sym);
 
-        var val = s.max_return_pct != null ? s.max_return_pct : (s.pnl_pct != null ? s.pnl_pct : null);
+        var val = s.current_return_pct != null ? s.current_return_pct : (s.pnl_pct != null ? s.pnl_pct : null);
         if (val != null) {
           var pnl = document.createElement('span');
           pnl.className = val >= 0 ? 'ticker-pnl-up' : 'ticker-pnl-down';

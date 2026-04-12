@@ -737,6 +737,11 @@ body {
     </div>
   </div>
 
+  <!-- TRANSPARENCY NOTE -->
+  <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-bottom:20px;padding:10px 14px;border:1px solid var(--border);border-radius:4px;background:var(--bg-card);">
+    Every signal logged with real option premium prices. Entry, current, and peak prices shown so you can verify the math. No cherry-picking. No deleting losers.
+  </div>
+
   <!-- STREAK BAR -->
   <div class="streak-section">
     <span class="streak-label">Record</span>
@@ -765,8 +770,9 @@ body {
           <th data-sort="ticker">Ticker <span class="sort-arrow"></span></th>
           <th data-sort="direction">Dir <span class="sort-arrow"></span></th>
           <th data-sort="conviction_score">Score <span class="sort-arrow"></span></th>
-          <th data-sort="entry_premium">Entry <span class="sort-arrow"></span></th>
-          <th data-sort="current_return_pct">Current <span class="sort-arrow"></span></th>
+          <th data-sort="entry_premium">Entry $ <span class="sort-arrow"></span></th>
+          <th data-sort="current_premium">Now $ <span class="sort-arrow"></span></th>
+          <th data-sort="current_return_pct">Return <span class="sort-arrow"></span></th>
           <th data-sort="max_return_pct">Peak <span class="sort-arrow"></span></th>
           <th data-sort="status">Status <span class="sort-arrow"></span></th>
           <th data-sort="result">Result <span class="sort-arrow"></span></th>
@@ -1364,7 +1370,20 @@ body {
       tdEntry.textContent = s.entry_premium != null ? '$' + s.entry_premium.toFixed(2) : '--';
       tr.appendChild(tdEntry);
 
-      // Current Return
+      // Current Premium
+      var tdCurPrem = document.createElement('td');
+      tdCurPrem.className = 'col-pnl';
+      if (s.current_premium != null) {
+        tdCurPrem.textContent = '$' + s.current_premium.toFixed(2);
+        if (s.entry_premium != null) {
+          tdCurPrem.classList.add(s.current_premium >= s.entry_premium ? 'positive' : 'negative');
+        }
+      } else {
+        tdCurPrem.textContent = '--';
+      }
+      tr.appendChild(tdCurPrem);
+
+      // Current Return %
       var tdCur = document.createElement('td');
       tdCur.className = 'col-pnl';
       if (s.current_return_pct != null) {

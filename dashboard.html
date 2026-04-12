@@ -994,9 +994,20 @@ body {
     var track = document.getElementById('ticker-track');
     track.textContent = '';
 
-    var latestDate = getLatestDate();
-    var today = allSignals.filter(function(s) { return s.signal_date === latestDate; });
-    var items = today.length > 0 ? today : allSignals.slice(0, 8);
+    // Dedupe by ticker: keep latest signal per ticker, skip signals with no return data
+    var seen = {};
+    var sorted = allSignals.slice().sort(function(a, b) {
+      return (b.signal_date || '').localeCompare(a.signal_date || '');
+    });
+    var items = [];
+    sorted.forEach(function(s) {
+      if (seen[s.ticker]) return;
+      if (s.current_return_pct == null && s.pnl_pct == null) return;
+      seen[s.ticker] = true;
+      items.push(s);
+    });
+
+    if (items.length === 0) return;
 
     function buildItemNodes() {
       var frag = document.createDocumentFragment();
@@ -1009,7 +1020,16 @@ body {
         sym.textContent = '$' + esc(s.ticker);
         item.appendChild(sym);
 
-        var val = s.current_return_pct != null ? s.current_return_pct : (s.pnl_pct != null ? s.pnl_pct : null);
+        // Show current premium price
+        if (s.current_premium != null) {
+          var priceSpan = document.createElement('span');
+          priceSpan.className = 'ticker-pnl-flat';
+          priceSpan.textContent = '$' + s.current_premium.toFixed(2);
+          item.appendChild(priceSpan);
+        }
+
+        // Show current return %
+        var val = s.current_return_pct != null ? s.current_return_pct : s.pnl_pct;
         if (val != null) {
           var pnlSpan = document.createElement('span');
           pnlSpan.className = val >= 0 ? 'ticker-pnl-up' : 'ticker-pnl-down';
@@ -1182,6 +1202,19 @@ body {
         optLabel.className = 'conviction-label';
         optLabel.textContent = esc(s.option_type);
         rowBot.appendChild(optLabel);
+      }
+
+      // Premium prices inline: entry -> current
+      if (s.entry_premium != null) {
+        var premSpan = document.createElement('span');
+        premSpan.className = 'conviction-label';
+        var premText = '$' + s.entry_premium.toFixed(2);
+        if (s.current_premium != null) {
+          premText += ' \u2192 $' + s.current_premium.toFixed(2);
+          premSpan.style.color = s.current_premium >= s.entry_premium ? 'var(--green)' : 'var(--red)';
+        }
+        premSpan.textContent = premText;
+        rowBot.appendChild(premSpan);
       }
 
       var meta = document.createElement('span');

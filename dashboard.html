@@ -466,6 +466,34 @@ body {
 .card-live-price.flash-up { color: var(--green); transition: color 0.3s; }
 .card-live-price.flash-down { color: var(--red); transition: color 0.3s; }
 
+/* Premium blur gate */
+.premium-blur {
+  filter: blur(5px);
+  user-select: none;
+  cursor: pointer;
+  transition: filter 0.2s;
+  display: inline;
+}
+.premium-blur:hover { filter: blur(3px); }
+body.premium .premium-blur {
+  filter: none;
+  user-select: auto;
+  cursor: default;
+}
+.unlock-badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--amber);
+  background: var(--amber-dim);
+  padding: 1px 6px;
+  border-radius: 2px;
+  margin-left: 6px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+body.premium .unlock-badge { display: none; }
+
 /* Expanded card detail */
 .card-detail {
   display: none;
@@ -784,6 +812,8 @@ body {
           <th data-sort="ticker">Ticker <span class="sort-arrow"></span></th>
           <th data-sort="direction">Dir <span class="sort-arrow"></span></th>
           <th data-sort="conviction_score">Score <span class="sort-arrow"></span></th>
+          <th data-sort="strike">Strike <span class="sort-arrow"></span></th>
+          <th data-sort="expiry">Expiry <span class="sort-arrow"></span></th>
           <th data-sort="entry_premium">Entry $ <span class="sort-arrow"></span></th>
           <th data-sort="current_premium">Now $ <span class="sort-arrow"></span></th>
           <th data-sort="current_return_pct">Return <span class="sort-arrow"></span></th>
@@ -861,12 +891,49 @@ body {
   var sortAsc = false;
   var loadTime = Date.now();
 
+  // ---- PREMIUM ACCESS CHECK ----
+  var urlKey = new URLSearchParams(window.location.search).get('key') || '';
+  var isPremium = false;
+  var WHOP_URL = 'https://whop.com/darkflow-signals/premium-e5-02ad/';
+
+  function checkPremium(serverKey) {
+    isPremium = (urlKey === serverKey && urlKey !== '');
+    if (isPremium) document.body.classList.add('premium');
+    else document.body.classList.remove('premium');
+  }
+
+  // Helper: wrap text in blur span for free users
+  function blurWrap(text, tag) {
+    if (isPremium) return text;
+    var span = document.createElement('span');
+    span.className = 'premium-blur';
+    span.textContent = text;
+    span.addEventListener('click', function(e) { e.stopPropagation(); window.open(WHOP_URL, '_blank'); });
+    if (tag) {
+      var badge = document.createElement('span');
+      badge.className = 'unlock-badge';
+      badge.textContent = 'premium';
+      badge.addEventListener('click', function(e) { e.stopPropagation(); window.open(WHOP_URL, '_blank'); });
+      var frag = document.createDocumentFragment();
+      frag.appendChild(span);
+      frag.appendChild(badge);
+      return frag;
+    }
+    return span;
+  }
+
   // ---- LOAD DATA ----
   function loadSignals() {
     fetch('signals.json?t=' + Date.now())
       .then(function(r) { return r.json(); })
       .then(function(data) {
-        allSignals = data;
+        // New format: {access_key, signals} or legacy array
+        if (Array.isArray(data)) {
+          allSignals = data;
+        } else {
+          allSignals = data.signals || [];
+          checkPremium(data.access_key || '');
+        }
         loadTime = Date.now();
         render();
       })
@@ -1162,23 +1229,46 @@ body {
       convWrap.appendChild(convBar);
       rowBot.appendChild(convWrap);
 
-      if (s.option_type) {
+      // Strike/Expiry (blurred for free)
+      if (s.strike && s.expiry) {
+        var specSpan = document.createElement('span');
+        specSpan.className = 'conviction-label';
+        var specText = (s.option_type || '') + ' $' + s.strike + ' exp ' + s.expiry.slice(5);
+        if (isPremium) {
+          specSpan.textContent = specText;
+        } else {
+          specSpan.appendChild(blurWrap(specText, true));
+        }
+        rowBot.appendChild(specSpan);
+      } else if (s.option_type) {
         var optLabel = document.createElement('span');
         optLabel.className = 'conviction-label';
         optLabel.textContent = esc(s.option_type);
         rowBot.appendChild(optLabel);
       }
 
-      // Premium prices inline: entry -> current
+      // Entry -> Current premium (entry blurred for free, current always visible)
       if (s.entry_premium != null) {
         var premSpan = document.createElement('span');
         premSpan.className = 'conviction-label';
-        var premText = '$' + s.entry_premium.toFixed(2);
-        if (s.current_premium != null) {
-          premText += ' \u2192 $' + s.current_premium.toFixed(2);
-          premSpan.style.color = s.current_premium >= s.entry_premium ? 'var(--green)' : 'var(--red)';
+        if (isPremium) {
+          var premText = '$' + s.entry_premium.toFixed(2);
+          if (s.current_premium != null) {
+            premText += ' \u2192 $' + s.current_premium.toFixed(2);
+            premSpan.style.color = s.current_premium >= s.entry_premium ? 'var(--green)' : 'var(--red)';
+          }
+          premSpan.textContent = premText;
+        } else {
+          premSpan.appendChild(blurWrap('$' + s.entry_premium.toFixed(2), false));
+          if (s.current_premium != null) {
+            var arrow = document.createTextNode(' \u2192 ');
+            premSpan.appendChild(arrow);
+            var curSpan = document.createElement('span');
+            curSpan.textContent = '$' + s.current_premium.toFixed(2);
+            curSpan.style.color = s.current_premium >= s.entry_premium ? 'var(--green)' : 'var(--red)';
+            premSpan.appendChild(curSpan);
+          }
         }
-        premSpan.textContent = premText;
         rowBot.appendChild(premSpan);
       }
 
@@ -1213,7 +1303,7 @@ body {
 
       detail.appendChild(detailRow);
 
-      // Row 2: premium prices (transparency)
+      // Row 2: premium prices (transparency) -- entry blurred for free
       if (s.entry_premium != null) {
         var premRow = document.createElement('div');
         premRow.className = 'card-detail-row';
@@ -1221,7 +1311,11 @@ body {
         var entryItem = document.createElement('span');
         entryItem.className = 'detail-item';
         entryItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Entry: ' }));
-        entryItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-value', textContent: '$' + s.entry_premium.toFixed(2) }));
+        if (isPremium) {
+          entryItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-value', textContent: '$' + s.entry_premium.toFixed(2) }));
+        } else {
+          entryItem.appendChild(blurWrap('$' + s.entry_premium.toFixed(2), true));
+        }
         premRow.appendChild(entryItem);
 
         if (s.current_premium != null) {
@@ -1266,12 +1360,17 @@ body {
       chartWrap.className = 'card-chart-wrap';
 
       // Entry label overlay
-      if (s.entry_premium != null) {
-        var entryLabel = document.createElement('div');
-        entryLabel.className = 'chart-entry-label';
-        entryLabel.textContent = 'Signal ' + esc(s.signal_date) + ' | Entry $' + s.entry_premium.toFixed(2);
-        chartWrap.appendChild(entryLabel);
+      var entryLabel = document.createElement('div');
+      entryLabel.className = 'chart-entry-label';
+      if (isPremium && s.entry_premium != null) {
+        var labelParts = 'Signal ' + esc(s.signal_date);
+        if (s.strike && s.expiry) labelParts += ' | $' + s.strike + ' ' + (s.option_type || '') + ' exp ' + s.expiry.slice(5);
+        if (s.entry_premium != null) labelParts += ' | Entry $' + s.entry_premium.toFixed(2);
+        entryLabel.textContent = labelParts;
+      } else {
+        entryLabel.textContent = 'Signal ' + esc(s.signal_date);
       }
+      chartWrap.appendChild(entryLabel);
 
       var chartFrame = document.createElement('iframe');
       chartFrame.className = 'card-chart-frame';
@@ -1346,9 +1445,28 @@ body {
       tdScore.textContent = Math.round(s.conviction_score);
       tr.appendChild(tdScore);
 
-      // Entry Premium
+      // Strike (blurred for free)
+      var tdStrike = document.createElement('td');
+      if (s.strike) {
+        if (isPremium) { tdStrike.textContent = '$' + s.strike; }
+        else { tdStrike.appendChild(blurWrap('$' + s.strike, false)); }
+      } else { tdStrike.textContent = '--'; }
+      tr.appendChild(tdStrike);
+
+      // Expiry (blurred for free)
+      var tdExpiry = document.createElement('td');
+      if (s.expiry) {
+        if (isPremium) { tdExpiry.textContent = s.expiry; }
+        else { tdExpiry.appendChild(blurWrap(s.expiry, false)); }
+      } else { tdExpiry.textContent = '--'; }
+      tr.appendChild(tdExpiry);
+
+      // Entry Premium (blurred for free)
       var tdEntry = document.createElement('td');
-      tdEntry.textContent = s.entry_premium != null ? '$' + s.entry_premium.toFixed(2) : '--';
+      if (s.entry_premium != null) {
+        if (isPremium) { tdEntry.textContent = '$' + s.entry_premium.toFixed(2); }
+        else { tdEntry.appendChild(blurWrap('$' + s.entry_premium.toFixed(2), false)); }
+      } else { tdEntry.textContent = '--'; }
       tr.appendChild(tdEntry);
 
       // Current Premium

@@ -637,7 +637,8 @@ nav {
   fetch('signals.json?t=' + Date.now())
     .then(function(r) { return r.json(); })
     .then(function(data) {
-      signals = data;
+      // Handle new wrapped format or legacy array
+      signals = Array.isArray(data) ? data : (data.signals || []);
       renderTickerStrip();
       renderStats();
       renderStreak();

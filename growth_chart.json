@@ -1,0 +1,41 @@
+{
+  "starting_capital": 10000,
+  "allocation_pct": 0.05,
+  "max_positions": 10,
+  "data": [
+    {
+      "date": "2026-04-09",
+      "system": 10723.5,
+      "hold": 11266.0,
+      "peak": 11305.0,
+      "positions": 2,
+      "cash": 9315.0
+    },
+    {
+      "date": "2026-04-10",
+      "system": 16815.0,
+      "hold": 23453.0,
+      "peak": 27036.0,
+      "positions": 9,
+      "cash": 5440.0
+    },
+    {
+      "date": "2026-04-13",
+      "system": 17391.0,
+      "hold": 24029.0,
+      "peak": 27957.0,
+      "positions": 10,
+      "cash": 4396.0
+    },
+    {
+      "date": "2026-04-14",
+      "system": 17391.0,
+      "hold": 24029.0,
+      "peak": 27957.0,
+      "positions": 10,
+      "cash": 4396.0
+    }
+  ],
+  "trades": 10,
+  "generated": "2026-04-14T13:24:33.009055"
+}

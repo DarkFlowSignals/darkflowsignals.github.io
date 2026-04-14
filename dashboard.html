@@ -846,6 +846,14 @@ body.premium .unlock-badge { display: none; }
     </table>
   </div>
 
+  <!-- GROWTH CHART -->
+  <div id="growth-section" style="margin:40px 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;">
+    <h3 style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0 0 4px 0;">Hypothetical $10K Portfolio</h3>
+    <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;">1 contract per signal, $500 allocation. Not investment advice. Forward-looking signals, not backtested.</p>
+    <canvas id="growth-chart" height="200"></canvas>
+    <div id="growth-stats" style="display:flex;gap:24px;margin-top:12px;font-family:var(--font-mono);font-size:12px;"></div>
+  </div>
+
   <!-- FOMO SECTION -->
   <div class="fomo-section" id="fomo-section" style="display:none;">
     <div class="fomo-header">
@@ -1687,6 +1695,72 @@ body.premium .unlock-badge { display: none; }
   loadSignals();
   setInterval(loadSignals, 900000); // 15 min to match price check cadence
   setInterval(tickUpdated, 1000);
+  // ---- GROWTH CHART ----
+  function loadGrowthChart() {
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js';
+    script.onload = function() {
+      fetch('growth_chart.json')
+        .then(function(r) { return r.json(); })
+        .then(function(data) { renderGrowthChart(data); })
+        .catch(function() {});
+    };
+    document.head.appendChild(script);
+  }
+
+  function renderGrowthChart(data) {
+    var ctx = document.getElementById('growth-chart');
+    if (!ctx) return;
+    var labels = ['Start'].concat(data.data.map(function(d) { return d.date; }));
+    var system = [data.starting_capital].concat(data.data.map(function(d) { return d.system; }));
+    var hold = [data.starting_capital].concat(data.data.map(function(d) { return d.hold; }));
+    var peak = [data.starting_capital].concat(data.data.map(function(d) { return d.peak; }));
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          { label: 'System Rules', data: system, borderColor: '#00E676', backgroundColor: 'rgba(0,230,118,0.1)', fill: true, tension: 0.3, pointRadius: 4 },
+          { label: 'Hold to Current', data: hold, borderColor: '#3B82F6', fill: false, tension: 0.3, pointRadius: 4, borderDash: [5, 5] },
+          { label: 'Peak Exit', data: peak, borderColor: '#F59E0B', fill: false, tension: 0.3, pointRadius: 4, borderDash: [2, 2] }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { color: '#9CA3AF', font: { family: 'monospace', size: 11 } } },
+          tooltip: { callbacks: { label: function(c) { return c.dataset.label + ': $' + c.parsed.y.toLocaleString(); } } }
+        },
+        scales: {
+          x: { ticks: { color: '#6B7280', font: { family: 'monospace', size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+          y: { ticks: { color: '#6B7280', font: { family: 'monospace', size: 10 }, callback: function(v) { return '$' + (v / 1000).toFixed(0) + 'K'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+        }
+      }
+    });
+
+    // Stats below chart
+    var last = data.data[data.data.length - 1];
+    var statsDiv = document.getElementById('growth-stats');
+    if (statsDiv) {
+      var sc = data.starting_capital;
+      var items = [
+        { color: '#00E676', label: 'System', val: last.system },
+        { color: '#3B82F6', label: 'Hold', val: last.hold },
+        { color: '#F59E0B', label: 'Peak', val: last.peak }
+      ];
+      statsDiv.textContent = '';
+      items.forEach(function(item) {
+        var span = document.createElement('span');
+        span.style.color = item.color;
+        var pct = ((item.val - sc) / sc * 100).toFixed(0);
+        span.textContent = item.label + ': $' + item.val.toLocaleString() + ' (+' + pct + '%)';
+        statsDiv.appendChild(span);
+      });
+    }
+  }
+
+  loadGrowthChart();
 })();
 </script>
 </body>

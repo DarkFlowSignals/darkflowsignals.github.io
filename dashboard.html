@@ -848,13 +848,12 @@ body.premium .unlock-badge { display: none; }
 
   <!-- GROWTH CHART -->
   <div id="growth-section" style="margin:40px 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;">
-    <h3 style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0 0 4px 0;">Hypothetical $10K Portfolio</h3>
+    <h3 style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0 0 4px 0;">Signal Performance</h3>
     <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;">
-      What would happen if you followed every signal with a $10K account? Three scenarios compared.<br>
-      <span style="color:#00E676">System Rules</span>: sell 2/3 at +100%, sell 1/3 at +200%, keep runner with 30% trailing stop. Stop at -50%. Partial exits only when you hold 3+ contracts -- otherwise hold until stop or expiry.<br>
-      <span style="color:#3B82F6">Hold to Current</span>: hold everything at today's price. No exits.<br>
-      <span style="color:#F59E0B">Peak Exit</span>: hypothetical perfect timing -- sell at the highest price each option reached.<br>
-      Allocation: 10% per trade ($1K), max 10 concurrent positions. Signals too expensive per contract are skipped. All signals are forward-looking with real timestamps, not backtested.
+      Every signal tracked from entry to current price. No cherry-picking.<br>
+      <span style="color:#00E676">Current Return</span>: average return per signal at today's option prices.<br>
+      <span style="color:#F59E0B">Peak Return</span>: average of each signal's highest recorded price.<br>
+      All signals included. All forward-looking with real timestamps, not backtested.
     </p>
     <canvas id="growth-chart" height="200"></canvas>
     <div id="growth-stats" style="display:flex;gap:24px;margin-top:12px;font-family:var(--font-mono);font-size:12px;"></div>
@@ -1712,7 +1711,7 @@ body.premium .unlock-badge { display: none; }
   loadSignals();
   setInterval(loadSignals, 900000); // 15 min to match price check cadence
   setInterval(tickUpdated, 1000);
-  // ---- GROWTH CHART ----
+  // ---- SIGNAL PERFORMANCE CHART ----
   function loadGrowthChart() {
     var script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js';
@@ -1728,50 +1727,45 @@ body.premium .unlock-badge { display: none; }
   function renderGrowthChart(data) {
     var ctx = document.getElementById('growth-chart');
     if (!ctx) return;
-    var labels = ['Start'].concat(data.data.map(function(d) { return d.date; }));
-    var system = [data.starting_capital].concat(data.data.map(function(d) { return d.system; }));
-    var hold = [data.starting_capital].concat(data.data.map(function(d) { return d.hold; }));
-    var peak = [data.starting_capital].concat(data.data.map(function(d) { return d.peak; }));
+    var labels = data.data.map(function(d) { return d.date + ' (' + d.signals + ')'; });
+    var avgReturn = data.data.map(function(d) { return d.avg_return; });
+    var avgPeak = data.data.map(function(d) { return d.avg_peak; });
 
     new Chart(ctx, {
       type: 'line',
       data: {
         labels: labels,
         datasets: [
-          { label: 'System Rules', data: system, borderColor: '#00E676', backgroundColor: 'rgba(0,230,118,0.1)', fill: true, tension: 0.3, pointRadius: 4 },
-          { label: 'Hold to Current', data: hold, borderColor: '#3B82F6', fill: false, tension: 0.3, pointRadius: 4, borderDash: [5, 5] },
-          { label: 'Peak Exit', data: peak, borderColor: '#F59E0B', fill: false, tension: 0.3, pointRadius: 4, borderDash: [2, 2] }
+          { label: 'Avg Return (Current)', data: avgReturn, borderColor: '#00E676', backgroundColor: 'rgba(0,230,118,0.1)', fill: true, tension: 0.3, pointRadius: 5 },
+          { label: 'Avg Peak Return', data: avgPeak, borderColor: '#F59E0B', fill: false, tension: 0.3, pointRadius: 5, borderDash: [4, 4] }
         ]
       },
       options: {
         responsive: true,
         plugins: {
           legend: { labels: { color: '#9CA3AF', font: { family: 'monospace', size: 11 } } },
-          tooltip: { callbacks: { label: function(c) { return c.dataset.label + ': $' + c.parsed.y.toLocaleString(); } } }
+          tooltip: { callbacks: { label: function(c) { return c.dataset.label + ': ' + (c.parsed.y >= 0 ? '+' : '') + c.parsed.y.toFixed(1) + '%'; } } }
         },
         scales: {
           x: { ticks: { color: '#6B7280', font: { family: 'monospace', size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-          y: { ticks: { color: '#6B7280', font: { family: 'monospace', size: 10 }, callback: function(v) { return '$' + (v / 1000).toFixed(0) + 'K'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+          y: { ticks: { color: '#6B7280', font: { family: 'monospace', size: 10 }, callback: function(v) { return (v >= 0 ? '+' : '') + v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
         }
       }
     });
 
     // Stats below chart
-    var last = data.data[data.data.length - 1];
     var statsDiv = document.getElementById('growth-stats');
     if (statsDiv) {
-      var sc = data.starting_capital;
-      var items = [
-        { color: '#00E676', label: 'System', val: last.system },
-        { color: '#3B82F6', label: 'Hold', val: last.hold },
-        { color: '#F59E0B', label: 'Peak', val: last.peak }
-      ];
       statsDiv.textContent = '';
+      var items = [
+        { color: '#00E676', text: data.total + ' signals | ' + data.win_rate + '% win rate' },
+        { color: '#00E676', text: 'Avg return: +' + data.avg_return + '%' },
+        { color: '#F59E0B', text: 'Avg peak: +' + data.avg_peak + '%' }
+      ];
       items.forEach(function(item) {
         var span = document.createElement('span');
         span.style.color = item.color;
-        var pct = ((item.val - sc) / sc * 100).toFixed(0);
-        span.textContent = item.label + ': $' + item.val.toLocaleString() + ' (+' + pct + '%)';
+        span.textContent = item.text;
         statsDiv.appendChild(span);
       });
     }

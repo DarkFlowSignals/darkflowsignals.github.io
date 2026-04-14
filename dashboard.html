@@ -1718,57 +1718,56 @@ body.premium .unlock-badge { display: none; }
     script.onload = function() {
       fetch('growth_chart.json')
         .then(function(r) { return r.json(); })
-        .then(function(data) { renderGrowthChart(data); })
-        .catch(function() {});
+        .then(function(d) {
+          if (!d || !d.data || !d.data.length) return;
+          var ctx = document.getElementById('growth-chart');
+          if (!ctx) return;
+
+          var labels = d.data.map(function(p) { return p.date + ' (' + p.signals + ' signals)'; });
+          var avgReturn = d.data.map(function(p) { return p.avg_return; });
+          var avgPeak = d.data.map(function(p) { return p.avg_peak; });
+
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [
+                { label: 'Avg Return (Current)', data: avgReturn, borderColor: '#00E676', backgroundColor: 'rgba(0,230,118,0.1)', fill: true, tension: 0.3, pointRadius: 6, borderWidth: 2 },
+                { label: 'Avg Peak Return', data: avgPeak, borderColor: '#F59E0B', fill: false, tension: 0.3, pointRadius: 6, borderWidth: 2, borderDash: [4, 4] }
+              ]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { labels: { color: '#9CA3AF', font: { family: 'monospace', size: 11 } } },
+                tooltip: { callbacks: { label: function(c) { return c.dataset.label + ': +' + c.parsed.y.toFixed(1) + '%'; } } }
+              },
+              scales: {
+                x: { ticks: { color: '#6B7280', font: { family: 'monospace', size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                y: { beginAtZero: true, ticks: { color: '#6B7280', font: { family: 'monospace', size: 10 }, callback: function(v) { return '+' + v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+              }
+            }
+          });
+
+          var statsDiv = document.getElementById('growth-stats');
+          if (statsDiv) {
+            statsDiv.textContent = '';
+            var items = [
+              { color: '#00E676', text: d.total + ' signals | ' + d.win_rate + '% win rate' },
+              { color: '#00E676', text: 'Avg return: +' + d.avg_return + '%' },
+              { color: '#F59E0B', text: 'Avg peak: +' + d.avg_peak + '%' }
+            ];
+            items.forEach(function(item) {
+              var span = document.createElement('span');
+              span.style.color = item.color;
+              span.textContent = item.text;
+              statsDiv.appendChild(span);
+            });
+          }
+        })
+        .catch(function(e) { console.log('Growth chart error:', e); });
     };
     document.head.appendChild(script);
-  }
-
-  function renderGrowthChart(data) {
-    var ctx = document.getElementById('growth-chart');
-    if (!ctx) return;
-    var labels = data.data.map(function(d) { return d.date + ' (' + d.signals + ')'; });
-    var avgReturn = data.data.map(function(d) { return d.avg_return; });
-    var avgPeak = data.data.map(function(d) { return d.avg_peak; });
-
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [
-          { label: 'Avg Return (Current)', data: avgReturn, borderColor: '#00E676', backgroundColor: 'rgba(0,230,118,0.1)', fill: true, tension: 0.3, pointRadius: 5 },
-          { label: 'Avg Peak Return', data: avgPeak, borderColor: '#F59E0B', fill: false, tension: 0.3, pointRadius: 5, borderDash: [4, 4] }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { labels: { color: '#9CA3AF', font: { family: 'monospace', size: 11 } } },
-          tooltip: { callbacks: { label: function(c) { return c.dataset.label + ': ' + (c.parsed.y >= 0 ? '+' : '') + c.parsed.y.toFixed(1) + '%'; } } }
-        },
-        scales: {
-          x: { ticks: { color: '#6B7280', font: { family: 'monospace', size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-          y: { ticks: { color: '#6B7280', font: { family: 'monospace', size: 10 }, callback: function(v) { return (v >= 0 ? '+' : '') + v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
-        }
-      }
-    });
-
-    // Stats below chart
-    var statsDiv = document.getElementById('growth-stats');
-    if (statsDiv) {
-      statsDiv.textContent = '';
-      var items = [
-        { color: '#00E676', text: data.total + ' signals | ' + data.win_rate + '% win rate' },
-        { color: '#00E676', text: 'Avg return: +' + data.avg_return + '%' },
-        { color: '#F59E0B', text: 'Avg peak: +' + data.avg_peak + '%' }
-      ];
-      items.forEach(function(item) {
-        var span = document.createElement('span');
-        span.style.color = item.color;
-        span.textContent = item.text;
-        statsDiv.appendChild(span);
-      });
-    }
   }
 
   loadGrowthChart();

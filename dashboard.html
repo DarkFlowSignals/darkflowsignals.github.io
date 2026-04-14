@@ -851,10 +851,10 @@ body.premium .unlock-badge { display: none; }
     <h3 style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0 0 4px 0;">Hypothetical $10K Portfolio</h3>
     <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;">
       What would happen if you followed every signal with a $10K account? Three scenarios compared.<br>
-      <span style="color:#00E676">System Rules</span>: sell 2/3 at +100%, sell 1/3 more at +200%, keep runner with 30% trailing stop. Stop loss at -50%.<br>
+      <span style="color:#00E676">System Rules</span>: sell 2/3 at +100%, sell 1/3 at +200%, keep runner with 30% trailing stop. Stop at -50%. Partial exits only when you hold 3+ contracts -- otherwise hold until stop or expiry.<br>
       <span style="color:#3B82F6">Hold to Current</span>: hold everything at today's price. No exits.<br>
       <span style="color:#F59E0B">Peak Exit</span>: hypothetical perfect timing -- sell at the highest price each option reached.<br>
-      Rules: 5% of portfolio per trade ($500), max 10 concurrent positions. All signals are forward-looking, not backtested.
+      Allocation: 10% per trade ($1K), max 10 concurrent positions. Signals too expensive per contract are skipped. All signals are forward-looking with real timestamps, not backtested.
     </p>
     <canvas id="growth-chart" height="200"></canvas>
     <div id="growth-stats" style="display:flex;gap:24px;margin-top:12px;font-family:var(--font-mono);font-size:12px;"></div>

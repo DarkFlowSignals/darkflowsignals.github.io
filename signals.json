@@ -13,13 +13,14 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 4.0,
-      "current_premium": 12.55,
+      "current_premium": 11.0,
       "peak_premium": 12.55,
-      "current_return_pct": 213.8,
+      "current_return_pct": 175.0,
       "max_return_pct": 213.8,
       "pnl_pct": null,
       "result": null,
-      "notes": null
+      "notes": null,
+      "tracking_type": "signal"
     },
     {
       "signal_date": "2026-04-09",
@@ -33,13 +34,14 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 6.5,
-      "current_premium": 5.54,
-      "peak_premium": 6.04,
-      "current_return_pct": -14.8,
-      "max_return_pct": -7.1,
+      "current_premium": 6.5,
+      "peak_premium": 6.5,
+      "current_return_pct": 0.0,
+      "max_return_pct": 0.0,
       "pnl_pct": null,
       "result": null,
-      "notes": null
+      "notes": null,
+      "tracking_type": "signal"
     },
     {
       "signal_date": "2026-04-09",
@@ -59,7 +61,8 @@
       "max_return_pct": -16.2,
       "pnl_pct": -64.7,
       "result": "LOSS",
-      "notes": "Auto-stopped at $2.12 (-64.7% vs -50.0% stop)"
+      "notes": "System-tracked signal. Not entered by user.",
+      "tracking_type": "signal"
     },
     {
       "signal_date": "2026-04-13",
@@ -73,13 +76,14 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.48,
-      "current_premium": 4.3,
+      "current_premium": 4.1,
       "peak_premium": 4.3,
-      "current_return_pct": 23.6,
+      "current_return_pct": 17.8,
       "max_return_pct": 23.6,
       "pnl_pct": null,
       "result": null,
-      "notes": null
+      "notes": null,
+      "tracking_type": "signal"
     },
     {
       "signal_date": "2026-04-09",
@@ -90,16 +94,17 @@
       "strike": 68.0,
       "expiry": "2026-04-17",
       "category": "primary",
-      "status": "open",
-      "outcome_date": null,
+      "status": "closed",
+      "outcome_date": "2026-04-13",
       "entry_premium": 2.85,
       "current_premium": 1.91,
       "peak_premium": 2.85,
       "current_return_pct": -33.0,
       "max_return_pct": 0.0,
-      "pnl_pct": null,
-      "result": null,
-      "notes": null
+      "pnl_pct": -49.8,
+      "result": "LOSS",
+      "notes": "Stopped out at 50% premium loss. Only trade actually entered by user.",
+      "tracking_type": "entered"
     },
     {
       "signal_date": "2026-04-10",
@@ -113,13 +118,14 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 2.1,
-      "current_premium": 4.4,
+      "current_premium": 3.9,
       "peak_premium": 4.4,
-      "current_return_pct": 109.5,
+      "current_return_pct": 85.7,
       "max_return_pct": 109.5,
       "pnl_pct": null,
       "result": null,
-      "notes": null
+      "notes": null,
+      "tracking_type": "signal"
     },
     {
       "signal_date": "2026-04-10",
@@ -133,13 +139,14 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 43.7,
-      "current_premium": 71.9,
-      "peak_premium": 71.9,
-      "current_return_pct": 64.5,
-      "max_return_pct": 64.5,
+      "current_premium": 104.05,
+      "peak_premium": 104.05,
+      "current_return_pct": 138.1,
+      "max_return_pct": 138.1,
       "pnl_pct": null,
       "result": null,
-      "notes": null
+      "notes": null,
+      "tracking_type": "signal"
     },
     {
       "signal_date": "2026-04-10",
@@ -153,13 +160,14 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 5.2,
-      "current_premium": 18.95,
+      "current_premium": 17.2,
       "peak_premium": 19.95,
-      "current_return_pct": 264.4,
+      "current_return_pct": 230.8,
       "max_return_pct": 283.7,
       "pnl_pct": null,
       "result": null,
-      "notes": null
+      "notes": null,
+      "tracking_type": "signal"
     },
     {
       "signal_date": "2026-04-10",
@@ -173,13 +181,14 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.85,
-      "current_premium": 5.54,
-      "peak_premium": 6.04,
-      "current_return_pct": 43.9,
-      "max_return_pct": 56.9,
+      "current_premium": 6.5,
+      "peak_premium": 6.5,
+      "current_return_pct": 68.8,
+      "max_return_pct": 68.8,
       "pnl_pct": null,
       "result": null,
-      "notes": null
+      "notes": null,
+      "tracking_type": "signal"
     },
     {
       "signal_date": "2026-04-10",
@@ -193,13 +202,14 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 7.7,
-      "current_premium": 21.35,
+      "current_premium": 20.6,
       "peak_premium": 21.45,
-      "current_return_pct": 177.3,
+      "current_return_pct": 167.5,
       "max_return_pct": 178.6,
       "pnl_pct": null,
       "result": null,
-      "notes": null
+      "notes": null,
+      "tracking_type": "signal"
     },
     {
       "signal_date": "2026-04-10",
@@ -213,13 +223,14 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 4.2,
-      "current_premium": 7.12,
-      "peak_premium": 7.12,
-      "current_return_pct": 69.5,
-      "max_return_pct": 69.5,
+      "current_premium": 9.18,
+      "peak_premium": 9.18,
+      "current_return_pct": 118.6,
+      "max_return_pct": 118.6,
       "pnl_pct": null,
       "result": null,
-      "notes": null
+      "notes": null,
+      "tracking_type": "signal"
     },
     {
       "signal_date": "2026-04-10",
@@ -233,13 +244,14 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 0.85,
-      "current_premium": 0.8,
-      "peak_premium": 0.8,
-      "current_return_pct": -5.9,
-      "max_return_pct": -5.9,
+      "current_premium": 0.85,
+      "peak_premium": 0.85,
+      "current_return_pct": 0.0,
+      "max_return_pct": 0.0,
       "pnl_pct": null,
       "result": null,
-      "notes": null
+      "notes": null,
+      "tracking_type": "signal"
     },
     {
       "signal_date": "2026-04-10",
@@ -253,13 +265,14 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 0.43,
-      "current_premium": 2.99,
+      "current_premium": 2.54,
       "peak_premium": 2.99,
-      "current_return_pct": 595.3,
+      "current_return_pct": 490.7,
       "max_return_pct": 595.3,
       "pnl_pct": null,
       "result": null,
-      "notes": null
+      "notes": null,
+      "tracking_type": "signal"
     },
     {
       "signal_date": "2026-04-10",
@@ -273,13 +286,14 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.38,
-      "current_premium": 7.35,
-      "peak_premium": 7.35,
-      "current_return_pct": 117.5,
-      "max_return_pct": 117.5,
+      "current_premium": 11.7,
+      "peak_premium": 11.7,
+      "current_return_pct": 246.2,
+      "max_return_pct": 246.2,
       "pnl_pct": null,
       "result": null,
-      "notes": null
+      "notes": null,
+      "tracking_type": "signal"
     }
   ]
 }

@@ -966,11 +966,22 @@ body.premium .unlock-badge { display: none; }
     return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
   }
 
+  // Free tier cutoff: beginning of current week (Monday).
+  // Free users only see signals from before this week (7+ day delay).
+  function getFreeCutoff() {
+    var d = new Date();
+    var day = d.getDay(); // 0=Sun, 1=Mon
+    var diff = (day === 0) ? 6 : day - 1; // days since Monday
+    var monday = new Date(d);
+    monday.setDate(d.getDate() - diff);
+    return monday.getFullYear() + '-' + String(monday.getMonth()+1).padStart(2,'0') + '-' + String(monday.getDate()).padStart(2,'0');
+  }
+
   function getFiltered() {
-    var today = getToday();
+    var cutoff = isPremium ? null : getFreeCutoff();
     return allSignals.filter(function(s) {
-      // Free users only see signals older than today (24h delay)
-      if (!isPremium && s.signal_date === today) return false;
+      // Free users only see signals older than this week (weekly delay)
+      if (!isPremium && s.signal_date >= cutoff) return false;
       if (currentFilter === 'open') return s.status === 'open';
       if (currentFilter === 'closed') return s.result !== null;
       if (currentFilter === 'bullish') return s.direction === 'BULLISH';
@@ -982,8 +993,8 @@ body.premium .unlock-badge { display: none; }
   // ---- VISIBLE SIGNALS (respects free-tier date gate) ----
   function getVisible() {
     if (isPremium) return allSignals;
-    var today = getToday();
-    return allSignals.filter(function(s) { return s.signal_date !== today; });
+    var cutoff = getFreeCutoff();
+    return allSignals.filter(function(s) { return s.signal_date < cutoff; });
   }
 
   // ---- STATS ----

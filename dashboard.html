@@ -714,18 +714,38 @@ body.premium .unlock-badge { display: none; }
    MOBILE
    ============================================================ */
 @media (max-width: 640px) {
+  .page-wrap { padding: 0 12px; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
   .stat-value { font-size: 18px; }
-  .dash-header { padding: 20px 0 12px; }
+  .stat-label { font-size: 9px; }
+  .dash-header { padding: 16px 0 10px; }
+
+  /* Cards: stack ticker + P&L vertically */
+  .card-row-top { flex-direction: column; gap: 6px; }
+  .card-right { text-align: left; }
   .card-ticker { font-size: 17px; }
-  .signal-card.featured .card-ticker { font-size: 22px; }
+  .signal-card.featured .card-ticker { font-size: 20px; }
   .card-pnl { font-size: 18px; }
-  .view-toggle { display: none; }
-  .table-view { display: none !important; }
-  .signal-feed.hidden { display: flex !important; }
+  .signal-card { padding: 14px 14px; }
+  .signal-card.featured { padding: 16px 14px; }
+  .card-meta { margin-left: 0; }
+  .card-row-bottom { gap: 10px; }
+  .card-detail-row { gap: 14px; }
+  .card-chart-frame { height: 250px; }
+
+  /* Table: horizontal scroll instead of hiding */
+  .table-view { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .data-table { min-width: 600px; }
+  .data-table th, .data-table td { padding: 8px 10px; font-size: 12px; }
+
+  /* FOMO */
   .fomo-grid { grid-template-columns: 1fr; }
-  .streak-blocks { gap: 2px; }
-  .streak-block { width: 18px; height: 18px; }
+
+  /* Streak */
+  .streak-blocks { gap: 2px; overflow-x: auto; }
+  .streak-block { width: 18px; height: 18px; min-width: 18px; }
+
+  /* Footer */
   .footer-links { gap: 12px; }
   .dash-footer { flex-direction: column; text-align: center; }
   .footer-disclaimer { text-align: center; }
@@ -941,8 +961,16 @@ body.premium .unlock-badge { display: none; }
   }
 
   // ---- FILTERS ----
+  function getToday() {
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+
   function getFiltered() {
+    var today = getToday();
     return allSignals.filter(function(s) {
+      // Free users only see signals older than today (24h delay)
+      if (!isPremium && s.signal_date === today) return false;
       if (currentFilter === 'open') return s.status === 'open';
       if (currentFilter === 'closed') return s.result !== null;
       if (currentFilter === 'bullish') return s.direction === 'BULLISH';
@@ -951,12 +979,20 @@ body.premium .unlock-badge { display: none; }
     });
   }
 
+  // ---- VISIBLE SIGNALS (respects free-tier date gate) ----
+  function getVisible() {
+    if (isPremium) return allSignals;
+    var today = getToday();
+    return allSignals.filter(function(s) { return s.signal_date !== today; });
+  }
+
   // ---- STATS ----
   function renderStats() {
-    var closed = allSignals.filter(function(s) { return s.result !== null; });
+    var visible = getVisible();
+    var closed = visible.filter(function(s) { return s.result !== null; });
     var wins = closed.filter(function(s) { return s.result && s.result.toLowerCase() === 'win'; });
 
-    document.getElementById('stat-total').textContent = allSignals.length;
+    document.getElementById('stat-total').textContent = visible.length;
 
     var wrEl = document.getElementById('stat-winrate');
     var avgEl = document.getElementById('stat-avg');
@@ -998,7 +1034,8 @@ body.premium .unlock-badge { display: none; }
     var tally = document.getElementById('streak-tally');
     container.textContent = '';
 
-    var sorted = allSignals.slice().sort(function(a, b) { return (a.signal_date || '').localeCompare(b.signal_date || ''); });
+    var visible = getVisible();
+    var sorted = visible.slice().sort(function(a, b) { return (a.signal_date || '').localeCompare(b.signal_date || ''); });
     var last20 = sorted.slice(-20);
     var wins = 0, losses = 0;
 
@@ -1032,7 +1069,8 @@ body.premium .unlock-badge { display: none; }
 
     // Dedupe by ticker: keep latest signal per ticker, skip signals with no return data
     var seen = {};
-    var sorted = allSignals.slice().sort(function(a, b) {
+    var visible = getVisible();
+    var sorted = visible.slice().sort(function(a, b) {
       return (b.signal_date || '').localeCompare(a.signal_date || '');
     });
     var items = [];
@@ -1092,9 +1130,10 @@ body.premium .unlock-badge { display: none; }
   }
 
   function getLatestDate() {
-    if (!allSignals.length) return '';
+    var visible = getVisible();
+    if (!visible.length) return '';
     var latest = '';
-    allSignals.forEach(function(s) { if (s.signal_date > latest) latest = s.signal_date; });
+    visible.forEach(function(s) { if (s.signal_date > latest) latest = s.signal_date; });
     return latest;
   }
 
@@ -1539,7 +1578,7 @@ body.premium .unlock-badge { display: none; }
     var now = new Date();
     var weekAgo = new Date(now - 7 * 86400000);
 
-    var recentWins = allSignals.filter(function(s) {
+    var recentWins = getVisible().filter(function(s) {
       if (!s.result || s.result.toLowerCase() !== 'win') return false;
       if (!s.outcome_date) return false;
       return new Date(s.outcome_date) >= weekAgo;

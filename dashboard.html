@@ -1224,7 +1224,9 @@ body.premium .unlock-badge { display: none; }
         if (s.max_return_pct != null) {
           var maxDiv = document.createElement('div');
           maxDiv.className = 'card-max-return';
-          maxDiv.textContent = 'peak: ' + (s.max_return_pct >= 0 ? '+' : '') + s.max_return_pct.toFixed(1) + '%';
+          var peakLabel = s.max_return_pct > s.pnl_pct ? 'live peak: ' : 'peak: ';
+          maxDiv.textContent = peakLabel + (s.max_return_pct >= 0 ? '+' : '') + s.max_return_pct.toFixed(1) + '%';
+          if (s.max_return_pct > 0 && s.pnl_pct < 0) maxDiv.style.color = 'var(--green)';
           cardRight.appendChild(maxDiv);
         }
       } else {

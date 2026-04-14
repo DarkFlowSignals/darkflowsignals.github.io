@@ -380,7 +380,6 @@ body {
 .badge-bearish { background: var(--red-dim); color: var(--red); }
 .badge-primary { background: var(--amber-dim); color: var(--amber); font-size: 9px; }
 .badge-watchlist { background: var(--blue-dim); color: var(--blue); font-size: 9px; }
-.badge-entered { background: rgba(0,230,118,0.15); color: var(--green); font-size: 9px; border: 1px solid var(--green); }
 
 .card-right { text-align: right; }
 
@@ -1161,14 +1160,6 @@ body.premium .unlock-badge { display: none; }
       catBadge.className = 'badge ' + (s.category === 'primary' ? 'badge-primary' : 'badge-watchlist');
       catBadge.textContent = esc(s.category);
       cardLeft.appendChild(catBadge);
-
-      // Tracking type badge (entered = real trade, signal = system only)
-      if (s.tracking_type === 'entered') {
-        var entBadge = document.createElement('span');
-        entBadge.className = 'badge badge-entered';
-        entBadge.textContent = 'TRADED';
-        cardLeft.appendChild(entBadge);
-      }
 
       rowTop.appendChild(cardLeft);
 

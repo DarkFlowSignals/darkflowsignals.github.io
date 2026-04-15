@@ -754,6 +754,13 @@ body.premium .unlock-badge { display: none; }
 </head>
 <body>
 
+<!-- PREMIUM UPGRADE BANNER (hidden for premium users) -->
+<div id="free-banner" style="display:none; background: linear-gradient(90deg, #1a1a2e, #16213e); border-bottom: 1px solid #FFD700; padding: 10px 20px; text-align: center; font-family: 'Space Grotesk', monospace; font-size: 13px;">
+  <span style="color: #9CA3AF;">You're viewing delayed signals (last week).</span>
+  <a href="https://whop.com/darkflow-signals/premium-e5-02ad/" target="_blank" rel="noopener" style="color: #FFD700; font-weight: 600; text-decoration: none; margin-left: 8px;">Upgrade to Premium</a>
+  <span style="color: #6B7280; margin-left: 8px;">-- live signals, strike prices, entry premiums, real-time alerts</span>
+</div>
+
 <!-- TICKER STRIP -->
 <div class="ticker-strip" id="ticker-strip">
   <div class="ticker-track" id="ticker-track"></div>
@@ -931,8 +938,15 @@ body.premium .unlock-badge { display: none; }
 
   function checkPremium(serverKey) {
     isPremium = (urlKey === serverKey && urlKey !== '');
-    if (isPremium) document.body.classList.add('premium');
-    else document.body.classList.remove('premium');
+    if (isPremium) {
+      document.body.classList.add('premium');
+      var banner = document.getElementById('free-banner');
+      if (banner) banner.style.display = 'none';
+    } else {
+      document.body.classList.remove('premium');
+      var banner = document.getElementById('free-banner');
+      if (banner) banner.style.display = 'block';
+    }
   }
 
   // Helper: wrap text in blur span for free users

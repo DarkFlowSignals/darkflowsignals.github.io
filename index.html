@@ -517,6 +517,10 @@ nav {
         <div class="rl">Avg Return</div>
       </div>
       <div class="record-stat">
+        <div class="rv" id="lp-peak">--</div>
+        <div class="rl">Avg Peak</div>
+      </div>
+      <div class="record-stat">
         <div class="rv amber" id="lp-conviction">--</div>
         <div class="rl">Avg Score</div>
       </div>
@@ -531,7 +535,9 @@ nav {
 
     <div class="record-cta">
       <p>Entry price, current price, peak price, return %. All public. Explore the full transparent record.</p>
-      <a href="dashboard.html" class="btn-dashboard">View Full Dashboard</a>
+      <a href="dashboard.html" class="btn-dashboard">View Free Dashboard</a>
+      <a href="https://whop.com/darkflow-signals/premium-e5-02ad/" target="_blank" rel="noopener" class="btn-dashboard" style="border-color: #FFD700; color: #FFD700; margin-left: 12px;">Unlock Premium -- Live Signals + Strike Prices</a>
+      <p style="font-size: 12px; color: #6B7280; margin-top: 10px;">Free shows last week's signals. Premium shows today's signals in real-time with strike prices, expiry dates, and entry premiums.</p>
     </div>
   </div>
 </section>
@@ -745,6 +751,18 @@ nav {
     } else {
       avgEl.textContent = '--';
       avgEl.className = 'rv neutral';
+    }
+
+    // Peak return: avg of max_return_pct across all positions
+    var peakEl = document.getElementById('lp-peak');
+    var allPeaks = [];
+    signals.forEach(function(s) {
+      if (s.max_return_pct != null) allPeaks.push(s.max_return_pct);
+    });
+    if (allPeaks.length > 0) {
+      var avgPeak = allPeaks.reduce(function(a, b) { return a + b; }, 0) / allPeaks.length;
+      peakEl.textContent = (avgPeak >= 0 ? '+' : '') + avgPeak.toFixed(1) + '%';
+      peakEl.className = 'rv ' + (avgPeak >= 0 ? 'green' : 'red');
     }
 
     if (signals.length > 0) {

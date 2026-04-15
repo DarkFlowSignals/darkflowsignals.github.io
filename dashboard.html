@@ -1547,36 +1547,40 @@ body.premium .unlock-badge { display: none; }
       tdScore.textContent = Math.round(s.conviction_score);
       tr.appendChild(tdScore);
 
-      // Strike (premium only -- not in public JSON)
+      // Strike (premium only)
       var tdStrike = document.createElement('td');
       if (s.strike && isPremium) { tdStrike.textContent = '$' + s.strike; }
       else if (s.strike) { tdStrike.appendChild(blurWrap('$' + s.strike, false)); }
-      else { var lk = document.createElement('a'); lk.href = WHOP_URL; lk.target = '_blank'; lk.className = 'premium-link'; lk.textContent = 'Premium'; tdStrike.appendChild(lk); }
+      else if (!isPremium) { var lk = document.createElement('a'); lk.href = WHOP_URL; lk.target = '_blank'; lk.style.cssText = 'color:#FFD700;text-decoration:none;font-size:11px;'; lk.textContent = '\uD83D\uDD12'; tdStrike.appendChild(lk); }
+      else { tdStrike.textContent = '--'; }
       tr.appendChild(tdStrike);
 
-      // Expiry (premium only -- not in public JSON)
+      // Expiry (premium only)
       var tdExpiry = document.createElement('td');
       if (s.expiry && isPremium) { tdExpiry.textContent = s.expiry; }
       else if (s.expiry) { tdExpiry.appendChild(blurWrap(s.expiry, false)); }
-      else { var lk2 = document.createElement('a'); lk2.href = WHOP_URL; lk2.target = '_blank'; lk2.className = 'premium-link'; lk2.textContent = 'Premium'; tdExpiry.appendChild(lk2); }
+      else if (!isPremium) { var lk2 = document.createElement('a'); lk2.href = WHOP_URL; lk2.target = '_blank'; lk2.style.cssText = 'color:#FFD700;text-decoration:none;font-size:11px;'; lk2.textContent = '\uD83D\uDD12'; tdExpiry.appendChild(lk2); }
+      else { tdExpiry.textContent = '--'; }
       tr.appendChild(tdExpiry);
 
-      // Entry Premium (blurred for free)
+      // Entry Premium (premium only)
       var tdEntry = document.createElement('td');
-      if (s.entry_premium != null) {
-        if (isPremium) { tdEntry.textContent = '$' + s.entry_premium.toFixed(2); }
-        else { tdEntry.appendChild(blurWrap('$' + s.entry_premium.toFixed(2), false)); }
-      } else { tdEntry.textContent = '--'; }
+      if (s.entry_premium != null && isPremium) { tdEntry.textContent = '$' + s.entry_premium.toFixed(2); }
+      else if (s.entry_premium != null) { tdEntry.appendChild(blurWrap('$' + s.entry_premium.toFixed(2), false)); }
+      else if (!isPremium) { var lk3 = document.createElement('a'); lk3.href = WHOP_URL; lk3.target = '_blank'; lk3.style.cssText = 'color:#FFD700;text-decoration:none;font-size:11px;'; lk3.textContent = '\uD83D\uDD12'; tdEntry.appendChild(lk3); }
+      else { tdEntry.textContent = '--'; }
       tr.appendChild(tdEntry);
 
-      // Current Premium
+      // Current Premium (premium only -- stripped from public JSON)
       var tdCurPrem = document.createElement('td');
       tdCurPrem.className = 'col-pnl';
-      if (s.current_premium != null) {
+      if (s.current_premium != null && isPremium) {
         tdCurPrem.textContent = '$' + s.current_premium.toFixed(2);
         if (s.entry_premium != null) {
           tdCurPrem.classList.add(s.current_premium >= s.entry_premium ? 'positive' : 'negative');
         }
+      } else if (!isPremium) {
+        var lk4 = document.createElement('a'); lk4.href = WHOP_URL; lk4.target = '_blank'; lk4.style.cssText = 'color:#FFD700;text-decoration:none;font-size:11px;'; lk4.textContent = '\uD83D\uDD12'; tdCurPrem.appendChild(lk4);
       } else {
         tdCurPrem.textContent = '--';
       }

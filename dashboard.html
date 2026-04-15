@@ -47,7 +47,7 @@ body {
 }
 
 /* ============================================================
-   TICKER STRIP -- always scrolling, always alive
+   TICKER STRIP: always scrolling, always alive
    ============================================================ */
 .ticker-strip {
   width: 100%;
@@ -141,9 +141,9 @@ body {
   gap: 16px;
 }
 
-/* WebSocket status indicator removed -- was placeholder, never functional */
+/* WebSocket status indicator removed, was placeholder, never functional */
 .ws-status {
-  display: none; /* Hidden -- no WebSocket integration */
+  display: none; /* Hidden, no WebSocket integration */
   gap: 6px;
   font-size: 11px;
   color: var(--text-muted);
@@ -322,7 +322,7 @@ body {
 }
 
 /* ============================================================
-   SIGNAL FEED -- card-based timeline
+   SIGNAL FEED: card-based timeline
    ============================================================ */
 .signal-feed { display: flex; flex-direction: column; gap: 12px; }
 
@@ -543,7 +543,7 @@ body.premium .unlock-badge { display: none; }
 }
 
 /* ============================================================
-   FOMO SECTION -- "What You Missed"
+   FOMO SECTION: "What You Missed"
    ============================================================ */
 .fomo-section {
   margin-top: 40px;
@@ -622,7 +622,7 @@ body.premium .unlock-badge { display: none; }
 .fomo-cta a:hover { opacity: 0.7; }
 
 /* ============================================================
-   TABLE VIEW -- compact data mode
+   TABLE VIEW: compact data mode
    ============================================================ */
 .table-view { display: none; }
 .table-view.active { display: block; }
@@ -873,7 +873,7 @@ body.premium .unlock-badge { display: none; }
     </div>
     <div class="fomo-grid" id="fomo-grid"></div>
     <div class="fomo-cta">
-      <a href="https://whop.com/darkflow-signals/premium-e5-02ad/" target="_blank" rel="noopener">Try 14 days free -- get signals before market open</a>
+      <a href="https://whop.com/darkflow-signals/premium-e5-02ad/" target="_blank" rel="noopener">Try 14 days free, get signals before market open</a>
     </div>
   </div>
 
@@ -1230,7 +1230,7 @@ body.premium .unlock-badge { display: none; }
       var rot = (Math.random() - 0.5) * 0.4;
       if (i > 0) card.style.transform = 'rotate(' + rot.toFixed(2) + 'deg)';
 
-      // -- TOP ROW --
+      // TOP ROW
       var rowTop = document.createElement('div');
       rowTop.className = 'card-row-top';
 
@@ -1297,7 +1297,7 @@ body.premium .unlock-badge { display: none; }
       rowTop.appendChild(cardRight);
       card.appendChild(rowTop);
 
-      // -- BOTTOM ROW --
+      // BOTTOM ROW
       var rowBot = document.createElement('div');
       rowBot.className = 'card-row-bottom';
 
@@ -1378,7 +1378,7 @@ body.premium .unlock-badge { display: none; }
 
       card.appendChild(rowBot);
 
-      // -- EXPANDABLE DETAIL --
+      // EXPANDABLE DETAIL
       var detail = document.createElement('div');
       detail.className = 'card-detail';
 
@@ -1402,7 +1402,7 @@ body.premium .unlock-badge { display: none; }
 
       detail.appendChild(detailRow);
 
-      // Row 2: premium prices (transparency) -- entry blurred for free
+      // Row 2: premium prices (transparency), entry blurred for free
       if (s.entry_premium != null) {
         var premRow = document.createElement('div');
         premRow.className = 'card-detail-row';
@@ -1568,7 +1568,7 @@ body.premium .unlock-badge { display: none; }
       else { tdEntry.textContent = '--'; }
       tr.appendChild(tdEntry);
 
-      // Current Premium (premium only -- stripped from public JSON)
+      // Current Premium (premium only, stripped from public JSON)
       var tdCurPrem = document.createElement('td');
       tdCurPrem.className = 'col-pnl';
       if (s.current_premium != null && isPremium) {
@@ -1737,7 +1737,7 @@ body.premium .unlock-badge { display: none; }
   loadSignals();
   setInterval(loadSignals, 900000); // 15 min to match price check cadence
   setInterval(tickUpdated, 1000);
-  // Refresh growth chart alongside signals (skip first load -- handled below)
+  // Refresh growth chart alongside signals (skip first load, handled below)
   setInterval(function() {
     if (typeof Chart !== 'undefined') {
       fetch('growth_chart.json?t=' + Date.now())

@@ -510,7 +510,7 @@ nav {
       </div>
       <div class="record-stat">
         <div class="rv" id="lp-winrate">--</div>
-        <div class="rl">Win Rate</div>
+        <div class="rl" id="lp-winrate-label">Win Rate</div>
       </div>
       <div class="record-stat">
         <div class="rv" id="lp-avg">--</div>
@@ -717,19 +717,32 @@ nav {
     var avgEl = document.getElementById('lp-avg');
     var convEl = document.getElementById('lp-conviction');
 
-    if (closed.length > 0) {
+    // Win rate: only from closed trades (need enough data)
+    if (closed.length >= 3) {
       var wr = Math.round((wins.length / closed.length) * 100);
       wrEl.textContent = wr + '%';
       wrEl.className = 'rv ' + (wr >= 50 ? 'green' : 'red');
-
-      var sum = 0;
-      closed.forEach(function(s) { sum += (s.pnl_pct || 0); });
-      var avg = sum / closed.length;
-      avgEl.textContent = (avg >= 0 ? '+' : '') + avg.toFixed(1) + '%';
-      avgEl.className = 'rv ' + (avg >= 0 ? 'green' : 'red');
     } else {
-      wrEl.textContent = '--';
-      wrEl.className = 'rv neutral';
+      // Not enough closed trades -- show open count instead
+      var openCount = signals.filter(function(s) { return s.result === null; }).length;
+      wrEl.textContent = openCount + ' open';
+      wrEl.className = 'rv green';
+      var wrLabel = document.getElementById('lp-winrate-label');
+      if (wrLabel) wrLabel.textContent = 'Positions';
+    }
+
+    // Avg return: show CURRENT return across ALL positions (open + closed)
+    // This reflects the real portfolio picture, not just realized P&L
+    var allReturns = [];
+    signals.forEach(function(s) {
+      if (s.current_return_pct != null) allReturns.push(s.current_return_pct);
+      else if (s.pnl_pct != null) allReturns.push(s.pnl_pct);
+    });
+    if (allReturns.length > 0) {
+      var avgAll = allReturns.reduce(function(a, b) { return a + b; }, 0) / allReturns.length;
+      avgEl.textContent = (avgAll >= 0 ? '+' : '') + avgAll.toFixed(1) + '%';
+      avgEl.className = 'rv ' + (avgAll >= 0 ? 'green' : 'red');
+    } else {
       avgEl.textContent = '--';
       avgEl.className = 'rv neutral';
     }

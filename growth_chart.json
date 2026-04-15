@@ -120,7 +120,7 @@
       "date": "2026-04-10",
       "pnl": 258.1,
       "peak": 595.3,
-      "status": "closed"
+      "status": "open"
     },
     {
       "ticker": "MU",
@@ -176,5 +176,5 @@
   "avg_return": 182.2,
   "avg_peak": 230.9,
   "win_rate": 89.0,
-  "generated": "2026-04-14T13:46:07.714352"
+  "generated": "2026-04-14T21:30:10.335878"
 }

@@ -1315,8 +1315,9 @@ body.premium .unlock-badge { display: none; }
       convWrap.appendChild(convBar);
       rowBot.appendChild(convWrap);
 
-      // Strike/Expiry
+      // Strike/Expiry + Entry/Current premium
       if (s.strike && s.expiry) {
+        // Premium user: show full trade spec
         var specSpan = document.createElement('span');
         specSpan.className = 'conviction-label';
         var specText = (s.option_type || '') + ' $' + s.strike + ' exp ' + s.expiry.slice(5);
@@ -1326,52 +1327,30 @@ body.premium .unlock-badge { display: none; }
           specSpan.appendChild(blurWrap(specText, true));
         }
         rowBot.appendChild(specSpan);
+
+        // Entry -> Current
+        if (s.entry_premium != null) {
+          var premSpan = document.createElement('span');
+          premSpan.className = 'conviction-label';
+          if (isPremium) {
+            var premText = '$' + s.entry_premium.toFixed(2);
+            if (s.current_premium != null) {
+              premText += ' \u2192 $' + s.current_premium.toFixed(2);
+              premSpan.style.color = s.current_premium >= s.entry_premium ? 'var(--green)' : 'var(--red)';
+            }
+            premSpan.textContent = premText;
+          } else {
+            premSpan.appendChild(blurWrap('$' + s.entry_premium.toFixed(2), false));
+          }
+          rowBot.appendChild(premSpan);
+        }
       } else if (!isPremium) {
-        // No strike data in public JSON -- show upgrade prompt
-        var lockSpan = document.createElement('a');
-        lockSpan.href = WHOP_URL;
-        lockSpan.target = '_blank';
-        lockSpan.style.cssText = 'color: #FFD700; font-size: 11px; text-decoration: none; font-family: var(--font-mono); opacity: 0.8;';
-        lockSpan.textContent = '\uD83D\uDD12 ' + (s.option_type || 'Call') + ' -- strike + expiry in Premium';
-        rowBot.appendChild(lockSpan);
-      } else if (s.option_type) {
+        // Free user: ONE clean line instead of multiple lock icons
         var optLabel = document.createElement('span');
         optLabel.className = 'conviction-label';
-        optLabel.textContent = esc(s.option_type);
+        optLabel.style.color = '#6B7280';
+        optLabel.textContent = s.option_type || 'Call';
         rowBot.appendChild(optLabel);
-      }
-
-      // Entry -> Current premium
-      if (s.entry_premium != null) {
-        var premSpan = document.createElement('span');
-        premSpan.className = 'conviction-label';
-        if (isPremium) {
-          var premText = '$' + s.entry_premium.toFixed(2);
-          if (s.current_premium != null) {
-            premText += ' \u2192 $' + s.current_premium.toFixed(2);
-            premSpan.style.color = s.current_premium >= s.entry_premium ? 'var(--green)' : 'var(--red)';
-          }
-          premSpan.textContent = premText;
-        } else {
-          premSpan.appendChild(blurWrap('$' + s.entry_premium.toFixed(2), false));
-          if (s.current_premium != null) {
-            var arrow = document.createTextNode(' \u2192 ');
-            premSpan.appendChild(arrow);
-            var curSpan = document.createElement('span');
-            curSpan.textContent = '$' + s.current_premium.toFixed(2);
-            curSpan.style.color = s.current_premium >= s.entry_premium ? 'var(--green)' : 'var(--red)';
-            premSpan.appendChild(curSpan);
-          }
-        }
-        rowBot.appendChild(premSpan);
-      } else if (!isPremium && s.current_premium != null) {
-        // No entry premium in public JSON -- show current price + lock icon
-        var lockPrem = document.createElement('a');
-        lockPrem.href = WHOP_URL;
-        lockPrem.target = '_blank';
-        lockPrem.style.cssText = 'color: #FFD700; font-size: 11px; text-decoration: none; font-family: var(--font-mono); opacity: 0.8;';
-        lockPrem.textContent = '\uD83D\uDD12 entry price in Premium \u2192 $' + s.current_premium.toFixed(2);
-        rowBot.appendChild(lockPrem);
       }
 
       var meta = document.createElement('span');
@@ -1379,23 +1358,24 @@ body.premium .unlock-badge { display: none; }
       meta.textContent = relativeTime(s.signal_date);
       rowBot.appendChild(meta);
 
-      // Free users: hint that these are delayed + newer signals exist
+      // Free users: one clean FOMO line per card
       if (!isPremium) {
         var liveHint = document.createElement('a');
         liveHint.href = WHOP_URL;
         liveHint.target = '_blank';
-        liveHint.style.cssText = 'font-size: 10px; color: #FFD700; text-decoration: none; opacity: 0.7; font-family: var(--font-mono); margin-left: 6px;';
-        // Dynamic text based on age
+        liveHint.style.cssText = 'font-size: 10px; color: #FFD700; text-decoration: none; opacity: 0.65; font-family: var(--font-mono);';
         var daysOld = Math.floor((Date.now() - new Date(s.signal_date).getTime()) / 86400000);
-        if (daysOld >= 7) {
-          liveHint.textContent = 'newer signals in Premium \u2192';
-        } else if (daysOld >= 3) {
-          liveHint.textContent = "this week's signals in Premium \u2192";
+        var retPct = s.current_return_pct != null ? Math.round(s.current_return_pct) : null;
+        // Outcome-based FOMO: "members got in before the +241% move"
+        if (retPct != null && retPct > 50) {
+          liveHint.textContent = 'members got in before the +' + retPct + '% move';
+        } else if (daysOld >= 5) {
+          liveHint.textContent = 'new signals dropped since -- see them live';
         } else {
-          liveHint.textContent = "today's signals in Premium \u2192";
+          liveHint.textContent = "today's picks are live for members";
         }
         liveHint.onmouseover = function() { this.style.opacity = '1'; };
-        liveHint.onmouseout = function() { this.style.opacity = '0.7'; };
+        liveHint.onmouseout = function() { this.style.opacity = '0.65'; };
         rowBot.appendChild(liveHint);
       }
 

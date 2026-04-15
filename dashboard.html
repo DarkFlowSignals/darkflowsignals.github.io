@@ -1186,13 +1186,19 @@ body.premium .unlock-badge { display: none; }
   // ---- RELATIVE TIME ----
   function relativeTime(dateStr) {
     if (!dateStr) return '';
-    var d = new Date(dateStr + 'T09:30:00');
+    // Compare calendar dates only (ignore hours) to avoid timezone drift
+    var parts = dateStr.split('-');
+    var sigYear = parseInt(parts[0]), sigMonth = parseInt(parts[1]) - 1, sigDay = parseInt(parts[2]);
     var now = new Date();
-    var diffDays = Math.floor((now - d) / 86400000);
+    var todayMid = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var sigMid = new Date(sigYear, sigMonth, sigDay);
+    var diffDays = Math.round((todayMid - sigMid) / 86400000);
     if (diffDays === 0) return 'today';
     if (diffDays === 1) return 'yesterday';
+    if (diffDays < 0) return 'today'; // future date edge case
     if (diffDays < 7) return diffDays + 'd ago';
-    return d.toLocaleString('en-US', { month: 'short' }) + ' ' + d.getDate();
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return months[sigMonth] + ' ' + sigDay;
   }
 
   // ---- SIGNAL FEED ----

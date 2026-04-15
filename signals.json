@@ -253,7 +253,7 @@
       "max_return_pct": 195.2,
       "pnl_pct": null,
       "result": null,
-      "notes": "100% hit",
+      "notes": "100% hit | Apr 15: take profit signal -- sell 2/3 at open (100%+ gain)",
       "tracking_type": "system"
     },
     {
@@ -334,22 +334,6 @@
       "pnl_pct": null,
       "result": null,
       "notes": null,
-      "tracking_type": "system"
-    },
-    {
-      "signal_date": "2026-04-15",
-      "ticker": "ORCL",
-      "direction": "BULLISH",
-      "conviction_score": 85.0,
-      "option_type": "Call",
-      "category": "primary",
-      "status": "open",
-      "outcome_date": null,
-      "current_return_pct": null,
-      "max_return_pct": null,
-      "pnl_pct": null,
-      "result": null,
-      "notes": "Take profit signal -- sell 2/3 of existing Apr 14 position",
       "tracking_type": "system"
     },
     {

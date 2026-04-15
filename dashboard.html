@@ -1358,24 +1358,15 @@ body.premium .unlock-badge { display: none; }
       meta.textContent = relativeTime(s.signal_date);
       rowBot.appendChild(meta);
 
-      // Free users: one clean FOMO line per card
+      // Free users: standardized FOMO line
       if (!isPremium) {
         var liveHint = document.createElement('a');
         liveHint.href = WHOP_URL;
         liveHint.target = '_blank';
-        liveHint.style.cssText = 'font-size: 10px; color: #FFD700; text-decoration: none; opacity: 0.65; font-family: var(--font-mono);';
-        var daysOld = Math.floor((Date.now() - new Date(s.signal_date).getTime()) / 86400000);
-        var retPct = s.current_return_pct != null ? Math.round(s.current_return_pct) : null;
-        // Outcome-based FOMO: "members got in before the +241% move"
-        if (retPct != null && retPct > 50) {
-          liveHint.textContent = 'members got in before the +' + retPct + '% move';
-        } else if (daysOld >= 5) {
-          liveHint.textContent = 'new signals dropped since -- see them live';
-        } else {
-          liveHint.textContent = "today's picks are live for members";
-        }
+        liveHint.style.cssText = 'font-size: 10px; color: #FFD700; text-decoration: none; opacity: 0.6; font-family: var(--font-mono);';
+        liveHint.textContent = 'premium members see new signals live \u2192';
         liveHint.onmouseover = function() { this.style.opacity = '1'; };
-        liveHint.onmouseout = function() { this.style.opacity = '0.65'; };
+        liveHint.onmouseout = function() { this.style.opacity = '0.6'; };
         rowBot.appendChild(liveHint);
       }
 

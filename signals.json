@@ -13,7 +13,7 @@
       "max_return_pct": 286.2,
       "pnl_pct": null,
       "result": null,
-      "notes": "200% target hit | 100% target hit",
+      "notes": "200% target hit | 100% target hit | 200% hit | 100% hit",
       "tracking_type": "system"
     },
     {
@@ -29,7 +29,7 @@
       "max_return_pct": 166.2,
       "pnl_pct": null,
       "result": null,
-      "notes": "100% target hit",
+      "notes": "100% target hit | 100% hit",
       "tracking_type": "system"
     },
     {
@@ -109,7 +109,7 @@
       "max_return_pct": 138.1,
       "pnl_pct": null,
       "result": null,
-      "notes": "100% target hit",
+      "notes": "100% target hit | 100% hit",
       "tracking_type": "system"
     },
     {
@@ -125,7 +125,7 @@
       "max_return_pct": 394.6,
       "pnl_pct": null,
       "result": null,
-      "notes": "200% target hit | 100% target hit",
+      "notes": "200% target hit | 100% target hit | 200% hit | 100% hit",
       "tracking_type": "system"
     },
     {
@@ -141,7 +141,7 @@
       "max_return_pct": 349.4,
       "pnl_pct": null,
       "result": null,
-      "notes": "200% target hit | 100% target hit",
+      "notes": "200% target hit | 100% target hit | 200% hit | 100% hit",
       "tracking_type": "system"
     },
     {
@@ -157,7 +157,7 @@
       "max_return_pct": 241.2,
       "pnl_pct": null,
       "result": null,
-      "notes": "200% target hit | 100% target hit",
+      "notes": "200% target hit | 100% target hit | 200% hit | 100% hit",
       "tracking_type": "system"
     },
     {
@@ -173,7 +173,7 @@
       "max_return_pct": 206.7,
       "pnl_pct": null,
       "result": null,
-      "notes": "100% target hit | 200% target hit",
+      "notes": "100% target hit | 200% target hit | 200% hit | 100% hit",
       "tracking_type": "system"
     },
     {
@@ -205,7 +205,7 @@
       "max_return_pct": 595.3,
       "pnl_pct": null,
       "result": null,
-      "notes": "200% target hit | 100% target hit",
+      "notes": "200% target hit | 100% target hit | 200% hit | 100% hit",
       "tracking_type": "system"
     },
     {
@@ -217,11 +217,11 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 1034.0,
+      "current_return_pct": 1031.7,
       "max_return_pct": 1034.0,
       "pnl_pct": null,
       "result": null,
-      "notes": "200% target hit | 100% target hit",
+      "notes": "200% target hit | 100% target hit | 500% hit | 200% hit | 100% hit",
       "tracking_type": "system"
     },
     {
@@ -285,7 +285,7 @@
       "max_return_pct": 324.2,
       "pnl_pct": null,
       "result": null,
-      "notes": "200% target hit | 100% target hit",
+      "notes": "200% target hit | 100% target hit | 200% hit | 100% hit",
       "tracking_type": "system"
     },
     {
@@ -299,6 +299,70 @@
       "outcome_date": null,
       "current_return_pct": 50.2,
       "max_return_pct": 88.2,
+      "pnl_pct": null,
+      "result": null,
+      "notes": null,
+      "tracking_type": "system"
+    },
+    {
+      "signal_date": "2026-04-15",
+      "ticker": "NVDA",
+      "direction": "BULLISH",
+      "conviction_score": 93.0,
+      "option_type": null,
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "current_return_pct": null,
+      "max_return_pct": null,
+      "pnl_pct": null,
+      "result": null,
+      "notes": null,
+      "tracking_type": "system"
+    },
+    {
+      "signal_date": "2026-04-15",
+      "ticker": "GLD",
+      "direction": "BULLISH",
+      "conviction_score": 89.0,
+      "option_type": null,
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "current_return_pct": null,
+      "max_return_pct": null,
+      "pnl_pct": null,
+      "result": null,
+      "notes": null,
+      "tracking_type": "system"
+    },
+    {
+      "signal_date": "2026-04-15",
+      "ticker": "ORCL",
+      "direction": "BULLISH",
+      "conviction_score": 85.0,
+      "option_type": null,
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "current_return_pct": null,
+      "max_return_pct": null,
+      "pnl_pct": null,
+      "result": null,
+      "notes": null,
+      "tracking_type": "system"
+    },
+    {
+      "signal_date": "2026-04-15",
+      "ticker": "MSFT",
+      "direction": "BULLISH",
+      "conviction_score": 84.0,
+      "option_type": null,
+      "category": "watchlist",
+      "status": "open",
+      "outcome_date": null,
+      "current_return_pct": null,
+      "max_return_pct": null,
       "pnl_pct": null,
       "result": null,
       "notes": null,

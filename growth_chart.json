@@ -12,28 +12,28 @@
     {
       "date": "2026-04-10",
       "signals": 13,
-      "avg_return": 224.9,
+      "avg_return": 224.7,
       "avg_peak": 280.6,
       "win_rate": 92.0,
-      "total_return": 2923.3,
+      "total_return": 2921.0,
       "total_peak": 3647.6
     },
     {
       "date": "2026-04-13",
       "signals": 14,
-      "avg_return": 212.2,
+      "avg_return": 212.1,
       "avg_peak": 266.8,
       "win_rate": 93.0,
-      "total_return": 2971.3,
+      "total_return": 2969.0,
       "total_peak": 3735.8
     },
     {
       "date": "2026-04-14",
       "signals": 19,
-      "avg_return": 182.2,
+      "avg_return": 182.1,
       "avg_peak": 230.9,
       "win_rate": 89.0,
-      "total_return": 3462.4,
+      "total_return": 3460.1,
       "total_peak": 4386.7
     }
   ],
@@ -125,7 +125,7 @@
     {
       "ticker": "MU",
       "date": "2026-04-10",
-      "pnl": 1034.0,
+      "pnl": 1031.7,
       "peak": 1034.0,
       "status": "open"
     },
@@ -173,8 +173,8 @@
     }
   ],
   "total": 19,
-  "avg_return": 182.2,
+  "avg_return": 182.1,
   "avg_peak": 230.9,
   "win_rate": 89.0,
-  "generated": "2026-04-14T21:30:10.335878"
+  "generated": "2026-04-15T06:34:56.506224"
 }

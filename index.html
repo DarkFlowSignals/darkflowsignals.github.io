@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DarkFlow | Smart Money Moves. Exposed.</title>
-<meta name="description" content="Institutional flow signals scored 0-100 and tracked publicly. Every trade logged, every loss shown. Free tier available.">
+<meta name="description" content="Continuously monitors institutional dark pool flow. Signals fire when multi-layer conviction confirms. Every trade tracked publicly. Free tier available.">
 
 <!-- Open Graph -->
 <meta property="og:title" content="DarkFlow | Smart Money Moves. Exposed.">
-<meta property="og:description" content="Institutional flow signals scored and tracked live. 13,000+ trades scanned daily. Free tier available.">
+<meta property="og:description" content="Continuously monitors 13,000+ institutional dark pool trades. Signals fire when conviction confirms. Free tier available.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://darkflowsignals.github.io">
 <meta property="og:image" content="https://darkflowsignals.github.io/og-image.png">
@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@DarkFlowSignals">
 <meta name="twitter:title" content="DarkFlow | Smart Money Moves. Exposed.">
-<meta name="twitter:description" content="Institutional flow signals scored and tracked live. 13,000+ trades scanned daily.">
+<meta name="twitter:description" content="Continuously monitors 13,000+ institutional dark pool trades. Signals fire when conviction confirms.">
 <meta name="twitter:image" content="https://darkflowsignals.github.io/og-image.png">
 
 <meta name="robots" content="index, follow">
@@ -98,7 +98,7 @@ nav {
 .nav-cta:hover { background: #00c864; }
 
 /* ============================================================
-   TICKER STRIP -- shared with dashboard
+   TICKER STRIP: shared with dashboard
    ============================================================ */
 .ticker-strip {
   width: 100%;
@@ -184,7 +184,7 @@ nav {
 .btn-secondary:hover { border-color: var(--text-muted); background: var(--bg-card); }
 
 /* ============================================================
-   HOW IT WORKS -- 3 steps, minimal
+   HOW IT WORKS: 3 steps, minimal
    ============================================================ */
 .how-section { padding: 72px 0; }
 .how-grid {
@@ -216,7 +216,7 @@ nav {
 }
 
 /* ============================================================
-   TRACK RECORD -- live from signals.json
+   TRACK RECORD: live from signals.json
    ============================================================ */
 .record-section {
   padding: 72px 0;
@@ -268,7 +268,7 @@ nav {
   letter-spacing: 1.2px;
 }
 
-/* Streak bar -- reused from dashboard */
+/* Streak bar, reused from dashboard */
 .streak-row {
   display: flex;
   align-items: center;
@@ -461,7 +461,7 @@ nav {
   <div class="container">
     <h1>Smart money moves.<br><em>Exposed.</em></h1>
     <p class="hero-sub">
-      Every morning I scan institutional options flow and dark pool activity across 13,000+ trades. When multiple data sources agree on the same ticker, that's a signal. You get it before market open, with real option pricing so you can verify every return I claim. Win or lose, it's all public.
+      Our system continuously monitors 13,000+ institutional dark pool trades. While you watch one ticker, it watches all of them. When multiple independent conviction layers confirm the same direction, that's a signal. You get it with real option pricing so you can verify every return I claim. Win or lose, it's all public.
     </p>
     <div class="hero-actions">
       <a href="dashboard.html" class="btn-primary">See Today's Signals</a>
@@ -476,8 +476,8 @@ nav {
     <div class="how-grid">
       <div class="how-card">
         <div class="how-num">01</div>
-        <h3>Scan institutional flow + dark pools</h3>
-        <p>I pull options flow data and dark pool block trades from multiple sources. When a ticker shows unusual activity in both, that's not retail. That's institutional conviction.</p>
+        <h3>Monitor institutional flow continuously</h3>
+        <p>The system watches options flow and dark pool block trades across multiple sources in real time. When a ticker shows unusual activity in both, that's not retail. That's institutional conviction.</p>
       </div>
       <div class="how-card">
         <div class="how-num">02</div>
@@ -532,7 +532,7 @@ nav {
     <div class="record-cta">
       <p>Entry price, current price, peak price, return %. All public. Explore the full transparent record.</p>
       <a href="dashboard.html" class="btn-dashboard">View Free Dashboard</a>
-      <a href="https://whop.com/darkflow-signals/premium-e5-02ad/" target="_blank" rel="noopener" class="btn-dashboard" style="border-color: #FFD700; color: #FFD700; margin-left: 12px;">Unlock Premium -- Live Signals + Strike Prices</a>
+      <a href="https://whop.com/darkflow-signals/premium-e5-02ad/" target="_blank" rel="noopener" class="btn-dashboard" style="border-color: #FFD700; color: #FFD700; margin-left: 12px;">Unlock Premium | Live Signals + Strike Prices</a>
       <p style="font-size: 12px; color: #6B7280; margin-top: 10px;">Free shows last week's signals. Premium shows today's signals in real-time with strike prices, expiry dates, and entry premiums.</p>
     </div>
   </div>
@@ -566,7 +566,7 @@ nav {
         <div class="price-amount">$59<span>/mo</span></div>
         <p class="price-desc">14 days free. Get the signal before market open. Full breakdown, not just a ticker and a direction.</p>
         <ul class="price-features">
-          <li>14-day free trial -- no commitment</li>
+          <li>14-day free trial, no commitment</li>
           <li>Real-time premarket + midday alerts</li>
           <li>Full conviction breakdowns</li>
           <li>Entry, exit, stop loss for every trade</li>
@@ -725,7 +725,7 @@ nav {
       wrEl.textContent = wr + '%';
       wrEl.className = 'rv ' + (wr >= 50 ? 'green' : 'red');
     } else {
-      // Not enough closed trades -- show open count instead
+      // Not enough closed trades, show open count instead
       var openCount = signals.filter(function(s) { return s.result === null; }).length;
       wrEl.textContent = openCount + ' open';
       wrEl.className = 'rv green';

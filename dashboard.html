@@ -1315,7 +1315,7 @@ body.premium .unlock-badge { display: none; }
       convWrap.appendChild(convBar);
       rowBot.appendChild(convWrap);
 
-      // Strike/Expiry (blurred for free)
+      // Strike/Expiry
       if (s.strike && s.expiry) {
         var specSpan = document.createElement('span');
         specSpan.className = 'conviction-label';
@@ -1326,6 +1326,14 @@ body.premium .unlock-badge { display: none; }
           specSpan.appendChild(blurWrap(specText, true));
         }
         rowBot.appendChild(specSpan);
+      } else if (!isPremium) {
+        // No strike data in public JSON -- show upgrade prompt
+        var lockSpan = document.createElement('a');
+        lockSpan.href = WHOP_URL;
+        lockSpan.target = '_blank';
+        lockSpan.style.cssText = 'color: #FFD700; font-size: 11px; text-decoration: none; font-family: var(--font-mono); opacity: 0.8;';
+        lockSpan.textContent = '\uD83D\uDD12 ' + (s.option_type || 'Call') + ' -- strike + expiry in Premium';
+        rowBot.appendChild(lockSpan);
       } else if (s.option_type) {
         var optLabel = document.createElement('span');
         optLabel.className = 'conviction-label';
@@ -1333,7 +1341,7 @@ body.premium .unlock-badge { display: none; }
         rowBot.appendChild(optLabel);
       }
 
-      // Entry -> Current premium (entry blurred for free, current always visible)
+      // Entry -> Current premium
       if (s.entry_premium != null) {
         var premSpan = document.createElement('span');
         premSpan.className = 'conviction-label';
@@ -1356,6 +1364,14 @@ body.premium .unlock-badge { display: none; }
           }
         }
         rowBot.appendChild(premSpan);
+      } else if (!isPremium && s.current_premium != null) {
+        // No entry premium in public JSON -- show current price + lock icon
+        var lockPrem = document.createElement('a');
+        lockPrem.href = WHOP_URL;
+        lockPrem.target = '_blank';
+        lockPrem.style.cssText = 'color: #FFD700; font-size: 11px; text-decoration: none; font-family: var(--font-mono); opacity: 0.8;';
+        lockPrem.textContent = '\uD83D\uDD12 entry price in Premium \u2192 $' + s.current_premium.toFixed(2);
+        rowBot.appendChild(lockPrem);
       }
 
       var meta = document.createElement('span');

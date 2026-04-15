@@ -520,10 +520,6 @@ nav {
         <div class="rv" id="lp-peak">--</div>
         <div class="rl">Avg Peak</div>
       </div>
-      <div class="record-stat">
-        <div class="rv amber" id="lp-conviction">--</div>
-        <div class="rl">Avg Score</div>
-      </div>
     </div>
 
     <!-- Streak bar -->
@@ -765,11 +761,6 @@ nav {
       peakEl.className = 'rv ' + (avgPeak >= 0 ? 'green' : 'red');
     }
 
-    if (signals.length > 0) {
-      var convSum = 0;
-      signals.forEach(function(s) { convSum += (s.conviction_score || 0); });
-      convEl.textContent = Math.round(convSum / signals.length);
-    }
   }
 
   // ---- STREAK BAR ----

@@ -1379,13 +1379,21 @@ body.premium .unlock-badge { display: none; }
       meta.textContent = relativeTime(s.signal_date);
       rowBot.appendChild(meta);
 
-      // Free users: show "live in Premium" hint next to the date
+      // Free users: hint that these are delayed + newer signals exist
       if (!isPremium) {
         var liveHint = document.createElement('a');
         liveHint.href = WHOP_URL;
         liveHint.target = '_blank';
         liveHint.style.cssText = 'font-size: 10px; color: #FFD700; text-decoration: none; opacity: 0.7; font-family: var(--font-mono); margin-left: 6px;';
-        liveHint.textContent = 'live pricing in Premium \u2192';
+        // Dynamic text based on age
+        var daysOld = Math.floor((Date.now() - new Date(s.signal_date).getTime()) / 86400000);
+        if (daysOld >= 7) {
+          liveHint.textContent = 'newer signals in Premium \u2192';
+        } else if (daysOld >= 3) {
+          liveHint.textContent = "this week's signals in Premium \u2192";
+        } else {
+          liveHint.textContent = "today's signals in Premium \u2192";
+        }
         liveHint.onmouseover = function() { this.style.opacity = '1'; };
         liveHint.onmouseout = function() { this.style.opacity = '0.7'; };
         rowBot.appendChild(liveHint);

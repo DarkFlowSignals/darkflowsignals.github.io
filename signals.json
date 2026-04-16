@@ -23,7 +23,7 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 108.8,
+      "current_return_pct": 109.5,
       "peak_return_pct": 166.2,
       "result": "WIN",
       "tracking_type": "system"
@@ -65,7 +65,7 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 34.4,
+      "current_return_pct": 31.6,
       "peak_return_pct": 64.6,
       "result": "WIN",
       "tracking_type": "system"
@@ -79,7 +79,7 @@
       "category": "watchlist",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 203.8,
+      "current_return_pct": 201.4,
       "peak_return_pct": 203.8,
       "result": "WIN",
       "tracking_type": "system"
@@ -93,7 +93,7 @@
       "category": "watchlist",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 16.7,
+      "current_return_pct": 17.0,
       "peak_return_pct": 138.1,
       "result": "WIN",
       "tracking_type": "system"
@@ -107,7 +107,7 @@
       "category": "watchlist",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 379.2,
+      "current_return_pct": 378.5,
       "peak_return_pct": 421.2,
       "result": "WIN",
       "tracking_type": "system"
@@ -121,7 +121,7 @@
       "category": "watchlist",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 252.5,
+      "current_return_pct": 253.8,
       "peak_return_pct": 349.4,
       "result": "WIN",
       "tracking_type": "system"
@@ -163,7 +163,7 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": -37.6,
+      "current_return_pct": -38.8,
       "peak_return_pct": 84.7,
       "result": "WIN",
       "tracking_type": "system"
@@ -177,7 +177,7 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 923.3,
+      "current_return_pct": 888.4,
       "peak_return_pct": 923.3,
       "result": "WIN",
       "tracking_type": "system"
@@ -191,7 +191,7 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 714.2,
+      "current_return_pct": 703.3,
       "peak_return_pct": 1034.0,
       "result": "WIN",
       "tracking_type": "system"
@@ -205,7 +205,7 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": -71.2,
+      "current_return_pct": -70.6,
       "peak_return_pct": 0.0,
       "result": "LOSS",
       "tracking_type": "system"
@@ -219,7 +219,7 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 290.2,
+      "current_return_pct": 295.7,
       "peak_return_pct": 334.6,
       "result": "WIN",
       "tracking_type": "system"
@@ -233,7 +233,7 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 44.1,
+      "current_return_pct": 41.4,
       "peak_return_pct": 91.3,
       "result": "WIN",
       "tracking_type": "system"
@@ -247,7 +247,7 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 210.9,
+      "current_return_pct": 206.6,
       "peak_return_pct": 397.7,
       "result": "WIN",
       "tracking_type": "system"
@@ -261,7 +261,7 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 50.2,
+      "current_return_pct": 49.6,
       "peak_return_pct": 88.2,
       "result": "WIN",
       "tracking_type": "system"
@@ -289,7 +289,7 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": -53.8,
+      "current_return_pct": -54.5,
       "peak_return_pct": -21.3,
       "result": "LOSS",
       "tracking_type": "system"
@@ -303,7 +303,7 @@
       "category": "watchlist",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 653.1,
+      "current_return_pct": 658.5,
       "peak_return_pct": 692.8,
       "result": "WIN",
       "tracking_type": "system"
@@ -317,7 +317,7 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": -24.0,
+      "current_return_pct": -23.5,
       "peak_return_pct": 2.5,
       "result": "WIN",
       "tracking_type": "system"
@@ -331,7 +331,7 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 484.0,
+      "current_return_pct": 502.0,
       "peak_return_pct": 623.6,
       "result": "WIN",
       "tracking_type": "system"
@@ -345,7 +345,7 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 73.5,
+      "current_return_pct": 81.2,
       "peak_return_pct": 92.9,
       "result": "WIN",
       "tracking_type": "system"

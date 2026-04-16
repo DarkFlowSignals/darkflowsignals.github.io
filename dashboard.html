@@ -816,8 +816,8 @@ body.premium .unlock-badge { display: none; }
 
   <!-- TRANSPARENCY NOTE -->
   <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-bottom:20px;padding:10px 14px;border:1px solid var(--border);border-radius:4px;background:var(--bg-card);">
-    Every signal logged with real option premium prices. Entry, current, and peak shown so you can verify the math. Signals auto-close at 50% premium loss (no exceptions). No cherry-picking. No deleting losers.<br>
-    Option prices and page both refresh every 15 minutes during market hours.
+    Every signal tracked from entry to expiry. <span style="color:var(--green);">Peak</span> is the highest return reached (signal quality). <span style="color:var(--amber);">Real</span> is the actual return at expiry (ITM intrinsic value, or -100% if OTM). No cherry-picking, no deleting losers.<br>
+    Option prices refresh every 5 minutes during market hours; the page refreshes every 15 minutes.
   </div>
 
   <!-- STREAK BAR -->
@@ -831,7 +831,7 @@ body.premium .unlock-badge { display: none; }
   <div class="filter-row" id="filter-row">
     <button class="filter-pill active" data-filter="all">All</button>
     <button class="filter-pill" data-filter="open">Open</button>
-    <button class="filter-pill" data-filter="closed">Closed</button>
+    <button class="filter-pill" data-filter="expired">Expired</button>
     <button class="filter-pill" data-filter="bullish">Bullish</button>
     <button class="filter-pill" data-filter="bearish">Bearish</button>
   </div>
@@ -851,9 +851,9 @@ body.premium .unlock-badge { display: none; }
           <th data-sort="strike">Strike <span class="sort-arrow"></span></th>
           <th data-sort="expiry">Expiry <span class="sort-arrow"></span></th>
           <th data-sort="entry_premium">Entry $ <span class="sort-arrow"></span></th>
-          <th data-sort="current_premium">Now $ <span class="sort-arrow"></span></th>
-          <th data-sort="current_return_pct">Return <span class="sort-arrow"></span></th>
-          <th data-sort="max_return_pct">Peak <span class="sort-arrow"></span></th>
+          <th data-sort="current_return_pct">Current <span class="sort-arrow"></span></th>
+          <th data-sort="peak_return_pct">Peak <span class="sort-arrow"></span></th>
+          <th data-sort="real_return_pct">Real <span class="sort-arrow"></span></th>
           <th data-sort="status">Status <span class="sort-arrow"></span></th>
           <th data-sort="result">Result <span class="sort-arrow"></span></th>
         </tr>
@@ -866,13 +866,13 @@ body.premium .unlock-badge { display: none; }
   <div id="growth-section" style="margin:40px 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;">
     <h3 style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0 0 4px 0;">Signal Performance</h3>
     <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;">
-      Every signal tracked from entry to current price. No cherry-picking.<br>
-      <span style="color:#00E676">Current Return</span>: average return per signal at today's option prices.<br>
-      <span style="color:#F59E0B">Peak Return</span>: average of each signal's highest recorded price.<br>
+      Every signal tracked from entry to expiry. No cherry-picking.<br>
+      <span style="color:#00E676">Peak Return</span>: average of each signal's highest recorded price (signal quality).<br>
+      <span style="color:#F59E0B">Current Return</span>: average return at today's option prices.<br>
       All signals included. All forward-looking with real timestamps, not backtested.
     </p>
     <canvas id="growth-chart" height="200"></canvas>
-    <div id="growth-stats" style="display:flex;gap:24px;margin-top:12px;font-family:var(--font-mono);font-size:12px;"></div>
+    <div id="growth-stats" style="display:flex;gap:24px;margin-top:12px;font-family:var(--font-mono);font-size:12px;flex-wrap:wrap;"></div>
   </div>
 
   <!-- FOMO SECTION -->
@@ -944,6 +944,59 @@ body.premium .unlock-badge { display: none; }
   var urlKey = new URLSearchParams(window.location.search).get('key') || '';
   var isPremium = false;
   var WHOP_URL = 'https://whop.com/darkflow-signals/premium-e5-02ad/';
+
+  // =================================================================
+  // UNIFIED DATA HELPERS. Every view (feed, table, stats, streak, chart,
+  // ticker, FOMO) MUST derive values through these. Single source of truth.
+  // =================================================================
+
+  // Peak return % (signal quality metric, updated throughout the signal's life)
+  function peakPct(s) {
+    return (s.peak_return_pct != null) ? s.peak_return_pct
+         : (s.max_return_pct != null) ? s.max_return_pct   // legacy fallback
+         : null;
+  }
+
+  // Current return % while the signal is live; null once expired
+  function currentPct(s) {
+    if (s.status === 'expired') return null;
+    return (s.current_return_pct != null) ? s.current_return_pct : null;
+  }
+
+  // Real return % at expiry (ITM intrinsic / entry, or -100% OTM); null while open
+  function realPct(s) {
+    if (s.real_return_pct != null) return s.real_return_pct;
+    // Legacy: if marked closed with a clean expiry note and pnl_pct exists
+    if (s.status === 'expired' && s.pnl_pct != null) return s.pnl_pct;
+    return null;
+  }
+
+  // Is the signal still OPEN publicly? (calendar-based, ignores internal stops)
+  function isOpen(s) {
+    if (s.status === 'open') return true;
+    if (s.status === 'expired') return false;
+    // Legacy rows: status may be 'closed' from internal stops. Treat as OPEN
+    // publicly unless a real expiry outcome exists.
+    return realPct(s) === null;
+  }
+
+  // Signal-quality win: peak > 0 = thesis was correct. Loss: peak never > 0.
+  // null means not enough data yet.
+  function signalResult(s) {
+    var p = peakPct(s);
+    if (p != null) return p > 0 ? 'WIN' : 'LOSS';
+    var c = currentPct(s);
+    if (c != null) return c > 0 ? 'WIN' : 'LOSS';
+    return null;
+  }
+
+  function isSignalWin(s) { return signalResult(s) === 'WIN'; }
+  function hasResult(s) { return signalResult(s) !== null; }
+
+  function fmtPct(v) {
+    if (v == null) return null;
+    return (v >= 0 ? '+' : '') + v.toFixed(1) + '%';
+  }
 
   function checkPremium(serverKey) {
     isPremium = (urlKey === serverKey && urlKey !== '');
@@ -1026,8 +1079,8 @@ body.premium .unlock-badge { display: none; }
     return allSignals.filter(function(s) {
       // Free feed/table: 7-day delay on actual signals
       if (!isPremium && cutoff && s.signal_date >= cutoff) return false;
-      if (currentFilter === 'open') return s.status === 'open';
-      if (currentFilter === 'closed') return s.result !== null;
+      if (currentFilter === 'open') return isOpen(s);
+      if (currentFilter === 'expired') return !isOpen(s);
       if (currentFilter === 'bullish') return s.direction === 'BULLISH';
       if (currentFilter === 'bearish') return s.direction === 'BEARISH';
       return true;
@@ -1042,19 +1095,11 @@ body.premium .unlock-badge { display: none; }
   }
 
   // ---- STATS ----
-  // Signal quality win: peak return was positive (thesis was correct)
-  // Signal quality loss: peak never went positive (thesis was wrong)
-  function isSignalWin(s) {
-    if (s.max_return_pct != null && s.max_return_pct > 0) return true;
-    if (s.current_return_pct != null && s.current_return_pct > 0) return true;
-    return false;
-  }
-
+  // All stats routed through unified helpers defined above.
   function renderStats() {
     var visible = getVisible();
-    // For win rate: use all signals with enough data (closed OR open with peak data)
-    var withData = visible.filter(function(s) { return s.max_return_pct != null || s.result !== null; });
-    var wins = withData.filter(function(s) { return isSignalWin(s); });
+    var withData = visible.filter(hasResult);
+    var wins = withData.filter(isSignalWin);
 
     document.getElementById('stat-total').textContent = visible.length;
 
@@ -1067,23 +1112,23 @@ body.premium .unlock-badge { display: none; }
       wrEl.textContent = wr + '%';
       wrEl.className = 'stat-value ' + (wr >= 50 ? 'green' : 'red');
 
-      // Avg Peak: use max_return_pct (signal quality), not exit P&L
+      // Avg Peak: signal-quality metric
       var sum = 0, count = 0;
       withData.forEach(function(s) {
-        var peak = s.max_return_pct != null ? s.max_return_pct : (s.pnl_pct || 0);
-        sum += peak;
-        count++;
+        var p = peakPct(s);
+        if (p != null) { sum += p; count++; }
       });
       var avgPeak = count > 0 ? sum / count : 0;
-      avgEl.textContent = (avgPeak >= 0 ? '+' : '') + avgPeak.toFixed(1) + '%';
+      avgEl.textContent = fmtPct(avgPeak);
       avgEl.className = 'stat-value ' + (avgPeak >= 0 ? 'green' : 'red');
 
-      // Streak: based on signal quality (peak > 0 = W)
-      var sorted = withData.slice().sort(function(a, b) { return (b.signal_date || '').localeCompare(a.signal_date || ''); });
+      // Streak: most recent consecutive W/L by signal_date
+      var sorted = withData.slice().sort(function(a, b) {
+        return (b.signal_date || '').localeCompare(a.signal_date || '');
+      });
       var streakCount = 0, streakType = null;
       for (var i = 0; i < sorted.length; i++) {
-        var isWin = isSignalWin(sorted[i]);
-        var r = isWin ? 'win' : 'loss';
+        var r = isSignalWin(sorted[i]) ? 'win' : 'loss';
         if (!streakType) { streakType = r; streakCount = 1; }
         else if (r === streakType) streakCount++;
         else break;
@@ -1106,15 +1151,15 @@ body.premium .unlock-badge { display: none; }
     container.textContent = '';
 
     var visible = getVisible();
-    var sorted = visible.slice().sort(function(a, b) { return (a.signal_date || '').localeCompare(b.signal_date || ''); });
+    var sorted = visible.slice().sort(function(a, b) {
+      return (a.signal_date || '').localeCompare(b.signal_date || '');
+    });
     var last20 = sorted.slice(-20);
     var wins = 0, losses = 0;
 
     last20.forEach(function(s) {
       var block = document.createElement('div');
-      // Signal quality: peak > 0 = win, peak <= 0 or never positive = loss
-      var hasData = s.max_return_pct != null || s.result !== null;
-      if (!hasData) {
+      if (!hasResult(s)) {
         block.className = 'streak-block open-block';
       } else if (isSignalWin(s)) {
         block.className = 'streak-block win'; wins++;
@@ -1124,10 +1169,9 @@ body.premium .unlock-badge { display: none; }
 
       var tip = document.createElement('span');
       tip.className = 'streak-tooltip';
-      // Show peak % as the signal quality metric
-      var peakVal = s.max_return_pct != null ? s.max_return_pct : s.current_return_pct;
-      var pnlText = peakVal != null ? 'peak ' + (peakVal >= 0 ? '+' : '') + peakVal.toFixed(1) + '%' : 'open';
-      tip.textContent = esc(s.ticker) + ' ' + pnlText;
+      var p = peakPct(s);
+      var label = (p != null) ? ('peak ' + fmtPct(p)) : 'open';
+      tip.textContent = esc(s.ticker) + ' ' + label;
       block.appendChild(tip);
       container.appendChild(block);
     });
@@ -1136,7 +1180,7 @@ body.premium .unlock-badge { display: none; }
     if (total > 0) {
       tally.textContent = wins + 'W - ' + losses + 'L (' + Math.round((wins / total) * 100) + '%)';
     } else {
-      tally.textContent = 'no closed trades';
+      tally.textContent = 'tracking in progress';
     }
   }
 
@@ -1154,7 +1198,8 @@ body.premium .unlock-badge { display: none; }
     var items = [];
     sorted.forEach(function(s) {
       if (seen[s.ticker]) return;
-      if (s.current_return_pct == null && s.pnl_pct == null) return;
+      // Show if we have ANY return signal (open current, peak, or real)
+      if (currentPct(s) == null && peakPct(s) == null && realPct(s) == null) return;
       seen[s.ticker] = true;
       items.push(s);
     });
@@ -1172,21 +1217,25 @@ body.premium .unlock-badge { display: none; }
         sym.textContent = '$' + esc(s.ticker);
         item.appendChild(sym);
 
-        // Show current premium price
-        if (s.current_premium != null) {
+        // Show current premium price (premium users only)
+        if (isPremium && s.current_premium != null) {
           var priceSpan = document.createElement('span');
           priceSpan.className = 'ticker-pnl-flat';
           priceSpan.textContent = '$' + s.current_premium.toFixed(2);
           item.appendChild(priceSpan);
         }
 
-        // Show current return %
-        var val = s.current_return_pct != null ? s.current_return_pct : s.pnl_pct;
+        // Prefer real_return (expired), then current (open), then peak
+        var val = realPct(s);
+        var mode = 'real';
+        if (val == null) { val = currentPct(s); mode = 'cur'; }
+        if (val == null) { val = peakPct(s); mode = 'peak'; }
         if (val != null) {
           var pnlSpan = document.createElement('span');
           pnlSpan.className = val >= 0 ? 'ticker-pnl-up' : 'ticker-pnl-down';
           var arrow = val >= 0 ? '\u25B2' : '\u25BC';
-          pnlSpan.textContent = arrow + (val >= 0 ? '+' : '') + val.toFixed(1) + '%';
+          var prefix = (mode === 'peak') ? 'pk ' : '';
+          pnlSpan.textContent = arrow + prefix + (val >= 0 ? '+' : '') + val.toFixed(1) + '%';
           item.appendChild(pnlSpan);
         }
 
@@ -1253,7 +1302,7 @@ body.premium .unlock-badge { display: none; }
     data.forEach(function(s, i) {
       var isBullish = s.direction === 'BULLISH';
       var isFeatured = i === 0 && s.conviction_score === topScore;
-      var isClosed = s.result !== null;
+      var open = isOpen(s);
 
       var card = document.createElement('div');
       card.className = 'signal-card ' + (isBullish ? 'bullish' : 'bearish') + (isFeatured ? ' featured' : '');
@@ -1289,20 +1338,22 @@ body.premium .unlock-badge { display: none; }
       var cardRight = document.createElement('div');
       cardRight.className = 'card-right';
 
-      if (isClosed) {
-        // CLOSED: just the peak number. Green = signal worked. Red = signal didn't. No labels.
-        var mainVal = s.max_return_pct != null ? s.max_return_pct : (s.pnl_pct || 0);
-        var peakDiv = document.createElement('div');
-        peakDiv.className = 'card-pnl ' + (mainVal >= 0 ? 'positive' : 'negative');
-        peakDiv.textContent = (mainVal >= 0 ? '+' : '') + mainVal.toFixed(1) + '%';
-        cardRight.appendChild(peakDiv);
-      } else {
-        // OPEN: current return + OPEN badge + peak if meaningful
-        if (s.current_return_pct != null) {
+      var pk = peakPct(s);
+      var cur = currentPct(s);
+      var real = realPct(s);
+
+      if (open) {
+        // OPEN: current return + live badge + peak as sub-line when meaningful
+        if (cur != null) {
           var retDiv = document.createElement('div');
-          retDiv.className = 'card-pnl ' + (s.current_return_pct >= 0 ? 'positive' : 'negative');
-          retDiv.textContent = (s.current_return_pct >= 0 ? '+' : '') + s.current_return_pct.toFixed(1) + '%';
+          retDiv.className = 'card-pnl ' + (cur >= 0 ? 'positive' : 'negative');
+          retDiv.textContent = fmtPct(cur);
           cardRight.appendChild(retDiv);
+        } else if (pk != null) {
+          var pkHead = document.createElement('div');
+          pkHead.className = 'card-pnl ' + (pk >= 0 ? 'positive' : 'negative');
+          pkHead.textContent = fmtPct(pk);
+          cardRight.appendChild(pkHead);
         }
         var openDiv = document.createElement('div');
         openDiv.className = 'card-status-open';
@@ -1311,12 +1362,32 @@ body.premium .unlock-badge { display: none; }
         openDiv.appendChild(dot);
         openDiv.appendChild(document.createTextNode(' OPEN'));
         cardRight.appendChild(openDiv);
-        if (s.max_return_pct != null && s.max_return_pct > (s.current_return_pct || 0) + 5) {
+        if (pk != null && cur != null && pk > cur + 5) {
           var runDiv = document.createElement('div');
           runDiv.className = 'card-max-return';
           runDiv.style.color = 'var(--green)';
-          runDiv.textContent = 'peak +' + s.max_return_pct.toFixed(1) + '%';
+          runDiv.textContent = 'peak ' + fmtPct(pk);
           cardRight.appendChild(runDiv);
+        }
+      } else {
+        // EXPIRED: lead with Peak (signal quality), then Real underneath
+        if (pk != null) {
+          var peakDiv = document.createElement('div');
+          peakDiv.className = 'card-pnl ' + (pk >= 0 ? 'positive' : 'negative');
+          peakDiv.textContent = fmtPct(pk);
+          cardRight.appendChild(peakDiv);
+
+          var peakTag = document.createElement('div');
+          peakTag.className = 'card-max-return';
+          peakTag.textContent = 'peak';
+          cardRight.appendChild(peakTag);
+        }
+        if (real != null) {
+          var realDiv = document.createElement('div');
+          realDiv.className = 'card-max-return';
+          realDiv.style.color = real >= 0 ? 'var(--green)' : 'var(--red)';
+          realDiv.textContent = 'real ' + fmtPct(real);
+          cardRight.appendChild(realDiv);
         }
       }
 
@@ -1470,15 +1541,20 @@ body.premium .unlock-badge { display: none; }
         detail.appendChild(premRow);
       }
 
-      if (s.notes) {
-        var noteRow = document.createElement('div');
-        noteRow.className = 'card-detail-row';
-        var noteItem = document.createElement('span');
-        noteItem.className = 'detail-item';
-        noteItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Note: ' }));
-        noteItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-value', textContent: esc(s.notes) }));
-        noteRow.appendChild(noteItem);
-        detail.appendChild(noteRow);
+      // Real return detail row (only for expired signals)
+      if (real != null) {
+        var realRow = document.createElement('div');
+        realRow.className = 'card-detail-row';
+        var realItem = document.createElement('span');
+        realItem.className = 'detail-item';
+        realItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Real return at expiry: ' }));
+        var realValSpan = document.createElement('span');
+        realValSpan.className = 'detail-value';
+        realValSpan.style.color = real >= 0 ? 'var(--green)' : 'var(--red)';
+        realValSpan.textContent = fmtPct(real);
+        realItem.appendChild(realValSpan);
+        realRow.appendChild(realItem);
+        detail.appendChild(realRow);
       }
 
       var chartWrap = document.createElement('div');
@@ -1534,13 +1610,42 @@ body.premium .unlock-badge { display: none; }
   function renderTable() {
     var tbody = document.getElementById('table-body');
     tbody.textContent = '';
+
+    // Sort-key lookup routed through unified helpers for new columns
+    function sortKey(s, col) {
+      if (col === 'peak_return_pct') return peakPct(s);
+      if (col === 'real_return_pct') return realPct(s);
+      if (col === 'current_return_pct') return currentPct(s);
+      if (col === 'status') return isOpen(s) ? 'open' : 'expired';
+      if (col === 'result') return signalResult(s);
+      return s[col];
+    }
+
     var data = getFiltered().sort(function(a, b) {
-      var va = a[sortCol], vb = b[sortCol];
+      var va = sortKey(a, sortCol), vb = sortKey(b, sortCol);
       if (va == null) va = '';
       if (vb == null) vb = '';
       if (typeof va === 'number' && typeof vb === 'number') return sortAsc ? va - vb : vb - va;
       return sortAsc ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
     });
+
+    function lockIcon() {
+      var lk = document.createElement('a');
+      lk.href = WHOP_URL;
+      lk.target = '_blank';
+      lk.style.cssText = 'color:#FFD700;text-decoration:none;font-size:11px;';
+      lk.textContent = '\uD83D\uDD12';
+      return lk;
+    }
+
+    function pctCell(v) {
+      var td = document.createElement('td');
+      td.className = 'col-pnl';
+      if (v == null) { td.textContent = '--'; return td; }
+      td.textContent = fmtPct(v);
+      td.classList.add(v >= 0 ? 'positive' : 'negative');
+      return td;
+    }
 
     data.forEach(function(s) {
       var tr = document.createElement('tr');
@@ -1574,7 +1679,7 @@ body.premium .unlock-badge { display: none; }
       var tdStrike = document.createElement('td');
       if (s.strike && isPremium) { tdStrike.textContent = '$' + s.strike; }
       else if (s.strike) { tdStrike.appendChild(blurWrap('$' + s.strike, false)); }
-      else if (!isPremium) { var lk = document.createElement('a'); lk.href = WHOP_URL; lk.target = '_blank'; lk.style.cssText = 'color:#FFD700;text-decoration:none;font-size:11px;'; lk.textContent = '\uD83D\uDD12'; tdStrike.appendChild(lk); }
+      else if (!isPremium) { tdStrike.appendChild(lockIcon()); }
       else { tdStrike.textContent = '--'; }
       tr.appendChild(tdStrike);
 
@@ -1582,7 +1687,7 @@ body.premium .unlock-badge { display: none; }
       var tdExpiry = document.createElement('td');
       if (s.expiry && isPremium) { tdExpiry.textContent = s.expiry; }
       else if (s.expiry) { tdExpiry.appendChild(blurWrap(s.expiry, false)); }
-      else if (!isPremium) { var lk2 = document.createElement('a'); lk2.href = WHOP_URL; lk2.target = '_blank'; lk2.style.cssText = 'color:#FFD700;text-decoration:none;font-size:11px;'; lk2.textContent = '\uD83D\uDD12'; tdExpiry.appendChild(lk2); }
+      else if (!isPremium) { tdExpiry.appendChild(lockIcon()); }
       else { tdExpiry.textContent = '--'; }
       tr.appendChild(tdExpiry);
 
@@ -1590,70 +1695,40 @@ body.premium .unlock-badge { display: none; }
       var tdEntry = document.createElement('td');
       if (s.entry_premium != null && isPremium) { tdEntry.textContent = '$' + s.entry_premium.toFixed(2); }
       else if (s.entry_premium != null) { tdEntry.appendChild(blurWrap('$' + s.entry_premium.toFixed(2), false)); }
-      else if (!isPremium) { var lk3 = document.createElement('a'); lk3.href = WHOP_URL; lk3.target = '_blank'; lk3.style.cssText = 'color:#FFD700;text-decoration:none;font-size:11px;'; lk3.textContent = '\uD83D\uDD12'; tdEntry.appendChild(lk3); }
+      else if (!isPremium) { tdEntry.appendChild(lockIcon()); }
       else { tdEntry.textContent = '--'; }
       tr.appendChild(tdEntry);
 
-      // Current Premium (premium only, stripped from public JSON)
-      var tdCurPrem = document.createElement('td');
-      tdCurPrem.className = 'col-pnl';
-      if (s.current_premium != null && isPremium) {
-        tdCurPrem.textContent = '$' + s.current_premium.toFixed(2);
-        if (s.entry_premium != null) {
-          tdCurPrem.classList.add(s.current_premium >= s.entry_premium ? 'positive' : 'negative');
-        }
-      } else if (!isPremium) {
-        var lk4 = document.createElement('a'); lk4.href = WHOP_URL; lk4.target = '_blank'; lk4.style.cssText = 'color:#FFD700;text-decoration:none;font-size:11px;'; lk4.textContent = '\uD83D\uDD12'; tdCurPrem.appendChild(lk4);
-      } else {
-        tdCurPrem.textContent = '--';
-      }
-      tr.appendChild(tdCurPrem);
+      // Current Return % (null once expired)
+      tr.appendChild(pctCell(currentPct(s)));
 
-      // Current Return %
-      var tdCur = document.createElement('td');
-      tdCur.className = 'col-pnl';
-      if (s.current_return_pct != null) {
-        tdCur.textContent = (s.current_return_pct >= 0 ? '+' : '') + s.current_return_pct.toFixed(1) + '%';
-        tdCur.classList.add(s.current_return_pct >= 0 ? 'positive' : 'negative');
-      } else {
-        tdCur.textContent = '--';
-      }
-      tr.appendChild(tdCur);
+      // Peak Return % (signal quality)
+      tr.appendChild(pctCell(peakPct(s)));
 
-      // Peak Return
-      var tdMax = document.createElement('td');
-      tdMax.className = 'col-pnl';
-      if (s.max_return_pct != null) {
-        tdMax.textContent = (s.max_return_pct >= 0 ? '+' : '') + s.max_return_pct.toFixed(1) + '%';
-        tdMax.classList.add(s.max_return_pct >= 0 ? 'positive' : 'negative');
-      } else {
-        tdMax.textContent = '--';
-      }
-      tr.appendChild(tdMax);
+      // Real Return % (at expiry only)
+      tr.appendChild(pctCell(realPct(s)));
 
-      // Status
+      // Status: OPEN or EXPIRED (no STOPPED / PEAK public labels)
       var tdStatus = document.createElement('td');
       var statusSpan = document.createElement('span');
-      if (s.status === 'open' || !s.result) {
+      if (isOpen(s)) {
         statusSpan.className = 'badge badge-open';
         statusSpan.textContent = 'OPEN';
-      } else if (s.pnl_pct != null && s.pnl_pct <= -50) {
-        statusSpan.className = 'badge badge-loss';
-        statusSpan.textContent = 'STOPPED';
       } else {
-        statusSpan.className = 'badge badge-win';
-        statusSpan.textContent = 'PEAK';
+        statusSpan.className = 'badge';
+        statusSpan.style.cssText = 'background:var(--border);color:var(--text-secondary);';
+        statusSpan.textContent = 'EXPIRED';
       }
       tdStatus.appendChild(statusSpan);
       tr.appendChild(tdStatus);
 
-      // Signal Quality (peak-based)
+      // Result (signal-quality, peak-based)
       var tdResult = document.createElement('td');
-      if (s.max_return_pct != null || s.result) {
+      var r = signalResult(s);
+      if (r) {
         var resBadge = document.createElement('span');
-        var won = isSignalWin(s);
-        resBadge.className = 'badge badge-' + (won ? 'win' : 'loss');
-        resBadge.textContent = won ? 'WIN' : 'LOSS';
+        resBadge.className = 'badge badge-' + (r === 'WIN' ? 'win' : 'loss');
+        resBadge.textContent = r;
         tdResult.appendChild(resBadge);
       } else {
         tdResult.textContent = '--';
@@ -1671,10 +1746,11 @@ body.premium .unlock-badge { display: none; }
     var now = new Date();
     var weekAgo = new Date(now - 7 * 86400000);
 
-    // Show signals with positive peaks as "what you missed" for free users
+    // Show signals with strong peaks as "what you missed" for free users
     var topSignals = getVisible().filter(function(s) {
-      return isSignalWin(s) && s.max_return_pct != null && s.max_return_pct > 20;
-    }).sort(function(a, b) { return (b.max_return_pct || 0) - (a.max_return_pct || 0); }).slice(0, 6);
+      var p = peakPct(s);
+      return p != null && p > 20 && isSignalWin(s);
+    }).sort(function(a, b) { return (peakPct(b) || 0) - (peakPct(a) || 0); }).slice(0, 6);
 
     if (topSignals.length === 0 || isPremium) {
       section.style.display = 'none';
@@ -1695,7 +1771,7 @@ body.premium .unlock-badge { display: none; }
 
       var fg = document.createElement('div');
       fg.className = 'fomo-gain';
-      fg.textContent = '+' + s.max_return_pct.toFixed(1) + '%';
+      fg.textContent = fmtPct(peakPct(s));
       fomoCard.appendChild(fg);
 
       var fti = document.createElement('div');
@@ -1763,29 +1839,9 @@ body.premium .unlock-badge { display: none; }
   loadSignals();
   setInterval(loadSignals, 900000); // 15 min to match price check cadence
   setInterval(tickUpdated, 1000);
-  // Refresh growth chart alongside signals (skip first load, handled below)
-  setInterval(function() {
-    if (typeof Chart !== 'undefined') {
-      fetch('growth_chart.json?t=' + Date.now())
-        .then(function(r) { return r.json(); })
-        .then(function(d) {
-          if (!d || !d.data) return;
-          var statsDiv = document.getElementById('growth-stats');
-          if (statsDiv) {
-            statsDiv.textContent = '';
-            [{ color: '#00E676', text: d.total + ' signals | ' + d.win_rate + '% win rate' },
-             { color: '#00E676', text: 'Avg return: +' + d.avg_return + '%' },
-             { color: '#F59E0B', text: 'Avg peak: +' + d.avg_peak + '%' }
-            ].forEach(function(item) {
-              var span = document.createElement('span');
-              span.style.color = item.color;
-              span.textContent = item.text;
-              statsDiv.appendChild(span);
-            });
-          }
-        }).catch(function() {});
-    }
-  }, 900000);
+  // Growth-chart footer is rebuilt from signals inside loadGrowthChart on
+  // each full reload. loadSignals() (every 15m) triggers render(), which
+  // keeps stats/streak/feed/table in sync. No separate chart-only refresh.
   // ---- SIGNAL PERFORMANCE CHART ----
   function loadGrowthChart() {
     var script = document.createElement('script');
@@ -1808,7 +1864,7 @@ body.premium .unlock-badge { display: none; }
               labels: labels,
               datasets: [
                 { label: 'Avg Peak Return', data: avgPeak, borderColor: '#00E676', backgroundColor: 'rgba(0,230,118,0.08)', fill: true, tension: 0.3, pointRadius: 6, borderWidth: 2 },
-                { label: 'Avg Return (Current)', data: avgReturn, borderColor: '#F59E0B', fill: false, tension: 0.3, pointRadius: 6, borderWidth: 2, borderDash: [4, 4] }
+                { label: 'Avg Current Return', data: avgReturn, borderColor: '#F59E0B', fill: false, tension: 0.3, pointRadius: 6, borderWidth: 2, borderDash: [4, 4] }
               ]
             },
             options: {
@@ -1824,21 +1880,29 @@ body.premium .unlock-badge { display: none; }
             }
           });
 
-          // Chart footer: calculate live from signals data (same source as stats bar)
+          // Chart footer: derive live via unified helpers (single source of truth)
           var statsDiv = document.getElementById('growth-stats');
           if (statsDiv && allSignals.length > 0) {
             statsDiv.textContent = '';
             var vis = getVisible();
-            var withData = vis.filter(function(s) { return s.max_return_pct != null || s.result !== null; });
-            var sigWins = withData.filter(function(s) { return isSignalWin(s); });
+            var withData = vis.filter(hasResult);
+            var sigWins = withData.filter(isSignalWin);
             var wr = withData.length > 0 ? Math.round((sigWins.length / withData.length) * 100) : 0;
+
             var peakSum = 0, peakCount = 0;
-            withData.forEach(function(s) { var p = s.max_return_pct != null ? s.max_return_pct : 0; peakSum += p; peakCount++; });
-            var avgPk = peakCount > 0 ? (peakSum / peakCount).toFixed(1) : '0.0';
+            withData.forEach(function(s) { var p = peakPct(s); if (p != null) { peakSum += p; peakCount++; } });
+            var avgPk = peakCount > 0 ? (peakSum / peakCount) : 0;
+
+            var realSum = 0, realCount = 0;
+            vis.forEach(function(s) { var r = realPct(s); if (r != null) { realSum += r; realCount++; } });
+
             var items = [
               { color: '#00E676', text: vis.length + ' signals | ' + wr + '% win rate' },
-              { color: '#F59E0B', text: 'Avg peak: +' + avgPk + '%' }
+              { color: '#00E676', text: 'Avg peak: ' + fmtPct(avgPk) }
             ];
+            if (realCount > 0) {
+              items.push({ color: '#F59E0B', text: 'Avg real (' + realCount + ' expired): ' + fmtPct(realSum / realCount) });
+            }
             items.forEach(function(item) {
               var span = document.createElement('span');
               span.style.color = item.color;

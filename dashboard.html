@@ -815,9 +815,12 @@ body.premium .unlock-badge { display: none; }
   </div>
 
   <!-- TRANSPARENCY NOTE -->
-  <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-bottom:20px;padding:10px 14px;border:1px solid var(--border);border-radius:4px;background:var(--bg-card);">
-    Every signal tracked from entry to expiry. <span style="color:var(--green);">Peak</span> is the highest return reached (signal quality). <span style="color:var(--amber);">Real</span> is the actual return at expiry (ITM intrinsic value, or -100% if OTM). No cherry-picking, no deleting losers.<br>
-    Option prices refresh every 5 minutes during market hours; the page refreshes every 15 minutes.
+  <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-bottom:20px;padding:12px 16px;border:1px solid var(--border);border-radius:4px;background:var(--bg-card);line-height:1.7;">
+    <div style="color:var(--text-secondary);margin-bottom:6px;">Every signal logged with the real option premium at entry, tracked through its expiry date. No cherry-picking, no deleting losers.</div>
+    <div><span style="color:var(--amber);display:inline-block;width:70px;">Current:</span>today's option price vs entry (updates every 5 min while the signal is live)</div>
+    <div><span style="color:var(--green);display:inline-block;width:70px;">Peak:</span>highest return ever reached on this signal (signal-quality metric, only goes up)</div>
+    <div><span style="color:#8B5CF6;display:inline-block;width:70px;">Real:</span>intrinsic value at expiry vs entry, or -100% if OTM (final outcome)</div>
+    <div style="color:var(--text-muted);margin-top:6px;">WIN = Peak went above 0% (thesis was correct). LOSS = Peak never went positive. The page itself reloads every 15 minutes.</div>
   </div>
 
   <!-- STREAK BAR -->
@@ -851,6 +854,7 @@ body.premium .unlock-badge { display: none; }
           <th data-sort="strike">Strike <span class="sort-arrow"></span></th>
           <th data-sort="expiry">Expiry <span class="sort-arrow"></span></th>
           <th data-sort="entry_premium">Entry $ <span class="sort-arrow"></span></th>
+          <th data-sort="current_premium">Now $ <span class="sort-arrow"></span></th>
           <th data-sort="current_return_pct">Current <span class="sort-arrow"></span></th>
           <th data-sort="peak_return_pct">Peak <span class="sort-arrow"></span></th>
           <th data-sort="real_return_pct">Real <span class="sort-arrow"></span></th>
@@ -865,11 +869,10 @@ body.premium .unlock-badge { display: none; }
   <!-- GROWTH CHART -->
   <div id="growth-section" style="margin:40px 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;">
     <h3 style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0 0 4px 0;">Signal Performance</h3>
-    <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;">
-      Every signal tracked from entry to expiry. No cherry-picking.<br>
-      <span style="color:#00E676">Peak Return</span>: average of each signal's highest recorded price (signal quality).<br>
-      <span style="color:#F59E0B">Current Return</span>: average return at today's option prices.<br>
-      All signals included. All forward-looking with real timestamps, not backtested.
+    <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;line-height:1.7;">
+      Running average across every signal ever logged. All forward-looking with real timestamps, not backtested. No cherry-picking.<br>
+      <span style="color:#00E676;display:inline-block;width:56px;">Peak:</span>average of each signal's highest return (signal quality).<br>
+      <span style="color:#F59E0B;display:inline-block;width:56px;">Current:</span>average return at today's option prices (live).
     </p>
     <canvas id="growth-chart" height="200"></canvas>
     <div id="growth-stats" style="display:flex;gap:24px;margin-top:12px;font-family:var(--font-mono);font-size:12px;flex-wrap:wrap;"></div>
@@ -1341,53 +1344,97 @@ body.premium .unlock-badge { display: none; }
       var pk = peakPct(s);
       var cur = currentPct(s);
       var real = realPct(s);
+      var resultLabel = signalResult(s);
+
+      // Small helper: sub-line with explicit label and correct color
+      function subLine(label, value, colorClass) {
+        var d = document.createElement('div');
+        d.className = 'card-max-return';
+        var lbl = document.createElement('span');
+        lbl.style.color = 'var(--text-muted)';
+        lbl.textContent = label + ' ';
+        var val = document.createElement('span');
+        val.style.color = colorClass === 'pos' ? 'var(--green)'
+                        : colorClass === 'neg' ? 'var(--red)'
+                        : 'var(--text-secondary)';
+        val.textContent = fmtPct(value);
+        d.appendChild(lbl);
+        d.appendChild(val);
+        return d;
+      }
 
       if (open) {
-        // OPEN: current return + live badge + peak as sub-line when meaningful
-        if (cur != null) {
-          var retDiv = document.createElement('div');
-          retDiv.className = 'card-pnl ' + (cur >= 0 ? 'positive' : 'negative');
-          retDiv.textContent = fmtPct(cur);
-          cardRight.appendChild(retDiv);
-        } else if (pk != null) {
-          var pkHead = document.createElement('div');
-          pkHead.className = 'card-pnl ' + (pk >= 0 ? 'positive' : 'negative');
-          pkHead.textContent = fmtPct(pk);
-          cardRight.appendChild(pkHead);
+        // OPEN: headline is Current. Peak subline colored by sign.
+        // Live OPEN badge + WIN/LOSS badge (peak-based).
+        var leadValue = (cur != null) ? cur : pk;
+        var leadLabel = (cur != null) ? 'current' : 'peak';
+        if (leadValue != null) {
+          var leadDiv = document.createElement('div');
+          leadDiv.className = 'card-pnl ' + (leadValue >= 0 ? 'positive' : 'negative');
+          leadDiv.textContent = fmtPct(leadValue);
+          cardRight.appendChild(leadDiv);
+
+          var leadTag = document.createElement('div');
+          leadTag.className = 'card-max-return';
+          leadTag.textContent = leadLabel;
+          cardRight.appendChild(leadTag);
         }
-        var openDiv = document.createElement('div');
+
+        // OPEN + result pair on one line
+        var statusRow = document.createElement('div');
+        statusRow.style.cssText = 'display:flex;gap:8px;align-items:center;justify-content:flex-end;';
+        var openDiv = document.createElement('span');
         openDiv.className = 'card-status-open';
         var dot = document.createElement('span');
         dot.className = 'open-dot';
         openDiv.appendChild(dot);
         openDiv.appendChild(document.createTextNode(' OPEN'));
-        cardRight.appendChild(openDiv);
-        if (pk != null && cur != null && pk > cur + 5) {
-          var runDiv = document.createElement('div');
-          runDiv.className = 'card-max-return';
-          runDiv.style.color = 'var(--green)';
-          runDiv.textContent = 'peak ' + fmtPct(pk);
-          cardRight.appendChild(runDiv);
+        statusRow.appendChild(openDiv);
+        if (resultLabel) {
+          var resB = document.createElement('span');
+          resB.className = 'badge badge-' + (resultLabel === 'WIN' ? 'win' : 'loss');
+          resB.textContent = resultLabel;
+          statusRow.appendChild(resB);
+        }
+        cardRight.appendChild(statusRow);
+
+        // Peak sub-line (only if different from lead, or if lead was current)
+        if (pk != null && (cur == null || Math.abs(pk - (cur || 0)) > 0.1)) {
+          cardRight.appendChild(subLine('peak', pk, pk >= 0 ? 'pos' : 'neg'));
         }
       } else {
-        // EXPIRED: lead with Peak (signal quality), then Real underneath
-        if (pk != null) {
-          var peakDiv = document.createElement('div');
-          peakDiv.className = 'card-pnl ' + (pk >= 0 ? 'positive' : 'negative');
-          peakDiv.textContent = fmtPct(pk);
-          cardRight.appendChild(peakDiv);
-
-          var peakTag = document.createElement('div');
-          peakTag.className = 'card-max-return';
-          peakTag.textContent = 'peak';
-          cardRight.appendChild(peakTag);
-        }
-        if (real != null) {
+        // EXPIRED: headline is Real (the final outcome). Peak underneath.
+        var expLead = (real != null) ? real : pk;
+        if (expLead != null) {
           var realDiv = document.createElement('div');
-          realDiv.className = 'card-max-return';
-          realDiv.style.color = real >= 0 ? 'var(--green)' : 'var(--red)';
-          realDiv.textContent = 'real ' + fmtPct(real);
+          realDiv.className = 'card-pnl ' + (expLead >= 0 ? 'positive' : 'negative');
+          realDiv.textContent = fmtPct(expLead);
           cardRight.appendChild(realDiv);
+
+          var leadTag2 = document.createElement('div');
+          leadTag2.className = 'card-max-return';
+          leadTag2.textContent = (real != null) ? 'real' : 'peak';
+          cardRight.appendChild(leadTag2);
+        }
+
+        var expRow = document.createElement('div');
+        expRow.style.cssText = 'display:flex;gap:8px;align-items:center;justify-content:flex-end;';
+        var expStatus = document.createElement('span');
+        expStatus.className = 'badge';
+        expStatus.style.cssText = 'background:var(--border);color:var(--text-secondary);';
+        expStatus.textContent = 'EXPIRED';
+        expRow.appendChild(expStatus);
+        if (resultLabel) {
+          var resB2 = document.createElement('span');
+          resB2.className = 'badge badge-' + (resultLabel === 'WIN' ? 'win' : 'loss');
+          resB2.textContent = resultLabel;
+          expRow.appendChild(resB2);
+        }
+        cardRight.appendChild(expRow);
+
+        // If we have Real as lead, also show Peak under it. And vice-versa.
+        if (real != null && pk != null) {
+          cardRight.appendChild(subLine('peak', pk, pk >= 0 ? 'pos' : 'neg'));
         }
       }
 
@@ -1541,21 +1588,47 @@ body.premium .unlock-badge { display: none; }
         detail.appendChild(premRow);
       }
 
-      // Real return detail row (only for expired signals)
-      if (real != null) {
-        var realRow = document.createElement('div');
-        realRow.className = 'card-detail-row';
-        var realItem = document.createElement('span');
-        realItem.className = 'detail-item';
-        realItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Real return at expiry: ' }));
-        var realValSpan = document.createElement('span');
-        realValSpan.className = 'detail-value';
-        realValSpan.style.color = real >= 0 ? 'var(--green)' : 'var(--red)';
-        realValSpan.textContent = fmtPct(real);
-        realItem.appendChild(realValSpan);
-        realRow.appendChild(realItem);
-        detail.appendChild(realRow);
+      // Return breakdown (all three side by side when available)
+      var retRow = document.createElement('div');
+      retRow.className = 'card-detail-row';
+
+      if (cur != null) {
+        var curItemD = document.createElement('span');
+        curItemD.className = 'detail-item';
+        curItemD.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Current: ' }));
+        var curVS = document.createElement('span');
+        curVS.className = 'detail-value';
+        curVS.style.color = cur >= 0 ? 'var(--green)' : 'var(--red)';
+        curVS.textContent = fmtPct(cur);
+        curItemD.appendChild(curVS);
+        retRow.appendChild(curItemD);
       }
+
+      if (pk != null) {
+        var pkItemD = document.createElement('span');
+        pkItemD.className = 'detail-item';
+        pkItemD.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Peak: ' }));
+        var pkVS = document.createElement('span');
+        pkVS.className = 'detail-value';
+        pkVS.style.color = pk >= 0 ? 'var(--green)' : 'var(--red)';
+        pkVS.textContent = fmtPct(pk);
+        pkItemD.appendChild(pkVS);
+        retRow.appendChild(pkItemD);
+      }
+
+      if (real != null) {
+        var realItemD = document.createElement('span');
+        realItemD.className = 'detail-item';
+        realItemD.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Real (at expiry): ' }));
+        var realVS = document.createElement('span');
+        realVS.className = 'detail-value';
+        realVS.style.color = real >= 0 ? 'var(--green)' : 'var(--red)';
+        realVS.textContent = fmtPct(real);
+        realItemD.appendChild(realVS);
+        retRow.appendChild(realItemD);
+      }
+
+      if (retRow.childNodes.length > 0) detail.appendChild(retRow);
 
       var chartWrap = document.createElement('div');
       chartWrap.className = 'card-chart-wrap';
@@ -1698,6 +1771,17 @@ body.premium .unlock-badge { display: none; }
       else if (!isPremium) { tdEntry.appendChild(lockIcon()); }
       else { tdEntry.textContent = '--'; }
       tr.appendChild(tdEntry);
+
+      // Current Option Price (premium only - stripped from public JSON for security)
+      var tdNow = document.createElement('td');
+      if (s.current_premium != null && isPremium) {
+        tdNow.textContent = '$' + s.current_premium.toFixed(2);
+        if (s.entry_premium != null) {
+          tdNow.className = 'col-pnl ' + (s.current_premium >= s.entry_premium ? 'positive' : 'negative');
+        }
+      } else if (!isPremium) { tdNow.appendChild(lockIcon()); }
+      else { tdNow.textContent = '--'; }
+      tr.appendChild(tdNow);
 
       // Current Return % (null once expired)
       tr.appendChild(pctCell(currentPct(s)));
@@ -1880,7 +1964,7 @@ body.premium .unlock-badge { display: none; }
             }
           });
 
-          // Chart footer: derive live via unified helpers (single source of truth)
+          // Chart footer: each line has its own total (matches legend colors)
           var statsDiv = document.getElementById('growth-stats');
           if (statsDiv && allSignals.length > 0) {
             statsDiv.textContent = '';
@@ -1890,18 +1974,23 @@ body.premium .unlock-badge { display: none; }
             var wr = withData.length > 0 ? Math.round((sigWins.length / withData.length) * 100) : 0;
 
             var peakSum = 0, peakCount = 0;
-            withData.forEach(function(s) { var p = peakPct(s); if (p != null) { peakSum += p; peakCount++; } });
+            vis.forEach(function(s) { var p = peakPct(s); if (p != null) { peakSum += p; peakCount++; } });
             var avgPk = peakCount > 0 ? (peakSum / peakCount) : 0;
+
+            var curSum = 0, curCount = 0;
+            vis.forEach(function(s) { var c = currentPct(s); if (c != null) { curSum += c; curCount++; } });
+            var avgCur = curCount > 0 ? (curSum / curCount) : 0;
 
             var realSum = 0, realCount = 0;
             vis.forEach(function(s) { var r = realPct(s); if (r != null) { realSum += r; realCount++; } });
 
             var items = [
-              { color: '#00E676', text: vis.length + ' signals | ' + wr + '% win rate' },
-              { color: '#00E676', text: 'Avg peak: ' + fmtPct(avgPk) }
+              { color: '#00E676', text: 'Avg Peak Return: ' + fmtPct(avgPk) },
+              { color: '#F59E0B', text: 'Avg Current Return: ' + fmtPct(avgCur) },
+              { color: 'var(--text-secondary)', text: vis.length + ' signals  |  ' + wr + '% win rate' }
             ];
             if (realCount > 0) {
-              items.push({ color: '#F59E0B', text: 'Avg real (' + realCount + ' expired): ' + fmtPct(realSum / realCount) });
+              items.splice(2, 0, { color: '#8B5CF6', text: 'Avg Real Return (' + realCount + ' expired): ' + fmtPct(realSum / realCount) });
             }
             items.forEach(function(item) {
               var span = document.createElement('span');

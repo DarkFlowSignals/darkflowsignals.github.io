@@ -351,6 +351,54 @@
       "result": null,
       "notes": "Watchlist only. Strongest convergence signal of the day (6/6 filters + dark pool #6). Not entered at signal time. | 500% hit",
       "tracking_type": "system"
+    },
+    {
+      "signal_date": "2026-04-16",
+      "ticker": "AAPL",
+      "direction": "BULLISH",
+      "conviction_score": 86.0,
+      "option_type": "Call",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "current_return_pct": null,
+      "max_return_pct": null,
+      "pnl_pct": null,
+      "result": null,
+      "notes": "New: 5/5 filters, $50M dark pool, +3.2% breakout confirmed",
+      "tracking_type": "system"
+    },
+    {
+      "signal_date": "2026-04-16",
+      "ticker": "AMD",
+      "direction": "BULLISH",
+      "conviction_score": 83.0,
+      "option_type": "Call",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "current_return_pct": null,
+      "max_return_pct": null,
+      "pnl_pct": null,
+      "result": null,
+      "notes": "New: P/C 0.12 most bullish, $31M dark pool, semi rotation",
+      "tracking_type": "system"
+    },
+    {
+      "signal_date": "2026-04-16",
+      "ticker": "HIMS",
+      "direction": "BULLISH",
+      "conviction_score": 76.0,
+      "option_type": "Call",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "current_return_pct": null,
+      "max_return_pct": null,
+      "pnl_pct": null,
+      "result": null,
+      "notes": "New: 12 all-call trades, +11.8% gap, GLP-1 tailwind (HIGH RISK)",
+      "tracking_type": "system"
     }
   ]
 }

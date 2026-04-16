@@ -1013,10 +1013,8 @@ body.premium .unlock-badge { display: none; }
   }
 
   function getFiltered() {
-    var cutoff = isPremium ? null : getFreeCutoff();
+    // All users see all signals live. Premium gates trade DETAILS (strike, entry), not visibility.
     return allSignals.filter(function(s) {
-      // Free users only see signals older than this week (weekly delay)
-      if (!isPremium && s.signal_date >= cutoff) return false;
       if (currentFilter === 'open') return s.status === 'open';
       if (currentFilter === 'closed') return s.result !== null;
       if (currentFilter === 'bullish') return s.direction === 'BULLISH';
@@ -1025,11 +1023,9 @@ body.premium .unlock-badge { display: none; }
     });
   }
 
-  // ---- VISIBLE SIGNALS (respects free-tier date gate) ----
+  // ---- VISIBLE SIGNALS (all users see all signals) ----
   function getVisible() {
-    if (isPremium) return allSignals;
-    var cutoff = getFreeCutoff();
-    return allSignals.filter(function(s) { return s.signal_date < cutoff; });
+    return allSignals;
   }
 
   // ---- STATS ----
@@ -1300,9 +1296,14 @@ body.premium .unlock-badge { display: none; }
         } else if (s.notes && s.notes.toLowerCase().indexOf('expired itm') >= 0) {
           exitDiv.textContent = 'expired ITM';
           exitDiv.style.color = 'var(--green)';
-        } else if (s.pnl_pct != null) {
-          exitDiv.textContent = 'closed ' + (s.pnl_pct >= 0 ? '+' : '') + s.pnl_pct.toFixed(1) + '%';
-          exitDiv.style.color = s.pnl_pct >= 0 ? 'var(--green)' : 'var(--red)';
+        } else if (s.pnl_pct != null && s.pnl_pct <= -95) {
+          exitDiv.textContent = 'expired OTM';
+          exitDiv.style.color = 'var(--red)';
+        } else {
+          // Don't show private exit details (trailing stops, etc.)
+          // Just mark as completed
+          exitDiv.textContent = 'signal complete';
+          exitDiv.style.color = 'var(--text-muted)';
         }
         cardRight.appendChild(exitDiv);
       } else {
@@ -1833,13 +1834,20 @@ body.premium .unlock-badge { display: none; }
             }
           });
 
+          // Chart footer: calculate live from signals data (same source as stats bar)
           var statsDiv = document.getElementById('growth-stats');
-          if (statsDiv) {
+          if (statsDiv && allSignals.length > 0) {
             statsDiv.textContent = '';
+            var vis = getVisible();
+            var withData = vis.filter(function(s) { return s.max_return_pct != null || s.result !== null; });
+            var sigWins = withData.filter(function(s) { return isSignalWin(s); });
+            var wr = withData.length > 0 ? Math.round((sigWins.length / withData.length) * 100) : 0;
+            var peakSum = 0, peakCount = 0;
+            withData.forEach(function(s) { var p = s.max_return_pct != null ? s.max_return_pct : 0; peakSum += p; peakCount++; });
+            var avgPk = peakCount > 0 ? (peakSum / peakCount).toFixed(1) : '0.0';
             var items = [
-              { color: '#00E676', text: d.total + ' signals | ' + d.win_rate + '% win rate' },
-              { color: '#00E676', text: 'Avg return: +' + d.avg_return + '%' },
-              { color: '#F59E0B', text: 'Avg peak: +' + d.avg_peak + '%' }
+              { color: '#00E676', text: vis.length + ' signals | ' + wr + '% win rate' },
+              { color: '#F59E0B', text: 'Avg peak: +' + avgPk + '%' }
             ];
             items.forEach(function(item) {
               var span = document.createElement('span');

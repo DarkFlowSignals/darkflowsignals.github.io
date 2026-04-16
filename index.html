@@ -708,24 +708,29 @@ nav {
     track.appendChild(buildNodes());
   }
 
+  // Signal quality: peak > 0% = signal was correct
+  function isSignalWin(s) {
+    if (s.max_return_pct != null && s.max_return_pct > 0) return true;
+    if (s.current_return_pct != null && s.current_return_pct > 0) return true;
+    return false;
+  }
+
   // ---- LIVE STATS ----
   function renderStats() {
     document.getElementById('lp-total').textContent = signals.length;
 
-    var closed = signals.filter(function(s) { return s.result !== null; });
-    var wins = closed.filter(function(s) { return s.result && s.result.toLowerCase() === 'win'; });
+    // Win rate: peak-based (signal quality, not exit timing)
+    var withData = signals.filter(function(s) { return s.max_return_pct != null || s.result !== null; });
+    var wins = withData.filter(function(s) { return isSignalWin(s); });
 
     var wrEl = document.getElementById('lp-winrate');
     var avgEl = document.getElementById('lp-avg');
-    var convEl = document.getElementById('lp-conviction');
 
-    // Win rate: only from closed trades (need enough data)
-    if (closed.length >= 3) {
-      var wr = Math.round((wins.length / closed.length) * 100);
+    if (withData.length >= 3) {
+      var wr = Math.round((wins.length / withData.length) * 100);
       wrEl.textContent = wr + '%';
       wrEl.className = 'rv ' + (wr >= 50 ? 'green' : 'red');
     } else {
-      // Not enough closed trades, show open count instead
       var openCount = signals.filter(function(s) { return s.result === null; }).length;
       wrEl.textContent = openCount + ' open';
       wrEl.className = 'rv green';
@@ -733,8 +738,7 @@ nav {
       if (wrLabel) wrLabel.textContent = 'Positions';
     }
 
-    // Avg return: show CURRENT return across ALL positions (open + closed)
-    // This reflects the real portfolio picture, not just realized P&L
+    // Avg return: use current return (real-time portfolio picture)
     var allReturns = [];
     signals.forEach(function(s) {
       if (s.current_return_pct != null) allReturns.push(s.current_return_pct);
@@ -749,7 +753,7 @@ nav {
       avgEl.className = 'rv neutral';
     }
 
-    // Peak return: avg of max_return_pct across all positions
+    // Avg Peak: signal quality metric
     var peakEl = document.getElementById('lp-peak');
     var allPeaks = [];
     signals.forEach(function(s) {
@@ -777,14 +781,19 @@ nav {
 
     last20.forEach(function(s) {
       var block = document.createElement('div');
-      var r = s.result ? s.result.toLowerCase() : null;
-      if (r === 'win') { block.className = 'streak-block win'; wins++; }
-      else if (r === 'loss') { block.className = 'streak-block loss'; losses++; }
-      else { block.className = 'streak-block open-block'; }
+      var hasData = s.max_return_pct != null || s.result !== null;
+      if (!hasData) {
+        block.className = 'streak-block open-block';
+      } else if (isSignalWin(s)) {
+        block.className = 'streak-block win'; wins++;
+      } else {
+        block.className = 'streak-block loss'; losses++;
+      }
 
       var tip = document.createElement('span');
       tip.className = 'streak-tooltip';
-      var pnlText = s.pnl_pct != null ? (s.pnl_pct >= 0 ? '+' : '') + s.pnl_pct.toFixed(1) + '%' : 'open';
+      var peakVal = s.max_return_pct != null ? s.max_return_pct : s.current_return_pct;
+      var pnlText = peakVal != null ? 'peak ' + (peakVal >= 0 ? '+' : '') + peakVal.toFixed(1) + '%' : 'open';
       tip.textContent = esc(s.ticker) + ' ' + pnlText;
       block.appendChild(tip);
       container.appendChild(block);

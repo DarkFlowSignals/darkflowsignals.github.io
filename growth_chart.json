@@ -3,61 +3,61 @@
     {
       "date": "2026-04-09",
       "signals": 4,
-      "avg_return": 62.1,
+      "avg_return": 59.0,
       "avg_peak": 133.4,
       "win_rate": 50.0,
-      "total_return": 248.6,
+      "total_return": 235.8,
       "total_peak": 533.6
     },
     {
       "date": "2026-04-10",
       "signals": 13,
-      "avg_return": 214.3,
+      "avg_return": 213.3,
       "avg_peak": 315.6,
       "win_rate": 77.0,
-      "total_return": 2785.4,
+      "total_return": 2773.4,
       "total_peak": 4102.5
     },
     {
       "date": "2026-04-13",
       "signals": 14,
-      "avg_return": 199.3,
+      "avg_return": 198.5,
       "avg_peak": 299.3,
       "win_rate": 79.0,
-      "total_return": 2790.9,
+      "total_return": 2778.9,
       "total_peak": 4190.7
     },
     {
       "date": "2026-04-14",
       "signals": 19,
-      "avg_return": 170.3,
+      "avg_return": 169.1,
       "avg_peak": 268.6,
       "win_rate": 79.0,
-      "total_return": 3236.6,
+      "total_return": 3212.2,
       "total_peak": 5102.5
     },
     {
       "date": "2026-04-15",
       "signals": 22,
-      "avg_return": 173.4,
-      "avg_peak": 260.2,
+      "avg_return": 173.0,
+      "avg_peak": 260.8,
       "win_rate": 73.0,
-      "total_return": 3815.7,
-      "total_peak": 5723.9
+      "total_return": 3805.3,
+      "total_peak": 5736.5
     }
   ],
   "signals": [
     {
       "ticker": "CRWV",
       "date": "2026-04-09",
-      "pnl": 262.0,
+      "pnl": 253.5,
       "peak": 319.0,
       "status": "open"
     },
     {
       "ticker": "AMZN",
       "date": "2026-04-09",
-      "pnl": 101.1,
+      "pnl": 96.8,
       "peak": 166.2,
       "status": "closed"
     },
@@ -78,7 +78,7 @@
     {
       "ticker": "INTC",
       "date": "2026-04-10",
-      "pnl": 165.2,
+      "pnl": 171.4,
       "peak": 181.4,
       "status": "closed"
     },
@@ -92,7 +92,7 @@
     {
       "ticker": "NBIS",
       "date": "2026-04-10",
-      "pnl": 347.9,
+      "pnl": 340.6,
       "peak": 421.2,
       "status": "closed"
     },
@@ -106,28 +106,28 @@
     {
       "ticker": "CRWV",
       "date": "2026-04-10",
-      "pnl": 219.7,
+      "pnl": 235.8,
       "peak": 256.4,
       "status": "open"
     },
     {
       "ticker": "SOXL",
       "date": "2026-04-10",
-      "pnl": 287.4,
+      "pnl": 278.1,
       "peak": 287.4,
       "status": "closed"
     },
     {
       "ticker": "WULF",
       "date": "2026-04-10",
-      "pnl": -20.0,
+      "pnl": -31.8,
       "peak": 84.7,
       "status": "closed"
     },
     {
       "ticker": "INTC",
       "date": "2026-04-10",
-      "pnl": 779.1,
+      "pnl": 786.0,
       "peak": 816.3,
       "status": "closed"
     },
@@ -162,7 +162,7 @@
     {
       "ticker": "CRWV",
       "date": "2026-04-14",
-      "pnl": 50.7,
+      "pnl": 42.6,
       "peak": 91.3,
       "status": "open"
     },
@@ -176,14 +176,14 @@
     {
       "ticker": "NBIS",
       "date": "2026-04-14",
-      "pnl": 43.5,
+      "pnl": 39.2,
       "peak": 88.2,
       "status": "open"
     },
     {
       "ticker": "NVDA",
       "date": "2026-04-15",
-      "pnl": -4.7,
+      "pnl": -7.3,
       "peak": 3.8,
       "status": "open"
     },
@@ -197,14 +197,14 @@
     {
       "ticker": "MSFT",
       "date": "2026-04-15",
-      "pnl": 634.9,
-      "peak": 638.9,
+      "pnl": 651.5,
+      "peak": 651.5,
       "status": "open"
     }
   ],
   "total": 22,
-  "avg_return": 173.4,
-  "avg_peak": 260.2,
+  "avg_return": 173.0,
+  "avg_peak": 260.8,
   "win_rate": 73.0,
-  "generated": "2026-04-16T08:22:16.869833"
+  "generated": "2026-04-16T08:36:29.002289"
 }

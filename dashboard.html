@@ -796,7 +796,7 @@ body.premium .unlock-badge { display: none; }
       <div class="stat-value" id="stat-winrate">--</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-label">Avg Return</div>
+      <div class="stat-label">Avg Peak</div>
       <div class="stat-value" id="stat-avg">--</div>
     </div>
     <div class="stat-cell">
@@ -1033,10 +1033,19 @@ body.premium .unlock-badge { display: none; }
   }
 
   // ---- STATS ----
+  // Signal quality win: peak return was positive (thesis was correct)
+  // Signal quality loss: peak never went positive (thesis was wrong)
+  function isSignalWin(s) {
+    if (s.max_return_pct != null && s.max_return_pct > 0) return true;
+    if (s.current_return_pct != null && s.current_return_pct > 0) return true;
+    return false;
+  }
+
   function renderStats() {
     var visible = getVisible();
-    var closed = visible.filter(function(s) { return s.result !== null; });
-    var wins = closed.filter(function(s) { return s.result && s.result.toLowerCase() === 'win'; });
+    // For win rate: use all signals with enough data (closed OR open with peak data)
+    var withData = visible.filter(function(s) { return s.max_return_pct != null || s.result !== null; });
+    var wins = withData.filter(function(s) { return isSignalWin(s); });
 
     document.getElementById('stat-total').textContent = visible.length;
 
@@ -1044,21 +1053,28 @@ body.premium .unlock-badge { display: none; }
     var avgEl = document.getElementById('stat-avg');
     var streakEl = document.getElementById('stat-streak');
 
-    if (closed.length > 0) {
-      var wr = Math.round((wins.length / closed.length) * 100);
+    if (withData.length > 0) {
+      var wr = Math.round((wins.length / withData.length) * 100);
       wrEl.textContent = wr + '%';
       wrEl.className = 'stat-value ' + (wr >= 50 ? 'green' : 'red');
 
-      var sum = 0;
-      closed.forEach(function(s) { sum += (s.pnl_pct || 0); });
-      var avgPnl = sum / closed.length;
-      avgEl.textContent = (avgPnl >= 0 ? '+' : '') + avgPnl.toFixed(1) + '%';
-      avgEl.className = 'stat-value ' + (avgPnl >= 0 ? 'green' : 'red');
+      // Avg Peak: use max_return_pct (signal quality), not exit P&L
+      var sum = 0, count = 0;
+      withData.forEach(function(s) {
+        var peak = s.max_return_pct != null ? s.max_return_pct : (s.pnl_pct || 0);
+        sum += peak;
+        count++;
+      });
+      var avgPeak = count > 0 ? sum / count : 0;
+      avgEl.textContent = (avgPeak >= 0 ? '+' : '') + avgPeak.toFixed(1) + '%';
+      avgEl.className = 'stat-value ' + (avgPeak >= 0 ? 'green' : 'red');
 
-      var sorted = closed.slice().sort(function(a, b) { return (b.outcome_date || '').localeCompare(a.outcome_date || ''); });
+      // Streak: based on signal quality (peak > 0 = W)
+      var sorted = withData.slice().sort(function(a, b) { return (b.signal_date || '').localeCompare(a.signal_date || ''); });
       var streakCount = 0, streakType = null;
       for (var i = 0; i < sorted.length; i++) {
-        var r = sorted[i].result ? sorted[i].result.toLowerCase() : null;
+        var isWin = isSignalWin(sorted[i]);
+        var r = isWin ? 'win' : 'loss';
         if (!streakType) { streakType = r; streakCount = 1; }
         else if (r === streakType) streakCount++;
         else break;
@@ -1087,14 +1103,21 @@ body.premium .unlock-badge { display: none; }
 
     last20.forEach(function(s) {
       var block = document.createElement('div');
-      var r = s.result ? s.result.toLowerCase() : null;
-      if (r === 'win') { block.className = 'streak-block win'; wins++; }
-      else if (r === 'loss') { block.className = 'streak-block loss'; losses++; }
-      else { block.className = 'streak-block open-block'; }
+      // Signal quality: peak > 0 = win, peak <= 0 or never positive = loss
+      var hasData = s.max_return_pct != null || s.result !== null;
+      if (!hasData) {
+        block.className = 'streak-block open-block';
+      } else if (isSignalWin(s)) {
+        block.className = 'streak-block win'; wins++;
+      } else {
+        block.className = 'streak-block loss'; losses++;
+      }
 
       var tip = document.createElement('span');
       tip.className = 'streak-tooltip';
-      var pnlText = s.pnl_pct != null ? (s.pnl_pct >= 0 ? '+' : '') + s.pnl_pct.toFixed(1) + '%' : 'open';
+      // Show peak % as the signal quality metric
+      var peakVal = s.max_return_pct != null ? s.max_return_pct : s.current_return_pct;
+      var pnlText = peakVal != null ? 'peak ' + (peakVal >= 0 ? '+' : '') + peakVal.toFixed(1) + '%' : 'open';
       tip.textContent = esc(s.ticker) + ' ' + pnlText;
       block.appendChild(tip);
       container.appendChild(block);
@@ -1257,21 +1280,33 @@ body.premium .unlock-badge { display: none; }
       var cardRight = document.createElement('div');
       cardRight.className = 'card-right';
 
-      if (isClosed && s.pnl_pct != null) {
-        var pnlDiv = document.createElement('div');
-        pnlDiv.className = 'card-pnl ' + (s.pnl_pct >= 0 ? 'positive' : 'negative');
-        pnlDiv.textContent = (s.pnl_pct >= 0 ? '+' : '') + s.pnl_pct.toFixed(1) + '%';
-        cardRight.appendChild(pnlDiv);
+      if (isClosed) {
+        // CLOSED: Show peak as primary metric (signal quality), exit P&L secondary
         if (s.max_return_pct != null) {
-          var maxDiv = document.createElement('div');
-          maxDiv.className = 'card-max-return';
-          var peakLabel = s.max_return_pct > s.pnl_pct ? 'live peak: ' : 'peak: ';
-          maxDiv.textContent = peakLabel + (s.max_return_pct >= 0 ? '+' : '') + s.max_return_pct.toFixed(1) + '%';
-          if (s.max_return_pct > 0 && s.pnl_pct < 0) maxDiv.style.color = 'var(--green)';
-          cardRight.appendChild(maxDiv);
+          var peakDiv = document.createElement('div');
+          peakDiv.className = 'card-pnl ' + (s.max_return_pct >= 0 ? 'positive' : 'negative');
+          peakDiv.textContent = 'peak ' + (s.max_return_pct >= 0 ? '+' : '') + s.max_return_pct.toFixed(1) + '%';
+          cardRight.appendChild(peakDiv);
         }
+        // Show exit type as small secondary label
+        var exitDiv = document.createElement('div');
+        exitDiv.className = 'card-max-return';
+        if (s.pnl_pct != null && s.pnl_pct <= -50) {
+          exitDiv.textContent = 'stopped -50%';
+          exitDiv.style.color = 'var(--red)';
+        } else if (s.notes && s.notes.toLowerCase().indexOf('expired otm') >= 0) {
+          exitDiv.textContent = 'expired OTM';
+          exitDiv.style.color = 'var(--red)';
+        } else if (s.notes && s.notes.toLowerCase().indexOf('expired itm') >= 0) {
+          exitDiv.textContent = 'expired ITM';
+          exitDiv.style.color = 'var(--green)';
+        } else if (s.pnl_pct != null) {
+          exitDiv.textContent = 'closed ' + (s.pnl_pct >= 0 ? '+' : '') + s.pnl_pct.toFixed(1) + '%';
+          exitDiv.style.color = s.pnl_pct >= 0 ? 'var(--green)' : 'var(--red)';
+        }
+        cardRight.appendChild(exitDiv);
       } else {
-        // Show current return % if available
+        // OPEN: Show current return as primary, peak as secondary
         if (s.current_return_pct != null) {
           var retDiv = document.createElement('div');
           retDiv.className = 'card-pnl ' + (s.current_return_pct >= 0 ? 'positive' : 'negative');
@@ -1285,7 +1320,7 @@ body.premium .unlock-badge { display: none; }
         openDiv.appendChild(dot);
         openDiv.appendChild(document.createTextNode(' OPEN'));
         cardRight.appendChild(openDiv);
-        if (s.max_return_pct != null) {
+        if (s.max_return_pct != null && s.max_return_pct > (s.current_return_pct || 0)) {
           var runDiv = document.createElement('div');
           runDiv.className = 'card-max-return';
           runDiv.style.color = s.max_return_pct >= 0 ? 'var(--green)' : 'var(--text-muted)';

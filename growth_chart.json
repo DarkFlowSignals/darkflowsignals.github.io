@@ -3,55 +3,55 @@
     {
       "date": "2026-04-09",
       "signals": 5,
-      "avg_return": 53.3,
+      "avg_return": 51.8,
       "avg_peak": 107.0,
       "win_rate": 40.0,
-      "total_return": 266.6,
+      "total_return": 258.8,
       "total_peak": 535.2
     },
     {
       "date": "2026-04-10",
       "signals": 14,
-      "avg_return": 210.2,
+      "avg_return": 202.8,
       "avg_peak": 300.7,
       "win_rate": 71.0,
-      "total_return": 2942.3,
+      "total_return": 2839.5,
       "total_peak": 4209.4
     },
     {
       "date": "2026-04-13",
       "signals": 15,
-      "avg_return": 196.5,
+      "avg_return": 189.7,
       "avg_peak": 286.5,
       "win_rate": 73.0,
-      "total_return": 2947.8,
+      "total_return": 2845.0,
       "total_peak": 4297.6
     },
     {
       "date": "2026-04-14",
       "signals": 20,
-      "avg_return": 170.1,
+      "avg_return": 164.5,
       "avg_peak": 260.5,
       "win_rate": 75.0,
-      "total_return": 3401.3,
+      "total_return": 3290.6,
       "total_peak": 5209.4
     },
     {
       "date": "2026-04-15",
       "signals": 23,
-      "avg_return": 174.2,
+      "avg_return": 169.4,
       "avg_peak": 255.9,
       "win_rate": 70.0,
-      "total_return": 4005.8,
+      "total_return": 3895.5,
       "total_peak": 5884.7
     },
     {
       "date": "2026-04-16",
       "signals": 26,
-      "avg_return": 180.1,
+      "avg_return": 173.5,
       "avg_peak": 252.8,
       "win_rate": 69.0,
-      "total_return": 4682.0,
+      "total_return": 4512.0,
       "total_peak": 6573.2
     }
   ],
@@ -59,14 +59,14 @@
     {
       "ticker": "CRWV",
       "date": "2026-04-09",
-      "pnl": 269.8,
+      "pnl": 270.8,
       "peak": 319.0,
       "status": "open"
     },
     {
       "ticker": "AMZN",
       "date": "2026-04-09",
-      "pnl": 114.6,
+      "pnl": 105.8,
       "peak": 166.2,
       "status": "closed"
     },
@@ -94,7 +94,7 @@
     {
       "ticker": "INTC",
       "date": "2026-04-10",
-      "pnl": 191.4,
+      "pnl": 181.0,
       "peak": 196.2,
       "status": "closed"
     },
@@ -108,7 +108,7 @@
     {
       "ticker": "NBIS",
       "date": "2026-04-10",
-      "pnl": 363.3,
+      "pnl": 356.5,
       "peak": 421.2,
       "status": "closed"
     },
@@ -122,28 +122,28 @@
     {
       "ticker": "CRWV",
       "date": "2026-04-10",
-      "pnl": 239.5,
+      "pnl": 236.5,
       "peak": 256.4,
       "status": "open"
     },
     {
       "ticker": "SOXL",
       "date": "2026-04-10",
-      "pnl": 289.5,
+      "pnl": 286.9,
       "peak": 289.5,
       "status": "closed"
     },
     {
       "ticker": "WULF",
       "date": "2026-04-10",
-      "pnl": -37.6,
+      "pnl": -40.0,
       "peak": 84.7,
       "status": "closed"
     },
     {
       "ticker": "INTC",
       "date": "2026-04-10",
-      "pnl": 872.1,
+      "pnl": 802.3,
       "peak": 904.7,
       "status": "closed"
     },
@@ -192,14 +192,14 @@
     {
       "ticker": "NBIS",
       "date": "2026-04-14",
-      "pnl": 47.5,
+      "pnl": 39.6,
       "peak": 88.2,
       "status": "open"
     },
     {
       "ticker": "NVDA",
       "date": "2026-04-15",
-      "pnl": -11.3,
+      "pnl": -19.8,
       "peak": 3.8,
       "status": "open"
     },
@@ -213,35 +213,35 @@
     {
       "ticker": "MSFT",
       "date": "2026-04-15",
-      "pnl": 666.9,
+      "pnl": 675.8,
       "peak": 692.8,
       "status": "open"
     },
     {
       "ticker": "AAPL",
       "date": "2026-04-16",
-      "pnl": -6.0,
+      "pnl": -7.0,
       "peak": 2.5,
       "status": "open"
     },
     {
       "ticker": "AMD",
       "date": "2026-04-16",
-      "pnl": 621.6,
+      "pnl": 570.0,
       "peak": 623.6,
       "status": "open"
     },
     {
       "ticker": "HIMS",
       "date": "2026-04-16",
-      "pnl": 60.6,
+      "pnl": 53.5,
       "peak": 62.4,
       "status": "open"
     }
   ],
   "total": 26,
-  "avg_return": 180.1,
+  "avg_return": 173.5,
   "avg_peak": 252.8,
   "win_rate": 69.0,
-  "generated": "2026-04-16T09:27:54.288840"
+  "generated": "2026-04-16T09:32:45.371721"
 }

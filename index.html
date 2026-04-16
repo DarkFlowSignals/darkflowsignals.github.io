@@ -637,25 +637,17 @@ nav {
 
   // =================================================================
   // Unified data helpers (must match dashboard.html exactly).
+  // Current is the single return metric: live while open, settles to
+  // intrinsic value at expiry. No separate Real concept.
   // =================================================================
   function peakPct(s) {
-    return (s.peak_return_pct != null) ? s.peak_return_pct
-         : (s.max_return_pct != null) ? s.max_return_pct
-         : null;
+    return (s.peak_return_pct != null) ? s.peak_return_pct : null;
   }
   function currentPct(s) {
-    if (s.status === 'expired') return null;
     return (s.current_return_pct != null) ? s.current_return_pct : null;
   }
-  function realPct(s) {
-    if (s.real_return_pct != null) return s.real_return_pct;
-    if (s.status === 'expired' && s.pnl_pct != null) return s.pnl_pct;
-    return null;
-  }
   function isOpen(s) {
-    if (s.status === 'open') return true;
-    if (s.status === 'expired') return false;
-    return realPct(s) === null;
+    return s.status !== 'expired';
   }
   function signalResult(s) {
     var p = peakPct(s);
@@ -693,7 +685,7 @@ nav {
     var items = [];
     sorted.forEach(function(s) {
       if (seen[s.ticker]) return;
-      if (currentPct(s) == null && peakPct(s) == null && realPct(s) == null) return;
+      if (currentPct(s) == null && peakPct(s) == null) return;
       seen[s.ticker] = true;
       items.push(s);
     });
@@ -711,10 +703,9 @@ nav {
         sym.textContent = '$' + esc(s.ticker);
         item.appendChild(sym);
 
-        // Prefer real (expired), then current (open), then peak
-        var val = realPct(s);
-        var mode = 'real';
-        if (val == null) { val = currentPct(s); mode = 'cur'; }
+        // Prefer current (live or settled), fall back to peak
+        var val = currentPct(s);
+        var mode = 'cur';
         if (val == null) { val = peakPct(s); mode = 'peak'; }
         if (val != null) {
           var pnl = document.createElement('span');
@@ -775,25 +766,17 @@ nav {
       peakEl.textContent = '--'; peakEl.className = 'rv neutral';
     }
 
-    // Second stat: if we have enough expired signals, show Avg Real; else Avg Current
-    var realVals = [];
-    signals.forEach(function(s) { var r = realPct(s); if (r != null) realVals.push(r); });
-    if (realVals.length >= 3) {
-      var avgReal = realVals.reduce(function(a, b) { return a + b; }, 0) / realVals.length;
-      avgEl.textContent = fmtPct(avgReal);
-      avgEl.className = 'rv ' + (avgReal >= 0 ? 'green' : 'red');
-      if (avgLbl) avgLbl.textContent = 'Avg Real';
+    // Avg Current (live while open, settles to intrinsic at expiry).
+    // Single unified return metric - matches dashboard.html exactly.
+    var curVals = [];
+    signals.forEach(function(s) { var c = currentPct(s); if (c != null) curVals.push(c); });
+    if (curVals.length > 0) {
+      var avgCur = curVals.reduce(function(a, b) { return a + b; }, 0) / curVals.length;
+      avgEl.textContent = fmtPct(avgCur);
+      avgEl.className = 'rv ' + (avgCur >= 0 ? 'green' : 'red');
+      if (avgLbl) avgLbl.textContent = 'Avg Current';
     } else {
-      var curVals = [];
-      signals.forEach(function(s) { var c = currentPct(s); if (c != null) curVals.push(c); });
-      if (curVals.length > 0) {
-        var avgCur = curVals.reduce(function(a, b) { return a + b; }, 0) / curVals.length;
-        avgEl.textContent = fmtPct(avgCur);
-        avgEl.className = 'rv ' + (avgCur >= 0 ? 'green' : 'red');
-        if (avgLbl) avgLbl.textContent = 'Avg Current';
-      } else {
-        avgEl.textContent = '--'; avgEl.className = 'rv neutral';
-      }
+      avgEl.textContent = '--'; avgEl.className = 'rv neutral';
     }
   }
 

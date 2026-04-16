@@ -1013,8 +1013,10 @@ body.premium .unlock-badge { display: none; }
   }
 
   function getFiltered() {
-    // All users see all signals live. Premium gates trade DETAILS (strike, entry), not visibility.
+    var cutoff = isPremium ? null : getFreeCutoff();
     return allSignals.filter(function(s) {
+      // Free feed/table: 7-day delay on actual signals
+      if (!isPremium && cutoff && s.signal_date >= cutoff) return false;
       if (currentFilter === 'open') return s.status === 'open';
       if (currentFilter === 'closed') return s.result !== null;
       if (currentFilter === 'bullish') return s.direction === 'BULLISH';
@@ -1023,8 +1025,10 @@ body.premium .unlock-badge { display: none; }
     });
   }
 
-  // ---- VISIBLE SIGNALS (all users see all signals) ----
+  // ---- VISIBLE SIGNALS for STATS (everyone sees live stats, feed is gated) ----
   function getVisible() {
+    // Stats, win rate, avg peak, streak bar, ticker strip, growth chart: use ALL signals for everyone
+    // This gives free users accurate live performance data while keeping the feed delayed
     return allSignals;
   }
 

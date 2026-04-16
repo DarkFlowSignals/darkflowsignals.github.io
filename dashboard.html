@@ -810,8 +810,8 @@ body.premium .unlock-badge { display: none; }
       <div class="stat-value" id="stat-avg">--</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-label">Avg Real</div>
-      <div class="stat-value" id="stat-real">--</div>
+      <div class="stat-label">Avg Current</div>
+      <div class="stat-value" id="stat-current">--</div>
     </div>
     <div class="stat-cell">
       <div class="stat-label">Streak</div>
@@ -822,10 +822,9 @@ body.premium .unlock-badge { display: none; }
   <!-- TRANSPARENCY NOTE -->
   <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-bottom:20px;padding:12px 16px;border:1px solid var(--border);border-radius:4px;background:var(--bg-card);line-height:1.7;">
     <div style="color:var(--text-secondary);margin-bottom:6px;">Every signal logged with the real option premium at entry, tracked through its expiry date. No cherry-picking, no deleting losers.</div>
-    <div><span style="color:var(--amber);display:inline-block;width:70px;">Current:</span>today's option price vs entry (updates every 5 min while the signal is live)</div>
-    <div><span style="color:var(--green);display:inline-block;width:70px;">Peak:</span>highest return ever reached on this signal (signal-quality metric, only goes up)</div>
-    <div><span style="color:#8B5CF6;display:inline-block;width:70px;">Real:</span>intrinsic value at expiry vs entry, or -100% if OTM (final outcome)</div>
-    <div style="color:var(--text-muted);margin-top:6px;">WIN = Peak went above 0% (thesis was correct). LOSS = Peak never went positive. The page itself reloads every 15 minutes.</div>
+    <div><span style="color:var(--amber);display:inline-block;width:70px;">Current:</span>today's option price vs entry. Live while the signal is open; settles to intrinsic value at expiry.</div>
+    <div><span style="color:var(--green);display:inline-block;width:70px;">Peak:</span>highest return ever reached on this signal. Signal-quality metric; only goes up.</div>
+    <div style="color:var(--text-muted);margin-top:6px;">WIN = Peak went above 0% (thesis was correct). LOSS = Peak never went positive. Prices refresh every 5 min; page reloads every 15 min.</div>
   </div>
 
   <!-- STREAK BAR -->
@@ -862,7 +861,6 @@ body.premium .unlock-badge { display: none; }
           <th data-sort="current_premium">Now $ <span class="sort-arrow"></span></th>
           <th data-sort="current_return_pct">Current <span class="sort-arrow"></span></th>
           <th data-sort="peak_return_pct">Peak <span class="sort-arrow"></span></th>
-          <th data-sort="real_return_pct">Real <span class="sort-arrow"></span></th>
           <th data-sort="status">Status <span class="sort-arrow"></span></th>
           <th data-sort="result">Result <span class="sort-arrow"></span></th>
         </tr>
@@ -880,7 +878,7 @@ body.premium .unlock-badge { display: none; }
       <span style="color:#F59E0B;display:inline-block;width:56px;">Current:</span>average return at today's option prices (live).
     </p>
     <canvas id="growth-chart" height="200"></canvas>
-    <div id="growth-stats" style="display:flex;gap:24px;margin-top:12px;font-family:var(--font-mono);font-size:12px;flex-wrap:wrap;"></div>
+    <div id="growth-stats" style="display:flex;gap:28px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:13px;flex-wrap:wrap;justify-content:center;align-items:baseline;"></div>
   </div>
 
   <!-- FOMO SECTION -->
@@ -965,27 +963,18 @@ body.premium .unlock-badge { display: none; }
          : null;
   }
 
-  // Current return % while the signal is live; null once expired
+  // Current return %. Live while the signal is open. At expiry the JSON's
+  // current_return_pct folds in the intrinsic-based settled value, so the
+  // same field keeps rendering for expired signals (no separate Real).
   function currentPct(s) {
-    if (s.status === 'expired') return null;
     return (s.current_return_pct != null) ? s.current_return_pct : null;
-  }
-
-  // Real return % at expiry (ITM intrinsic / entry, or -100% OTM); null while open
-  function realPct(s) {
-    if (s.real_return_pct != null) return s.real_return_pct;
-    // Legacy: if marked closed with a clean expiry note and pnl_pct exists
-    if (s.status === 'expired' && s.pnl_pct != null) return s.pnl_pct;
-    return null;
   }
 
   // Is the signal still OPEN publicly? (calendar-based, ignores internal stops)
   function isOpen(s) {
     if (s.status === 'open') return true;
     if (s.status === 'expired') return false;
-    // Legacy rows: status may be 'closed' from internal stops. Treat as OPEN
-    // publicly unless a real expiry outcome exists.
-    return realPct(s) === null;
+    return true;
   }
 
   // Signal-quality win: peak > 0 = thesis was correct. Loss: peak never > 0.
@@ -1113,18 +1102,23 @@ body.premium .unlock-badge { display: none; }
 
     var wrEl = document.getElementById('stat-winrate');
     var avgEl = document.getElementById('stat-avg');
-    var realEl = document.getElementById('stat-real');
+    var curEl = document.getElementById('stat-current');
     var streakEl = document.getElementById('stat-streak');
 
-    // Avg Real: mean of real_return_pct across visible signals that have expired
-    var realVals = [];
-    visible.forEach(function(s) { var r = realPct(s); if (r != null) realVals.push(r); });
-    if (realVals.length > 0) {
-      var avgReal = realVals.reduce(function(a, b) { return a + b; }, 0) / realVals.length;
-      realEl.textContent = fmtPct(avgReal);
-      realEl.className = 'stat-value ' + (avgReal >= 0 ? 'green' : 'red');
+    // Avg Current: live average across visible signals with a current return
+    // (post-expiry signals contribute their settled intrinsic return, since
+    // current_return_pct folds in the real-at-expiry value)
+    var curVals = [];
+    visible.forEach(function(s) {
+      var c = (s.current_return_pct != null) ? s.current_return_pct : null;
+      if (c != null) curVals.push(c);
+    });
+    if (curVals.length > 0) {
+      var avgCur = curVals.reduce(function(a, b) { return a + b; }, 0) / curVals.length;
+      curEl.textContent = fmtPct(avgCur);
+      curEl.className = 'stat-value ' + (avgCur >= 0 ? 'green' : 'red');
     } else {
-      realEl.textContent = '--'; realEl.className = 'stat-value neutral';
+      curEl.textContent = '--'; curEl.className = 'stat-value neutral';
     }
 
     if (withData.length > 0) {
@@ -1218,8 +1212,8 @@ body.premium .unlock-badge { display: none; }
     var items = [];
     sorted.forEach(function(s) {
       if (seen[s.ticker]) return;
-      // Show if we have ANY return signal (open current, peak, or real)
-      if (currentPct(s) == null && peakPct(s) == null && realPct(s) == null) return;
+      // Show if we have any return signal at all
+      if (currentPct(s) == null && peakPct(s) == null) return;
       seen[s.ticker] = true;
       items.push(s);
     });
@@ -1245,10 +1239,9 @@ body.premium .unlock-badge { display: none; }
           item.appendChild(priceSpan);
         }
 
-        // Prefer real_return (expired), then current (open), then peak
-        var val = realPct(s);
-        var mode = 'real';
-        if (val == null) { val = currentPct(s); mode = 'cur'; }
+        // Prefer current (live or settled), fall back to peak
+        var val = currentPct(s);
+        var mode = 'cur';
         if (val == null) { val = peakPct(s); mode = 'peak'; }
         if (val != null) {
           var pnlSpan = document.createElement('span');
@@ -1360,7 +1353,6 @@ body.premium .unlock-badge { display: none; }
 
       var pk = peakPct(s);
       var cur = currentPct(s);
-      var real = realPct(s);
       var resultLabel = signalResult(s);
 
       // Small helper: sub-line with explicit label and correct color
@@ -1431,11 +1423,9 @@ body.premium .unlock-badge { display: none; }
       }
       cardRight.appendChild(statusRow);
 
-      // Sub-line: Current (open) or Real (expired) below the badges
-      if (open && cur != null && pk != null) {
+      // Sub-line: Current value (live while open, settled value post-expiry)
+      if (cur != null && pk != null) {
         cardRight.appendChild(subLine('current', cur, cur >= 0 ? 'pos' : 'neg'));
-      } else if (!open && real != null) {
-        cardRight.appendChild(subLine('real', real, real >= 0 ? 'pos' : 'neg'));
       }
 
       rowTop.appendChild(cardRight);
@@ -1616,18 +1606,6 @@ body.premium .unlock-badge { display: none; }
         retRow.appendChild(pkItemD);
       }
 
-      if (real != null) {
-        var realItemD = document.createElement('span');
-        realItemD.className = 'detail-item';
-        realItemD.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Real (at expiry): ' }));
-        var realVS = document.createElement('span');
-        realVS.className = 'detail-value';
-        realVS.style.color = real >= 0 ? 'var(--green)' : 'var(--red)';
-        realVS.textContent = fmtPct(real);
-        realItemD.appendChild(realVS);
-        retRow.appendChild(realItemD);
-      }
-
       if (retRow.childNodes.length > 0) detail.appendChild(retRow);
 
       var chartWrap = document.createElement('div');
@@ -1687,7 +1665,6 @@ body.premium .unlock-badge { display: none; }
     // Sort-key lookup routed through unified helpers for new columns
     function sortKey(s, col) {
       if (col === 'peak_return_pct') return peakPct(s);
-      if (col === 'real_return_pct') return realPct(s);
       if (col === 'current_return_pct') return currentPct(s);
       if (col === 'status') return isOpen(s) ? 'open' : 'expired';
       if (col === 'result') return signalResult(s);
@@ -1780,14 +1757,11 @@ body.premium .unlock-badge { display: none; }
       else { tdNow.textContent = '--'; }
       tr.appendChild(tdNow);
 
-      // Current Return % (null once expired)
+      // Current Return % (live while open; settles to intrinsic at expiry)
       tr.appendChild(pctCell(currentPct(s)));
 
       // Peak Return % (signal quality)
       tr.appendChild(pctCell(peakPct(s)));
-
-      // Real Return % (at expiry only)
-      tr.appendChild(pctCell(realPct(s)));
 
       // Status: OPEN or EXPIRED (no STOPPED / PEAK public labels)
       var tdStatus = document.createElement('td');
@@ -1979,14 +1953,6 @@ body.premium .unlock-badge { display: none; }
               { color: '#F59E0B', label: 'Avg Current Return', value: fmtPct(d.avg_return) },
               { color: 'var(--text-secondary)', label: d.total + ' signals', value: d.win_rate + '% win rate' }
             ];
-            // Add Real line only when expirations exist. Derive from full signals if available.
-            if (allSignals.length > 0) {
-              var realSum = 0, realCount = 0;
-              allSignals.forEach(function(s) { var r = realPct(s); if (r != null) { realSum += r; realCount++; } });
-              if (realCount > 0) {
-                items.splice(2, 0, { color: '#8B5CF6', label: 'Avg Real Return', value: fmtPct(realSum / realCount) + ' (' + realCount + ' expired)' });
-              }
-            }
             items.forEach(function(item) {
               var wrap = document.createElement('span');
               wrap.style.cssText = 'display:inline-flex;gap:6px;align-items:baseline;';

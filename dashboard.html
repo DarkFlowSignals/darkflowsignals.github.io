@@ -1290,26 +1290,12 @@ body.premium .unlock-badge { display: none; }
       cardRight.className = 'card-right';
 
       if (isClosed) {
-        // CLOSED: peak % is the number. No strategy labels.
+        // CLOSED: just the peak number. Green = signal worked. Red = signal didn't. No labels.
         var mainVal = s.max_return_pct != null ? s.max_return_pct : (s.pnl_pct || 0);
         var peakDiv = document.createElement('div');
         peakDiv.className = 'card-pnl ' + (mainVal >= 0 ? 'positive' : 'negative');
         peakDiv.textContent = (mainVal >= 0 ? '+' : '') + mainVal.toFixed(1) + '%';
         cardRight.appendChild(peakDiv);
-        // Only label: "stopped" if hit -50%, otherwise nothing
-        if (s.pnl_pct != null && s.pnl_pct <= -50) {
-          var stopDiv = document.createElement('div');
-          stopDiv.className = 'card-max-return';
-          stopDiv.textContent = 'stopped';
-          stopDiv.style.color = 'var(--red)';
-          cardRight.appendChild(stopDiv);
-        } else {
-          var peakLabel = document.createElement('div');
-          peakLabel.className = 'card-max-return';
-          peakLabel.textContent = 'peak';
-          peakLabel.style.color = 'var(--text-muted)';
-          cardRight.appendChild(peakLabel);
-        }
       } else {
         // OPEN: current return + OPEN badge + peak if meaningful
         if (s.current_return_pct != null) {

@@ -1854,6 +1854,8 @@ body.premium .unlock-badge { display: none; }
     renderFeed();
     renderTable();
     renderFomo();
+    // Chart footer must stay in sync with stats bar. Re-derive after each render.
+    if (typeof renderChartFooter === 'function') renderChartFooter(null);
   }
 
   // ---- EVENT: FILTERS ----
@@ -1942,36 +1944,66 @@ body.premium .unlock-badge { display: none; }
             }
           });
 
-          // Chart footer: read totals directly from growth_chart.json's
-          // top-level fields. Race-proof (doesn't depend on signals.json
-          // having loaded yet) and consistent with what the chart shows.
-          var statsDiv = document.getElementById('growth-stats');
-          if (statsDiv) {
-            statsDiv.textContent = '';
-            var items = [
-              { color: '#00E676', label: 'Avg Peak Return', value: fmtPct(d.avg_peak) },
-              { color: '#F59E0B', label: 'Avg Current Return', value: fmtPct(d.avg_return) },
-              { color: 'var(--text-secondary)', label: d.total + ' signals', value: d.win_rate + '% win rate' }
-            ];
-            items.forEach(function(item) {
-              var wrap = document.createElement('span');
-              wrap.style.cssText = 'display:inline-flex;gap:6px;align-items:baseline;';
-              var lbl = document.createElement('span');
-              lbl.style.color = 'var(--text-muted)';
-              lbl.textContent = item.label + ':';
-              var val = document.createElement('span');
-              val.style.color = item.color;
-              val.style.fontWeight = '600';
-              val.textContent = item.value;
-              wrap.appendChild(lbl);
-              wrap.appendChild(val);
-              statsDiv.appendChild(wrap);
-            });
-          }
+          // Chart footer uses the same helpers as the top stats bar so the
+          // numbers ALWAYS agree. Fall back to growth_chart.json's top-level
+          // totals (same public set) if signals.json hasn't loaded yet.
+          renderChartFooter(d);
         })
         .catch(function(e) { console.log('Growth chart error:', e); });
     };
     document.head.appendChild(script);
+  }
+
+  function renderChartFooter(growthData) {
+    var statsDiv = document.getElementById('growth-stats');
+    if (!statsDiv) return;
+    statsDiv.textContent = '';
+
+    var vis = getVisible();
+    var withData = vis.filter(hasResult);
+    var sigWins = withData.filter(isSignalWin);
+    var wr, totalN, avgPk, avgCur;
+
+    if (vis.length > 0) {
+      totalN = vis.length;
+      wr = withData.length > 0 ? Math.round((sigWins.length / withData.length) * 100) : 0;
+
+      var peakSum = 0, peakCount = 0;
+      vis.forEach(function(s) { var p = peakPct(s); if (p != null) { peakSum += p; peakCount++; } });
+      avgPk = peakCount > 0 ? (peakSum / peakCount) : 0;
+
+      var curSum = 0, curCount = 0;
+      vis.forEach(function(s) { var c = currentPct(s); if (c != null) { curSum += c; curCount++; } });
+      avgCur = curCount > 0 ? (curSum / curCount) : 0;
+    } else if (growthData) {
+      // Signals haven't loaded yet - fall back to precomputed totals
+      totalN = growthData.total;
+      wr = growthData.win_rate;
+      avgPk = growthData.avg_peak;
+      avgCur = growthData.avg_return;
+    } else {
+      return;
+    }
+
+    var items = [
+      { color: '#00E676', label: 'Avg Peak Return', value: fmtPct(avgPk) },
+      { color: '#F59E0B', label: 'Avg Current Return', value: fmtPct(avgCur) },
+      { color: 'var(--text-secondary)', label: totalN + ' signals', value: wr + '% win rate' }
+    ];
+    items.forEach(function(item) {
+      var wrap = document.createElement('span');
+      wrap.style.cssText = 'display:inline-flex;gap:6px;align-items:baseline;';
+      var lbl = document.createElement('span');
+      lbl.style.color = 'var(--text-muted)';
+      lbl.textContent = item.label + ':';
+      var val = document.createElement('span');
+      val.style.color = item.color;
+      val.style.fontWeight = '600';
+      val.textContent = item.value;
+      wrap.appendChild(lbl);
+      wrap.appendChild(val);
+      statsDiv.appendChild(wrap);
+    });
   }
 
   loadGrowthChart();

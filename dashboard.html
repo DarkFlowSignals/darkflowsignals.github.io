@@ -381,12 +381,20 @@ body {
 .badge-primary { background: var(--amber-dim); color: var(--amber); font-size: 9px; }
 .badge-watchlist { background: var(--blue-dim); color: var(--blue); font-size: 9px; }
 
-.card-right { text-align: right; }
+.card-right {
+  text-align: right;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
 
 .card-pnl {
   font-family: var(--font-mono);
   font-size: 22px;
   font-weight: 700;
+  line-height: 1.2;
 }
 .card-pnl.positive { color: var(--green); }
 .card-pnl.negative { color: var(--red); }
@@ -395,6 +403,7 @@ body {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-muted);
+  line-height: 1.3;
 }
 
 .card-status-open {
@@ -1281,43 +1290,36 @@ body.premium .unlock-badge { display: none; }
       cardRight.className = 'card-right';
 
       if (isClosed) {
-        // CLOSED: Show peak as primary metric (signal quality), exit P&L secondary
+        // CLOSED: Show peak as primary metric (signal quality)
         if (s.max_return_pct != null) {
           var peakDiv = document.createElement('div');
           peakDiv.className = 'card-pnl ' + (s.max_return_pct >= 0 ? 'positive' : 'negative');
-          peakDiv.textContent = 'peak ' + (s.max_return_pct >= 0 ? '+' : '') + s.max_return_pct.toFixed(1) + '%';
+          peakDiv.textContent = (s.max_return_pct >= 0 ? '+' : '') + s.max_return_pct.toFixed(1) + '%';
           cardRight.appendChild(peakDiv);
         }
-        // Show exit type as small secondary label
+        // Clean exit label - no private management details
         var exitDiv = document.createElement('div');
         exitDiv.className = 'card-max-return';
         if (s.pnl_pct != null && s.pnl_pct <= -50) {
           exitDiv.textContent = 'stopped -50%';
           exitDiv.style.color = 'var(--red)';
-        } else if (s.notes && s.notes.toLowerCase().indexOf('expired otm') >= 0) {
-          exitDiv.textContent = 'expired OTM';
-          exitDiv.style.color = 'var(--red)';
-        } else if (s.notes && s.notes.toLowerCase().indexOf('expired itm') >= 0) {
-          exitDiv.textContent = 'expired ITM';
+        } else if (isSignalWin(s)) {
+          exitDiv.textContent = 'target hit';
           exitDiv.style.color = 'var(--green)';
-        } else if (s.pnl_pct != null && s.pnl_pct <= -95) {
-          exitDiv.textContent = 'expired OTM';
-          exitDiv.style.color = 'var(--red)';
         } else {
-          // Don't show private exit details (trailing stops, etc.)
-          // Just mark as completed
           exitDiv.textContent = 'signal complete';
           exitDiv.style.color = 'var(--text-muted)';
         }
         cardRight.appendChild(exitDiv);
       } else {
-        // OPEN: Show current return as primary, peak as secondary
+        // OPEN: Current return as primary number
         if (s.current_return_pct != null) {
           var retDiv = document.createElement('div');
           retDiv.className = 'card-pnl ' + (s.current_return_pct >= 0 ? 'positive' : 'negative');
           retDiv.textContent = (s.current_return_pct >= 0 ? '+' : '') + s.current_return_pct.toFixed(1) + '%';
           cardRight.appendChild(retDiv);
         }
+        // OPEN status with pulsing dot
         var openDiv = document.createElement('div');
         openDiv.className = 'card-status-open';
         var dot = document.createElement('span');
@@ -1325,11 +1327,12 @@ body.premium .unlock-badge { display: none; }
         openDiv.appendChild(dot);
         openDiv.appendChild(document.createTextNode(' OPEN'));
         cardRight.appendChild(openDiv);
-        if (s.max_return_pct != null && s.max_return_pct > (s.current_return_pct || 0)) {
+        // Peak (only show if higher than current)
+        if (s.max_return_pct != null && s.max_return_pct > (s.current_return_pct || 0) + 5) {
           var runDiv = document.createElement('div');
           runDiv.className = 'card-max-return';
-          runDiv.style.color = s.max_return_pct >= 0 ? 'var(--green)' : 'var(--text-muted)';
-          runDiv.textContent = 'peak: ' + (s.max_return_pct >= 0 ? '+' : '') + s.max_return_pct.toFixed(1) + '%';
+          runDiv.style.color = 'var(--green)';
+          runDiv.textContent = 'peak +' + s.max_return_pct.toFixed(1) + '%';
           cardRight.appendChild(runDiv);
         }
       }
@@ -1821,8 +1824,8 @@ body.premium .unlock-badge { display: none; }
             data: {
               labels: labels,
               datasets: [
-                { label: 'Avg Return (Current)', data: avgReturn, borderColor: '#00E676', backgroundColor: 'rgba(0,230,118,0.1)', fill: true, tension: 0.3, pointRadius: 6, borderWidth: 2 },
-                { label: 'Avg Peak Return', data: avgPeak, borderColor: '#F59E0B', fill: false, tension: 0.3, pointRadius: 6, borderWidth: 2, borderDash: [4, 4] }
+                { label: 'Avg Peak Return', data: avgPeak, borderColor: '#00E676', backgroundColor: 'rgba(0,230,118,0.08)', fill: true, tension: 0.3, pointRadius: 6, borderWidth: 2 },
+                { label: 'Avg Return (Current)', data: avgReturn, borderColor: '#F59E0B', fill: false, tension: 0.3, pointRadius: 6, borderWidth: 2, borderDash: [4, 4] }
               ]
             },
             options: {

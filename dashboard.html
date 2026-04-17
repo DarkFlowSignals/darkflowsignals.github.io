@@ -1494,11 +1494,11 @@ body.premium .unlock-badge { display: none; }
 
       var meta = document.createElement('span');
       meta.className = 'card-meta';
-      // Show entry timestamp when available, else fall back to relative signal date
+      // Show entry timestamp when available, else fall back to relative signal date.
+      // fmtTs handles UTC -> ET conversion and appends " ET" already.
       var entryTs = s.entry_time || s.signal_time;
       if (entryTs) {
-        var tsStr = String(entryTs).replace('T', ' ').slice(0, 16);
-        meta.textContent = tsStr + ' ET';
+        meta.textContent = fmtTs(entryTs);
       } else {
         meta.textContent = relativeTime(s.signal_date);
       }

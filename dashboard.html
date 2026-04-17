@@ -1543,7 +1543,24 @@ body.premium .unlock-badge { display: none; }
       // Apr 17 2026 transparency: every signal shows entry price + signal time identically.
       // Internal audit (real Alpaca fill vs tracked-only) is in signal_decisions.csv,
       // not exposed publicly to avoid leaking sizing/account-state.
-      function fmtTs(ts) { return String(ts || '').replace('T', ' ').slice(0, 16); }
+      function fmtTs(ts) {
+        if (!ts) return '';
+        var s = String(ts);
+        var d = new Date(s);
+        if (isNaN(d.getTime())) return s.replace('T', ' ').slice(0, 16);
+        try {
+          var fmt = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'America/New_York',
+            year: 'numeric', month: '2-digit', day: '2-digit',
+            hour: '2-digit', minute: '2-digit', hour12: false,
+          });
+          var parts = fmt.formatToParts(d);
+          var g = function(t) { for (var i=0;i<parts.length;i++) if (parts[i].type===t) return parts[i].value; return ''; };
+          return g('year')+'-'+g('month')+'-'+g('day')+' '+g('hour')+':'+g('minute')+' ET';
+        } catch(e) {
+          return s.replace('T', ' ').slice(0, 16);
+        }
+      }
       var entryPriceShown = (s.fill_price != null) ? s.fill_price : s.entry_premium;
       var entryTsShown = s.entry_time || s.signal_time;
       if (entryPriceShown != null) {

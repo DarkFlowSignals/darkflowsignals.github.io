@@ -236,8 +236,8 @@
     {
       "ticker": "AMD",
       "date": "2026-04-17",
-      "pnl": 14.8,
-      "peak": 17.2,
+      "pnl": 15.0,
+      "peak": 17.5,
       "expired": false
     },
     {
@@ -252,5 +252,5 @@
   "avg_return": 207.9,
   "avg_peak": 290.3,
   "win_rate": 89.0,
-  "generated": "2026-04-17T09:59:34.036311"
+  "generated": "2026-04-17T10:01:36.907294"
 }

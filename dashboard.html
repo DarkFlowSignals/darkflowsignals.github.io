@@ -1924,7 +1924,7 @@ body.premium .unlock-badge { display: none; }
 
   // ---- INIT ----
   loadSignals();
-  setInterval(loadSignals, 900000); // 15 min to match price check cadence
+  setInterval(loadSignals, 300000); // 5 min, matches darkflow-price-check cadence
   setInterval(tickUpdated, 1000);
   // Growth-chart footer is rebuilt from signals inside loadGrowthChart on
   // each full reload. loadSignals() (every 15m) triggers render(), which

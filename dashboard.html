@@ -848,6 +848,11 @@ body.premium .unlock-badge { display: none; }
     <button class="filter-pill" data-category="primary">Primary</button>
     <button class="filter-pill" data-category="watchlist">Watchlist</button>
   </div>
+  <div class="filter-row" id="stop-mode-row" style="margin-top:-4px;">
+    <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);align-self:center;margin-right:4px;" title="Raw shows actual settled returns. Stop applied caps losses at -50% as if the hard stop executed perfectly.">Stop rule:</span>
+    <button class="filter-pill active" data-stop="raw">Raw</button>
+    <button class="filter-pill" data-stop="applied">-50% applied</button>
+  </div>
 
   <!-- SIGNAL FEED -->
   <div class="signal-feed" id="signal-feed"></div>
@@ -948,6 +953,7 @@ body.premium .unlock-badge { display: none; }
   var allSignals = [];
   var currentFilter = 'all';
   var currentCategory = 'all'; // primary | watchlist | all (=both)
+  var currentStopMode = 'raw'; // raw = transparent actuals | applied = cap losses at -50%
   var currentView = 'feed';
   var sortCol = 'signal_date';
   var sortAsc = false;
@@ -973,8 +979,17 @@ body.premium .unlock-badge { display: none; }
   // Current return %. Live while the signal is open. At expiry the JSON's
   // current_return_pct folds in the intrinsic-based settled value, so the
   // same field keeps rendering for expired signals (no separate Real).
+  // currentPct respects the Stop Rule toggle.
+  // raw     = 100% transparency, return the actual live/settled number
+  //           (e.g. -99% PLTR blow-through, -100% expired OTM).
+  // applied = cap the loss at -50% to show what stats would look like if the
+  //           hard stop rule was enforced perfectly. Upside numbers are never
+  //           capped. Peak % is never capped (signal quality is never stopped).
   function currentPct(s) {
-    return (s.current_return_pct != null) ? s.current_return_pct : null;
+    var c = (s.current_return_pct != null) ? s.current_return_pct : null;
+    if (c == null) return null;
+    if (currentStopMode === 'applied' && c < -50) return -50;
+    return c;
   }
 
   // Is the signal still OPEN publicly? (calendar-based, ignores internal stops)
@@ -1131,12 +1146,12 @@ body.premium .unlock-badge { display: none; }
     var curEl = document.getElementById('stat-current');
     var streakEl = document.getElementById('stat-streak');
 
-    // Avg Current: live average across visible signals with a current return
-    // (post-expiry signals contribute their settled intrinsic return, since
-    // current_return_pct folds in the real-at-expiry value)
+    // Avg Current: live average across visible signals with a current return.
+    // Routed through currentPct() so the Stop Rule toggle (Raw vs -50% applied)
+    // flows into the headline stat automatically.
     var curVals = [];
     visible.forEach(function(s) {
-      var c = (s.current_return_pct != null) ? s.current_return_pct : null;
+      var c = currentPct(s);
       if (c != null) curVals.push(c);
     });
     if (curVals.length > 0) {
@@ -1968,6 +1983,20 @@ body.premium .unlock-badge { display: none; }
     document.querySelectorAll('#category-row .filter-pill').forEach(function(p) { p.classList.remove('active'); });
     pill.classList.add('active');
     currentCategory = pill.dataset.category;
+    render();
+  });
+
+  // ---- EVENT: STOP RULE TOGGLE (Raw vs -50% applied) ----
+  // Raw shows actual settled/live numbers (100% transparency).
+  // -50% applied caps each signal's current return at -50% for stats + table,
+  // showing what the book would look like if the hard stop rule fired perfectly.
+  // Peak % is never touched (signal quality is never stopped out).
+  document.getElementById('stop-mode-row').addEventListener('click', function(e) {
+    var pill = e.target.closest('.filter-pill');
+    if (!pill || !pill.dataset.stop) return;
+    document.querySelectorAll('#stop-mode-row .filter-pill').forEach(function(p) { p.classList.remove('active'); });
+    pill.classList.add('active');
+    currentStopMode = pill.dataset.stop;
     render();
   });
 

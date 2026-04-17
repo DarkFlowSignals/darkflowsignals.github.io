@@ -301,6 +301,7 @@ body {
   gap: 8px;
   margin-bottom: 20px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .filter-pill {
@@ -319,6 +320,32 @@ body {
   background: var(--green-dim);
   border-color: var(--green);
   color: var(--green);
+}
+
+/* Secondary filter row: Category + Stop rule on a single line with a subtle
+   divider between the two pill groups. Keeps the surface tight. */
+.filter-row.secondary {
+  gap: 6px;
+  margin-top: -12px;
+  margin-bottom: 24px;
+}
+.filter-row.secondary .group-sep {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+  margin: 0 10px;
+}
+.filter-row.secondary .group-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 2px;
+}
+.filter-row.secondary .filter-pill {
+  font-size: 11px;
+  padding: 3px 11px;
 }
 
 /* ============================================================
@@ -842,16 +869,15 @@ body.premium .unlock-badge { display: none; }
     <button class="filter-pill" data-filter="bullish">Bullish</button>
     <button class="filter-pill" data-filter="bearish">Bearish</button>
   </div>
-  <div class="filter-row" id="category-row" style="margin-top:-4px;">
-    <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);align-self:center;margin-right:4px;">Category:</span>
+  <div class="filter-row secondary" id="secondary-row">
+    <span class="group-label">Category</span>
     <button class="filter-pill active" data-category="all">Both</button>
     <button class="filter-pill" data-category="primary">Primary</button>
     <button class="filter-pill" data-category="watchlist">Watchlist</button>
-  </div>
-  <div class="filter-row" id="stop-mode-row" style="margin-top:-4px;">
-    <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);align-self:center;margin-right:4px;" title="Raw shows actual settled returns. Stop applied caps losses at -50% as if the hard stop executed perfectly.">Stop rule:</span>
+    <span class="group-sep"></span>
+    <span class="group-label" title="Raw shows actual settled returns. Stop applied caps losses at -50% as if the hard stop executed perfectly.">Stop</span>
     <button class="filter-pill active" data-stop="raw">Raw</button>
-    <button class="filter-pill" data-stop="applied">-50% applied</button>
+    <button class="filter-pill" data-stop="applied">-50% cap</button>
   </div>
 
   <!-- SIGNAL FEED -->
@@ -1973,31 +1999,24 @@ body.premium .unlock-badge { display: none; }
     renderTable();
   });
 
-  // ---- EVENT: CATEGORY TOGGLE (Primary / Watchlist / Both) ----
-  // Toggling the category recomputes the WHOLE dashboard: top stats bar, streak,
-  // ticker strip, growth chart footer, and table. This answers 'what would the
-  // returns be if I just had watchlist, or just primary, or both' in one click.
-  document.getElementById('category-row').addEventListener('click', function(e) {
+  // ---- EVENT: SECONDARY FILTERS (Category + Stop rule on one row) ----
+  // Single delegated handler, routes by which data attribute the pill carries.
+  // Toggling any of these recomputes the WHOLE dashboard: top stats bar,
+  // streak, ticker strip, growth chart footer, feed, and table.
+  document.getElementById('secondary-row').addEventListener('click', function(e) {
     var pill = e.target.closest('.filter-pill');
-    if (!pill || !pill.dataset.category) return;
-    document.querySelectorAll('#category-row .filter-pill').forEach(function(p) { p.classList.remove('active'); });
-    pill.classList.add('active');
-    currentCategory = pill.dataset.category;
-    render();
-  });
-
-  // ---- EVENT: STOP RULE TOGGLE (Raw vs -50% applied) ----
-  // Raw shows actual settled/live numbers (100% transparency).
-  // -50% applied caps each signal's current return at -50% for stats + table,
-  // showing what the book would look like if the hard stop rule fired perfectly.
-  // Peak % is never touched (signal quality is never stopped out).
-  document.getElementById('stop-mode-row').addEventListener('click', function(e) {
-    var pill = e.target.closest('.filter-pill');
-    if (!pill || !pill.dataset.stop) return;
-    document.querySelectorAll('#stop-mode-row .filter-pill').forEach(function(p) { p.classList.remove('active'); });
-    pill.classList.add('active');
-    currentStopMode = pill.dataset.stop;
-    render();
+    if (!pill) return;
+    if (pill.dataset.category) {
+      document.querySelectorAll('#secondary-row .filter-pill[data-category]').forEach(function(p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      currentCategory = pill.dataset.category;
+      render();
+    } else if (pill.dataset.stop) {
+      document.querySelectorAll('#secondary-row .filter-pill[data-stop]').forEach(function(p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      currentStopMode = pill.dataset.stop;
+      render();
+    }
   });
 
   // ---- EVENT: VIEW TOGGLE ----

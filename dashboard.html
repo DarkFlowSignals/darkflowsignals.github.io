@@ -1078,11 +1078,19 @@ body.premium .unlock-badge { display: none; }
     return monday.getFullYear() + '-' + String(monday.getMonth()+1).padStart(2,'0') + '-' + String(monday.getDate()).padStart(2,'0');
   }
 
-  // Category match: 'all' passes everything; 'primary' / 'watchlist' match that field exactly.
-  // Treats missing category as 'primary' fallback so legacy rows don't silently vanish.
+  // Category match for the Primary / Watchlist / Both toggle.
+  // 'hedge' category rows (e.g. PLTR protective put) are bucketed WITH primary
+  // so the 'Both' aggregate is a proper weighted average of Primary + Watchlist.
+  // Without this, one negative hedge signal could drag Both below both subsets,
+  // which is mathematically wrong for a toggle labeled as their union.
+  function normalizeCategory(raw) {
+    var cat = (raw || 'primary').toLowerCase();
+    if (cat === 'hedge') return 'primary';
+    return cat;
+  }
   function matchesCategory(s) {
-    if (currentCategory === 'all') return true;
-    var cat = (s.category || 'primary').toLowerCase();
+    var cat = normalizeCategory(s.category);
+    if (currentCategory === 'all') return cat === 'primary' || cat === 'watchlist';
     return cat === currentCategory;
   }
 
@@ -1786,11 +1794,12 @@ body.premium .unlock-badge { display: none; }
       tdDir.appendChild(dirSpan);
       tr.appendChild(tdDir);
 
-      // Category tag (primary / watchlist)
+      // Category tag (primary / watchlist). Hedge bucket displays as PRIMARY
+      // for toggle/stat consistency.
       var tdCat = document.createElement('td');
-      var catRaw = (s.category || 'primary').toLowerCase();
+      var catNorm = normalizeCategory(s.category);
       var catBadge = document.createElement('span');
-      if (catRaw === 'watchlist') {
+      if (catNorm === 'watchlist') {
         catBadge.className = 'badge badge-watchlist';
         catBadge.textContent = 'WATCH';
       } else {

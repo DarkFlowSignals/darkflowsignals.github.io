@@ -842,6 +842,12 @@ body.premium .unlock-badge { display: none; }
     <button class="filter-pill" data-filter="bullish">Bullish</button>
     <button class="filter-pill" data-filter="bearish">Bearish</button>
   </div>
+  <div class="filter-row" id="category-row" style="margin-top:-4px;">
+    <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);align-self:center;margin-right:4px;">Category:</span>
+    <button class="filter-pill active" data-category="all">Both</button>
+    <button class="filter-pill" data-category="primary">Primary</button>
+    <button class="filter-pill" data-category="watchlist">Watchlist</button>
+  </div>
 
   <!-- SIGNAL FEED -->
   <div class="signal-feed" id="signal-feed"></div>
@@ -854,6 +860,7 @@ body.premium .unlock-badge { display: none; }
           <th data-sort="signal_date">Date <span class="sort-arrow"></span></th>
           <th data-sort="ticker">Ticker <span class="sort-arrow"></span></th>
           <th data-sort="direction">Dir <span class="sort-arrow"></span></th>
+          <th data-sort="category">Tag <span class="sort-arrow"></span></th>
           <th data-sort="conviction_score">Score <span class="sort-arrow"></span></th>
           <th data-sort="strike">Strike <span class="sort-arrow"></span></th>
           <th data-sort="expiry">Expiry <span class="sort-arrow"></span></th>
@@ -940,6 +947,7 @@ body.premium .unlock-badge { display: none; }
 
   var allSignals = [];
   var currentFilter = 'all';
+  var currentCategory = 'all'; // primary | watchlist | all (=both)
   var currentView = 'feed';
   var sortCol = 'signal_date';
   var sortAsc = false;
@@ -1070,11 +1078,20 @@ body.premium .unlock-badge { display: none; }
     return monday.getFullYear() + '-' + String(monday.getMonth()+1).padStart(2,'0') + '-' + String(monday.getDate()).padStart(2,'0');
   }
 
+  // Category match: 'all' passes everything; 'primary' / 'watchlist' match that field exactly.
+  // Treats missing category as 'primary' fallback so legacy rows don't silently vanish.
+  function matchesCategory(s) {
+    if (currentCategory === 'all') return true;
+    var cat = (s.category || 'primary').toLowerCase();
+    return cat === currentCategory;
+  }
+
   function getFiltered() {
     var cutoff = isPremium ? null : getFreeCutoff();
     return allSignals.filter(function(s) {
       // Free feed/table: 7-day delay on actual signals
       if (!isPremium && cutoff && s.signal_date >= cutoff) return false;
+      if (!matchesCategory(s)) return false;
       if (currentFilter === 'open') return isOpen(s);
       if (currentFilter === 'expired') return !isOpen(s);
       if (currentFilter === 'bullish') return s.direction === 'BULLISH';
@@ -1085,9 +1102,11 @@ body.premium .unlock-badge { display: none; }
 
   // ---- VISIBLE SIGNALS for STATS (everyone sees live stats, feed is gated) ----
   function getVisible() {
-    // Stats, win rate, avg peak, streak bar, ticker strip, growth chart: use ALL signals for everyone
-    // This gives free users accurate live performance data while keeping the feed delayed
-    return allSignals;
+    // Stats, win rate, avg peak, streak bar, ticker strip, growth chart use the
+    // category toggle too, so toggling Primary / Watchlist / Both recomputes
+    // every top-bar stat and chart-footer number together. Direction/status
+    // filters do NOT recompute stats (by design: those only narrow the feed).
+    return allSignals.filter(matchesCategory);
   }
 
   // ---- STATS ----
@@ -1767,6 +1786,20 @@ body.premium .unlock-badge { display: none; }
       tdDir.appendChild(dirSpan);
       tr.appendChild(tdDir);
 
+      // Category tag (primary / watchlist)
+      var tdCat = document.createElement('td');
+      var catRaw = (s.category || 'primary').toLowerCase();
+      var catBadge = document.createElement('span');
+      if (catRaw === 'watchlist') {
+        catBadge.className = 'badge badge-watchlist';
+        catBadge.textContent = 'WATCH';
+      } else {
+        catBadge.className = 'badge badge-primary';
+        catBadge.textContent = 'PRIMARY';
+      }
+      tdCat.appendChild(catBadge);
+      tr.appendChild(tdCat);
+
       // Score
       var tdScore = document.createElement('td');
       tdScore.textContent = Math.round(s.conviction_score);
@@ -1905,15 +1938,28 @@ body.premium .unlock-badge { display: none; }
     if (typeof renderChartFooter === 'function') renderChartFooter(null);
   }
 
-  // ---- EVENT: FILTERS ----
+  // ---- EVENT: FILTERS (direction / status row) ----
   document.getElementById('filter-row').addEventListener('click', function(e) {
     var pill = e.target.closest('.filter-pill');
-    if (!pill) return;
-    document.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
+    if (!pill || !pill.dataset.filter) return;
+    document.querySelectorAll('#filter-row .filter-pill').forEach(function(p) { p.classList.remove('active'); });
     pill.classList.add('active');
     currentFilter = pill.dataset.filter;
     renderFeed();
     renderTable();
+  });
+
+  // ---- EVENT: CATEGORY TOGGLE (Primary / Watchlist / Both) ----
+  // Toggling the category recomputes the WHOLE dashboard: top stats bar, streak,
+  // ticker strip, growth chart footer, and table. This answers 'what would the
+  // returns be if I just had watchlist, or just primary, or both' in one click.
+  document.getElementById('category-row').addEventListener('click', function(e) {
+    var pill = e.target.closest('.filter-pill');
+    if (!pill || !pill.dataset.category) return;
+    document.querySelectorAll('#category-row .filter-pill').forEach(function(p) { p.classList.remove('active'); });
+    pill.classList.add('active');
+    currentCategory = pill.dataset.category;
+    render();
   });
 
   // ---- EVENT: VIEW TOGGLE ----

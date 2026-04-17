@@ -897,7 +897,6 @@ body.premium .unlock-badge { display: none; }
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="https://darkflowsignals.substack.com" target="_blank" rel="noopener">Newsletter</a>
-      <a href="https://x.com/DarkFlowSignals" target="_blank" rel="noopener">Twitter</a>
       <a href="https://whop.com/darkflow-signals/premium-e5-02ad/" target="_blank" rel="noopener">Try Premium Free</a>
     </div>
     <div class="footer-disclaimer">
@@ -1495,7 +1494,14 @@ body.premium .unlock-badge { display: none; }
 
       var meta = document.createElement('span');
       meta.className = 'card-meta';
-      meta.textContent = relativeTime(s.signal_date);
+      // Show entry timestamp when available, else fall back to relative signal date
+      var entryTs = s.entry_time || s.signal_time;
+      if (entryTs) {
+        var tsStr = String(entryTs).replace('T', ' ').slice(0, 16);
+        meta.textContent = tsStr + ' ET';
+      } else {
+        meta.textContent = relativeTime(s.signal_date);
+      }
       rowBot.appendChild(meta);
 
       // Free users: standardized FOMO line
@@ -1532,6 +1538,30 @@ body.premium .unlock-badge { display: none; }
         closeItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Closed: ' }));
         closeItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-value', textContent: esc(s.outcome_date) }));
         detailRow.appendChild(closeItem);
+      }
+
+      // Apr 17 2026 transparency: every signal shows entry price + signal time identically.
+      // Internal audit (real Alpaca fill vs tracked-only) is in signal_decisions.csv,
+      // not exposed publicly to avoid leaking sizing/account-state.
+      function fmtTs(ts) { return String(ts || '').replace('T', ' ').slice(0, 16); }
+      var entryPriceShown = (s.fill_price != null) ? s.fill_price : s.entry_premium;
+      var entryTsShown = s.entry_time || s.signal_time;
+      if (entryPriceShown != null) {
+        var entryItem = document.createElement('span');
+        entryItem.className = 'detail-item';
+        entryItem.style.color = '#00E676';
+        entryItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Entry: ' }));
+        var txt = '$' + Number(entryPriceShown).toFixed(2);
+        if (entryTsShown) txt += ' @ ' + fmtTs(entryTsShown).slice(11);
+        entryItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-value', textContent: txt }));
+        detailRow.appendChild(entryItem);
+      }
+      if (s.signal_time) {
+        var sigItem = document.createElement('span');
+        sigItem.className = 'detail-item';
+        sigItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-label', textContent: 'Signaled: ' }));
+        sigItem.appendChild(Object.assign(document.createElement('span'), { className: 'detail-value', textContent: esc(fmtTs(s.signal_time)) }));
+        detailRow.appendChild(sigItem);
       }
 
       detail.appendChild(detailRow);

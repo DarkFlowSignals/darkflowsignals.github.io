@@ -9,10 +9,15 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 274.2,
+      "current_return_pct": 276.8,
       "peak_return_pct": 319.0,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-09",
@@ -23,10 +28,15 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 119.5,
+      "current_return_pct": 124.6,
       "peak_return_pct": 166.2,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-09",
@@ -40,21 +50,12 @@
       "current_return_pct": -99.3,
       "peak_return_pct": -16.2,
       "result": "LOSS",
-      "tracking_type": "system"
-    },
-    {
-      "signal_date": "2026-04-13",
-      "ticker": "MRVL",
-      "direction": "BULLISH",
-      "conviction_score": 90.0,
-      "option_type": "Call",
-      "category": "primary",
-      "status": "open",
-      "outcome_date": null,
-      "current_return_pct": 10.6,
-      "peak_return_pct": 88.2,
-      "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-09",
@@ -68,7 +69,12 @@
       "current_return_pct": 34.4,
       "peak_return_pct": 64.6,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-10",
@@ -82,7 +88,12 @@
       "current_return_pct": 211.0,
       "peak_return_pct": 211.0,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-10",
@@ -93,10 +104,15 @@
       "category": "watchlist",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 38.8,
+      "current_return_pct": 41.0,
       "peak_return_pct": 138.1,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-10",
@@ -110,7 +126,12 @@
       "current_return_pct": 376.0,
       "peak_return_pct": 421.2,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-10",
@@ -121,10 +142,15 @@
       "category": "watchlist",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 270.6,
+      "current_return_pct": 279.2,
       "peak_return_pct": 349.4,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-10",
@@ -135,10 +161,15 @@
       "category": "watchlist",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 236.6,
+      "current_return_pct": 241.6,
       "peak_return_pct": 256.4,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-10",
@@ -152,7 +183,12 @@
       "current_return_pct": 276.7,
       "peak_return_pct": 289.5,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-10",
@@ -163,10 +199,15 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": -34.1,
+      "current_return_pct": -35.3,
       "peak_return_pct": 84.7,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-10",
@@ -177,10 +218,15 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 974.4,
+      "current_return_pct": 958.1,
       "peak_return_pct": 974.4,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-10",
@@ -191,10 +237,34 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 716.6,
+      "current_return_pct": 726.3,
       "peak_return_pct": 1034.0,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
+    },
+    {
+      "signal_date": "2026-04-13",
+      "ticker": "MRVL",
+      "direction": "BULLISH",
+      "conviction_score": 90.0,
+      "option_type": "Call",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "current_return_pct": 12.1,
+      "peak_return_pct": 88.2,
+      "result": "WIN",
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-14",
@@ -208,7 +278,12 @@
       "current_return_pct": -67.9,
       "peak_return_pct": 0.0,
       "result": "LOSS",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-14",
@@ -222,7 +297,12 @@
       "current_return_pct": 318.0,
       "peak_return_pct": 334.6,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-14",
@@ -233,10 +313,15 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 62.3,
+      "current_return_pct": 64.3,
       "peak_return_pct": 91.3,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-14",
@@ -247,10 +332,15 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 210.3,
+      "current_return_pct": 219.0,
       "peak_return_pct": 397.7,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-14",
@@ -261,10 +351,15 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 51.1,
+      "current_return_pct": 54.2,
       "peak_return_pct": 88.2,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-15",
@@ -275,10 +370,15 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": -23.0,
+      "current_return_pct": -25.5,
       "peak_return_pct": 3.8,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-15",
@@ -289,10 +389,15 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": -54.9,
+      "current_return_pct": -55.3,
       "peak_return_pct": -21.3,
       "result": "LOSS",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-15",
@@ -303,10 +408,15 @@
       "category": "watchlist",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 677.7,
+      "current_return_pct": 675.4,
       "peak_return_pct": 692.8,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-16",
@@ -317,10 +427,15 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": -27.0,
+      "current_return_pct": -29.0,
       "peak_return_pct": 2.5,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-16",
@@ -331,10 +446,15 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 587.2,
+      "current_return_pct": 588.0,
       "peak_return_pct": 623.6,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
     },
     {
       "signal_date": "2026-04-16",
@@ -345,10 +465,72 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 72.9,
+      "current_return_pct": 71.2,
       "peak_return_pct": 92.9,
       "result": "WIN",
-      "tracking_type": "system"
+      "tracking_type": "system",
+      "decision": null,
+      "signal_time": null,
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
+    },
+    {
+      "signal_date": "2026-04-16",
+      "ticker": "TSM",
+      "direction": "BULLISH",
+      "conviction_score": 87.0,
+      "option_type": "Call",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "current_return_pct": -2.0,
+      "peak_return_pct": 0.0,
+      "result": "LOSS",
+      "tracking_type": "system",
+      "decision": "TRACKED_ONLY",
+      "signal_time": "2026-04-16T22:05:26",
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
+    },
+    {
+      "signal_date": "2026-04-17",
+      "ticker": "AMD",
+      "direction": "BULLISH",
+      "conviction_score": 82.0,
+      "option_type": "Call",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "current_return_pct": 0.0,
+      "peak_return_pct": 0.0,
+      "result": "LOSS",
+      "tracking_type": "system",
+      "decision": "SKIPPED_TOO_EXPENSIVE",
+      "signal_time": "2026-04-17T05:47:52",
+      "entry_time": null,
+      "fill_price": null,
+      "alpaca_status": null
+    },
+    {
+      "signal_date": "2026-04-17",
+      "ticker": "GOOGL",
+      "direction": "BULLISH",
+      "conviction_score": 75.0,
+      "option_type": "Call",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "current_return_pct": -1.6,
+      "peak_return_pct": -1.6,
+      "result": "LOSS",
+      "tracking_type": "system",
+      "decision": "ENTERED",
+      "signal_time": "2026-04-17T05:47:52",
+      "entry_time": "2026-04-17T05:47:52",
+      "fill_price": 4.46,
+      "alpaca_status": "OrderStatus.ACCEPTED"
     }
   ]
 }

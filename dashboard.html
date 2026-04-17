@@ -294,14 +294,31 @@ body {
 }
 
 /* ============================================================
-   FILTER ROW
+   FILTER AREA
    ============================================================ */
+.filter-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 22px;
+}
+.filter-hint {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin: 0 0 2px;
+  line-height: 1.5;
+}
 .filter-row {
   display: flex;
   gap: 8px;
-  margin-bottom: 20px;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
+  margin: 0;
 }
 
 .filter-pill {
@@ -326,8 +343,6 @@ body {
    divider between the two pill groups. Keeps the surface tight. */
 .filter-row.secondary {
   gap: 6px;
-  margin-top: -12px;
-  margin-bottom: 24px;
 }
 .filter-row.secondary .group-sep {
   width: 1px;
@@ -346,6 +361,21 @@ body {
 .filter-row.secondary .filter-pill {
   font-size: 11px;
   padding: 3px 11px;
+}
+
+/* Mobile: keep pills visible without forcing horizontal scroll. Divider
+   between the two secondary groups drops to a thin horizontal line so the
+   rows stack cleanly. */
+@media (max-width: 640px) {
+  .filter-hint { font-size: 9px; line-height: 1.45; }
+  .filter-pill { font-size: 11px; padding: 4px 10px; }
+  .filter-row.secondary .filter-pill { font-size: 10px; padding: 3px 9px; }
+  .filter-row.secondary .group-sep {
+    width: 100%;
+    height: 1px;
+    margin: 4px 0;
+  }
+  .filter-row.secondary .group-label { width: auto; }
 }
 
 /* ============================================================
@@ -862,22 +892,27 @@ body.premium .unlock-badge { display: none; }
   </div>
 
   <!-- FILTERS -->
-  <div class="filter-row" id="filter-row">
-    <button class="filter-pill active" data-filter="all">All</button>
-    <button class="filter-pill" data-filter="open">Open</button>
-    <button class="filter-pill" data-filter="expired">Expired</button>
-    <button class="filter-pill" data-filter="bullish">Bullish</button>
-    <button class="filter-pill" data-filter="bearish">Bearish</button>
-  </div>
-  <div class="filter-row secondary" id="secondary-row">
-    <span class="group-label">Category</span>
-    <button class="filter-pill active" data-category="all">Both</button>
-    <button class="filter-pill" data-category="primary">Primary</button>
-    <button class="filter-pill" data-category="watchlist">Watchlist</button>
-    <span class="group-sep"></span>
-    <span class="group-label" title="Raw shows actual settled returns. Stop applied caps losses at -50% as if the hard stop executed perfectly.">Stop</span>
-    <button class="filter-pill active" data-stop="raw">Raw</button>
-    <button class="filter-pill" data-stop="applied">-50% cap</button>
+  <div class="filter-block">
+    <p class="filter-hint">
+      Every filter recomputes the stats, chart, and table together. Slice by status, direction, category, or apply the -50% stop rule to see the book under strict risk management.
+    </p>
+    <div class="filter-row" id="filter-row" title="Status and direction. Click any pill to narrow the book.">
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="open">Open</button>
+      <button class="filter-pill" data-filter="expired">Expired</button>
+      <button class="filter-pill" data-filter="bullish">Bullish</button>
+      <button class="filter-pill" data-filter="bearish">Bearish</button>
+    </div>
+    <div class="filter-row secondary" id="secondary-row">
+      <span class="group-label" title="Primary = 75+ conviction. Watchlist = 60-74 conviction with a real entry. Both = everything tracked.">Category</span>
+      <button class="filter-pill active" data-category="all">Both</button>
+      <button class="filter-pill" data-category="primary">Primary</button>
+      <button class="filter-pill" data-category="watchlist">Watchlist</button>
+      <span class="group-sep"></span>
+      <span class="group-label" title="Raw shows actual settled returns, no clipping. 50% stop caps every losing signal at -50% so you see the book as if the hard stop fired perfectly.">Stop</span>
+      <button class="filter-pill active" data-stop="raw">Raw</button>
+      <button class="filter-pill" data-stop="applied">50% stop</button>
+    </div>
   </div>
 
   <!-- SIGNAL FEED -->
@@ -1151,11 +1186,19 @@ body.premium .unlock-badge { display: none; }
 
   // ---- VISIBLE SIGNALS for STATS (everyone sees live stats, feed is gated) ----
   function getVisible() {
-    // Stats, win rate, avg peak, streak bar, ticker strip, growth chart use the
-    // category toggle too, so toggling Primary / Watchlist / Both recomputes
-    // every top-bar stat and chart-footer number together. Direction/status
-    // filters do NOT recompute stats (by design: those only narrow the feed).
-    return allSignals.filter(matchesCategory);
+    // Every filter flows into the stats so the top bar, streak, ticker strip,
+    // chart footer, and table ALL recompute together. Click Bullish and the
+    // stats show only bullish performance. Click Open and you see just the
+    // carrying book. The only filter NOT applied here is the free-tier 7-day
+    // cutoff; stats stay accurate for everyone.
+    return allSignals.filter(function(s) {
+      if (!matchesCategory(s)) return false;
+      if (currentFilter === 'open') return isOpen(s);
+      if (currentFilter === 'expired') return !isOpen(s);
+      if (currentFilter === 'bullish') return s.direction === 'BULLISH';
+      if (currentFilter === 'bearish') return s.direction === 'BEARISH';
+      return true;
+    });
   }
 
   // ---- STATS ----
@@ -1988,15 +2031,17 @@ body.premium .unlock-badge { display: none; }
     if (typeof renderChartFooter === 'function') renderChartFooter(null);
   }
 
-  // ---- EVENT: FILTERS (direction / status row) ----
+  // ---- EVENT: FILTERS (status / direction row) ----
+  // Row 1 flows into the whole dashboard the same way Category and Stop rule
+  // do, so clicking Bullish or Open recomputes the stats bar, chart footer,
+  // streak, feed, and table together.
   document.getElementById('filter-row').addEventListener('click', function(e) {
     var pill = e.target.closest('.filter-pill');
     if (!pill || !pill.dataset.filter) return;
     document.querySelectorAll('#filter-row .filter-pill').forEach(function(p) { p.classList.remove('active'); });
     pill.classList.add('active');
     currentFilter = pill.dataset.filter;
-    renderFeed();
-    renderTable();
+    render();
   });
 
   // ---- EVENT: SECONDARY FILTERS (Category + Stop rule on one row) ----

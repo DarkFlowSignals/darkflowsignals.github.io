@@ -385,23 +385,36 @@ nav {
 }
 .record-stat {
   background: var(--bg-card);
-  padding: 20px;
+  padding: 20px 16px 18px;
   text-align: center;
+}
+.record-stat .rl {
+  font-size: 10px; color: var(--text-muted);
+  font-family: var(--font-mono); text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 8px;
 }
 .record-stat .rv {
   font-family: var(--font-mono);
   font-size: 28px;
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: 0;
+  line-height: 1.1;
 }
 .record-stat .rv.green { color: var(--green); }
 .record-stat .rv.red { color: var(--red); }
 .record-stat .rv.amber { color: var(--amber); }
 .record-stat .rv.neutral { color: var(--text-primary); }
-.record-stat .rl {
-  font-size: 10px; color: var(--text-muted);
-  font-family: var(--font-mono); text-transform: uppercase;
-  letter-spacing: 1.2px;
+.record-stat .rs {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  margin-top: 6px;
+  line-height: 1.3;
+  opacity: 0.75;
+}
+@media (max-width: 640px) {
+  .record-stat .rs { font-size: 9px; }
 }
 
 /* Streak bar, reused from dashboard */
@@ -724,20 +737,24 @@ nav {
     <!-- Live stats from signals.json -->
     <div class="record-stats">
       <div class="record-stat">
+        <div class="rl">Signals</div>
         <div class="rv neutral" id="lp-total">--</div>
-        <div class="rl">Total Signals</div>
+        <div class="rs">Total tracked</div>
       </div>
       <div class="record-stat">
-        <div class="rv" id="lp-winrate">--</div>
         <div class="rl" id="lp-winrate-label">Win Rate</div>
+        <div class="rv" id="lp-winrate">--</div>
+        <div class="rs" id="lp-winrate-sub">Signal quality: peak &gt; 0%</div>
       </div>
       <div class="record-stat">
-        <div class="rv" id="lp-peak">--</div>
         <div class="rl">Avg Peak</div>
+        <div class="rv" id="lp-peak">--</div>
+        <div class="rs">Each signal at its best moment</div>
       </div>
       <div class="record-stat">
+        <div class="rl" id="lp-avg-label">Avg Current</div>
         <div class="rv" id="lp-avg">--</div>
-        <div class="rl" id="lp-avg-label">Avg Return</div>
+        <div class="rs">Every signal, ride to the finish</div>
       </div>
     </div>
 
@@ -961,16 +978,19 @@ nav {
     var avgLbl = document.getElementById('lp-avg-label');
     var wrLbl = document.getElementById('lp-winrate-label');
 
+    var wrSub = document.getElementById('lp-winrate-sub');
     if (withData.length >= 3) {
       var wr = Math.round((wins.length / withData.length) * 100);
       wrEl.textContent = wr + '%';
       wrEl.className = 'rv ' + (wr >= 50 ? 'green' : 'red');
       if (wrLbl) wrLbl.textContent = 'Win Rate';
+      if (wrSub) wrSub.textContent = 'Signal quality: peak > 0%';
     } else {
       var openCount = signals.filter(isOpen).length;
       wrEl.textContent = openCount + ' open';
       wrEl.className = 'rv green';
       if (wrLbl) wrLbl.textContent = 'Positions';
+      if (wrSub) wrSub.textContent = 'Live and tracking, pre-close';
     }
 
     // Avg Peak (signal-quality metric, primary stat)

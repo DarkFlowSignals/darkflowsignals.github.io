@@ -19,8 +19,8 @@
   --border: #1E1E2E;
   --border-accent: #2A2A3F;
   --text-primary: #E8E8ED;
-  --text-secondary: #7A7A95;
-  --text-muted: #4A4A60;
+  --text-secondary: #8B8BA8;   /* bumped from #7A7A95 to ~5.2:1 for WCAG AA normal text */
+  --text-muted: #7D7D92;       /* bumped from #4A4A60 (2.5:1) to ~4.5:1 for WCAG AA */
   --green: #00E676;
   --green-dim: rgba(0, 230, 118, 0.08);
   --green-glow: rgba(0, 230, 118, 0.15);
@@ -857,18 +857,18 @@ body.premium .unlock-badge { display: none; }
     </div>
     <div class="header-right">
       <span class="updated-ago" id="updated-ago"></span>
-      <div class="view-toggle">
-        <button class="view-btn active" data-view="feed">Feed</button>
-        <button class="view-btn" data-view="table">Table</button>
+      <div class="view-toggle" role="tablist" aria-label="Signal display view">
+        <button class="view-btn active" data-view="feed" role="tab" aria-selected="true" aria-controls="signal-feed">Feed</button>
+        <button class="view-btn" data-view="table" role="tab" aria-selected="false" aria-controls="table-view">Table</button>
       </div>
     </div>
   </header>
 
   <!-- STATS BAR -->
-  <div class="stats-bar">
+  <div class="stats-bar" role="region" aria-label="Summary statistics" aria-live="polite">
     <div class="stat-cell">
-      <div class="stat-label">Signals</div>
-      <div class="stat-value neutral" id="stat-total">--</div>
+      <div class="stat-label" id="stat-label-total">Signals</div>
+      <div class="stat-value neutral" id="stat-total" aria-labelledby="stat-label-total">--</div>
       <div class="stat-sublabel">Total tracked</div>
     </div>
     <div class="stat-cell">
@@ -913,27 +913,27 @@ body.premium .unlock-badge { display: none; }
     <p class="filter-hint">
       Every filter recomputes the stats, chart, and table together. Slice by status, direction, category, or apply the -50% stop rule to see the book under strict risk management.
     </p>
-    <div class="filter-row" id="filter-row" title="Status and direction. Click any pill to narrow the book.">
-      <button class="filter-pill active" data-filter="all">All</button>
-      <button class="filter-pill" data-filter="open">Open</button>
-      <button class="filter-pill" data-filter="expired">Expired</button>
-      <button class="filter-pill" data-filter="bullish">Bullish</button>
-      <button class="filter-pill" data-filter="bearish">Bearish</button>
+    <div class="filter-row" id="filter-row" role="group" aria-label="Filter by status and direction" title="Status and direction. Click any pill to narrow the book.">
+      <button class="filter-pill active" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter-pill" data-filter="open" aria-pressed="false">Open</button>
+      <button class="filter-pill" data-filter="expired" aria-pressed="false">Expired</button>
+      <button class="filter-pill" data-filter="bullish" aria-pressed="false">Bullish</button>
+      <button class="filter-pill" data-filter="bearish" aria-pressed="false">Bearish</button>
     </div>
-    <div class="filter-row secondary" id="secondary-row">
+    <div class="filter-row secondary" id="secondary-row" role="group" aria-label="Filter by category and stop rule">
       <span class="group-label" title="Primary = 75+ conviction. Watchlist = 60-74 conviction with a real entry. Both = everything tracked.">Category</span>
-      <button class="filter-pill active" data-category="all">Both</button>
-      <button class="filter-pill" data-category="primary">Primary</button>
-      <button class="filter-pill" data-category="watchlist">Watchlist</button>
-      <span class="group-sep"></span>
+      <button class="filter-pill active" data-category="all" aria-pressed="true">Both</button>
+      <button class="filter-pill" data-category="primary" aria-pressed="false">Primary</button>
+      <button class="filter-pill" data-category="watchlist" aria-pressed="false">Watchlist</button>
+      <span class="group-sep" aria-hidden="true"></span>
       <span class="group-label" title="Raw shows actual settled returns, no clipping. 50% stop caps every losing signal at -50% so you see the book as if the hard stop fired perfectly.">Stop</span>
-      <button class="filter-pill active" data-stop="raw">Raw</button>
-      <button class="filter-pill" data-stop="applied">50% stop</button>
+      <button class="filter-pill active" data-stop="raw" aria-pressed="true">Raw</button>
+      <button class="filter-pill" data-stop="applied" aria-pressed="false">50% stop</button>
     </div>
   </div>
 
   <!-- SIGNAL FEED -->
-  <div class="signal-feed" id="signal-feed"></div>
+  <div class="signal-feed" id="signal-feed" role="region" aria-label="Signal feed, card layout" aria-live="polite"></div>
 
   <!-- TABLE VIEW -->
   <div class="table-view" id="table-view">
@@ -1668,9 +1668,7 @@ body.premium .unlock-badge { display: none; }
         detailRow.appendChild(closeItem);
       }
 
-      // Apr 17 2026 transparency: every signal shows entry price + signal time identically.
-      // Internal audit (real Alpaca fill vs tracked-only) is in signal_decisions.csv,
-      // not exposed publicly to avoid leaking sizing/account-state.
+      // Every signal shows entry price + signal time identically on the public feed.
       function fmtTs(ts) {
         if (!ts) return '';
         var s = String(ts);
@@ -2055,8 +2053,12 @@ body.premium .unlock-badge { display: none; }
   document.getElementById('filter-row').addEventListener('click', function(e) {
     var pill = e.target.closest('.filter-pill');
     if (!pill || !pill.dataset.filter) return;
-    document.querySelectorAll('#filter-row .filter-pill').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelectorAll('#filter-row .filter-pill').forEach(function(p) {
+      p.classList.remove('active');
+      p.setAttribute('aria-pressed', 'false');
+    });
     pill.classList.add('active');
+    pill.setAttribute('aria-pressed', 'true');
     currentFilter = pill.dataset.filter;
     render();
   });
@@ -2069,13 +2071,21 @@ body.premium .unlock-badge { display: none; }
     var pill = e.target.closest('.filter-pill');
     if (!pill) return;
     if (pill.dataset.category) {
-      document.querySelectorAll('#secondary-row .filter-pill[data-category]').forEach(function(p) { p.classList.remove('active'); });
+      document.querySelectorAll('#secondary-row .filter-pill[data-category]').forEach(function(p) {
+        p.classList.remove('active');
+        p.setAttribute('aria-pressed', 'false');
+      });
       pill.classList.add('active');
+      pill.setAttribute('aria-pressed', 'true');
       currentCategory = pill.dataset.category;
       render();
     } else if (pill.dataset.stop) {
-      document.querySelectorAll('#secondary-row .filter-pill[data-stop]').forEach(function(p) { p.classList.remove('active'); });
+      document.querySelectorAll('#secondary-row .filter-pill[data-stop]').forEach(function(p) {
+        p.classList.remove('active');
+        p.setAttribute('aria-pressed', 'false');
+      });
       pill.classList.add('active');
+      pill.setAttribute('aria-pressed', 'true');
       currentStopMode = pill.dataset.stop;
       render();
     }
@@ -2085,8 +2095,12 @@ body.premium .unlock-badge { display: none; }
   document.querySelector('.view-toggle').addEventListener('click', function(e) {
     var btn = e.target.closest('.view-btn');
     if (!btn) return;
-    document.querySelectorAll('.view-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.view-btn').forEach(function(b) {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
     btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
     currentView = btn.dataset.view;
     document.getElementById('signal-feed').classList.toggle('hidden', currentView === 'table');
     document.getElementById('table-view').classList.toggle('active', currentView === 'table');

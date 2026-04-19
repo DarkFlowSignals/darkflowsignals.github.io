@@ -1,0 +1,22 @@
+# Internal/premium-only files that must NEVER be committed to a public repo.
+# signals_premium.json carries the dashboard access key + premium fields
+# (strike, expiry, entry_premium, current_premium, peak_premium). It is
+# generated locally by signals/darkflow/dashboard.py and consumed only by
+# Discord bot tasks. The public-facing feed is signals.json.
+signals_premium.json
+
+# Operational / audit artifacts - never deploy.
+task_events.jsonl
+signal_decisions.csv
+alpaca_trade_log.csv
+hw_tracking.json
+pending_entries.json
+trade_log.csv
+_smoke_*.py
+
+# Local editor / IDE noise
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

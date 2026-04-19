@@ -179,6 +179,120 @@ nav {
 .btn-secondary:hover { border-color: var(--text-muted); background: var(--bg-card); }
 
 /* ============================================================
+   METHODOLOGY TEASER: 6-pillar convergence explanation
+   ============================================================ */
+.methodology-section { padding: 72px 0; background: var(--bg-surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 28px 0 24px;
+}
+.pillar-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 18px;
+  transition: border-color 0.2s;
+}
+.pillar-item:hover { border-color: var(--green); }
+.pillar-weight {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--green);
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.pillar-item h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+}
+.pillar-item p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.method-learn {
+  display: inline-block;
+  padding: 10px 18px;
+  background: transparent;
+  border: 1.5px solid var(--green);
+  color: var(--green);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+.method-learn:hover { background: rgba(0, 230, 118, 0.08); }
+
+/* ============================================================
+   CASE STUDIES TEASER
+   ============================================================ */
+.case-teaser-section { padding: 72px 0; }
+.case-teaser-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 28px 0 28px;
+}
+.case-teaser {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 26px 22px;
+  transition: border-color 0.2s, background 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.case-teaser:hover { border-color: var(--green); background: var(--bg-card-hover); }
+.case-teaser-ticker {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.case-teaser-peak {
+  font-family: var(--font-mono);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.case-teaser-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.case-teaser-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.case-teaser-link {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+@media (max-width: 720px) {
+  .pillar-grid, .case-teaser-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
    HOW IT WORKS: 3 steps, minimal
    ============================================================ */
 .how-section { padding: 72px 0; }
@@ -441,6 +555,8 @@ nav {
       <a href="#record">Track Record</a>
       <a href="#pricing">Pricing</a>
       <a href="dashboard.html">Dashboard</a>
+      <a href="/case-studies/" class="nav-link" style="font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); margin-right: 20px;">Cases</a>
+      <a href="#methodology" class="nav-link" style="font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); margin-right: 20px;">Method</a>
       <a href="https://whop.com/darkflow-signals/premium-e5-02ad/" target="_blank" rel="noopener" class="nav-cta">Try 14 Days Free</a>
     </div>
   </div>
@@ -484,6 +600,87 @@ nav {
         <h3>You get the call before the bell</h3>
         <p>Premium members see near-term swing signals at 6:00 AM ET with full entry, stop, and target. Options in the sweet spot where institutional flow has the strongest predictive edge. Free tier gets last week's picks so you can audit the track record.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY TEASER -->
+<section class="methodology-section" id="methodology">
+  <div class="container">
+    <div class="section-label">Methodology</div>
+    <h2 class="section-title">Six independent pillars. One 0-100 score.</h2>
+    <p class="section-desc">
+      Every candidate ticker gets scored on six independent evidence layers. The threshold for publication is 75 or higher. One layer tells you almost nothing. Six layers agreeing tells you a lot. That's the edge: convergence, not speed.
+    </p>
+
+    <div class="pillar-grid">
+      <div class="pillar-item">
+        <div class="pillar-weight">Pillar 1 &middot; 20 pts</div>
+        <h4>Options Flow</h4>
+        <p>Eight distinct flow characteristics. Size, urgency, repetition, and whether trades clear at the ask. The most leading indicator in the stack.</p>
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-weight">Pillar 2 &middot; 20 pts</div>
+        <h4>Dark Pool</h4>
+        <p>Block trades off-exchange. Does the dark pool confirm the options flow direction, or conflict with it? Confirmation adds conviction.</p>
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-weight">Pillar 3 &middot; 15 pts</div>
+        <h4>Technical</h4>
+        <p>Multi-timeframe read using standard indicators across daily and weekly, plus a 4-hour overlay for near-term swings.</p>
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-weight">Pillar 4 &middot; 15 pts</div>
+        <h4>Macro</h4>
+        <p>Economic calendar, central bank commentary, CME FedWatch delta. Filters trades that fight the tape. Boosts trades aligned with it.</p>
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-weight">Pillar 5 &middot; 20 pts</div>
+        <h4>Institutional Thesis</h4>
+        <p>Can a coherent explanation be written for why institutions are positioning this way right now? Signals without a thesis underperform.</p>
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-weight">Pillar 6 &middot; 10 pts</div>
+        <h4>Continuation</h4>
+        <p>Did the same ticker score 75+ yesterday or the day before? Repeated flow on the same name is a thesis, not a one-day event.</p>
+      </div>
+    </div>
+
+    <a href="METHODOLOGY.md" class="method-learn">Read the full methodology &rarr;</a>
+  </div>
+</section>
+
+<!-- CASE STUDIES TEASER -->
+<section class="case-teaser-section" id="case-studies">
+  <div class="container">
+    <div class="section-label">Case Studies</div>
+    <h2 class="section-title">The biggest convergence wins, broken down.</h2>
+    <p class="section-desc">
+      Every case walks through the scan, the 6-pillar read, the contract choice, and the outcome. Public record. Every peak number has a timestamp on the dashboard.
+    </p>
+
+    <div class="case-teaser-grid">
+      <a href="/case-studies/msft-april-2026.html" class="case-teaser">
+        <div class="case-teaser-ticker">MSFT &middot; Apr 15 2026</div>
+        <div class="case-teaser-peak">+818%</div>
+        <div class="case-teaser-title">Microsoft against the consensus.</div>
+        <div class="case-teaser-desc">Mega-cap tech was -20% YTD and retail was calling the top. The flow and dark pool were saying otherwise.</div>
+        <div class="case-teaser-link">Read the case &rarr;</div>
+      </a>
+      <a href="/case-studies/intc-april-2026.html" class="case-teaser">
+        <div class="case-teaser-ticker">INTC &middot; Apr 10 2026</div>
+        <div class="case-teaser-peak">+1,360%</div>
+        <div class="case-teaser-title">Intel's 7-DTE monster.</div>
+        <div class="case-teaser-desc">Sub-dollar premium, weekly expiry, six filters. The best-return-per-dollar trade of the month.</div>
+        <div class="case-teaser-link">Read the case &rarr;</div>
+      </a>
+      <a href="/case-studies/mu-april-2026.html" class="case-teaser">
+        <div class="case-teaser-ticker">MU &middot; Apr 10 2026</div>
+        <div class="case-teaser-peak">+1,044%</div>
+        <div class="case-teaser-title">Micron on the semi rotation.</div>
+        <div class="case-teaser-desc">Chip tape leaders printed three 1,000%+ peaks in one week. This was the cleanest one.</div>
+        <div class="case-teaser-link">Read the case &rarr;</div>
+      </a>
     </div>
   </div>
 </section>

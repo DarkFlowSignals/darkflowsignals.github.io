@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INTC +1,360% Case Study | DarkFlow Signals</title>
+<meta name="description" content="April 10 2026 Intel weekly call peaked +1,360% on sub-dollar premium. Full breakdown of the 6-pillar scan and the outcome.">
+<meta property="og:title" content="INTC +1,360% Case Study | DarkFlow Signals">
+<meta property="og:description" content="Sub-dollar premium, 7 DTE, six filters. The best-return-per-dollar trade of the month.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://darkflowsignals.github.io/case-studies/intc-april-2026.html">
+<link rel="canonical" href="https://darkflowsignals.github.io/case-studies/intc-april-2026.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg-primary: #0A0A0F; --bg-card: #12121B; --bg-surface: #0E0E16;
+  --border: #1E1E2E; --text-primary: #E8E8ED; --text-secondary: #8B8BA8;
+  --text-muted: #7D7D92; --green: #00E676; --amber: #F59E0B; --blue: #3B82F6;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-display); background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+nav { position: sticky; top: 0; background: rgba(10,10,15,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 100; }
+.nav-inner { max-width: 1040px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: var(--font-mono); font-weight: 700; font-size: 17px; letter-spacing: -0.5px; color: var(--text-primary); }
+.logo-flow { color: var(--green); }
+.back-link { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); }
+article { max-width: 720px; margin: 0 auto; padding: 60px 24px 80px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--amber); margin-bottom: 16px; }
+h1 { font-size: 42px; line-height: 1.15; letter-spacing: -1px; margin-bottom: 16px; font-weight: 700; }
+.subtitle { font-size: 18px; color: var(--text-secondary); margin-bottom: 32px; line-height: 1.5; }
+.meta-row { display: flex; gap: 20px; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-bottom: 40px; flex-wrap: wrap; }
+.meta-item strong { color: var(--text-secondary); font-weight: 500; }
+.hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 40px 0; }
+.stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px 16px; text-align: center; }
+.stat-value { font-family: var(--font-mono); font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+.stat-value.pos { color: var(--green); }
+.stat-label { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+h2 { font-size: 26px; margin: 48px 0 18px; letter-spacing: -0.5px; font-weight: 600; }
+h3 { font-size: 18px; margin: 32px 0 12px; font-weight: 600; color: var(--text-primary); }
+p { margin-bottom: 16px; color: var(--text-secondary); font-size: 16px; }
+ul { margin: 0 0 20px 22px; color: var(--text-secondary); }
+ul li { margin-bottom: 6px; }
+blockquote { border-left: 3px solid var(--amber); padding: 8px 0 8px 20px; margin: 24px 0; color: var(--text-primary); font-style: italic; }
+.pillar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0; }
+@media (max-width: 640px) { .pillar-grid, .hero-stats { grid-template-columns: 1fr; } h1 { font-size: 32px; } }
+.pillar { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; }
+.pillar-name { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 4px; }
+.pillar-score { font-family: var(--font-mono); font-size: 14px; color: var(--green); margin-bottom: 4px; }
+.pillar-detail { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+.cta-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 32px 24px; margin: 56px 0 0; text-align: center; }
+.cta-title { font-size: 22px; margin-bottom: 10px; }
+.cta-desc { color: var(--text-secondary); margin-bottom: 20px; font-size: 15px; }
+.cta-btn { display: inline-block; padding: 12px 22px; background: transparent; border: 1.5px solid var(--green); color: var(--green); border-radius: 6px; font-family: var(--font-mono); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin: 4px; }
+.cta-btn:hover { background: rgba(0, 230, 118, 0.08); text-decoration: none; }
+.cta-btn.gold { border-color: #FFD700; color: #FFD700; }
+.cta-btn.gold:hover { background: rgba(255, 215, 0, 0.08); }
+footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--text-muted); font-family: var(--font-mono); font-size: 11px; max-width: 1040px; margin: 40px auto 0; }
+.disclaimer { margin-top: 16px; font-size: 10px; line-height: 1.6; opacity: 0.7; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">DARK<span class="logo-flow">FLOW</span></a>
+    <a href="/case-studies/" class="back-link">&larr; All Case Studies</a>
+  </div>
+</nav>
+
+<article>
+  <div class="eyebrow">Case Study &middot; April 2026</div>
+  <h1>INTC $64 Call. Peak +1,360%.</h1>
+  <p class="subtitle">
+    Sub-dollar premium, 7 days to expiration, six filters firing. The scan flagged Intel on April 10 morning. By expiry week it had printed the best return-per-dollar trade of the month.
+  </p>
+
+  <div class="meta-row">
+    <span class="meta-item"><strong>Signal date:</strong> 2026-04-10</span>
+    <span class="meta-item"><strong>Ticker:</strong> INTC</span>
+    <span class="meta-item"><strong>Strike / Exp:</strong> $64C Apr 17</span>
+    <span class="meta-item"><strong>Category:</strong> Primary (conviction 92)</span>
+    <span class="meta-item"><strong>Status:</strong> Expired</span>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="stat-value pos">+1,360%</div>
+      <div class="stat-label">Peak return</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value pos">+353%</div>
+      <div class="stat-label">Final at expiry</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$0.43</div>
+      <div class="stat-label">Entry premium</div>
+    </div>
+  </div>
+
+  <h2>Why this was the trade of the month</h2>
+  <p>
+    Sub-dollar premium options are where institutional conviction gets amplified. A call bought at $0.43 moves asymmetrically. If it works, the return is outsized. If it doesn't, the dollar loss is capped at the entry. This is what makes the 7-14 DTE window the DarkFlow sweet spot.
+  </p>
+  <p>
+    INTC had been beaten up for months. Chip sentiment was mixed. The flow said something had changed.
+  </p>
+
+  <h2>The convergence read on April 10 morning</h2>
+  <div class="pillar-grid">
+    <div class="pillar">
+      <div class="pillar-name">Pillar 1 &middot; Options Flow</div>
+      <div class="pillar-score">6 of 8 filters hit</div>
+      <div class="pillar-detail">Sweeps across $62 and $64 strikes, above-ask tape, repeat hits, sized premium. The $64 strike was the clear concentration point.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-name">Pillar 2 &middot; Dark Pool</div>
+      <div class="pillar-score">Top-20 aggregate</div>
+      <div class="pillar-detail">Block-trade volume on INTC put the ticker in the top 20 for the session with net-positive direction. Dark pool confirming options flow.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-name">Pillar 3 &middot; Technical</div>
+      <div class="pillar-score">Breakout coil</div>
+      <div class="pillar-detail">Daily had been coiling under resistance for a week. RSI neutral, MACD turning up. Setup primed for continuation if the flow was right.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-name">Pillar 4 &middot; Macro</div>
+      <div class="pillar-score">Semi tape supportive</div>
+      <div class="pillar-detail">Semi sector leading, SMH above 50-SMA. No adverse macro prints in the 7-DTE window. Risk-on tone.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-name">Pillar 5 &middot; Institutional Thesis</div>
+      <div class="pillar-score">Clear narrative</div>
+      <div class="pillar-detail">Post-beat chip sector rotation with INTC as the laggard-catching-up play. Institutions positioning into the chip tape continuation.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-name">Pillar 6 &middot; Continuation</div>
+      <div class="pillar-score">Repeat from prior day</div>
+      <div class="pillar-detail">INTC had scored 75+ on April 9 too. Second-day confirmation on the same ticker added the continuation bonus and pushed total score to 92.</div>
+    </div>
+  </div>
+
+  <h2>The DTE debate</h2>
+  <p>
+    7 DTE is outside the DarkFlow sweet spot of 7-14 DTE, right at the edge. Per the methodology, DTE is a scoring factor, not a hard filter. Strong flow at 7 DTE still gets published, it just needs everything else to line up to hit the 75+ threshold. Here, everything lined up. Theta collapse was a real risk, but the convergence was strong enough to justify it.
+  </p>
+
+  <blockquote>
+    "If the flow is strong enough, the DTE is secondary. Not every week has a convergence like this. When it comes, you take the signal on its merits."
+  </blockquote>
+
+  <h2>What happened</h2>
+  <ul>
+    <li><strong>Thursday April 10:</strong> signal fires premarket. Entry captured at $0.43.</li>
+    <li><strong>Monday April 14:</strong> INTC pushes through resistance. Call premium doubles by noon.</li>
+    <li><strong>Wednesday April 16:</strong> semi rally accelerates. Call prints +1,360% peak during the session (option $6.28 vs $0.43 entry).</li>
+    <li><strong>Thursday April 17:</strong> expiry. Option settles at $1.95, +353% final.</li>
+  </ul>
+  <p>
+    Peak and final both get logged. The dashboard shows both. The gap between peak and final is the reality of option trading, some peaks don't last. Signal quality is measured on peak, because that is what the thesis produced. What you do with the peak is the trade-management decision, which lives outside the signal itself.
+  </p>
+
+  <h2>Related from the same scan week</h2>
+  <ul>
+    <li>MU $430 Call 4/17 - +1,044% peak, same day (Apr 10) entry, chip rotation continuation</li>
+    <li>SOXL $73 Call 4/17 - +427% peak, semi-tape leverage</li>
+    <li>AMZN $235 Call 4/17 - +445% peak, cross-sector alignment</li>
+    <li>NBIS $140 Call 4/17 - +421% peak, growth name in the same tape</li>
+  </ul>
+
+  <div class="cta-section">
+    <div class="cta-title">The scan is live, every morning.</div>
+    <div class="cta-desc">Subscribe for same-day signals with entry and strike. Dashboard tracks everything, winners and losers, through expiry.</div>
+    <a href="/dashboard.html" class="cta-btn">View Dashboard</a>
+    <a href="https://whop.com/darkflow-signals/premium-e5-02ad/" target="_blank" rel="noopener" class="cta-btn gold">Start 14-Day Free Trial</a>
+  </div>
+</article>
+
+<footer>
+  <div>DarkFlow Signals &middot; darkflowsignals.github.io</div>
+  <div class="disclaimer">
+    DarkFlow provides algorithmic signals for educational and informational purposes only. Not financial advice. Options trading involves substantial risk of loss. Past performance does not guarantee future results. Trade at your own risk.
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSFT +818% Case Study | DarkFlow Signals</title>
+<meta name="description" content="April 15 2026 MSFT call signal hit +818% peak. Full breakdown of the flow scan, convergence pillars, and outcome.">
+<meta property="og:title" content="MSFT +818% Case Study | DarkFlow Signals">
+<meta property="og:description" content="How a 6-pillar convergence flagged MSFT on April 15. Full public breakdown.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://darkflowsignals.github.io/case-studies/msft-april-2026.html">
+<link rel="canonical" href="https://darkflowsignals.github.io/case-studies/msft-april-2026.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg-primary: #0A0A0F;
+  --bg-card: #12121B;
+  --bg-surface: #0E0E16;
+  --border: #1E1E2E;
+  --text-primary: #E8E8ED;
+  --text-secondary: #8B8BA8;
+  --text-muted: #7D7D92;
+  --green: #00E676;
+  --red: #EF4444;
+  --amber: #F59E0B;
+  --blue: #3B82F6;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-display); background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+nav { position: sticky; top: 0; background: rgba(10,10,15,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 100; }
+.nav-inner { max-width: 1040px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: var(--font-mono); font-weight: 700; font-size: 17px; letter-spacing: -0.5px; color: var(--text-primary); }
+.logo-flow { color: var(--green); }
+.back-link { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); }
+article { max-width: 720px; margin: 0 auto; padding: 60px 24px 80px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--amber); margin-bottom: 16px; }
+h1 { font-size: 42px; line-height: 1.15; letter-spacing: -1px; margin-bottom: 16px; font-weight: 700; }
+.subtitle { font-size: 18px; color: var(--text-secondary); margin-bottom: 32px; line-height: 1.5; }
+.meta-row { display: flex; gap: 20px; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-bottom: 40px; flex-wrap: wrap; }
+.meta-item strong { color: var(--text-secondary); font-weight: 500; }
+.hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 40px 0; }
+.stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px 16px; text-align: center; }
+.stat-value { font-family: var(--font-mono); font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+.stat-value.pos { color: var(--green); }
+.stat-label { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+h2 { font-size: 26px; margin: 48px 0 18px; letter-spacing: -0.5px; font-weight: 600; }
+h3 { font-size: 18px; margin: 32px 0 12px; font-weight: 600; color: var(--text-primary); }
+p { margin-bottom: 16px; color: var(--text-secondary); font-size: 16px; }
+ul { margin: 0 0 20px 22px; color: var(--text-secondary); }
+ul li { margin-bottom: 6px; }
+blockquote { border-left: 3px solid var(--amber); padding: 8px 0 8px 20px; margin: 24px 0; color: var(--text-primary); font-style: italic; }
+.pillar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0; }
+@media (max-width: 640px) { .pillar-grid, .hero-stats { grid-template-columns: 1fr; } h1 { font-size: 32px; } }
+.pillar { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; }
+.pillar-name { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 4px; }
+.pillar-score { font-family: var(--font-mono); font-size: 14px; color: var(--green); margin-bottom: 4px; }
+.pillar-detail { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+.cta-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 32px 24px; margin: 56px 0 0; text-align: center; }
+.cta-title { font-size: 22px; margin-bottom: 10px; }
+.cta-desc { color: var(--text-secondary); margin-bottom: 20px; font-size: 15px; }
+.cta-btn { display: inline-block; padding: 12px 22px; background: transparent; border: 1.5px solid var(--green); color: var(--green); border-radius: 6px; font-family: var(--font-mono); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin: 4px; }
+.cta-btn:hover { background: rgba(0, 230, 118, 0.08); text-decoration: none; }
+.cta-btn.gold { border-color: #FFD700; color: #FFD700; }
+.cta-btn.gold:hover { background: rgba(255, 215, 0, 0.08); }
+footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--text-muted); font-family: var(--font-mono); font-size: 11px; max-width: 1040px; margin: 40px auto 0; }
+.disclaimer { margin-top: 16px; font-size: 10px; line-height: 1.6; opacity: 0.7; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">DARK<span class="logo-flow">FLOW</span></a>
+    <a href="/case-studies/" class="back-link">&larr; All Case Studies</a>
+  </div>
+</nav>
+
+<article>
+  <div class="eyebrow">Case Study · April 2026</div>
+  <h1>MSFT $375 Call. Peak +818% from signal.</h1>
+  <p class="subtitle">
+    The flow scan flagged Microsoft on April 15 against the consensus. Six filters fired, dark pool confirmed, and the $375 call May 15 ran past +800% peak inside a week. This is the full public breakdown.
+  </p>
+
+  <div class="meta-row">
+    <span class="meta-item"><strong>Signal date:</strong> 2026-04-15</span>
+    <span class="meta-item"><strong>Ticker:</strong> MSFT</span>
+    <span class="meta-item"><strong>Strike / Exp:</strong> $375C May 15</span>
+    <span class="meta-item"><strong>Category:</strong> Watchlist (conviction 84)</span>
+    <span class="meta-item"><strong>Status:</strong> Open</span>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="stat-value pos">+818%</div>
+      <div class="stat-label">Peak return</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value pos">+697%</div>
+      <div class="stat-label">Current</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$6.50</div>
+      <div class="stat-label">Entry premium</div>
+    </div>
+  </div>
+
+  <h2>The setup against the consensus</h2>
+  <p>
+    MSFT was down 20% year-to-date. Consensus was cautious. The tape was telling you mega-cap tech had run its course. Every retail thread was calling for a bounce in the "beaten down" names and a rotation out of software.
+  </p>
+  <p>
+    The flow said otherwise.
+  </p>
+
+  <h2>What the flow scan showed</h2>
+  <p>On April 15 morning, the 6-pillar convergence read on MSFT was one of the clearest scans of the week:</p>
+
+  <div class="pillar-grid">
+    <div class="pillar">
+      <div class="pillar-name">Pillar 1 · Options Flow</div>
+      <div class="pillar-score">6 of 8 filters hit</div>
+      <div class="pillar-detail">Sweeps on multiple strikes, above-ask buying, repeat hits across expiries, sized premium. Call-side dollar volume ~$143M by scan time.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-name">Pillar 2 · Dark Pool</div>
+      <div class="pillar-score">#6 in market-wide ranking</div>
+      <div class="pillar-detail">$174.7M in block-trade dollars, highest individual-stock value in the market-wide top 15. Flow and dark pool pointing same direction same day.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-name">Pillar 3 · Technical</div>
+      <div class="pillar-score">Daily above 20SMA</div>
+      <div class="pillar-detail">Daily RSI neutral, price reclaiming 20-SMA after the YTD drawdown. Weekly still below 50-SMA, so this was a counter-trend setup with flow leading.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-name">Pillar 4 · Macro</div>
+      <div class="pillar-score">Soft tape, no binary event</div>
+      <div class="pillar-detail">No FOMC proximity. CPI was behind us. Risk-on tone helped but wasn't the driver. Macro alignment was neutral-positive.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-name">Pillar 5 · Institutional Thesis</div>
+      <div class="pillar-score">Clear narrative</div>
+      <div class="pillar-detail">Institutions positioning ahead of an Azure/AI capital-return setup that was not yet priced in by retail. Contrarian by definition, but the size tells you who's right.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-name">Pillar 6 · Continuation</div>
+      <div class="pillar-score">First-day conviction</div>
+      <div class="pillar-detail">No prior-day repeat on MSFT specifically, but the $375 strike showed up as the concentration point with a single clear expiry cluster.</div>
+    </div>
+  </div>
+
+  <h2>The contract choice</h2>
+  <p>
+    The $375 call May 15 flagged as the structure. One strike above spot, 30 days to expiration, liquid enough to actually track on a public dashboard without the option price feed being a gong show. Entry premium $6.50 per contract, captured at signal fire on the morning of April 15.
+  </p>
+
+  <h2>What happened</h2>
+  <ul>
+    <li><strong>Wednesday April 15:</strong> signal fires in premarket. Stock rallies mid-day on sector rotation.</li>
+    <li><strong>Thursday April 16 AM:</strong> consolidation at highs. Call premium holds near +400%.</li>
+    <li><strong>Thursday April 16 PM:</strong> breakout confirms. Call pushes above +700%.</li>
+    <li><strong>Friday April 17 close:</strong> peak hit +818% during the session. Currently sits at +697% and remains open.</li>
+  </ul>
+
+  <blockquote>
+    "Public exit rule is the -50% hard stop on premium decay. Peak % is the signal-quality metric, not the trade-management exit. The call is open and tracked through May 15 expiry."
+  </blockquote>
+
+  <h2>Why transparency matters here</h2>
+  <p>
+    Most signals don't print +818%. Most are in the 40-150% range. Some hit the -50% stop and get logged as losses. The full track record, wins <em>and</em> losses, lives on the dashboard with entry, peak, current, and final outcome for every single call.
+  </p>
+  <p>
+    This case is on the board because the convergence was real and the tracking was public before the move, not after. That distinction is everything in this category.
+  </p>
+
+  <h2>Related open positions from the same scan week</h2>
+  <ul>
+    <li>BE $185 Call 4/24 - +397% peak</li>
+    <li>AMD $265 Call 4/24 - +623% peak</li>
+    <li>ORCL $160 Call 4/24 - +434% peak</li>
+    <li>HIMS $26 Call 5/1 - +177% peak</li>
+  </ul>
+
+  <div class="cta-section">
+    <div class="cta-title">See the live book.</div>
+    <div class="cta-desc">Every open position, every closed trade, entry through expiry. Public dashboard, no cherry-picking.</div>
+    <a href="/dashboard.html" class="cta-btn">View Dashboard</a>
+    <a href="https://whop.com/darkflow-signals/premium-e5-02ad/" target="_blank" rel="noopener" class="cta-btn gold">Start 14-Day Free Trial</a>
+  </div>
+</article>
+
+<footer>
+  <div>DarkFlow Signals &middot; darkflowsignals.github.io</div>
+  <div class="disclaimer">
+    DarkFlow provides algorithmic signals for educational and informational purposes only. Not financial advice. Options trading involves substantial risk of loss. Past performance does not guarantee future results. Trade at your own risk.
+  </div>
+</footer>
+
+</body>
+</html>

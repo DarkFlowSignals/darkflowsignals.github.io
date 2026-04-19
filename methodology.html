@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How DarkFlow Publishes | Methodology &amp; Transparency | DarkFlow Signals</title>
+<meta name="description" content="How DarkFlow publishes options signals. Multi-source convergence, radical transparency, every trade tracked on a public dashboard through calendar expiry. Winners and losers, no cherry-picking.">
+<meta property="og:title" content="How DarkFlow Publishes | DarkFlow Signals">
+<meta property="og:description" content="Multi-source convergence. Every signal tracked publicly. Winners and losers, no cherry-picking.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://darkflowsignals.github.io/methodology.html">
+<link rel="canonical" href="https://darkflowsignals.github.io/methodology.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How DarkFlow Publishes",
+  "description": "How DarkFlow publishes options signals with radical transparency. Multi-source convergence, every signal tracked publicly through calendar expiry.",
+  "datePublished": "2026-04-19",
+  "dateModified": "2026-04-19",
+  "author": { "@type": "Organization", "name": "DarkFlow Signals", "url": "https://darkflowsignals.github.io" },
+  "publisher": { "@type": "Organization", "name": "DarkFlow Signals", "url": "https://darkflowsignals.github.io" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://darkflowsignals.github.io/methodology.html" },
+  "keywords": "options signals methodology, institutional flow analysis, dark pool signals, options trading transparency, DarkFlow Signals"
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg-primary: #0A0A0F; --bg-card: #12121B; --bg-surface: #0E0E16;
+  --border: #1E1E2E; --text-primary: #E8E8ED; --text-secondary: #8B8BA8;
+  --text-muted: #7D7D92; --green: #00E676; --amber: #F59E0B; --blue: #3B82F6;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-display); background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+nav { position: sticky; top: 0; background: rgba(10,10,15,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 100; }
+.nav-inner { max-width: 1040px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: var(--font-mono); font-weight: 700; font-size: 17px; letter-spacing: -0.5px; color: var(--text-primary); }
+.logo-flow { color: var(--green); }
+.back-link { font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); }
+article { max-width: 760px; margin: 0 auto; padding: 60px 24px 80px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--amber); margin-bottom: 16px; }
+h1 { font-size: 42px; line-height: 1.15; letter-spacing: -1px; margin-bottom: 16px; font-weight: 700; }
+h2 { font-size: 26px; margin: 48px 0 18px; letter-spacing: -0.5px; font-weight: 600; }
+h3 { font-size: 18px; margin: 32px 0 12px; font-weight: 600; color: var(--text-primary); }
+.subtitle { font-size: 18px; color: var(--text-secondary); margin-bottom: 32px; line-height: 1.5; }
+p { margin-bottom: 16px; color: var(--text-secondary); font-size: 16px; }
+ul { margin: 0 0 20px 22px; color: var(--text-secondary); }
+ul li { margin-bottom: 8px; }
+strong { color: var(--text-primary); }
+hr { border: 0; border-top: 1px solid var(--border); margin: 40px 0; }
+.promise-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 26px 24px; margin: 18px 0; }
+.promise-card h3 { margin-top: 0; color: var(--green); }
+.cta-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 32px 24px; margin: 56px 0 0; text-align: center; }
+.cta-title { font-size: 22px; margin-bottom: 10px; color: var(--text-primary); }
+.cta-desc { color: var(--text-secondary); margin-bottom: 20px; font-size: 15px; }
+.cta-btn { display: inline-block; padding: 12px 22px; background: transparent; border: 1.5px solid var(--green); color: var(--green); border-radius: 6px; font-family: var(--font-mono); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin: 4px; }
+.cta-btn:hover { background: rgba(0, 230, 118, 0.08); text-decoration: none; }
+.cta-btn.gold { border-color: #FFD700; color: #FFD700; }
+.cta-btn.gold:hover { background: rgba(255, 215, 0, 0.08); }
+footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--text-muted); font-family: var(--font-mono); font-size: 11px; max-width: 1040px; margin: 40px auto 0; }
+.disclaimer { margin-top: 16px; font-size: 10px; line-height: 1.6; opacity: 0.7; }
+@media (max-width: 640px) { h1 { font-size: 32px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">DARK<span class="logo-flow">FLOW</span></a>
+    <a href="/" class="back-link">&larr; Home</a>
+  </div>
+</nav>
+
+<article>
+  <div class="eyebrow">Methodology &amp; Transparency</div>
+  <h1>How DarkFlow Publishes</h1>
+  <p class="subtitle">
+    A plain-English guide to what you see on darkflowsignals.github.io, how the dashboard works, and what we promise about every trade we publish. This is the user manual for our transparency, not a description of our scoring internals.
+  </p>
+
+  <h2>The one-paragraph version</h2>
+  <p>
+    DarkFlow is a near-term swing signal system focused on options. We monitor institutional flow and dark pool activity continuously, overlay chart and macro context on every candidate, and publish only the strongest multi-source confirmations. Every published signal goes on a public dashboard at signal fire, tracks live through calendar expiry, and stays on the dashboard forever. The winners and the losers. That's the promise.
+  </p>
+
+  <hr>
+
+  <h2>Our three promises</h2>
+
+  <div class="promise-card">
+    <h3>1. We only publish what we'd trade ourselves.</h3>
+    <p>Most signal services publish too much. Twenty picks a day, spray and pray, let the winners carry the losers. We don't work that way. A signal only gets published when independent evidence sources agree on direction, size, and timing. Some days produce two primary signals. Some days produce zero. The cadence is dictated by what the tape is doing, not by a content quota.</p>
+  </div>
+
+  <div class="promise-card">
+    <h3>2. Every signal is logged at time of signal, not retroactively.</h3>
+    <p>When a signal fires, the entry price is captured from the live option chain at the moment of publication. The dashboard timestamps the entry. Peak and current returns update every 5 minutes during market hours. Nothing gets edited after the fact. Nothing gets deleted. A signal that went wrong stays on the board with the loss visible. That is not a bug. That is the product.</p>
+  </div>
+
+  <div class="promise-card">
+    <h3>3. We close only at calendar expiry.</h3>
+    <p>A signal closes publicly when its option contract reaches its expiration date. Not when we decide we've made enough. Not when the chart looks toppy. The dashboard shows the settled value at expiry, win or lose, and that becomes the final record.</p>
+    <p>The one exception to "only expiry closes" is a display tool on the dashboard called the -50% stop view. That's a toggle you can click to see what the cumulative returns would look like under a strict -50% hard-stop rule. It caps the displayed current return of any losing signal at -50% to model the risk-managed view. It does not close signals. Peak is never capped.</p>
+  </div>
+
+  <hr>
+
+  <h2>How to read the dashboard</h2>
+
+  <h3>The conviction score</h3>
+  <p>Every published signal has a 0-100 conviction score shown on the card. Higher means more independent sources agreed. You can filter the dashboard to primary-tier signals or watchlist-tier signals using the category pills. The scale is there so you can quickly sort highest-conviction from edge-case calls. The scoring mechanics themselves are proprietary.</p>
+
+  <h3>Peak % (the signal-quality metric)</h3>
+  <p>Peak % is the highest return the signal ever reached, measured from the captured entry price to the highest option premium printed during the signal's life. If a call bought at $2.00 reached $8.00 at any point, peak % = +300%. Peak only moves one direction: up. Once set, it never retreats.</p>
+  <p>Peak answers one question: was the thesis correct at any point? If peak went positive, the thesis worked, even if the option later faded. That's a win on signal quality.</p>
+
+  <h3>Current % (the live pricing metric)</h3>
+  <p>Current % is the live option premium return, measured against the same entry. For an open signal, it updates every 5 minutes during market hours. For an expired signal, it locks to the settled value (intrinsic value at expiry for ITM options, -100% for options that expired OTM).</p>
+  <p>Current can swing between positive and negative as the option trades. It is not a signal-quality metric. It is the live pricing.</p>
+
+  <h3>WIN and LOSS</h3>
+  <ul>
+    <li><strong>WIN</strong> = peak went above 0% at some point during the signal's life.</li>
+    <li><strong>LOSS</strong> = peak never went positive. The thesis was wrong from entry.</li>
+  </ul>
+  <p>This definition matters. An option can peak at +300%, pull back, and expire worthless. On the dashboard, that still shows as WIN because peak crossed zero. The trader's exit timing is a separate discipline from the signal's underlying quality. We track the signal, not the exit.</p>
+
+  <h3>Expiry date</h3>
+  <p>Every option has a contract expiration date. On the dashboard you'll see that date on each card. When expiry passes, the card flips from <em>open</em> to <em>expired</em>, the current % locks to settled intrinsic value, and the signal stops updating.</p>
+
+  <hr>
+
+  <h2>Our trade style</h2>
+  <p>DarkFlow is a near-term swing system. Typical trade characteristics:</p>
+  <ul>
+    <li><strong>DTE:</strong> 7-30 days to expiration. Sweet spot is 7-14 DTE.</li>
+    <li><strong>Holding period:</strong> 2-10 trading days, depending on how the thesis plays out.</li>
+    <li><strong>Vehicle:</strong> single-leg options (calls or puts). We don't publish spreads, strangles, or exotic structures.</li>
+    <li><strong>Direction:</strong> bullish, bearish, or tactical hedge. Roughly two thirds bullish historically, reflecting the general market bias in the signal set.</li>
+  </ul>
+  <p>DTE is a scoring factor, not a hard filter. If the system sees a strong multi-source confirmation on a 5-DTE or a 45-DTE option, it gets graded honestly. Short DTE means higher theta risk and a lower ceiling; long DTE dilutes the conviction signal. The 7-14 DTE sweet spot is where institutional positioning has the strongest predictive edge, so that's where most primary signals land.</p>
+
+  <hr>
+
+  <h2>What this is not</h2>
+  <ul>
+    <li><strong>Not a day-trading service.</strong> Intraday noise dominates. Taxes pile up. Different game.</li>
+    <li><strong>Not financial advice.</strong> The dashboard shows our signal record. It is a transparency asset, not a recommendation tailored to your risk tolerance, tax situation, or portfolio construction.</li>
+    <li><strong>Not a "hot picks" newsletter with a daily quota.</strong> Some days produce signals. Some days don't. Cadence is dictated by tape conditions, not marketing.</li>
+    <li><strong>Not leveraged or short-volatility.</strong> We publish long options. Defined risk, premium paid is the max loss per contract.</li>
+    <li><strong>Not systematic in the "press a button and the algo runs the bank" sense.</strong> The monitoring is automated; the publish decision respects judgment layers we've built over time. The edge is in those judgment layers, not in faster alerts.</li>
+  </ul>
+
+  <hr>
+
+  <h2>What makes the dashboard different</h2>
+  <p>Most signal services hide their losses. The track record screenshots you see on social are cherry-picked. The misses vanish. The dashboard does the opposite: every signal logged at fire, every signal tracked through expiry, every loss visible.</p>
+  <p>Anyone can pull up any date in the history and cross-reference the signal entry against the underlying's option chain for that moment. If we say we bought a $100 call at $2.50 at 9:34 AM on April 15, the public record on the dashboard says so at that timestamp. If the option chain data for that moment shows a different price, we'd be caught.</p>
+  <p>That's the verifiable edge. That's why the dashboard is public and will stay public.</p>
+
+  <hr>
+
+  <h2>The honest limits</h2>
+  <ul>
+    <li><strong>Track record is still building.</strong> Live trading data since early 2026. Meaningful statistical significance requires hundreds more closed trades, not tens.</li>
+    <li><strong>Option pricing feeds can disagree.</strong> The dashboard uses broker-confirmed prices during market hours with a delayed-data fallback after hours. When feeds disagree by more than a few cents, we flag it.</li>
+    <li><strong>Solo-operated.</strong> One person, one set of judgment. That's a strength (no conflicting incentives) and a limit (no backup on sick days, no second set of eyes in real time).</li>
+    <li><strong>Options are risky.</strong> Even multi-source confirmations fail. The -50% stop view and hard risk discipline exist because no service, including this one, is right every time.</li>
+  </ul>
+
+  <hr>
+
+  <h2>What you get when you subscribe</h2>
+
+  <h3>Free tier</h3>
+  <ul>
+    <li>Yesterday's picks (1-week delayed view of the signal record)</li>
+    <li>Weekly performance scorecard</li>
+    <li>Access to the community Discord</li>
+    <li>Substack newsletter</li>
+  </ul>
+
+  <h3>Premium ($59/mo, 14-day trial)</h3>
+  <ul>
+    <li>Real-time premarket and midday alerts with entry, strike, expiry</li>
+    <li>Live dashboard with strike prices, option premium, and full signal detail</li>
+    <li>Premium Discord channels</li>
+    <li>Daily briefings during market hours</li>
+  </ul>
+
+  <h3>Founder ($149/mo, limited seats)</h3>
+  <ul>
+    <li>Everything in Premium</li>
+    <li>Founder-only daily briefing</li>
+    <li>On-demand ticker check command in Discord</li>
+    <li>Direct access and priority feature input</li>
+  </ul>
+
+  <div class="cta-section">
+    <div class="cta-title">See the live book.</div>
+    <div class="cta-desc">Every open position, every closed trade, entry through expiry. Public dashboard, no cherry-picking.</div>
+    <a href="/dashboard.html" class="cta-btn">View Dashboard</a>
+    <a href="https://whop.com/darkflow-signals/premium-e5-02ad/" target="_blank" rel="noopener" class="cta-btn gold">Start 14-Day Free Trial</a>
+  </div>
+</article>
+
+<footer>
+  <div>DarkFlow Signals &middot; darkflowsignals.github.io</div>
+  <div class="disclaimer">
+    DarkFlow provides algorithmic signals for educational and informational purposes only. Not financial advice. Options trading involves substantial risk of loss. Past performance does not guarantee future results. Trade at your own risk.
+  </div>
+</footer>
+
+</body>
+</html>

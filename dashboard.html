@@ -3,8 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DarkFlow | The Signal Feed</title>
-<meta name="description" content="Live institutional flow signals. Every trade tracked, every loss shown.">
+<title>Live Signal Feed &amp; Track Record | DarkFlow Signals</title>
+<meta name="description" content="Live dashboard of DarkFlow institutional flow signals. Every trade logged with entry, peak, current, win/loss. No cherry-picking, no deleted losers.">
+<meta property="og:title" content="Live Signal Feed &amp; Track Record | DarkFlow Signals">
+<meta property="og:description" content="Live dashboard of DarkFlow institutional flow signals. Every trade logged, every loss shown.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://darkflowsignals.github.io/dashboard.html">
+<meta property="og:site_name" content="DarkFlow Signals">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://darkflowsignals.github.io/dashboard.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Live Signal Feed & Track Record | DarkFlow Signals",
+  "description": "Live dashboard of DarkFlow institutional flow signals with full public track record.",
+  "url": "https://darkflowsignals.github.io/dashboard.html",
+  "isPartOf": { "@type": "WebSite", "name": "DarkFlow Signals", "url": "https://darkflowsignals.github.io" }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -851,9 +868,9 @@ body.premium .unlock-badge { display: none; }
   <header class="dash-header">
     <div class="logo-area">
       <a href="index.html" style="text-decoration:none">
-        <div class="logo"><span class="logo-dark">Dark</span><span class="logo-flow">Flow</span></div>
+        <h1 class="logo" style="font-size:17px;font-weight:700;letter-spacing:-0.5px;margin:0;font-family:var(--font-mono);"><span class="logo-dark">Dark</span><span class="logo-flow">Flow</span> Signal Feed</h1>
       </a>
-      <span class="logo-tag">Signal Feed</span>
+      <span class="logo-tag" style="display:none;">Signal Feed</span>
     </div>
     <div class="header-right">
       <span class="updated-ago" id="updated-ago"></span>
@@ -921,7 +938,7 @@ body.premium .unlock-badge { display: none; }
       <button class="filter-pill" data-filter="bearish" aria-pressed="false">Bearish</button>
     </div>
     <div class="filter-row secondary" id="secondary-row" role="group" aria-label="Filter by category and stop rule">
-      <span class="group-label" title="Primary = 75+ conviction. Watchlist = 60-74 conviction with a real entry. Both = everything tracked.">Category</span>
+      <span class="group-label" title="Primary = high-conviction signals. Watchlist = moderate-conviction with a real tracked entry. Both = everything tracked.">Category</span>
       <button class="filter-pill active" data-category="all" aria-pressed="true">Both</button>
       <button class="filter-pill" data-category="primary" aria-pressed="false">Primary</button>
       <button class="filter-pill" data-category="watchlist" aria-pressed="false">Watchlist</button>

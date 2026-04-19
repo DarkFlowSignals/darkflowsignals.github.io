@@ -11,7 +11,9 @@
 <meta property="og:description" content="Continuously monitors 13,000+ institutional dark pool trades. Signals fire when conviction confirms. Free tier available.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://darkflowsignals.github.io">
-<meta property="og:image" content="https://darkflowsignals.github.io/og-image.png">
+<!-- og:image intentionally omitted until a branded image is created.
+     Adding a broken reference hurts social-share previews. When an image
+     is designed, restore: <meta property="og:image" content="https://darkflowsignals.github.io/og-image.png"> -->
 <meta property="og:site_name" content="DarkFlow">
 
 <!-- Twitter Card removed 2026-04-17: account suspended/deprecated -->
@@ -19,6 +21,31 @@
 <meta name="robots" content="index, follow">
 <meta name="author" content="DarkFlow">
 <link rel="canonical" href="https://darkflowsignals.github.io">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "DarkFlow Signals",
+  "url": "https://darkflowsignals.github.io",
+  "description": "Near-term swing options signals from institutional flow. Every trade tracked publicly, wins and losses both.",
+  "publisher": { "@type": "Organization", "name": "DarkFlow Signals", "url": "https://darkflowsignals.github.io" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "DarkFlow Signals",
+  "url": "https://darkflowsignals.github.io",
+  "description": "Near-term swing trading signal service. Multi-source institutional flow convergence with radical transparency. Every signal logged and tracked on a public dashboard through calendar expiry.",
+  "sameAs": [
+    "https://darkflowsignals.substack.com",
+    "https://www.reddit.com/r/DarkFlowSignals/",
+    "https://stocktwits.com/DarkFlowSignals",
+    "https://www.tradingview.com/u/DarkFlowSignals/"
+  ]
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -604,49 +631,49 @@ nav {
   </div>
 </section>
 
-<!-- METHODOLOGY TEASER -->
+<!-- HOW WE OPERATE -->
 <section class="methodology-section" id="methodology">
   <div class="container">
-    <div class="section-label">Methodology</div>
-    <h2 class="section-title">Six independent pillars. One 0-100 score.</h2>
+    <div class="section-label">How We Operate</div>
+    <h2 class="section-title">Multi-source convergence. Radical transparency.</h2>
     <p class="section-desc">
-      Every candidate ticker gets scored on six independent evidence layers. The threshold for publication is 75 or higher. One layer tells you almost nothing. Six layers agreeing tells you a lot. That's the edge: convergence, not speed.
+      Our edge is not seeing flow faster. It's refusing to publish until multiple independent sources agree. That's the filter that kills the noise. What makes it past the filter goes on the dashboard, live, every time.
     </p>
 
     <div class="pillar-grid">
       <div class="pillar-item">
-        <div class="pillar-weight">Pillar 1 &middot; 20 pts</div>
-        <h4>Options Flow</h4>
-        <p>Eight distinct flow characteristics. Size, urgency, repetition, and whether trades clear at the ask. The most leading indicator in the stack.</p>
+        <div class="pillar-weight">Step 1</div>
+        <h4>Watch the tape institutions are writing</h4>
+        <p>Options flow and dark pool block trades are the two places where large, directional capital shows up early. We monitor both continuously, not just at the open.</p>
       </div>
       <div class="pillar-item">
-        <div class="pillar-weight">Pillar 2 &middot; 20 pts</div>
-        <h4>Dark Pool</h4>
-        <p>Block trades off-exchange. Does the dark pool confirm the options flow direction, or conflict with it? Confirmation adds conviction.</p>
+        <div class="pillar-weight">Step 2</div>
+        <h4>Overlay chart and macro context</h4>
+        <p>Flow alone is noise. We grade every candidate against multi-timeframe chart structure and the macro window the trade has to play out in. If the setup fights the tape, it doesn't make the cut.</p>
       </div>
       <div class="pillar-item">
-        <div class="pillar-weight">Pillar 3 &middot; 15 pts</div>
-        <h4>Technical</h4>
-        <p>Multi-timeframe read using standard indicators across daily and weekly, plus a 4-hour overlay for near-term swings.</p>
+        <div class="pillar-weight">Step 3</div>
+        <h4>Publish only when layers agree</h4>
+        <p>Every candidate gets graded on a 0-100 conviction scale. Only the strongest multi-layer confirmations get published. Everything else gets tracked internally or discarded.</p>
       </div>
       <div class="pillar-item">
-        <div class="pillar-weight">Pillar 4 &middot; 15 pts</div>
-        <h4>Macro</h4>
-        <p>Economic calendar, central bank commentary, CME FedWatch delta. Filters trades that fight the tape. Boosts trades aligned with it.</p>
+        <div class="pillar-weight">Step 4</div>
+        <h4>Track every published signal live</h4>
+        <p>Entry captured at signal fire with real option chain pricing. Peak and current updated every 5 minutes during market hours. No retroactive edits.</p>
       </div>
       <div class="pillar-item">
-        <div class="pillar-weight">Pillar 5 &middot; 20 pts</div>
-        <h4>Institutional Thesis</h4>
-        <p>Can a coherent explanation be written for why institutions are positioning this way right now? Signals without a thesis underperform.</p>
+        <div class="pillar-weight">Step 5</div>
+        <h4>Close only at calendar expiry</h4>
+        <p>A signal closes publicly when its option contract expires, not when we feel like it. The -50% stop is a display toggle on the dashboard for readers who want the conservative view; it does not close positions.</p>
       </div>
       <div class="pillar-item">
-        <div class="pillar-weight">Pillar 6 &middot; 10 pts</div>
-        <h4>Continuation</h4>
-        <p>Did the same ticker score 75+ yesterday or the day before? Repeated flow on the same name is a thesis, not a one-day event.</p>
+        <div class="pillar-weight">Step 6</div>
+        <h4>Show every win and every loss</h4>
+        <p>Peak % is the signal-quality metric. Win = peak went above 0%. Loss = peak never crossed zero. Losses are not hidden. That is the whole point.</p>
       </div>
     </div>
 
-    <a href="METHODOLOGY.md" class="method-learn">Read the full methodology &rarr;</a>
+    <a href="methodology.html" class="method-learn">How to read the dashboard &rarr;</a>
   </div>
 </section>
 

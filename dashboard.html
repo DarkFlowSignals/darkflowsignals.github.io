@@ -988,6 +988,18 @@ body.premium .unlock-badge { display: none; }
     <div id="growth-stats" style="display:flex;gap:28px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:13px;flex-wrap:wrap;justify-content:center;align-items:baseline;"></div>
   </div>
 
+  <!-- EQUITY CURVE -->
+  <div id="equity-section" style="margin:40px 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;">
+    <h3 style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0 0 4px 0;">Equity Curve</h3>
+    <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;line-height:1.7;">
+      Cumulative return if you took every signal at a flat dollar allocation. Built from closed (expired) trades only. Peak curve is the best-case-if-you-exited-at-peak ceiling. Current curve is the public rule: settled value at calendar expiry.<br>
+      <span style="color:#00E676;display:inline-block;width:56px;">Peak:</span>sum of each signal's peak % return (ceiling).<br>
+      <span style="color:#F59E0B;display:inline-block;width:56px;">Current:</span>sum of each signal's settled % return (reality). Respects the 50% stop toggle above.
+    </p>
+    <canvas id="equity-chart" height="220" aria-label="Cumulative equity curve"></canvas>
+    <div id="equity-stats" style="display:flex;gap:28px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:13px;flex-wrap:wrap;justify-content:center;align-items:baseline;"></div>
+  </div>
+
   <!-- FOMO SECTION -->
   <div class="fomo-section" id="fomo-section" style="display:none;">
     <div class="fomo-header">
@@ -2061,6 +2073,11 @@ body.premium .unlock-badge { display: none; }
     renderFomo();
     // Chart footer must stay in sync with stats bar. Re-derive after each render.
     if (typeof renderChartFooter === 'function') renderChartFooter(null);
+    // Equity curve respects the same filters and the stop-rule toggle, so it
+    // must redraw on every render. No-op until Chart.js has loaded.
+    if (typeof Chart !== 'undefined' && typeof renderEquityChart === 'function') {
+      renderEquityChart();
+    }
   }
 
   // ---- EVENT: FILTERS (status / direction row) ----
@@ -2143,6 +2160,182 @@ body.premium .unlock-badge { display: none; }
   // each full reload. loadSignals() (every 15m) triggers render(), which
   // keeps stats/streak/feed/table in sync. No separate chart-only refresh.
   // ---- SIGNAL PERFORMANCE CHART ----
+  // Shared month helper for chart labels.
+  var CHART_MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function shortDate(dateStr) {
+    var parts = (dateStr || '').split('-');
+    if (parts.length !== 3) return dateStr || '';
+    return CHART_MONTHS[parseInt(parts[1]) - 1] + ' ' + parseInt(parts[2]);
+  }
+
+  // Equity curve chart instance - held at module scope so filter changes can
+  // destroy+recreate it without leaking canvas state.
+  var equityChartInstance = null;
+
+  function computeEquityCurve() {
+    // Only closed (publicly expired) signals contribute to the equity curve.
+    // Respects the same filter + stop-rule pills as the rest of the dashboard
+    // because it reads from getFiltered() and uses currentPct()/peakPct().
+    var closed = getFiltered().filter(function(s) {
+      return s.status === 'expired' && s.outcome_date;
+    });
+    closed.sort(function(a, b) {
+      return (a.outcome_date || '').localeCompare(b.outcome_date || '');
+    });
+
+    var labels = ['start'];
+    var curLine = [0];
+    var peakLine = [0];
+    var cumCur = 0;
+    var cumPeak = 0;
+    var tooltipData = [{ ticker: null, date: null, cur: null, peak: null }];
+
+    closed.forEach(function(s) {
+      var c = currentPct(s);
+      var p = peakPct(s);
+      if (c == null) c = 0;
+      if (p == null) p = 0;
+      cumCur += c;
+      cumPeak += p;
+      labels.push(shortDate(s.outcome_date));
+      curLine.push(Math.round(cumCur * 10) / 10);
+      peakLine.push(Math.round(cumPeak * 10) / 10);
+      tooltipData.push({ ticker: s.ticker, date: s.outcome_date, cur: c, peak: p });
+    });
+
+    return {
+      labels: labels,
+      current: curLine,
+      peak: peakLine,
+      tooltips: tooltipData,
+      closedCount: closed.length,
+      finalCur: cumCur,
+      finalPeak: cumPeak,
+    };
+  }
+
+  function renderEquityChart() {
+    var ctx = document.getElementById('equity-chart');
+    if (!ctx || typeof Chart === 'undefined') return;
+    var e = computeEquityCurve();
+
+    if (equityChartInstance) {
+      equityChartInstance.destroy();
+      equityChartInstance = null;
+    }
+
+    equityChartInstance = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: e.labels,
+        datasets: [
+          {
+            label: 'Cumulative Peak',
+            data: e.peak,
+            borderColor: '#00E676',
+            backgroundColor: 'rgba(0,230,118,0.08)',
+            fill: true,
+            tension: 0.25,
+            pointRadius: 3,
+            pointHoverRadius: 6,
+            borderWidth: 2,
+          },
+          {
+            label: 'Cumulative Current (public rule)',
+            data: e.current,
+            borderColor: '#F59E0B',
+            backgroundColor: 'rgba(245,158,11,0.04)',
+            fill: false,
+            tension: 0.25,
+            pointRadius: 3,
+            pointHoverRadius: 6,
+            borderWidth: 2,
+            borderDash: [4, 4],
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { color: '#9CA3AF', font: { family: 'monospace', size: 11 } } },
+          tooltip: {
+            callbacks: {
+              title: function(items) {
+                if (!items.length) return '';
+                var idx = items[0].dataIndex;
+                var t = e.tooltips[idx];
+                if (!t || !t.ticker) return 'Starting position';
+                return t.ticker + ' expired ' + t.date;
+              },
+              label: function(c) {
+                var prefix = c.parsed.y >= 0 ? '+' : '';
+                var line = c.dataset.label + ': ' + prefix + c.parsed.y.toFixed(1) + '%';
+                var idx = c.dataIndex;
+                var t = e.tooltips[idx];
+                if (t && t.ticker) {
+                  var ownKey = c.datasetIndex === 0 ? 'peak' : 'cur';
+                  var ownVal = t[ownKey];
+                  if (ownVal != null) {
+                    var sign = ownVal >= 0 ? '+' : '';
+                    line += '  (this trade ' + sign + ownVal.toFixed(1) + '%)';
+                  }
+                }
+                return line;
+              },
+            },
+          },
+        },
+        scales: {
+          x: { ticks: { color: '#6B7280', font: { family: 'monospace', size: 10 }, maxRotation: 0, autoSkipPadding: 20 }, grid: { color: 'rgba(255,255,255,0.05)' } },
+          y: {
+            ticks: {
+              color: '#6B7280',
+              font: { family: 'monospace', size: 10 },
+              callback: function(v) { return (v >= 0 ? '+' : '') + v + '%'; },
+            },
+            grid: { color: 'rgba(255,255,255,0.05)' },
+          },
+        },
+      },
+    });
+
+    renderEquityFooter(e);
+  }
+
+  function renderEquityFooter(e) {
+    var box = document.getElementById('equity-stats');
+    if (!box) return;
+    box.textContent = '';
+    function cell(label, value, colorClass) {
+      var wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex;flex-direction:column;align-items:center;';
+      var lbl = document.createElement('div');
+      lbl.style.cssText = 'font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px;';
+      lbl.textContent = label;
+      var val = document.createElement('div');
+      val.style.cssText = 'font-size:16px;font-weight:700;' + (
+        colorClass === 'pos' ? 'color:var(--green);' :
+        colorClass === 'neg' ? 'color:var(--red);' :
+        'color:var(--text-primary);'
+      );
+      val.textContent = value;
+      wrap.appendChild(lbl);
+      wrap.appendChild(val);
+      return wrap;
+    }
+    function fmtPctStr(n) {
+      if (n == null) return '--';
+      var sign = n >= 0 ? '+' : '';
+      return sign + Math.round(n * 10) / 10 + '%';
+    }
+    box.appendChild(cell('Closed Trades', String(e.closedCount), 'neutral'));
+    box.appendChild(cell('Cumulative Peak', fmtPctStr(e.finalPeak), e.finalPeak >= 0 ? 'pos' : 'neg'));
+    box.appendChild(cell('Cumulative Current', fmtPctStr(e.finalCur), e.finalCur >= 0 ? 'pos' : 'neg'));
+    if (e.closedCount > 0) {
+      box.appendChild(cell('Avg Peak / Trade', fmtPctStr(e.finalPeak / e.closedCount), e.finalPeak >= 0 ? 'pos' : 'neg'));
+    }
+  }
+
   function loadGrowthChart() {
     var script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js';
@@ -2154,13 +2347,6 @@ body.premium .unlock-badge { display: none; }
           var ctx = document.getElementById('growth-chart');
           if (!ctx) return;
 
-          var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-          function shortDate(dateStr) {
-            // dateStr like 2026-04-09 -> "Apr 9"
-            var parts = (dateStr || '').split('-');
-            if (parts.length !== 3) return dateStr;
-            return MONTHS[parseInt(parts[1]) - 1] + ' ' + parseInt(parts[2]);
-          }
           var labels = d.data.map(function(p) { return shortDate(p.date); });
           var avgReturn = d.data.map(function(p) { return p.avg_return; });
           var avgPeak = d.data.map(function(p) { return p.avg_peak; });
@@ -2191,6 +2377,14 @@ body.premium .unlock-badge { display: none; }
           // numbers ALWAYS agree. Fall back to growth_chart.json's top-level
           // totals (same public set) if signals.json hasn't loaded yet.
           renderChartFooter(d);
+
+          // Equity curve uses the live signals array (not growth_chart.json's
+          // daily aggregates) so it can redraw on filter change. Initial draw
+          // happens after signals.json has loaded; the filter event handlers
+          // below also call renderEquityChart().
+          if (typeof signals !== 'undefined' && signals && signals.length) {
+            renderEquityChart();
+          }
         })
         .catch(function(e) { console.log('Growth chart error:', e); });
     };

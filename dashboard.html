@@ -993,15 +993,25 @@ body.premium .unlock-badge { display: none; }
 
   <!-- ACCOUNT SIMULATION -->
   <div id="equity-section" style="margin:40px 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;">
-    <h3 style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0 0 4px 0;">Account Simulation · 1 contract per signal</h3>
-    <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 10px 0;line-height:1.7;">
-      Realistic simulation: buy exactly one contract of each published signal at the logged entry premium. One option contract controls 100 shares, so the dollar cost per signal = entry premium x 100. No compounding. No scaling up winners. Scale by your own sizing: 2 contracts = 2x the numbers, 5 contracts = 5x.
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:4px;">
+      <h3 id="equity-heading" style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0;">Account Simulation · 1 contract per signal</h3>
+      <div class="filter-group" style="margin:0;" role="tablist" aria-label="Equity simulation mode">
+        <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.2px;margin-right:8px;">Sim</span>
+        <button class="filter-pill active" data-sim="contract" role="tab" aria-selected="true">1 Contract</button>
+        <button class="filter-pill" data-sim="dollar" role="tab" aria-selected="false">$100 / Trade</button>
+      </div>
+    </div>
+    <p id="equity-copy-contract" style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:8px 0 10px 0;line-height:1.7;">
+      Realistic simulation: buy exactly one contract of each published signal at the logged entry premium. One option contract controls 100 shares, so the dollar cost per signal = entry premium x 100. No compounding. Scale by your own sizing: 2 contracts = 2x the numbers, 5 contracts = 5x.
+    </p>
+    <p id="equity-copy-dollar" style="display:none;font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:8px 0 10px 0;line-height:1.7;">
+      Flat-dollar simulation: allocate exactly $100 to every signal at entry, regardless of contract price. Cleanest apples-to-apples read on signal quality. No compounding, no winner scaling. Scale by your own sizing: $1,000 per signal, multiply the numbers by 10.
     </p>
     <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;line-height:1.7;padding:10px 12px;background:var(--bg-surface);border-left:2px solid var(--amber);border-radius:0 4px 4px 0;">
-      <strong style="color:var(--text-secondary);">Reading the lines:</strong> The curve only moves when a closed trade is added. Open positions don't shift it. A $0.43 call that peaked at +1,360% added +$585 to the cumulative P&L (1 contract, $43 in, $628 out at peak). A $6.50 call that peaked at +818% added +$5,317. Same percentage return, very different dollar outcomes because the contract costs differ. Peak shows best-case exits at each high. Current shows the public rule at calendar expiry.
+      <strong style="color:var(--text-secondary);">Reading the lines:</strong> The curve only moves when a closed trade is added. Open positions don't shift it. Peak shows best-case exits at each high. Current shows the public rule at calendar expiry.
     </p>
     <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;line-height:1.7;">
-      <span style="color:#00E676;display:inline-block;width:56px;">Peak $:</span>cumulative $ P&L if you exited each contract at its highest point.<br>
+      <span style="color:#00E676;display:inline-block;width:56px;">Peak $:</span>cumulative $ P&L if you exited each trade at its highest point.<br>
       <span style="color:#F59E0B;display:inline-block;width:56px;">Current $:</span>cumulative $ P&L at calendar expiry (public rule). Respects the 50% stop toggle above.
     </p>
     <canvas id="equity-chart" height="220" aria-label="Account simulation dollar P&L"></canvas>
@@ -2133,6 +2143,38 @@ body.premium .unlock-badge { display: none; }
     }
   });
 
+  // ---- EVENT: EQUITY SIM MODE TOGGLE (1 contract vs $100 / trade) ----
+  (function() {
+    var grp = document.querySelector('[data-sim]') && document.querySelector('[data-sim]').parentElement;
+    if (!grp) return;
+    grp.addEventListener('click', function(e) {
+      var pill = e.target.closest('.filter-pill[data-sim]');
+      if (!pill) return;
+      grp.querySelectorAll('.filter-pill[data-sim]').forEach(function(p) {
+        p.classList.remove('active');
+        p.setAttribute('aria-selected', 'false');
+      });
+      pill.classList.add('active');
+      pill.setAttribute('aria-selected', 'true');
+      EQUITY_SIM_MODE = pill.dataset.sim;
+
+      // Swap heading + copy to match the active mode
+      var heading = document.getElementById('equity-heading');
+      var cContract = document.getElementById('equity-copy-contract');
+      var cDollar = document.getElementById('equity-copy-dollar');
+      if (EQUITY_SIM_MODE === 'contract') {
+        if (heading) heading.textContent = 'Account Simulation \u00b7 1 contract per signal';
+        if (cContract) cContract.style.display = '';
+        if (cDollar) cDollar.style.display = 'none';
+      } else {
+        if (heading) heading.textContent = 'Account Simulation \u00b7 $100 per trade';
+        if (cContract) cContract.style.display = 'none';
+        if (cDollar) cDollar.style.display = '';
+      }
+      if (typeof renderEquityChart === 'function') renderEquityChart();
+    });
+  })();
+
   // ---- EVENT: VIEW TOGGLE ----
   document.querySelector('.view-toggle').addEventListener('click', function(e) {
     var btn = e.target.closest('.view-btn');
@@ -2180,13 +2222,18 @@ body.premium .unlock-badge { display: none; }
   // destroy+recreate it without leaking canvas state.
   var equityChartInstance = null;
 
+  // Simulation mode: 'contract' = 1 contract per signal (entry * 100 shares),
+  // 'dollar' = $100 flat per signal. Toggled by the Sim filter-pill group.
+  var EQUITY_SIM_MODE = 'contract';
+  var FLAT_DOLLAR_PER_TRADE = 100;
+
   function computeEquityCurve() {
-    // 1-contract-per-signal simulation. Only closed (publicly expired) signals
-    // contribute. Respects the same filter + stop-rule pills as the rest of
-    // the dashboard. Uses server-precomputed contract_cost / contract_peak_pnl /
-    // contract_current_pnl from signals.json (v5.8, 2026-04-20). When stop-rule
-    // = '50% stop' is on, we cap current loss at -50% of cost (matches peakPct /
-    // currentPct cap behavior).
+    // Only closed (publicly expired) signals contribute. Respects the same
+    // filter + stop-rule pills as the rest of the dashboard. Two sim modes:
+    //   contract: uses server-precomputed contract_cost / contract_peak_pnl /
+    //             contract_current_pnl from signals.json.
+    //   dollar:   $100 flat per signal, $ P&L = pct * 1.
+    // 50% stop toggle caps current (not peak) at -50% of per-trade cost.
     var closed = getFiltered().filter(function(s) {
       return s.status === 'expired' && s.outcome_date;
     });
@@ -2194,6 +2241,7 @@ body.premium .unlock-badge { display: none; }
       return (a.outcome_date || '').localeCompare(b.outcome_date || '');
     });
 
+    var mode = EQUITY_SIM_MODE;
     var labels = ['start'];
     var curLine = [0];
     var peakLine = [0];
@@ -2201,43 +2249,43 @@ body.premium .unlock-badge { display: none; }
     var cumPeakDollars = 0;
     var cumCost = 0;
     var tooltipData = [{ ticker: null, date: null, cost: 0, curPct: null, peakPct: null, curDollars: 0, peakDollars: 0 }];
-    var missingContractCount = 0;
+    var missingCount = 0;
 
     closed.forEach(function(s) {
-      var cost = (typeof s.contract_cost === 'number') ? s.contract_cost : null;
-      var pPnl = (typeof s.contract_peak_pnl === 'number') ? s.contract_peak_pnl : null;
-      var cPnl = (typeof s.contract_current_pnl === 'number') ? s.contract_current_pnl : null;
-      if (cost == null) {
-        // Signal has no verified entry premium; can't simulate a contract buy
-        // for this one. Skip so the curve stays honest.
-        missingContractCount += 1;
-        return;
-      }
-
-      // Respect the 50% stop toggle: cap current dollar loss at -50% of cost.
-      // Peak is never capped (signal quality not capped by stop rule).
       var cPct = currentPct(s);
-      if (cPnl != null && cPct != null) {
-        // If stop-rule toggle capped cPct to -50%, cPnl may still be the raw
-        // value from the server. Derive the capped dollars from cPct.
-        cPnl = Math.round((cPct / 100) * cost);
-      }
+      var pPct = peakPct(s);
+      if (cPct == null) cPct = 0;
+      if (pPct == null) pPct = 0;
 
-      if (cPnl == null) cPnl = 0;
-      if (pPnl == null) pPnl = 0;
+      var cost, cPnl, pPnl;
+      if (mode === 'contract') {
+        var contractCost = (typeof s.contract_cost === 'number') ? s.contract_cost : null;
+        if (contractCost == null) {
+          // No verified entry premium -> skip so the contract curve stays honest.
+          missingCount += 1;
+          return;
+        }
+        cost = contractCost;
+        cPnl = Math.round((cPct / 100) * cost);
+        pPnl = Math.round((pPct / 100) * cost);
+      } else {
+        cost = FLAT_DOLLAR_PER_TRADE;
+        cPnl = (cPct / 100) * cost;
+        pPnl = (pPct / 100) * cost;
+      }
 
       cumCost += cost;
       cumCurDollars += cPnl;
       cumPeakDollars += pPnl;
       labels.push(shortDate(s.outcome_date));
-      curLine.push(Math.round(cumCurDollars));
-      peakLine.push(Math.round(cumPeakDollars));
+      curLine.push(Math.round(cumCurDollars * 100) / 100);
+      peakLine.push(Math.round(cumPeakDollars * 100) / 100);
       tooltipData.push({
         ticker: s.ticker,
         date: s.outcome_date,
         cost: cost,
         curPct: cPct,
-        peakPct: peakPct(s),
+        peakPct: pPct,
         curDollars: cPnl,
         peakDollars: pPnl,
       });
@@ -2248,11 +2296,13 @@ body.premium .unlock-badge { display: none; }
       current: curLine,
       peak: peakLine,
       tooltips: tooltipData,
-      closedCount: closed.length - missingContractCount,
-      missingContractCount: missingContractCount,
+      mode: mode,
+      closedCount: closed.length - missingCount,
+      missingCount: missingCount,
       finalCurDollars: cumCurDollars,
       finalPeakDollars: cumPeakDollars,
       totalCost: cumCost,
+      perTrade: mode === 'dollar' ? FLAT_DOLLAR_PER_TRADE : null,
     };
   }
 
@@ -2328,13 +2378,18 @@ body.premium .unlock-badge { display: none; }
                   if (dVal != null && pVal != null) {
                     var dSign = dVal >= 0 ? '+$' : '-$';
                     var pSign = pVal >= 0 ? '+' : '';
-                    line += '  (1 ctr cost $' + (t.cost || 0).toFixed(0) + ' -> ' + dSign + Math.abs(dVal).toFixed(0) + ' / ' + pSign + pVal.toFixed(0) + '%)';
+                    var prefix = e.mode === 'contract'
+                      ? '1 ctr cost $' + (t.cost || 0).toFixed(0)
+                      : '$' + (t.cost || 0).toFixed(0) + ' allocated';
+                    line += '  (' + prefix + ' -> ' + dSign + Math.abs(dVal).toFixed(0) + ' / ' + pSign + pVal.toFixed(0) + '%)';
                   }
                 }
                 return line;
               },
               footer: function() {
-                return 'Simulation: 1 option contract per signal (100 shares each).';
+                return e.mode === 'contract'
+                  ? 'Simulation: 1 option contract per signal (100 shares each).'
+                  : 'Simulation: $' + (e.perTrade || 100) + ' allocated per signal, no compounding.';
               },
             },
           },
@@ -2397,6 +2452,9 @@ body.premium .unlock-badge { display: none; }
     if (e.totalCost > 0) {
       var roi = (e.finalCurDollars / e.totalCost) * 100;
       box.appendChild(cell('ROI (current)', (roi >= 0 ? '+' : '') + roi.toFixed(0) + '%', roi >= 0 ? 'pos' : 'neg'));
+    }
+    if (e.mode === 'contract' && e.missingCount > 0) {
+      box.appendChild(cell('Excluded (no entry)', String(e.missingCount), 'neutral'));
     }
   }
 

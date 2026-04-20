@@ -993,15 +993,15 @@ body.premium .unlock-badge { display: none; }
 
   <!-- ACCOUNT SIMULATION -->
   <div id="equity-section" style="margin:40px 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;">
-    <h3 style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0 0 4px 0;">Account Simulation · $100 per trade</h3>
+    <h3 style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0 0 4px 0;">Account Simulation · 1 contract per signal</h3>
     <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 10px 0;line-height:1.7;">
-      Simple simulation: allocate exactly $100 to every signal at entry. No compounding. No reinvesting wins into the next trade. Just flat-dollar sizing so you can see what the signals produced in literal dollar terms. Scale by your own sizing: if you put $1,000 per signal, multiply the numbers by 10. $500 per signal, multiply by 5.
+      Realistic simulation: buy exactly one contract of each published signal at the logged entry premium. One option contract controls 100 shares, so the dollar cost per signal = entry premium x 100. No compounding. No scaling up winners. Scale by your own sizing: 2 contracts = 2x the numbers, 5 contracts = 5x.
     </p>
     <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;line-height:1.7;padding:10px 12px;background:var(--bg-surface);border-left:2px solid var(--amber);border-radius:0 4px 4px 0;">
-      <strong style="color:var(--text-secondary);">Reading the lines:</strong> The curve only moves when a closed trade is added. Open positions don't shift it. A signal that went +300% added +$300 to the cumulative P&L (on the $100 base). A signal that hit -50% took away $50. Peak shows the best-case ceiling if you exited every signal at its high. Current shows the public rule at calendar expiry.
+      <strong style="color:var(--text-secondary);">Reading the lines:</strong> The curve only moves when a closed trade is added. Open positions don't shift it. A $0.43 call that peaked at +1,360% added +$585 to the cumulative P&L (1 contract, $43 in, $628 out at peak). A $6.50 call that peaked at +818% added +$5,317. Same percentage return, very different dollar outcomes because the contract costs differ. Peak shows best-case exits at each high. Current shows the public rule at calendar expiry.
     </p>
     <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;line-height:1.7;">
-      <span style="color:#00E676;display:inline-block;width:56px;">Peak $:</span>cumulative $ P&L if you exited each signal at its highest point ($100 base).<br>
+      <span style="color:#00E676;display:inline-block;width:56px;">Peak $:</span>cumulative $ P&L if you exited each contract at its highest point.<br>
       <span style="color:#F59E0B;display:inline-block;width:56px;">Current $:</span>cumulative $ P&L at calendar expiry (public rule). Respects the 50% stop toggle above.
     </p>
     <canvas id="equity-chart" height="220" aria-label="Account simulation dollar P&L"></canvas>
@@ -2180,15 +2180,13 @@ body.premium .unlock-badge { display: none; }
   // destroy+recreate it without leaking canvas state.
   var equityChartInstance = null;
 
-  // Base dollar allocation per signal for the account simulation. Round
-  // number so viewers can scale easily to their own sizing.
-  var ACCOUNT_SIM_PER_TRADE = 100;
-
   function computeEquityCurve() {
-    // Only closed (publicly expired) signals contribute. Respects the same
-    // filter + stop-rule pills as the rest of the dashboard via getFiltered()
-    // + currentPct() + peakPct(). Dollar values assume $100 allocated per
-    // signal with no compounding.
+    // 1-contract-per-signal simulation. Only closed (publicly expired) signals
+    // contribute. Respects the same filter + stop-rule pills as the rest of
+    // the dashboard. Uses server-precomputed contract_cost / contract_peak_pnl /
+    // contract_current_pnl from signals.json (v5.8, 2026-04-20). When stop-rule
+    // = '50% stop' is on, we cap current loss at -50% of cost (matches peakPct /
+    // currentPct cap behavior).
     var closed = getFiltered().filter(function(s) {
       return s.status === 'expired' && s.outcome_date;
     });
@@ -2201,30 +2199,47 @@ body.premium .unlock-badge { display: none; }
     var peakLine = [0];
     var cumCurDollars = 0;
     var cumPeakDollars = 0;
-    var tooltipData = [{ ticker: null, date: null, curPct: null, peakPct: null, curDollars: 0, peakDollars: 0 }];
+    var cumCost = 0;
+    var tooltipData = [{ ticker: null, date: null, cost: 0, curPct: null, peakPct: null, curDollars: 0, peakDollars: 0 }];
+    var missingContractCount = 0;
 
     closed.forEach(function(s) {
+      var cost = (typeof s.contract_cost === 'number') ? s.contract_cost : null;
+      var pPnl = (typeof s.contract_peak_pnl === 'number') ? s.contract_peak_pnl : null;
+      var cPnl = (typeof s.contract_current_pnl === 'number') ? s.contract_current_pnl : null;
+      if (cost == null) {
+        // Signal has no verified entry premium; can't simulate a contract buy
+        // for this one. Skip so the curve stays honest.
+        missingContractCount += 1;
+        return;
+      }
+
+      // Respect the 50% stop toggle: cap current dollar loss at -50% of cost.
+      // Peak is never capped (signal quality not capped by stop rule).
       var cPct = currentPct(s);
-      var pPct = peakPct(s);
-      if (cPct == null) cPct = 0;
-      if (pPct == null) pPct = 0;
-      // Convert % return to $ P&L on a $100 base: $100 * (pct / 100) = pct
-      // Yes, with a $100 base the dollar P&L number equals the percentage.
-      // Keeping the calculation explicit for clarity if the base changes.
-      var cDol = (cPct / 100) * ACCOUNT_SIM_PER_TRADE;
-      var pDol = (pPct / 100) * ACCOUNT_SIM_PER_TRADE;
-      cumCurDollars += cDol;
-      cumPeakDollars += pDol;
+      if (cPnl != null && cPct != null) {
+        // If stop-rule toggle capped cPct to -50%, cPnl may still be the raw
+        // value from the server. Derive the capped dollars from cPct.
+        cPnl = Math.round((cPct / 100) * cost);
+      }
+
+      if (cPnl == null) cPnl = 0;
+      if (pPnl == null) pPnl = 0;
+
+      cumCost += cost;
+      cumCurDollars += cPnl;
+      cumPeakDollars += pPnl;
       labels.push(shortDate(s.outcome_date));
-      curLine.push(Math.round(cumCurDollars * 100) / 100);
-      peakLine.push(Math.round(cumPeakDollars * 100) / 100);
+      curLine.push(Math.round(cumCurDollars));
+      peakLine.push(Math.round(cumPeakDollars));
       tooltipData.push({
         ticker: s.ticker,
         date: s.outcome_date,
+        cost: cost,
         curPct: cPct,
-        peakPct: pPct,
-        curDollars: cDol,
-        peakDollars: pDol,
+        peakPct: peakPct(s),
+        curDollars: cPnl,
+        peakDollars: pPnl,
       });
     });
 
@@ -2233,10 +2248,11 @@ body.premium .unlock-badge { display: none; }
       current: curLine,
       peak: peakLine,
       tooltips: tooltipData,
-      closedCount: closed.length,
+      closedCount: closed.length - missingContractCount,
+      missingContractCount: missingContractCount,
       finalCurDollars: cumCurDollars,
       finalPeakDollars: cumPeakDollars,
-      perTrade: ACCOUNT_SIM_PER_TRADE,
+      totalCost: cumCost,
     };
   }
 
@@ -2312,13 +2328,13 @@ body.premium .unlock-badge { display: none; }
                   if (dVal != null && pVal != null) {
                     var dSign = dVal >= 0 ? '+$' : '-$';
                     var pSign = pVal >= 0 ? '+' : '';
-                    line += '  (this trade ' + dSign + Math.abs(dVal).toFixed(0) + ' / ' + pSign + pVal.toFixed(0) + '%)';
+                    line += '  (1 ctr cost $' + (t.cost || 0).toFixed(0) + ' -> ' + dSign + Math.abs(dVal).toFixed(0) + ' / ' + pSign + pVal.toFixed(0) + '%)';
                   }
                 }
                 return line;
               },
               footer: function() {
-                return 'Assumes $' + e.perTrade + ' allocated per signal.';
+                return 'Simulation: 1 option contract per signal (100 shares each).';
               },
             },
           },
@@ -2368,12 +2384,19 @@ body.premium .unlock-badge { display: none; }
       if (abs >= 1000) return sign + (abs / 1000).toFixed(2) + 'k';
       return sign + Math.round(abs);
     }
+    function fmtCost(n) {
+      if (n == null) return '$0';
+      var abs = Math.abs(n);
+      if (abs >= 1000) return '$' + (abs / 1000).toFixed(2) + 'k';
+      return '$' + Math.round(abs);
+    }
     box.appendChild(cell('Closed Trades', String(e.closedCount), 'neutral'));
-    box.appendChild(cell('Capital Deployed', '$' + (e.closedCount * e.perTrade).toLocaleString(), 'neutral'));
+    box.appendChild(cell('Capital Deployed', fmtCost(e.totalCost), 'neutral'));
     box.appendChild(cell('Peak $ P&L', fmtDol(e.finalPeakDollars), e.finalPeakDollars >= 0 ? 'pos' : 'neg'));
     box.appendChild(cell('Current $ P&L', fmtDol(e.finalCurDollars), e.finalCurDollars >= 0 ? 'pos' : 'neg'));
-    if (e.closedCount > 0) {
-      box.appendChild(cell('Avg $ / Trade (peak)', fmtDol(e.finalPeakDollars / e.closedCount), e.finalPeakDollars >= 0 ? 'pos' : 'neg'));
+    if (e.totalCost > 0) {
+      var roi = (e.finalCurDollars / e.totalCost) * 100;
+      box.appendChild(cell('ROI (current)', (roi >= 0 ? '+' : '') + roi.toFixed(0) + '%', roi >= 0 ? 'pos' : 'neg'));
     }
   }
 

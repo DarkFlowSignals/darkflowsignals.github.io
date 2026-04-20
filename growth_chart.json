@@ -3,7 +3,7 @@
     {
       "date": "2026-04-09",
       "signals": 4,
-      "avg_return": 82.1,
+      "avg_return": 80.7,
       "avg_peak": 173.5,
       "win_rate": 75.0
     }
@@ -12,7 +12,7 @@
     {
       "ticker": "CRWV",
       "date": "2026-04-09",
-      "pnl": 218.2,
+      "pnl": 212.5,
       "peak": 319.0,
       "expired": false
     },
@@ -39,8 +39,8 @@
     }
   ],
   "total": 4,
-  "avg_return": 82.1,
+  "avg_return": 80.7,
   "avg_peak": 173.5,
   "win_rate": 75.0,
-  "generated": "2026-04-20T07:53:15.034474"
+  "generated": "2026-04-20T07:57:34.939222"
 }

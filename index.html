@@ -635,9 +635,61 @@ nav {
 /* ============================================================
    RESPONSIVE
    ============================================================ */
+
+/* Hamburger button, hidden on desktop */
+.nav-hamburger {
+  display: none;
+  width: 40px; height: 40px;
+  background: transparent; border: 1px solid var(--border-accent);
+  border-radius: 4px; cursor: pointer; padding: 0;
+  align-items: center; justify-content: center;
+  color: var(--text-primary); font-size: 18px;
+}
+.nav-hamburger:hover { border-color: var(--text-muted); background: var(--bg-surface); }
+.nav-hamburger .bar {
+  display: block; width: 18px; height: 2px;
+  background: currentColor; border-radius: 1px;
+  position: relative;
+}
+.nav-hamburger .bar::before,
+.nav-hamburger .bar::after {
+  content: ''; position: absolute; left: 0; width: 18px; height: 2px;
+  background: currentColor; border-radius: 1px;
+}
+.nav-hamburger .bar::before { top: -6px; }
+.nav-hamburger .bar::after { top: 6px; }
+
 @media (max-width: 768px) {
-  .nav-links { display: none; }
-  .hero h1 { letter-spacing: -1px; }
+  /* Nav: hamburger replaces the inline links */
+  .nav-links {
+    display: none;
+    position: absolute; top: 56px; left: 0; right: 0;
+    flex-direction: column; gap: 0;
+    background: var(--bg-card); border-bottom: 1px solid var(--border);
+    padding: 8px 16px 16px;
+  }
+  .nav-links.is-open { display: flex; }
+  .nav-links a {
+    padding: 14px 8px;
+    border-bottom: 1px solid var(--border);
+    margin: 0 !important;
+    font-size: 14px !important;
+  }
+  .nav-links a:last-child { border-bottom: none; }
+  .nav-links .nav-cta {
+    margin-top: 10px !important;
+    text-align: center;
+  }
+  .nav-hamburger { display: inline-flex; }
+  nav { position: relative; }
+
+  /* Layout stacking */
+  .hero h1 { font-size: clamp(36px, 10vw, 54px); letter-spacing: -1.5px; line-height: 1.05; }
+  .hero-sub { font-size: 15px; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn-primary, .hero-actions .btn-secondary {
+    width: 100%; text-align: center; justify-content: center;
+  }
   .how-grid { grid-template-columns: 1fr; }
   .record-stats { grid-template-columns: repeat(2, 1fr); }
   .pricing-grid { grid-template-columns: 1fr; }
@@ -646,6 +698,28 @@ nav {
   .footer-inner { flex-direction: column; }
   .footer-right { text-align: left; }
   .footer-links { justify-content: flex-start; }
+
+  /* Case teasers: tighter mobile */
+  .case-teaser-grid { grid-template-columns: 1fr; gap: 12px; }
+
+  /* Section title scaling already uses clamp; tighten margin */
+  .section-desc { font-size: 14px; }
+
+  /* Methodology-like grids stack */
+  .pillar-grid { grid-template-columns: 1fr; }
+}
+
+/* Phone sizes (iPhone SE, Pixel) */
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .nav-inner { padding: 0 16px; }
+  .hero h1 { font-size: 38px; }
+  .hero-sub { font-size: 14px; line-height: 1.6; }
+  .price-card { padding: 28px 22px; }
+  .price-amount { font-size: 34px; }
+  .how-card { padding: 28px 22px; }
+  .how-card h3 { font-size: 16px; }
+  .section-title { font-size: 24px !important; letter-spacing: -0.5px; }
 }
 </style>
 </head>
@@ -655,7 +729,10 @@ nav {
 <nav>
   <div class="nav-inner">
     <a href="/" class="logo">DARK<span class="logo-flow">FLOW</span></a>
-    <div class="nav-links">
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" onclick="(function(b){var l=document.getElementById('nav-links');var open=l.classList.toggle('is-open');b.setAttribute('aria-expanded',open);})(this);">
+      <span class="bar" aria-hidden="true"></span>
+    </button>
+    <div class="nav-links" id="nav-links">
       <a href="#how">How It Works</a>
       <a href="#record">Track Record</a>
       <a href="#pricing">Pricing</a>

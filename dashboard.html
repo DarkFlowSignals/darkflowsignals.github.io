@@ -991,20 +991,20 @@ body.premium .unlock-badge { display: none; }
     <div id="growth-stats" style="display:flex;gap:28px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:13px;flex-wrap:wrap;justify-content:center;align-items:baseline;"></div>
   </div>
 
-  <!-- EQUITY CURVE -->
+  <!-- ACCOUNT SIMULATION -->
   <div id="equity-section" style="margin:40px 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;">
-    <h3 style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0 0 4px 0;">Equity Curve</h3>
+    <h3 style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0 0 4px 0;">Account Simulation · $100 per trade</h3>
     <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 10px 0;line-height:1.7;">
-      Your cumulative % return if you took every signal with the same dollar amount each time. Not compounded. The curve only grows when a new signal expires, so it moves stepwise as closed trades are added. Open trades do not move the line.
+      Simple simulation: allocate exactly $100 to every signal at entry. No compounding. No reinvesting wins into the next trade. Just flat-dollar sizing so you can see what the signals produced in literal dollar terms. Scale by your own sizing: if you put $1,000 per signal, multiply the numbers by 10. $500 per signal, multiply by 5.
     </p>
     <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;line-height:1.7;padding:10px 12px;background:var(--bg-surface);border-left:2px solid var(--amber);border-radius:0 4px 4px 0;">
-      <strong style="color:var(--text-secondary);">How to read it:</strong> say you put $100 on each of 10 closed signals. The two lines show the SUM of percentage returns across those 10 trades. Peak is the best-case ceiling; Current is the public rule at calendar expiry. This is not compound growth, it is the trade-by-trade result added together.
+      <strong style="color:var(--text-secondary);">Reading the lines:</strong> The curve only moves when a closed trade is added. Open positions don't shift it. A signal that went +300% added +$300 to the cumulative P&L (on the $100 base). A signal that hit -50% took away $50. Peak shows the best-case ceiling if you exited every signal at its high. Current shows the public rule at calendar expiry.
     </p>
     <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;line-height:1.7;">
-      <span style="color:#00E676;display:inline-block;width:56px;">Peak:</span>sum of each closed signal's peak % (the ceiling if you exited at the best moment).<br>
-      <span style="color:#F59E0B;display:inline-block;width:56px;">Current:</span>sum of each closed signal's settled % at expiry (the public rule). Respects the 50% stop toggle above.
+      <span style="color:#00E676;display:inline-block;width:56px;">Peak $:</span>cumulative $ P&L if you exited each signal at its highest point ($100 base).<br>
+      <span style="color:#F59E0B;display:inline-block;width:56px;">Current $:</span>cumulative $ P&L at calendar expiry (public rule). Respects the 50% stop toggle above.
     </p>
-    <canvas id="equity-chart" height="220" aria-label="Cumulative equity curve"></canvas>
+    <canvas id="equity-chart" height="220" aria-label="Account simulation dollar P&L"></canvas>
     <div id="equity-stats" style="display:flex;gap:28px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:13px;flex-wrap:wrap;justify-content:center;align-items:baseline;"></div>
   </div>
 
@@ -2180,10 +2180,15 @@ body.premium .unlock-badge { display: none; }
   // destroy+recreate it without leaking canvas state.
   var equityChartInstance = null;
 
+  // Base dollar allocation per signal for the account simulation. Round
+  // number so viewers can scale easily to their own sizing.
+  var ACCOUNT_SIM_PER_TRADE = 100;
+
   function computeEquityCurve() {
-    // Only closed (publicly expired) signals contribute to the equity curve.
-    // Respects the same filter + stop-rule pills as the rest of the dashboard
-    // because it reads from getFiltered() and uses currentPct()/peakPct().
+    // Only closed (publicly expired) signals contribute. Respects the same
+    // filter + stop-rule pills as the rest of the dashboard via getFiltered()
+    // + currentPct() + peakPct(). Dollar values assume $100 allocated per
+    // signal with no compounding.
     var closed = getFiltered().filter(function(s) {
       return s.status === 'expired' && s.outcome_date;
     });
@@ -2194,21 +2199,33 @@ body.premium .unlock-badge { display: none; }
     var labels = ['start'];
     var curLine = [0];
     var peakLine = [0];
-    var cumCur = 0;
-    var cumPeak = 0;
-    var tooltipData = [{ ticker: null, date: null, cur: null, peak: null }];
+    var cumCurDollars = 0;
+    var cumPeakDollars = 0;
+    var tooltipData = [{ ticker: null, date: null, curPct: null, peakPct: null, curDollars: 0, peakDollars: 0 }];
 
     closed.forEach(function(s) {
-      var c = currentPct(s);
-      var p = peakPct(s);
-      if (c == null) c = 0;
-      if (p == null) p = 0;
-      cumCur += c;
-      cumPeak += p;
+      var cPct = currentPct(s);
+      var pPct = peakPct(s);
+      if (cPct == null) cPct = 0;
+      if (pPct == null) pPct = 0;
+      // Convert % return to $ P&L on a $100 base: $100 * (pct / 100) = pct
+      // Yes, with a $100 base the dollar P&L number equals the percentage.
+      // Keeping the calculation explicit for clarity if the base changes.
+      var cDol = (cPct / 100) * ACCOUNT_SIM_PER_TRADE;
+      var pDol = (pPct / 100) * ACCOUNT_SIM_PER_TRADE;
+      cumCurDollars += cDol;
+      cumPeakDollars += pDol;
       labels.push(shortDate(s.outcome_date));
-      curLine.push(Math.round(cumCur * 10) / 10);
-      peakLine.push(Math.round(cumPeak * 10) / 10);
-      tooltipData.push({ ticker: s.ticker, date: s.outcome_date, cur: c, peak: p });
+      curLine.push(Math.round(cumCurDollars * 100) / 100);
+      peakLine.push(Math.round(cumPeakDollars * 100) / 100);
+      tooltipData.push({
+        ticker: s.ticker,
+        date: s.outcome_date,
+        curPct: cPct,
+        peakPct: pPct,
+        curDollars: cDol,
+        peakDollars: pDol,
+      });
     });
 
     return {
@@ -2217,8 +2234,9 @@ body.premium .unlock-badge { display: none; }
       peak: peakLine,
       tooltips: tooltipData,
       closedCount: closed.length,
-      finalCur: cumCur,
-      finalPeak: cumPeak,
+      finalCurDollars: cumCurDollars,
+      finalPeakDollars: cumPeakDollars,
+      perTrade: ACCOUNT_SIM_PER_TRADE,
     };
   }
 
@@ -2232,13 +2250,20 @@ body.premium .unlock-badge { display: none; }
       equityChartInstance = null;
     }
 
+    function fmtDollarsShort(v) {
+      var sign = v >= 0 ? '+$' : '-$';
+      var abs = Math.abs(v);
+      if (abs >= 1000) return sign + (abs / 1000).toFixed(1) + 'k';
+      return sign + Math.round(abs);
+    }
+
     equityChartInstance = new Chart(ctx, {
       type: 'line',
       data: {
         labels: e.labels,
         datasets: [
           {
-            label: 'Cumulative Peak',
+            label: 'Peak $ P&L',
             data: e.peak,
             borderColor: '#00E676',
             backgroundColor: 'rgba(0,230,118,0.08)',
@@ -2249,7 +2274,7 @@ body.premium .unlock-badge { display: none; }
             borderWidth: 2,
           },
           {
-            label: 'Cumulative Current (public rule)',
+            label: 'Current $ P&L (public rule)',
             data: e.current,
             borderColor: '#F59E0B',
             backgroundColor: 'rgba(245,158,11,0.04)',
@@ -2272,23 +2297,28 @@ body.premium .unlock-badge { display: none; }
                 if (!items.length) return '';
                 var idx = items[0].dataIndex;
                 var t = e.tooltips[idx];
-                if (!t || !t.ticker) return 'Starting position';
+                if (!t || !t.ticker) return 'Starting position ($0)';
                 return t.ticker + ' expired ' + t.date;
               },
               label: function(c) {
-                var prefix = c.parsed.y >= 0 ? '+' : '';
-                var line = c.dataset.label + ': ' + prefix + c.parsed.y.toFixed(1) + '%';
+                var line = c.dataset.label + ': ' + fmtDollarsShort(c.parsed.y);
                 var idx = c.dataIndex;
                 var t = e.tooltips[idx];
                 if (t && t.ticker) {
-                  var ownKey = c.datasetIndex === 0 ? 'peak' : 'cur';
-                  var ownVal = t[ownKey];
-                  if (ownVal != null) {
-                    var sign = ownVal >= 0 ? '+' : '';
-                    line += '  (this trade ' + sign + ownVal.toFixed(1) + '%)';
+                  var dKey = c.datasetIndex === 0 ? 'peakDollars' : 'curDollars';
+                  var pKey = c.datasetIndex === 0 ? 'peakPct' : 'curPct';
+                  var dVal = t[dKey];
+                  var pVal = t[pKey];
+                  if (dVal != null && pVal != null) {
+                    var dSign = dVal >= 0 ? '+$' : '-$';
+                    var pSign = pVal >= 0 ? '+' : '';
+                    line += '  (this trade ' + dSign + Math.abs(dVal).toFixed(0) + ' / ' + pSign + pVal.toFixed(0) + '%)';
                   }
                 }
                 return line;
+              },
+              footer: function() {
+                return 'Assumes $' + e.perTrade + ' allocated per signal.';
               },
             },
           },
@@ -2299,7 +2329,7 @@ body.premium .unlock-badge { display: none; }
             ticks: {
               color: '#6B7280',
               font: { family: 'monospace', size: 10 },
-              callback: function(v) { return (v >= 0 ? '+' : '') + v + '%'; },
+              callback: function(v) { return fmtDollarsShort(v); },
             },
             grid: { color: 'rgba(255,255,255,0.05)' },
           },
@@ -2331,16 +2361,19 @@ body.premium .unlock-badge { display: none; }
       wrap.appendChild(val);
       return wrap;
     }
-    function fmtPctStr(n) {
+    function fmtDol(n) {
       if (n == null) return '--';
-      var sign = n >= 0 ? '+' : '';
-      return sign + Math.round(n * 10) / 10 + '%';
+      var sign = n >= 0 ? '+$' : '-$';
+      var abs = Math.abs(n);
+      if (abs >= 1000) return sign + (abs / 1000).toFixed(2) + 'k';
+      return sign + Math.round(abs);
     }
     box.appendChild(cell('Closed Trades', String(e.closedCount), 'neutral'));
-    box.appendChild(cell('Cumulative Peak', fmtPctStr(e.finalPeak), e.finalPeak >= 0 ? 'pos' : 'neg'));
-    box.appendChild(cell('Cumulative Current', fmtPctStr(e.finalCur), e.finalCur >= 0 ? 'pos' : 'neg'));
+    box.appendChild(cell('Capital Deployed', '$' + (e.closedCount * e.perTrade).toLocaleString(), 'neutral'));
+    box.appendChild(cell('Peak $ P&L', fmtDol(e.finalPeakDollars), e.finalPeakDollars >= 0 ? 'pos' : 'neg'));
+    box.appendChild(cell('Current $ P&L', fmtDol(e.finalCurDollars), e.finalCurDollars >= 0 ? 'pos' : 'neg'));
     if (e.closedCount > 0) {
-      box.appendChild(cell('Avg Peak / Trade', fmtPctStr(e.finalPeak / e.closedCount), e.finalPeak >= 0 ? 'pos' : 'neg'));
+      box.appendChild(cell('Avg $ / Trade (peak)', fmtDol(e.finalPeakDollars / e.closedCount), e.finalPeakDollars >= 0 ? 'pos' : 'neg'));
     }
   }
 

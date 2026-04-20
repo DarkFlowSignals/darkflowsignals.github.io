@@ -1,9 +1,11 @@
-# Internal/premium-only files that must NEVER be committed to a public repo.
-# signals_premium.json carries the dashboard access key + premium fields
-# (strike, expiry, entry_premium, current_premium, peak_premium). It is
-# generated locally by signals/darkflow/dashboard.py and consumed only by
-# Discord bot tasks. The public-facing feed is signals.json.
-signals_premium.json
+# v5.10 split (2026-04-20):
+# signals_premium.json IS now deployed (strike/expiry/entry/current/peak
+# premium, gated by weekly-rotating access_key URL param). The URL key check
+# lives in dashboard.html and premium-only fields show only when URL key
+# matches the access_key in this file.
+# signals_internal.json stays local-only (adds broker mechanics like
+# alpaca_status/decision/fill_price/entry_time that must never ship).
+signals_internal.json
 
 # Operational / audit artifacts - never deploy.
 task_events.jsonl

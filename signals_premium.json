@@ -895,28 +895,7 @@
       "contract_cost": 447,
       "contract_peak_pnl": 75,
       "contract_current_pnl": -162
-    },
-    {
-      "signal_date": "2026-04-21",
-      "ticker": "FSLR",
-      "direction": "CALL",
-      "conviction_score": 200.0,
-      "option_type": "watchlist",
-      "strike": null,
-      "expiry": "65",
-      "category": null,
-      "status": "open",
-      "outcome_date": null,
-      "entry_premium": 1.23,
-      "current_premium": null,
-      "peak_premium": null,
-      "current_return_pct": null,
-      "peak_return_pct": null,
-      "result": null,
-      "tracking_type": "system",
-      "signal_time": null,
-      "contract_cost": 123
     }
   ],
-  "last_updated": "2026-04-21T17:50:11.563038+00:00"
+  "last_updated": "2026-04-21T17:51:34.664803+00:00"
 }

@@ -13,16 +13,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 4.0,
-      "current_premium": 14.0,
+      "current_premium": 13.95,
       "peak_premium": 16.76,
-      "current_return_pct": 250.0,
+      "current_return_pct": 248.7,
       "peak_return_pct": 319.0,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-20T06:47:19",
       "contract_cost": 400,
       "contract_peak_pnl": 1276,
-      "contract_current_pnl": 1000
+      "contract_current_pnl": 995
     },
     {
       "signal_date": "2026-04-09",

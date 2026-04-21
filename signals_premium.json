@@ -895,6 +895,30 @@
       "contract_cost": 447,
       "contract_peak_pnl": 75,
       "contract_current_pnl": -199
+    },
+    {
+      "ticker": "FSLR",
+      "strike": 200,
+      "option_type": "CALL",
+      "expiry": "2026-04-24",
+      "direction": "BULLISH",
+      "conviction": 65,
+      "category": "watchlist",
+      "signal_date": "2026-04-21",
+      "signal_time": "2026-04-21T10:42:00",
+      "real_entry_price": 1.97,
+      "entry_premium": 1.97,
+      "current_option_price": 0.5,
+      "outcome_premium": 0.5,
+      "outcome_date": "2026-04-21",
+      "current_return_pct": -75.0,
+      "peak_return_pct": 0.0,
+      "pnl_pct": -75.0,
+      "status": "closed",
+      "win_loss": "LOSS",
+      "contracts": 2,
+      "notes": "Manual watchlist entry. Chart pillar weak at entry (3/8). Rejected $205 resistance; chart read was soft. Closed at $0.50 before hard stop auto-fired."
     }
-  ]
+  ],
+  "last_updated": "2026-04-21T17:48:37.106837+00:00"
 }

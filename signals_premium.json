@@ -114,7 +114,8 @@
       "signal_time": null,
       "contract_cost": 123,
       "contract_peak_pnl": 30,
-      "contract_current_pnl": -8
+      "contract_current_pnl": -8,
+      "real_entry_price": 1.23
     },
     {
       "signal_date": "2026-04-10",
@@ -689,7 +690,8 @@
       "signal_time": null,
       "contract_cost": 410,
       "contract_peak_pnl": 85,
-      "contract_current_pnl": -156
+      "contract_current_pnl": -156,
+      "real_entry_price": 4.1
     },
     {
       "signal_date": "2026-04-17",
@@ -712,7 +714,8 @@
       "signal_time": null,
       "contract_cost": 90,
       "contract_peak_pnl": 99,
-      "contract_current_pnl": 61
+      "contract_current_pnl": 61,
+      "real_entry_price": 0.9
     },
     {
       "signal_date": "2026-04-20",
@@ -850,7 +853,9 @@
       "signal_time": "2026-04-21T12:52:35",
       "contract_cost": 447,
       "contract_peak_pnl": 75,
-      "contract_current_pnl": -237
+      "contract_current_pnl": -237,
+      "real_entry_price": 4.47
     }
-  ]
+  ],
+  "last_updated": "2026-04-21T20:01:42.656109+00:00"
 }

@@ -13,16 +13,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 4.0,
-      "current_premium": 19.23,
+      "current_premium": 19.2,
       "peak_premium": 19.58,
-      "current_return_pct": 380.8,
+      "current_return_pct": 380.0,
       "peak_return_pct": 389.5,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-20T06:47:19",
       "contract_cost": 400,
       "contract_peak_pnl": 1558,
-      "contract_current_pnl": 1523
+      "contract_current_pnl": 1520
     },
     {
       "signal_date": "2026-04-09",
@@ -105,16 +105,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 1.23,
-      "current_premium": 1.32,
+      "current_premium": 1.35,
       "peak_premium": 1.53,
-      "current_return_pct": 7.3,
+      "current_return_pct": 9.8,
       "peak_return_pct": 24.4,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": null,
       "contract_cost": 123,
       "contract_peak_pnl": 30,
-      "contract_current_pnl": 9
+      "contract_current_pnl": 12
     },
     {
       "signal_date": "2026-04-10",
@@ -220,16 +220,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 7.7,
-      "current_premium": 30.8,
+      "current_premium": 30.35,
       "peak_premium": 30.95,
-      "current_return_pct": 300.0,
+      "current_return_pct": 294.2,
       "peak_return_pct": 301.9,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": null,
       "contract_cost": 770,
       "contract_peak_pnl": 2325,
-      "contract_current_pnl": 2310
+      "contract_current_pnl": 2265
     },
     {
       "signal_date": "2026-04-10",
@@ -358,16 +358,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 34.0,
-      "current_premium": 4.2,
+      "current_premium": 4.7,
       "peak_premium": 34.0,
-      "current_return_pct": -87.6,
+      "current_return_pct": -86.2,
       "peak_return_pct": 0.0,
       "result": "LOSS",
       "tracking_type": "system",
       "signal_time": "2026-04-21T12:22:39",
       "contract_cost": 3400,
       "contract_peak_pnl": 0,
-      "contract_current_pnl": -2978
+      "contract_current_pnl": -2931
     },
     {
       "signal_date": "2026-04-14",
@@ -381,16 +381,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 4.6,
-      "current_premium": 28.65,
-      "peak_premium": 28.65,
-      "current_return_pct": 522.8,
-      "peak_return_pct": 522.8,
+      "current_premium": 28.82,
+      "peak_premium": 28.82,
+      "current_return_pct": 526.5,
+      "peak_return_pct": 526.5,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": null,
       "contract_cost": 460,
-      "contract_peak_pnl": 2405,
-      "contract_current_pnl": 2405
+      "contract_peak_pnl": 2422,
+      "contract_current_pnl": 2422
     },
     {
       "signal_date": "2026-04-14",
@@ -404,16 +404,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.45,
-      "current_premium": 5.72,
+      "current_premium": 5.9,
       "peak_premium": 6.6,
-      "current_return_pct": 65.8,
+      "current_return_pct": 71.0,
       "peak_return_pct": 91.3,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-21T12:22:45",
       "contract_cost": 345,
       "contract_peak_pnl": 315,
-      "contract_current_pnl": 227
+      "contract_current_pnl": 245
     },
     {
       "signal_date": "2026-04-14",
@@ -427,16 +427,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 8.84,
-      "current_premium": 42.48,
+      "current_premium": 43.1,
       "peak_premium": 49.9,
-      "current_return_pct": 380.5,
+      "current_return_pct": 387.6,
       "peak_return_pct": 464.5,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": null,
       "contract_cost": 884,
       "contract_peak_pnl": 4106,
-      "contract_current_pnl": 3364
+      "contract_current_pnl": 3426
     },
     {
       "signal_date": "2026-04-14",
@@ -450,16 +450,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 5.66,
-      "current_premium": 2.44,
+      "current_premium": 2.54,
       "peak_premium": 10.65,
-      "current_return_pct": -56.9,
+      "current_return_pct": -55.1,
       "peak_return_pct": 88.2,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-21T12:22:46",
       "contract_cost": 566,
       "contract_peak_pnl": 499,
-      "contract_current_pnl": -322
+      "contract_current_pnl": -312
     },
     {
       "signal_date": "2026-04-15",
@@ -473,16 +473,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 4.0,
-      "current_premium": 2.95,
+      "current_premium": 2.88,
       "peak_premium": 4.47,
-      "current_return_pct": -26.2,
+      "current_return_pct": -28.0,
       "peak_return_pct": 11.7,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": null,
       "contract_cost": 400,
       "contract_peak_pnl": 47,
-      "contract_current_pnl": -105
+      "contract_current_pnl": -112
     },
     {
       "signal_date": "2026-04-15",
@@ -496,16 +496,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 5.5,
-      "current_premium": 0.13,
+      "current_premium": 0.12,
       "peak_premium": 5.5,
-      "current_return_pct": -97.6,
+      "current_return_pct": -97.8,
       "peak_return_pct": 0.0,
       "result": "LOSS",
       "tracking_type": "system",
       "signal_time": "2026-04-21T12:22:48",
       "contract_cost": 550,
       "contract_peak_pnl": 0,
-      "contract_current_pnl": -537
+      "contract_current_pnl": -538
     },
     {
       "signal_date": "2026-04-15",
@@ -519,16 +519,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 6.5,
-      "current_premium": 59.9,
+      "current_premium": 59.83,
       "peak_premium": 60.33,
-      "current_return_pct": 821.5,
+      "current_return_pct": 820.5,
       "peak_return_pct": 828.2,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": null,
       "contract_cost": 650,
       "contract_peak_pnl": 5383,
-      "contract_current_pnl": 5340
+      "contract_current_pnl": 5333
     },
     {
       "signal_date": "2026-04-16",
@@ -542,16 +542,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 2.0,
-      "current_premium": 4.2,
+      "current_premium": 1.4,
       "peak_premium": 5.9,
-      "current_return_pct": 110.0,
+      "current_return_pct": -30.0,
       "peak_return_pct": 195.0,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-21T12:22:53",
       "contract_cost": 200,
       "contract_peak_pnl": 390,
-      "contract_current_pnl": 220
+      "contract_current_pnl": -60
     },
     {
       "signal_date": "2026-04-16",
@@ -565,16 +565,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 2.5,
-      "current_premium": 30.65,
+      "current_premium": 30.32,
       "peak_premium": 32.92,
-      "current_return_pct": 1126.0,
+      "current_return_pct": 1112.8,
       "peak_return_pct": 1216.8,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": null,
       "contract_cost": 250,
       "contract_peak_pnl": 3042,
-      "contract_current_pnl": 2815
+      "contract_current_pnl": 2782
     },
     {
       "signal_date": "2026-04-16",
@@ -611,16 +611,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 12.8,
-      "current_premium": 19.18,
-      "peak_premium": 19.35,
-      "current_return_pct": 49.8,
-      "peak_return_pct": 51.2,
+      "current_premium": 19.7,
+      "peak_premium": 19.7,
+      "current_return_pct": 53.9,
+      "peak_return_pct": 53.9,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": null,
       "contract_cost": 1280,
-      "contract_peak_pnl": 655,
-      "contract_current_pnl": 637
+      "contract_peak_pnl": 690,
+      "contract_current_pnl": 690
     },
     {
       "signal_date": "2026-04-17",
@@ -634,16 +634,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 4.87,
-      "current_premium": 13.05,
+      "current_premium": 12.75,
       "peak_premium": 15.07,
-      "current_return_pct": 168.0,
+      "current_return_pct": 161.8,
       "peak_return_pct": 209.4,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-20T07:18:05",
       "contract_cost": 487,
       "contract_peak_pnl": 1020,
-      "contract_current_pnl": 818
+      "contract_current_pnl": 788
     },
     {
       "signal_date": "2026-04-17",
@@ -657,16 +657,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 4.45,
-      "current_premium": 2.41,
+      "current_premium": 2.65,
       "peak_premium": 6.78,
-      "current_return_pct": -45.8,
+      "current_return_pct": -40.4,
       "peak_return_pct": 52.4,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-21T12:22:58",
       "contract_cost": 445,
       "contract_peak_pnl": 233,
-      "contract_current_pnl": -204
+      "contract_current_pnl": -180
     },
     {
       "signal_date": "2026-04-17",
@@ -680,16 +680,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 4.1,
-      "current_premium": 2.4,
+      "current_premium": 2.38,
       "peak_premium": 4.95,
-      "current_return_pct": -41.5,
+      "current_return_pct": -42.0,
       "peak_return_pct": 20.7,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": null,
       "contract_cost": 410,
       "contract_peak_pnl": 85,
-      "contract_current_pnl": -170
+      "contract_current_pnl": -172
     },
     {
       "signal_date": "2026-04-17",
@@ -703,16 +703,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 0.9,
-      "current_premium": 1.33,
+      "current_premium": 1.32,
       "peak_premium": 1.92,
-      "current_return_pct": 47.8,
+      "current_return_pct": 46.7,
       "peak_return_pct": 113.3,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": null,
       "contract_cost": 90,
       "contract_peak_pnl": 102,
-      "contract_current_pnl": 43
+      "contract_current_pnl": 42
     },
     {
       "signal_date": "2026-04-20",
@@ -726,16 +726,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 10.0,
-      "current_premium": 8.05,
+      "current_premium": 8.3,
       "peak_premium": 10.03,
-      "current_return_pct": -19.5,
+      "current_return_pct": -17.0,
       "peak_return_pct": 0.3,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-20T12:55:20",
       "contract_cost": 1000,
       "contract_peak_pnl": 3,
-      "contract_current_pnl": -195
+      "contract_current_pnl": -170
     },
     {
       "signal_date": "2026-04-20",
@@ -749,16 +749,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.45,
-      "current_premium": 3.5,
+      "current_premium": 3.42,
       "peak_premium": 4.07,
-      "current_return_pct": 1.4,
+      "current_return_pct": -0.9,
       "peak_return_pct": 18.0,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-20T06:14:06",
       "contract_cost": 345,
       "contract_peak_pnl": 62,
-      "contract_current_pnl": 5
+      "contract_current_pnl": -3
     },
     {
       "signal_date": "2026-04-20",
@@ -772,16 +772,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.69,
-      "current_premium": 1.62,
+      "current_premium": 1.58,
       "peak_premium": 3.73,
-      "current_return_pct": -56.1,
+      "current_return_pct": -57.2,
       "peak_return_pct": 1.1,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-21T12:23:10",
       "contract_cost": 369,
       "contract_peak_pnl": 4,
-      "contract_current_pnl": -207
+      "contract_current_pnl": -211
     },
     {
       "signal_date": "2026-04-20",
@@ -795,16 +795,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.33,
-      "current_premium": 2.21,
+      "current_premium": 2.19,
       "peak_premium": 3.5,
-      "current_return_pct": -33.6,
+      "current_return_pct": -34.2,
       "peak_return_pct": 5.1,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-20T06:41:01",
       "contract_cost": 333,
       "contract_peak_pnl": 17,
-      "contract_current_pnl": -112
+      "contract_current_pnl": -114
     },
     {
       "signal_date": "2026-04-20",
@@ -818,16 +818,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.15,
-      "current_premium": 3.01,
+      "current_premium": 3.02,
       "peak_premium": 3.93,
-      "current_return_pct": -4.4,
+      "current_return_pct": -4.1,
       "peak_return_pct": 24.8,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-20T06:41:02",
       "contract_cost": 315,
       "contract_peak_pnl": 78,
-      "contract_current_pnl": -14
+      "contract_current_pnl": -13
     },
     {
       "signal_date": "2026-04-20",
@@ -841,16 +841,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 4.47,
-      "current_premium": 7.85,
+      "current_premium": 8.25,
       "peak_premium": 9.43,
-      "current_return_pct": 75.6,
+      "current_return_pct": 84.6,
       "peak_return_pct": 111.0,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-21T12:52:35",
       "contract_cost": 447,
       "contract_peak_pnl": 496,
-      "contract_current_pnl": 338
+      "contract_current_pnl": 378
     },
     {
       "signal_date": "2026-04-22",
@@ -864,16 +864,16 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 13.5,
-      "current_premium": 23.62,
-      "peak_premium": 23.82,
-      "current_return_pct": 75.0,
-      "peak_return_pct": 76.4,
+      "current_premium": 23.12,
+      "peak_premium": 24.1,
+      "current_return_pct": 71.3,
+      "peak_return_pct": 78.5,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": null,
       "contract_cost": 1350,
-      "contract_peak_pnl": 1031,
-      "contract_current_pnl": 1012
+      "contract_peak_pnl": 1060,
+      "contract_current_pnl": 963
     }
   ]
 }

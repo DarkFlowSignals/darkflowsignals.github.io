@@ -874,6 +874,48 @@
       "contract_cost": 1350,
       "contract_peak_pnl": 2051,
       "contract_current_pnl": 1831
+    },
+    {
+      "signal_date": "2026-04-23",
+      "ticker": "CCJ",
+      "direction": "BULLISH",
+      "conviction_score": 78.0,
+      "option_type": "Call",
+      "strike": 134.0,
+      "expiry": "2026-05-01",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "entry_premium": 3.0,
+      "current_premium": null,
+      "peak_premium": null,
+      "current_return_pct": null,
+      "peak_return_pct": null,
+      "result": null,
+      "tracking_type": "system",
+      "signal_time": null,
+      "contract_cost": 300
+    },
+    {
+      "signal_date": "2026-04-23",
+      "ticker": "HOOD",
+      "direction": "BULLISH",
+      "conviction_score": 65.0,
+      "option_type": "Call",
+      "strike": 88.0,
+      "expiry": "2026-04-24",
+      "category": "watchlist",
+      "status": "open",
+      "outcome_date": null,
+      "entry_premium": 1.23,
+      "current_premium": null,
+      "peak_premium": null,
+      "current_return_pct": null,
+      "peak_return_pct": null,
+      "result": null,
+      "tracking_type": "system",
+      "signal_time": null,
+      "contract_cost": 123
     }
   ]
 }

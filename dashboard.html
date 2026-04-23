@@ -964,6 +964,7 @@ body.premium .unlock-badge { display: none; }
           <th data-sort="ticker">Ticker <span class="sort-arrow"></span></th>
           <th data-sort="direction">Dir <span class="sort-arrow"></span></th>
           <th data-sort="category">Tag <span class="sort-arrow"></span></th>
+          <th data-sort="conviction_score">Score <span class="sort-arrow"></span></th>
           <th data-sort="strike">Strike <span class="sort-arrow"></span></th>
           <th data-sort="expiry">Expiry <span class="sort-arrow"></span></th>
           <th data-sort="entry_premium">Entry $ <span class="sort-arrow"></span></th>
@@ -1611,9 +1612,10 @@ body.premium .unlock-badge { display: none; }
       var convWrap = document.createElement('div');
       convWrap.className = 'conviction-bar-wrap';
 
-      // v6.5.5 (2026-04-23): the raw conviction score digit is founder-tier
-      // only. Public + premium dashboards render the bar alone so readers
-      // cannot cross-reference scores against tier thresholds.
+      var convLabel = document.createElement('span');
+      convLabel.className = 'conviction-label';
+      convLabel.textContent = Math.round(s.conviction_score);
+      convWrap.appendChild(convLabel);
 
       var convBar = document.createElement('div');
       convBar.className = 'conviction-bar';
@@ -1953,7 +1955,10 @@ body.premium .unlock-badge { display: none; }
       tdCat.appendChild(catBadge);
       tr.appendChild(tdCat);
 
-      // Score column removed v6.5.5 (2026-04-23) - digit is founder-only.
+      // Score
+      var tdScore = document.createElement('td');
+      tdScore.textContent = Math.round(s.conviction_score);
+      tr.appendChild(tdScore);
 
       // Strike (premium only)
       var tdStrike = document.createElement('td');

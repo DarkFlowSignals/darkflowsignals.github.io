@@ -67,7 +67,7 @@
       "date": "2026-04-23",
       "signals": 40,
       "avg_return": 193.8,
-      "avg_peak": 287.0,
+      "avg_peak": 287.1,
       "win_rate": 92.0
     }
   ],
@@ -341,8 +341,8 @@
     {
       "ticker": "CCJ",
       "date": "2026-04-23",
-      "pnl": -28.3,
-      "peak": 16.7,
+      "pnl": -27.6,
+      "peak": 17.8,
       "expired": false
     },
     {
@@ -355,7 +355,7 @@
   ],
   "total": 40,
   "avg_return": 193.8,
-  "avg_peak": 287.0,
+  "avg_peak": 287.1,
   "win_rate": 92.0,
-  "generated": "2026-04-23T09:53:48.346588"
+  "generated": "2026-04-23T09:56:31.361145"
 }

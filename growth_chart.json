@@ -73,8 +73,8 @@
     {
       "date": "2026-04-24",
       "signals": 43,
-      "avg_return": 219.1,
-      "avg_peak": 333.2,
+      "avg_return": 217.7,
+      "avg_peak": 331.6,
       "win_rate": 88.0
     }
   ],
@@ -362,8 +362,8 @@
     {
       "ticker": "ARM",
       "date": "2026-04-24",
-      "pnl": 73.1,
-      "peak": 82.2,
+      "pnl": 10.5,
+      "peak": 16.3,
       "expired": false
     },
     {
@@ -382,8 +382,8 @@
     }
   ],
   "total": 43,
-  "avg_return": 219.1,
-  "avg_peak": 333.2,
+  "avg_return": 217.7,
+  "avg_peak": 331.6,
   "win_rate": 88.0,
-  "generated": "2026-04-24T07:35:03.514588"
+  "generated": "2026-04-24T07:38:00.061431"
 }

@@ -941,10 +941,10 @@ body.premium .unlock-badge { display: none; }
       <button class="filter-pill" data-filter="bearish" aria-pressed="false">Bearish</button>
     </div>
     <div class="filter-row secondary" id="secondary-row" role="group" aria-label="Filter by category and stop rule">
-      <span class="group-label" title="Primary = high-conviction signals. Watchlist = moderate-conviction with a real tracked entry. Both = everything tracked.">Category</span>
-      <button class="filter-pill active" data-category="all" aria-pressed="true">Both</button>
-      <button class="filter-pill" data-category="primary" aria-pressed="false">Primary</button>
+      <span class="group-label" title="Primary = high-conviction signals (default view). Watchlist = moderate-conviction with a real tracked entry. Both = everything tracked.">Category</span>
+      <button class="filter-pill active" data-category="primary" aria-pressed="true">Primary</button>
       <button class="filter-pill" data-category="watchlist" aria-pressed="false">Watchlist</button>
+      <button class="filter-pill" data-category="all" aria-pressed="false">Both</button>
       <span class="group-sep" aria-hidden="true"></span>
       <span class="group-label" title="Raw shows actual settled returns, no clipping. 50% stop caps every losing signal at -50% so you see the book as if the hard stop fired perfectly.">Stop</span>
       <button class="filter-pill active" data-stop="raw" aria-pressed="true">Raw</button>
@@ -1077,7 +1077,7 @@ body.premium .unlock-badge { display: none; }
 
   var allSignals = [];
   var currentFilter = 'all';
-  var currentCategory = 'all'; // primary | watchlist | all (=both)
+  var currentCategory = 'primary'; // primary (default) | watchlist | all (=both)
   var currentStopMode = 'raw'; // raw = transparent actuals | applied = cap losses at -50%
   var currentView = 'feed';
   var sortCol = 'signal_date';

@@ -2235,14 +2235,18 @@ body.premium .unlock-badge { display: none; }
   var FLAT_DOLLAR_PER_TRADE = 100;
 
   function computeEquityCurve() {
-    // Only closed (publicly expired) signals contribute. Respects the same
-    // filter + stop-rule pills as the rest of the dashboard. Two sim modes:
+    // Signals that are DONE (status=expired OR status=closed via hard stop)
+    // contribute. Respects the same filter + stop-rule pills as the rest of
+    // the dashboard. Two sim modes:
     //   contract: uses server-precomputed contract_cost / contract_peak_pnl /
     //             contract_current_pnl from signals.json.
     //   dollar:   $100 flat per signal, $ P&L = pct * 1.
     // 50% stop toggle caps current (not peak) at -50% of per-trade cost.
+    // 2026-04-23 fix: was only `status === 'expired'` which excluded
+    // hard-stopped signals (status=closed with outcome_date set). Now both count.
     var closed = getFiltered().filter(function(s) {
-      return s.status === 'expired' && s.outcome_date;
+      if (!s.outcome_date) return false;
+      return s.status === 'expired' || s.status === 'closed';
     });
     closed.sort(function(a, b) {
       return (a.outcome_date || '').localeCompare(b.outcome_date || '');

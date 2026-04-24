@@ -1008,7 +1008,7 @@ body.premium .unlock-badge { display: none; }
       Flat-dollar simulation: allocate exactly $100 to every signal at entry, regardless of contract price. Cleanest apples-to-apples read on signal quality. No compounding, no winner scaling. Scale by your own sizing: $1,000 per signal, multiply the numbers by 10.
     </p>
     <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;line-height:1.7;padding:10px 12px;background:var(--bg-surface);border-left:2px solid var(--amber);border-radius:0 4px 4px 0;">
-      <strong style="color:var(--text-secondary);">Reading the lines:</strong> The curve only moves when a closed trade is added. Open positions don't shift it. Peak shows best-case exits at each high. Current shows the public rule at calendar expiry.
+      <strong style="color:var(--text-secondary);">Reading the lines:</strong> Every signal matching your current pill filter contributes. Closed trades lock in realized $P&L at their outcome date; open trades show live unrealized $P&L at their entry date (marked with *, still moving with price). Peak shows best-case exits at each high. Current shows the live rule today, or settled value at calendar expiry.
     </p>
     <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;line-height:1.7;">
       <span style="color:#00E676;display:inline-block;width:56px;">Peak $:</span>cumulative $ P&L if you exited each trade at its highest point.<br>
@@ -2235,21 +2235,20 @@ body.premium .unlock-badge { display: none; }
   var FLAT_DOLLAR_PER_TRADE = 100;
 
   function computeEquityCurve() {
-    // Signals that are DONE (status=expired OR status=closed via hard stop)
-    // contribute. Respects the same filter + stop-rule pills as the rest of
-    // the dashboard. Two sim modes:
+    // All signals that match the current pills contribute. Closed trades (status
+    // expired or hard-stopped) contribute realized $P&L at their outcome_date;
+    // open trades contribute live unrealized $P&L at their signal_date. The
+    // end of the curve = current book value across the pill-filtered set.
+    // Stop-rule toggle flows through currentPct (peak is never capped).
+    // Two sim modes:
     //   contract: uses server-precomputed contract_cost / contract_peak_pnl /
     //             contract_current_pnl from signals.json.
     //   dollar:   $100 flat per signal, $ P&L = pct * 1.
-    // 50% stop toggle caps current (not peak) at -50% of per-trade cost.
-    // 2026-04-23 fix: was only `status === 'expired'` which excluded
-    // hard-stopped signals (status=closed with outcome_date set). Now both count.
-    var closed = getFiltered().filter(function(s) {
-      if (!s.outcome_date) return false;
-      return s.status === 'expired' || s.status === 'closed';
-    });
-    closed.sort(function(a, b) {
-      return (a.outcome_date || '').localeCompare(b.outcome_date || '');
+    var trades = getFiltered().slice();
+    trades.sort(function(a, b) {
+      var da = a.outcome_date || a.signal_date || '';
+      var db = b.outcome_date || b.signal_date || '';
+      return da.localeCompare(db);
     });
 
     var mode = EQUITY_SIM_MODE;
@@ -2259,10 +2258,11 @@ body.premium .unlock-badge { display: none; }
     var cumCurDollars = 0;
     var cumPeakDollars = 0;
     var cumCost = 0;
-    var tooltipData = [{ ticker: null, date: null, cost: 0, curPct: null, peakPct: null, curDollars: 0, peakDollars: 0 }];
+    var tooltipData = [{ ticker: null, date: null, cost: 0, curPct: null, peakPct: null, curDollars: 0, peakDollars: 0, isOpen: false }];
     var missingCount = 0;
+    var openCount = 0;
 
-    closed.forEach(function(s) {
+    trades.forEach(function(s) {
       var cPct = currentPct(s);
       var pPct = peakPct(s);
       if (cPct == null) cPct = 0;
@@ -2285,20 +2285,25 @@ body.premium .unlock-badge { display: none; }
         pPnl = (pPct / 100) * cost;
       }
 
+      var stillOpen = !s.outcome_date;
+      if (stillOpen) openCount += 1;
+      var pointDate = s.outcome_date || s.signal_date;
+
       cumCost += cost;
       cumCurDollars += cPnl;
       cumPeakDollars += pPnl;
-      labels.push(shortDate(s.outcome_date));
+      labels.push(shortDate(pointDate) + (stillOpen ? '*' : ''));
       curLine.push(Math.round(cumCurDollars * 100) / 100);
       peakLine.push(Math.round(cumPeakDollars * 100) / 100);
       tooltipData.push({
         ticker: s.ticker,
-        date: s.outcome_date,
+        date: pointDate,
         cost: cost,
         curPct: cPct,
         peakPct: pPct,
         curDollars: cPnl,
         peakDollars: pPnl,
+        isOpen: stillOpen,
       });
     });
 
@@ -2308,7 +2313,9 @@ body.premium .unlock-badge { display: none; }
       peak: peakLine,
       tooltips: tooltipData,
       mode: mode,
-      closedCount: closed.length - missingCount,
+      tradesCount: trades.length - missingCount,
+      openCount: openCount,
+      closedCount: trades.length - missingCount - openCount,
       missingCount: missingCount,
       finalCurDollars: cumCurDollars,
       finalPeakDollars: cumPeakDollars,
@@ -2375,7 +2382,7 @@ body.premium .unlock-badge { display: none; }
                 var idx = items[0].dataIndex;
                 var t = e.tooltips[idx];
                 if (!t || !t.ticker) return 'Starting position ($0)';
-                return t.ticker + ' expired ' + t.date;
+                return t.ticker + (t.isOpen ? ' open (entered ' : ' expired ') + t.date + (t.isOpen ? ')' : '');
               },
               label: function(c) {
                 var line = c.dataset.label + ': ' + fmtDollarsShort(c.parsed.y);
@@ -2456,7 +2463,10 @@ body.premium .unlock-badge { display: none; }
       if (abs >= 1000) return '$' + (abs / 1000).toFixed(2) + 'k';
       return '$' + Math.round(abs);
     }
-    box.appendChild(cell('Closed Trades', String(e.closedCount), 'neutral'));
+    var signalsLabel = e.openCount > 0
+      ? 'Signals (' + e.closedCount + ' closed, ' + e.openCount + ' open)'
+      : 'Signals';
+    box.appendChild(cell(signalsLabel, String(e.tradesCount), 'neutral'));
     box.appendChild(cell('Capital Deployed', fmtCost(e.totalCost), 'neutral'));
     box.appendChild(cell('Peak $ P&L', fmtDol(e.finalPeakDollars), e.finalPeakDollars >= 0 ? 'pos' : 'neg'));
     box.appendChild(cell('Current $ P&L', fmtDol(e.finalCurDollars), e.finalCurDollars >= 0 ? 'pos' : 'neg'));

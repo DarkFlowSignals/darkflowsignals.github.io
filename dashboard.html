@@ -1105,15 +1105,31 @@ body.premium .unlock-badge { display: none; }
   // current_return_pct folds in the intrinsic-based settled value, so the
   // same field keeps rendering for expired signals (no separate Real).
   // currentPct respects the Stop Rule toggle.
-  // raw     = 100% transparency, return the actual live/settled number
-  //           (e.g. -99% PLTR blow-through, -100% expired OTM).
-  // applied = cap the loss at -50% to show what stats would look like if the
-  //           hard stop rule was enforced perfectly. Upside numbers are never
-  //           capped. Peak % is never capped (signal quality is never stopped).
+  // raw     = hold-to-expiry view. Returns the actual live/settled number
+  //           (current_return_pct) which tracks the option through expiry even
+  //           if the internal trade was exited earlier. Upside and downside
+  //           both shown as if the position rode to expiration.
+  // applied = -50% stop rule. Caps the return at -50% if the signal EVER
+  //           touched -50% during its life (low_return_pct <= -50), regardless
+  //           of where current landed. This catches bounce-back signals that
+  //           dipped to -60% intraday then rallied to +100% at expiry - under
+  //           the real -50% stop rule the operator would have been stopped at
+  //           -50% and never seen the +100%. For signals without low_watermark
+  //           data (legacy/pre-2026-04-24), falls back to current-based capping.
+  // Peak % is never capped (signal quality is never stopped).
   function currentPct(s) {
     var c = (s.current_return_pct != null) ? s.current_return_pct : null;
     if (c == null) return null;
-    if (currentStopMode === 'applied' && c < -50) return -50;
+    if (currentStopMode === 'applied') {
+      var lw = (s.low_return_pct != null) ? s.low_return_pct : null;
+      // If we have low_watermark data and the signal touched -50%, cap.
+      // Otherwise fall back to current-based capping (legacy signals).
+      if (lw != null) {
+        if (lw <= -50) return -50;
+      } else if (c < -50) {
+        return -50;
+      }
+    }
     return c;
   }
 

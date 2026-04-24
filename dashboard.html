@@ -2091,10 +2091,11 @@ body.premium .unlock-badge { display: none; }
     renderFomo();
     // Chart footer must stay in sync with stats bar. Re-derive after each render.
     if (typeof renderChartFooter === 'function') renderChartFooter(null);
-    // Equity curve respects the same filters and the stop-rule toggle, so it
-    // must redraw on every render. No-op until Chart.js has loaded.
-    if (typeof Chart !== 'undefined' && typeof renderEquityChart === 'function') {
-      renderEquityChart();
+    // Both charts respect every filter, so both redraw on each render.
+    // No-op until Chart.js has loaded.
+    if (typeof Chart !== 'undefined') {
+      if (typeof renderGrowthChart === 'function') renderGrowthChart();
+      if (typeof renderEquityChart === 'function') renderEquityChart();
     }
   }
 
@@ -2221,6 +2222,12 @@ body.premium .unlock-badge { display: none; }
   // Equity curve chart instance - held at module scope so filter changes can
   // destroy+recreate it without leaking canvas state.
   var equityChartInstance = null;
+
+  // Growth chart (Avg Peak / Avg Current cumulative lines) - same pattern as
+  // equityChartInstance. Re-derived on every render() so the curve reflects
+  // the current Category (Primary/Watchlist/Both) and Stop-rule pills.
+  var growthChartInstance = null;
+  var growthChartFallback = null;
 
   // Simulation mode: 'contract' = 1 contract per signal (entry * 100 shares),
   // 'dollar' = $100 flat per signal. Toggled by the Sim filter-pill group.
@@ -2458,6 +2465,86 @@ body.premium .unlock-badge { display: none; }
     }
   }
 
+  // Build cumulative daily aggregates from the currently-filtered signal set.
+  // Mirrors the server-side logic in dashboard.py _update_growth_chart but
+  // routes through peakPct / currentPct so the Stop-rule pill flows in.
+  // Returns null if the filtered set has no plottable signals.
+  function buildGrowthSeriesFromVisible() {
+    if (typeof getVisible !== 'function') return null;
+    var vis = getVisible();
+    if (!vis.length) return null;
+
+    var scored = vis.filter(function(s) {
+      return s.signal_date && peakPct(s) != null && currentPct(s) != null;
+    }).sort(function(a, b) { return a.signal_date.localeCompare(b.signal_date); });
+    if (!scored.length) return null;
+
+    var orderedDates = [];
+    var seen = {};
+    scored.forEach(function(s) {
+      if (!seen[s.signal_date]) { seen[s.signal_date] = true; orderedDates.push(s.signal_date); }
+    });
+
+    var cumPeaks = [], cumCurs = [];
+    var labels = [], avgPeak = [], avgReturn = [];
+    orderedDates.forEach(function(d) {
+      scored.forEach(function(s) {
+        if (s.signal_date !== d) return;
+        cumPeaks.push(peakPct(s));
+        cumCurs.push(currentPct(s));
+      });
+      labels.push(shortDate(d));
+      avgPeak.push(+(cumPeaks.reduce(function(a, b) { return a + b; }, 0) / cumPeaks.length).toFixed(1));
+      avgReturn.push(+(cumCurs.reduce(function(a, b) { return a + b; }, 0) / cumCurs.length).toFixed(1));
+    });
+    return { labels: labels, avgPeak: avgPeak, avgReturn: avgReturn };
+  }
+
+  // Redraw the growth chart from the current filter state. Destroys prior
+  // instance so Chart.js doesn't leak canvas state. Falls back to the static
+  // growth_chart.json payload only for the first paint before signals.json
+  // has loaded.
+  function renderGrowthChart() {
+    var ctx = document.getElementById('growth-chart');
+    if (!ctx || typeof Chart === 'undefined') return;
+
+    var series = buildGrowthSeriesFromVisible();
+    if (!series && growthChartFallback && growthChartFallback.data && growthChartFallback.data.length) {
+      series = {
+        labels: growthChartFallback.data.map(function(p) { return shortDate(p.date); }),
+        avgPeak: growthChartFallback.data.map(function(p) { return p.avg_peak; }),
+        avgReturn: growthChartFallback.data.map(function(p) { return p.avg_return; }),
+      };
+    }
+    if (!series) {
+      if (growthChartInstance) { growthChartInstance.destroy(); growthChartInstance = null; }
+      return;
+    }
+
+    if (growthChartInstance) growthChartInstance.destroy();
+    growthChartInstance = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: series.labels,
+        datasets: [
+          { label: 'Avg Peak Return', data: series.avgPeak, borderColor: '#00E676', backgroundColor: 'rgba(0,230,118,0.08)', fill: true, tension: 0.3, pointRadius: 6, borderWidth: 2 },
+          { label: 'Avg Current Return', data: series.avgReturn, borderColor: '#F59E0B', fill: false, tension: 0.3, pointRadius: 6, borderWidth: 2, borderDash: [4, 4] }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { color: '#9CA3AF', font: { family: 'monospace', size: 11 } } },
+          tooltip: { callbacks: { label: function(c) { return c.dataset.label + ': ' + (c.parsed.y >= 0 ? '+' : '') + c.parsed.y.toFixed(1) + '%'; } } }
+        },
+        scales: {
+          x: { ticks: { color: '#6B7280', font: { family: 'monospace', size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+          y: { beginAtZero: true, ticks: { color: '#6B7280', font: { family: 'monospace', size: 10 }, callback: function(v) { return (v >= 0 ? '+' : '') + v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+        }
+      }
+    });
+  }
+
   function loadGrowthChart() {
     var script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js';
@@ -2466,34 +2553,10 @@ body.premium .unlock-badge { display: none; }
         .then(function(r) { return r.json(); })
         .then(function(d) {
           if (!d || !d.data || !d.data.length) return;
-          var ctx = document.getElementById('growth-chart');
-          if (!ctx) return;
-
-          var labels = d.data.map(function(p) { return shortDate(p.date); });
-          var avgReturn = d.data.map(function(p) { return p.avg_return; });
-          var avgPeak = d.data.map(function(p) { return p.avg_peak; });
-
-          new Chart(ctx, {
-            type: 'line',
-            data: {
-              labels: labels,
-              datasets: [
-                { label: 'Avg Peak Return', data: avgPeak, borderColor: '#00E676', backgroundColor: 'rgba(0,230,118,0.08)', fill: true, tension: 0.3, pointRadius: 6, borderWidth: 2 },
-                { label: 'Avg Current Return', data: avgReturn, borderColor: '#F59E0B', fill: false, tension: 0.3, pointRadius: 6, borderWidth: 2, borderDash: [4, 4] }
-              ]
-            },
-            options: {
-              responsive: true,
-              plugins: {
-                legend: { labels: { color: '#9CA3AF', font: { family: 'monospace', size: 11 } } },
-                tooltip: { callbacks: { label: function(c) { return c.dataset.label + ': +' + c.parsed.y.toFixed(1) + '%'; } } }
-              },
-              scales: {
-                x: { ticks: { color: '#6B7280', font: { family: 'monospace', size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                y: { beginAtZero: true, ticks: { color: '#6B7280', font: { family: 'monospace', size: 10 }, callback: function(v) { return '+' + v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
-              }
-            }
-          });
+          // Cache for first-paint fallback; every subsequent render rebuilds
+          // the chart from live filtered signals.
+          growthChartFallback = d;
+          renderGrowthChart();
 
           // Chart footer uses the same helpers as the top stats bar so the
           // numbers ALWAYS agree. Fall back to growth_chart.json's top-level

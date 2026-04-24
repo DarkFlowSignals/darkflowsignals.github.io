@@ -2244,7 +2244,10 @@ body.premium .unlock-badge { display: none; }
     //   contract: uses server-precomputed contract_cost / contract_peak_pnl /
     //             contract_current_pnl from signals.json.
     //   dollar:   $100 flat per signal, $ P&L = pct * 1.
-    var trades = getFiltered().slice();
+    // Use getVisible() (not getFiltered) so this chart shares the exact same
+    // signal set as the top stats bar and Signal Performance chart. Free-tier
+    // 7-day delay only gates the feed/table, not the aggregate visualizations.
+    var trades = getVisible().slice();
     trades.sort(function(a, b) {
       var da = a.outcome_date || a.signal_date || '';
       var db = b.outcome_date || b.signal_date || '';
@@ -2470,9 +2473,16 @@ body.premium .unlock-badge { display: none; }
     box.appendChild(cell('Capital Deployed', fmtCost(e.totalCost), 'neutral'));
     box.appendChild(cell('Peak $ P&L', fmtDol(e.finalPeakDollars), e.finalPeakDollars >= 0 ? 'pos' : 'neg'));
     box.appendChild(cell('Current $ P&L', fmtDol(e.finalCurDollars), e.finalCurDollars >= 0 ? 'pos' : 'neg'));
-    if (e.totalCost > 0) {
-      var roi = (e.finalCurDollars / e.totalCost) * 100;
-      box.appendChild(cell('ROI (current)', (roi >= 0 ? '+' : '') + roi.toFixed(0) + '%', roi >= 0 ? 'pos' : 'neg'));
+    // Avg Current uses the same unweighted mean-of-% math as the top stats bar
+    // and Signal Performance footer, so the three always agree. The cost-
+    // weighted ROI from $P&L/$cost is intentionally not shown here; operator
+    // prefers one consistent "Avg Current" number across the whole dashboard.
+    var vis = getVisible();
+    var avgCurVals = [];
+    vis.forEach(function(s) { var c = currentPct(s); if (c != null) avgCurVals.push(c); });
+    if (avgCurVals.length > 0) {
+      var avgCur = avgCurVals.reduce(function(a, b) { return a + b; }, 0) / avgCurVals.length;
+      box.appendChild(cell('Avg Current', (avgCur >= 0 ? '+' : '') + avgCur.toFixed(1) + '%', avgCur >= 0 ? 'pos' : 'neg'));
     }
     if (e.mode === 'contract' && e.missingCount > 0) {
       box.appendChild(cell('Excluded (no entry)', String(e.missingCount), 'neutral'));

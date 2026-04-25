@@ -213,7 +213,7 @@ body {
    ============================================================ */
 .stats-bar {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
@@ -897,6 +897,11 @@ body.premium .unlock-badge { display: none; }
       <div class="stat-sublabel">Signal quality: peak &gt; 0%</div>
     </div>
     <div class="stat-cell">
+      <div class="stat-label">Outcome</div>
+      <div class="stat-value" id="stat-outcome">--</div>
+      <div class="stat-sublabel" id="stat-outcome-sub">Position outcome: held to expiry</div>
+    </div>
+    <div class="stat-cell">
       <div class="stat-label">Avg Peak</div>
       <div class="stat-value" id="stat-avg">--</div>
       <div class="stat-sublabel">Each signal at its best moment</div>
@@ -1140,24 +1145,32 @@ body.premium .unlock-badge { display: none; }
     return true;
   }
 
-  // Win/loss aligned with the canonical two-view scoreboard (IDENTITY RULE 2026-04-24).
-  // Uses currentPct, which already respects the active Stop Rule toggle:
-  //   raw     = hold-to-expiry final value
-  //   applied = capped at -50% if the signal ever touched the stop
-  // A signal that briefly tickled +1% peak then expired at -50% is a LOSS, not a WIN.
-  // This matches every public scoreboard we publish (Reddit, Substack, EOD desk close).
-  // Peak fallback is retained ONLY for the rare case where current data is missing
-  // entirely (very early signals before first price tick).
+  // SIGNAL QUALITY (peak-based). Did the thesis ever work? This is the default
+  // headline metric. Peak > 0% means the option was in profit territory at some
+  // point, regardless of how the position was managed afterward. This is the
+  // signal-provider lens, not a position-management lens.
   function signalResult(s) {
-    var c = currentPct(s);
-    if (c != null) return c > 0 ? 'WIN' : 'LOSS';
     var p = peakPct(s);
     if (p != null) return p > 0 ? 'WIN' : 'LOSS';
+    var c = currentPct(s);
+    if (c != null) return c > 0 ? 'WIN' : 'LOSS';
+    return null;
+  }
+
+  // POSITION OUTCOME (settled-value based). Did the rule make money? Respects
+  // the active Stop Rule toggle: Raw = held to expiry, Applied = capped at -50%
+  // if the signal ever touched the stop. This matches the published two-view
+  // scoreboard math (Reddit, Substack, EOD desk close, weekly scorecard).
+  function positionResult(s) {
+    var c = currentPct(s);
+    if (c != null) return c > 0 ? 'WIN' : 'LOSS';
     return null;
   }
 
   function isSignalWin(s) { return signalResult(s) === 'WIN'; }
   function hasResult(s) { return signalResult(s) !== null; }
+  function isPositionWin(s) { return positionResult(s) === 'WIN'; }
+  function hasPositionResult(s) { return positionResult(s) !== null; }
 
   function fmtPct(v) {
     if (v == null) return null;
@@ -1297,6 +1310,8 @@ body.premium .unlock-badge { display: none; }
     document.getElementById('stat-total').textContent = visible.length;
 
     var wrEl = document.getElementById('stat-winrate');
+    var outEl = document.getElementById('stat-outcome');
+    var outSubEl = document.getElementById('stat-outcome-sub');
     var avgEl = document.getElementById('stat-avg');
     var curEl = document.getElementById('stat-current');
     var streakEl = document.getElementById('stat-streak');
@@ -1321,6 +1336,21 @@ body.premium .unlock-badge { display: none; }
       var wr = Math.round((wins.length / withData.length) * 100);
       wrEl.textContent = wr + '%';
       wrEl.className = 'stat-value ' + (wr >= 50 ? 'green' : 'red');
+
+      // Outcome: position-outcome win rate. Toggles with the Stop Rule pill.
+      var outData = visible.filter(hasPositionResult);
+      var outWins = outData.filter(isPositionWin);
+      if (outData.length > 0) {
+        var orate = Math.round((outWins.length / outData.length) * 100);
+        outEl.textContent = orate + '%';
+        outEl.className = 'stat-value ' + (orate >= 50 ? 'green' : 'red');
+      } else {
+        outEl.textContent = '--';
+        outEl.className = 'stat-value neutral';
+      }
+      outSubEl.textContent = currentStopMode === 'applied'
+        ? 'Position outcome: -50% stop applied'
+        : 'Position outcome: held to expiry';
 
       // Avg Peak: signal-quality metric
       var sum = 0, count = 0;
@@ -1349,6 +1379,7 @@ body.premium .unlock-badge { display: none; }
       }
     } else {
       wrEl.textContent = '--'; wrEl.className = 'stat-value neutral';
+      outEl.textContent = '--'; outEl.className = 'stat-value neutral';
       avgEl.textContent = '--'; avgEl.className = 'stat-value neutral';
       streakEl.textContent = '--'; streakEl.className = 'stat-value neutral';
     }

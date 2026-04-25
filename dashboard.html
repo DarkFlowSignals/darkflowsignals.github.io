@@ -931,7 +931,7 @@ body.premium .unlock-badge { display: none; }
   <!-- FILTERS -->
   <div class="filter-block">
     <p class="filter-hint">
-      Every filter recomputes the stats, chart, and table together. Slice by status, direction, category, or apply the -50% stop rule to see the book under strict risk management.
+      Every filter recomputes the stats, chart, and table together. Slice by status, direction, category, or apply the -50% stop rule to see the book under strict risk management. Default view holds every signal to expiration; the 50% stop pill caps any signal that touched -50% intraday at -50%.
     </p>
     <div class="filter-row" id="filter-row" role="group" aria-label="Filter by status and direction" title="Status and direction. Click any pill to narrow the book.">
       <button class="filter-pill active" data-filter="all" aria-pressed="true">All</button>
@@ -946,7 +946,7 @@ body.premium .unlock-badge { display: none; }
       <button class="filter-pill" data-category="watchlist" aria-pressed="false">Watchlist</button>
       <button class="filter-pill" data-category="all" aria-pressed="false">Both</button>
       <span class="group-sep" aria-hidden="true"></span>
-      <span class="group-label" title="Raw shows actual settled returns, no clipping. 50% stop caps every losing signal at -50% so you see the book as if the hard stop fired perfectly.">Stop</span>
+      <span class="group-label" title="Raw shows the value held to expiration (no early exit). 50% stop caps any signal that ever touched -50% during its life at -50%, regardless of where it ended.">Stop</span>
       <button class="filter-pill active" data-stop="raw" aria-pressed="true">Raw</button>
       <button class="filter-pill" data-stop="applied" aria-pressed="false">50% stop</button>
     </div>
@@ -1140,13 +1140,19 @@ body.premium .unlock-badge { display: none; }
     return true;
   }
 
-  // Signal-quality win: peak > 0 = thesis was correct. Loss: peak never > 0.
-  // null means not enough data yet.
+  // Win/loss aligned with the canonical two-view scoreboard (IDENTITY RULE 2026-04-24).
+  // Uses currentPct, which already respects the active Stop Rule toggle:
+  //   raw     = hold-to-expiry final value
+  //   applied = capped at -50% if the signal ever touched the stop
+  // A signal that briefly tickled +1% peak then expired at -50% is a LOSS, not a WIN.
+  // This matches every public scoreboard we publish (Reddit, Substack, EOD desk close).
+  // Peak fallback is retained ONLY for the rare case where current data is missing
+  // entirely (very early signals before first price tick).
   function signalResult(s) {
-    var p = peakPct(s);
-    if (p != null) return p > 0 ? 'WIN' : 'LOSS';
     var c = currentPct(s);
     if (c != null) return c > 0 ? 'WIN' : 'LOSS';
+    var p = peakPct(s);
+    if (p != null) return p > 0 ? 'WIN' : 'LOSS';
     return null;
   }
 

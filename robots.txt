@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://darkflowsignals.github.io/sitemap.xml
+Sitemap: https://darkflowsignals.com/sitemap.xml

@@ -220,6 +220,86 @@ body {
 }
 
 /* ============================================================
+   MEMBER MENU (signed-in dropdown)
+   ============================================================ */
+.member-menu { position: relative; }
+.member-menu-trigger {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 6px; padding: 5px 10px 5px 5px;
+  font-family: var(--font-mono); font-size: 12px;
+  color: var(--text-primary); cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.member-menu-trigger:hover { border-color: rgba(0,230,118,0.45); background: var(--bg-card-hover, #18182A); }
+.member-avatar {
+  display: inline-block; width: 22px; height: 22px;
+  border-radius: 50%; background: linear-gradient(135deg, #00E676, #00BFA5);
+  flex-shrink: 0; box-shadow: 0 0 0 1px rgba(0, 230, 118, 0.25);
+}
+.member-tier-badge {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+  text-transform: uppercase; color: #00E676;
+}
+.member-tier-badge.founder { color: #FFD700; }
+.member-menu-chevron { color: var(--text-muted); font-size: 10px; transition: transform 0.18s; }
+.member-menu.open .member-menu-chevron { transform: rotate(180deg); }
+
+.member-menu-panel {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  min-width: 320px; max-width: 360px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.02);
+  padding: 8px 0;
+  opacity: 0; transform: translateY(-6px);
+  pointer-events: none; transition: opacity 0.18s, transform 0.18s;
+  z-index: 200;
+}
+.member-menu.open .member-menu-panel {
+  opacity: 1; transform: translateY(0); pointer-events: auto;
+}
+
+.member-menu-section { padding: 4px 0; border-bottom: 1px solid var(--border); }
+.member-menu-section:last-child { border-bottom: none; }
+.member-menu-label {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--text-muted); padding: 6px 16px 4px;
+}
+
+.member-menu-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 16px; text-decoration: none;
+  transition: background 0.12s;
+}
+.member-menu-item:hover { background: rgba(255,255,255,0.04); }
+.mm-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 6px;
+  font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+  flex-shrink: 0;
+}
+.mm-body { display: flex; flex-direction: column; min-width: 0; }
+.mm-title {
+  font-family: var(--font-display, 'Space Grotesk'); font-size: 13px;
+  color: var(--text-primary); font-weight: 500; line-height: 1.2;
+}
+.mm-sub {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--text-muted); margin-top: 2px; line-height: 1.3;
+}
+
+@media (max-width: 720px) {
+  .member-menu-panel {
+    position: fixed; top: 64px; right: 12px; left: 12px;
+    min-width: 0; max-width: none;
+  }
+  .member-tier-badge { display: none; }
+}
+
+/* ============================================================
    STATS BAR
    ============================================================ */
 .stats-bar {
@@ -898,7 +978,57 @@ body.premium .unlock-badge { display: none; }
     <div class="header-right">
       <span class="updated-ago" id="updated-ago"></span>
       <a id="whop-login-btn" href="/auth/whop/login" style="display:none;font-family:var(--font-mono);font-size:12px;padding:6px 12px;border:1px solid var(--green);color:var(--green);border-radius:4px;text-decoration:none;">Member sign in</a>
-      <a id="whop-logout-btn" href="/auth/whop/logout" style="display:none;font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-decoration:none;">Sign out</a>
+      <!-- MEMBER MENU (dropdown shown when signed in) -->
+      <div id="member-menu" class="member-menu" style="display:none;">
+        <button id="member-menu-trigger" type="button" class="member-menu-trigger" aria-haspopup="menu" aria-expanded="false">
+          <span class="member-avatar"></span>
+          <span class="member-tier-badge" id="member-tier-badge">Member</span>
+          <span class="member-menu-chevron">&#9662;</span>
+        </button>
+        <div class="member-menu-panel" id="member-menu-panel" role="menu" aria-hidden="true">
+          <div class="member-menu-section">
+            <div class="member-menu-label">Member resources</div>
+            <a href="https://discord.gg/NsnCEmeJqA" target="_blank" rel="noopener" class="member-menu-item">
+              <span class="mm-icon" style="background:rgba(88,101,242,0.12);color:#5865F2;">D</span>
+              <span class="mm-body"><span class="mm-title">Live Discord server</span><span class="mm-sub">Premium signal channels + /check TICKER</span></span>
+            </a>
+            <a href="/dashboard.html" class="member-menu-item">
+              <span class="mm-icon" style="background:rgba(0,230,118,0.12);color:#00E676;">$</span>
+              <span class="mm-body"><span class="mm-title">Live signal book</span><span class="mm-sub">Strike, expiry, entry, peak, current</span></span>
+            </a>
+          </div>
+          <div class="member-menu-section">
+            <div class="member-menu-label">Content + community</div>
+            <a href="https://darkflowsignals.substack.com" target="_blank" rel="noopener" class="member-menu-item">
+              <span class="mm-icon" style="background:rgba(255,123,77,0.12);color:#FF7B4D;">S</span>
+              <span class="mm-body"><span class="mm-title">Substack newsletter</span><span class="mm-sub">Daily note + weekly recap</span></span>
+            </a>
+            <a href="https://www.reddit.com/r/DarkFlowSignals/" target="_blank" rel="noopener" class="member-menu-item">
+              <span class="mm-icon" style="background:rgba(255,69,0,0.12);color:#FF4500;">r</span>
+              <span class="mm-body"><span class="mm-title">Reddit community</span><span class="mm-sub">r/DarkFlowSignals</span></span>
+            </a>
+            <a href="https://stocktwits.com/DarkFlowSignals" target="_blank" rel="noopener" class="member-menu-item">
+              <span class="mm-icon" style="background:rgba(0,194,194,0.12);color:#00C2C2;">ST</span>
+              <span class="mm-body"><span class="mm-title">Stocktwits</span><span class="mm-sub">Real-time market chatter</span></span>
+            </a>
+            <a href="https://www.tradingview.com/u/DarkFlowSignals/" target="_blank" rel="noopener" class="member-menu-item">
+              <span class="mm-icon" style="background:rgba(41,113,237,0.12);color:#2971ED;">TV</span>
+              <span class="mm-body"><span class="mm-title">TradingView ideas</span><span class="mm-sub">Chart-first weekly setups</span></span>
+            </a>
+          </div>
+          <div class="member-menu-section">
+            <div class="member-menu-label">Account</div>
+            <a href="https://whop.com/orders/" target="_blank" rel="noopener" class="member-menu-item">
+              <span class="mm-icon" style="background:rgba(255,255,255,0.06);color:#A8A8B5;">@</span>
+              <span class="mm-body"><span class="mm-title">Manage subscription</span><span class="mm-sub">Billing, cancel, upgrade</span></span>
+            </a>
+            <a href="/auth/whop/logout" class="member-menu-item">
+              <span class="mm-icon" style="background:rgba(239,68,68,0.10);color:#EF4444;">&#8629;</span>
+              <span class="mm-body"><span class="mm-title">Sign out</span><span class="mm-sub">Clear this session</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
       <div class="view-toggle" role="tablist" aria-label="Signal display view">
         <button class="view-btn active" data-view="feed" role="tab" aria-selected="true" aria-controls="signal-feed">Feed</button>
         <button class="view-btn" data-view="table" role="tab" aria-selected="false" aria-controls="table-view">Table</button>
@@ -1245,8 +1375,18 @@ body.premium .unlock-badge { display: none; }
         document.body.classList.toggle('premium', isPremium);
         var loginBtn = document.getElementById('whop-login-btn');
         if (loginBtn) loginBtn.style.display = isPremium ? 'none' : '';
-        var logoutBtn = document.getElementById('whop-logout-btn');
-        if (logoutBtn) logoutBtn.style.display = isPremium ? '' : 'none';
+        var memberMenu = document.getElementById('member-menu');
+        if (memberMenu) memberMenu.style.display = isPremium ? '' : 'none';
+        var tierBadge = document.getElementById('member-tier-badge');
+        if (tierBadge) {
+          if (sessionTier === 'founder') {
+            tierBadge.textContent = 'Founder';
+            tierBadge.classList.add('founder');
+          } else {
+            tierBadge.textContent = 'Member';
+            tierBadge.classList.remove('founder');
+          }
+        }
         var freeBanner = document.getElementById('free-banner');
         if (freeBanner) freeBanner.style.display = isPremium ? 'none' : 'block';
 
@@ -2304,6 +2444,37 @@ body.premium .unlock-badge { display: none; }
         if (cDollar) cDollar.style.display = '';
       }
       if (typeof renderEquityChart === 'function') renderEquityChart();
+    });
+  })();
+
+  // ---- EVENT: MEMBER MENU DROPDOWN ----
+  // Trigger toggles .open on the wrapper. Click-outside + Escape both close.
+  (function() {
+    var wrap = document.getElementById('member-menu');
+    var trigger = document.getElementById('member-menu-trigger');
+    var panel = document.getElementById('member-menu-panel');
+    if (!wrap || !trigger || !panel) return;
+
+    function close() {
+      wrap.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+      panel.setAttribute('aria-hidden', 'true');
+    }
+    function open() {
+      wrap.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+      panel.setAttribute('aria-hidden', 'false');
+    }
+    trigger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (wrap.classList.contains('open')) close();
+      else open();
+    });
+    document.addEventListener('click', function(e) {
+      if (!wrap.contains(e.target)) close();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') close();
     });
   })();
 

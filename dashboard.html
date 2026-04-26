@@ -888,6 +888,8 @@ body.premium .unlock-badge { display: none; }
     </div>
     <div class="header-right">
       <span class="updated-ago" id="updated-ago"></span>
+      <a id="whop-login-btn" href="/auth/whop/login" style="display:none;font-family:var(--font-mono);font-size:12px;padding:6px 12px;border:1px solid var(--green);color:var(--green);border-radius:4px;text-decoration:none;">Sign in with Whop</a>
+      <a id="whop-logout-btn" href="/auth/whop/logout" style="display:none;font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-decoration:none;">Sign out</a>
       <div class="view-toggle" role="tablist" aria-label="Signal display view">
         <button class="view-btn active" data-view="feed" role="tab" aria-selected="true" aria-controls="signal-feed">Feed</button>
         <button class="view-btn" data-view="table" role="tab" aria-selected="false" aria-controls="table-view">Table</button>
@@ -1100,10 +1102,16 @@ body.premium .unlock-badge { display: none; }
   var sortAsc = false;
   var loadTime = Date.now();
 
-  // ---- PREMIUM ACCESS CHECK ----
-  var urlKey = new URLSearchParams(window.location.search).get('key') || '';
+  // ---- PREMIUM ACCESS (Whop OAuth via Cloudflare Worker, 2026-04-25) ----
+  // Old ?key=URL model retired. Now: /api/whoami returns the active session
+  // tier (premium / founder / null), and gated data flows through /api/signals_premium
+  // which the Worker validates before proxying. signals.json remains the public
+  // free-tier feed.
   var isPremium = false;
+  var sessionTier = null;
   var WHOP_URL = 'https://whop.com/darkflow-signals/premium-e5-02ad/';
+  var AUTH_LOGIN_URL = '/auth/whop/login';
+  var AUTH_LOGOUT_URL = '/auth/whop/logout';
 
   // =================================================================
   // UNIFIED DATA HELPERS. Every view (feed, table, stats, streak, chart,
@@ -1188,18 +1196,9 @@ body.premium .unlock-badge { display: none; }
     return (v >= 0 ? '+' : '') + v.toFixed(1) + '%';
   }
 
-  function checkPremium(serverKey) {
-    isPremium = (urlKey === serverKey && urlKey !== '');
-    if (isPremium) {
-      document.body.classList.add('premium');
-      var banner = document.getElementById('free-banner');
-      if (banner) banner.style.display = 'none';
-    } else {
-      document.body.classList.remove('premium');
-      var banner = document.getElementById('free-banner');
-      if (banner) banner.style.display = 'block';
-    }
-  }
+  // checkPremium() retired 2026-04-25. Premium status now comes from
+  // /api/whoami via the Whop OAuth Worker; loadSignals() reads it on each
+  // page load and toggles body.premium / banner / login-button visibility.
 
   // Helper: wrap text in blur span for free users
   function blurWrap(text, tag) {
@@ -1222,24 +1221,41 @@ body.premium .unlock-badge { display: none; }
   }
 
   // ---- LOAD DATA ----
+  // 1. Hit /api/whoami first to detect a logged-in session.
+  // 2. If logged in (premium or founder), fetch /api/signals_premium - the
+  //    Worker validates the session cookie + active Whop membership and proxies
+  //    the gated JSON. Free fallback if the gate refuses for any reason.
+  // 3. If logged out, fetch the public signals.json.
   function loadSignals() {
-    // If user has a key, try premium JSON first (has strike/expiry/entry)
-    var src = urlKey ? 'signals_premium.json?t=' + Date.now() : 'signals.json?t=' + Date.now();
-    fetch(src)
-      .then(function(r) {
-        if (!r.ok && urlKey) {
-          // Premium file not on server (expected for GitHub Pages public deploy)
-          // Fall back to public JSON
-          return fetch('signals.json?t=' + Date.now()).then(function(r2) { return r2.json(); });
-        }
-        return r.json();
+    fetch('/api/whoami', { credentials: 'same-origin' })
+      .then(function(r) { return r.ok ? r.json() : { tier: null }; })
+      .catch(function() { return { tier: null }; })
+      .then(function(me) {
+        sessionTier = me && me.tier ? me.tier : null;
+        isPremium = (sessionTier === 'premium' || sessionTier === 'founder');
+        document.body.classList.toggle('premium', isPremium);
+        var loginBtn = document.getElementById('whop-login-btn');
+        if (loginBtn) loginBtn.style.display = isPremium ? 'none' : '';
+        var logoutBtn = document.getElementById('whop-logout-btn');
+        if (logoutBtn) logoutBtn.style.display = isPremium ? '' : 'none';
+        var freeBanner = document.getElementById('free-banner');
+        if (freeBanner) freeBanner.style.display = isPremium ? 'none' : 'block';
+
+        var src = isPremium
+          ? '/api/signals_premium?t=' + Date.now()
+          : '/signals.json?t=' + Date.now();
+        return fetch(src, { credentials: 'same-origin' }).then(function(r) {
+          if (!r.ok && isPremium) {
+            return fetch('/signals.json?t=' + Date.now()).then(function(r2) { return r2.json(); });
+          }
+          return r.json();
+        });
       })
       .then(function(data) {
         if (Array.isArray(data)) {
           allSignals = data;
         } else {
           allSignals = data.signals || [];
-          checkPremium(data.access_key || '');
         }
         loadTime = Date.now();
         render();

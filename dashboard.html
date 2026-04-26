@@ -864,11 +864,20 @@ body.premium .unlock-badge { display: none; }
 </head>
 <body>
 
-<!-- PREMIUM UPGRADE BANNER (hidden for premium users) -->
-<div id="free-banner" style="display:none; background: linear-gradient(90deg, #1a1a2e, #16213e); border-bottom: 1px solid #FFD700; padding: 10px 20px; text-align: center; font-family: 'Space Grotesk', monospace; font-size: 13px;">
-  <span style="color: #9CA3AF;">You're viewing delayed signals (last week).</span>
-  <a href="https://whop.com/darkflow-signals/premium-e5-02ad/" target="_blank" rel="noopener" style="color: #FFD700; font-weight: 600; text-decoration: none; margin-left: 8px;">Upgrade to Premium</a>
-  <span style="color: #6B7280; margin-left: 8px;">-- live signals, strike prices, entry premiums, real-time alerts</span>
+<!-- TRIAL CTA BAR (hidden for premium users) -->
+<div id="free-banner" style="display:none; background: linear-gradient(90deg, #0F1A14, #0A1F12 50%, #0F1A14); border-bottom: 1px solid rgba(0, 230, 118, 0.4); padding: 14px 20px; font-family: 'Space Grotesk', system-ui, sans-serif; position: relative;">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;">
+    <div style="flex: 1 1 320px; min-width: 0;">
+      <div style="color: #00E676; font-weight: 600; font-size: 14px; letter-spacing: 0.2px;">Unlock every signal live</div>
+      <div style="color: #A8A8B5; font-size: 12px; margin-top: 2px;">Strike, expiry, entry premium, real-time Discord alerts, on-demand <code style="color:#FFD700;font-size:11px;">/check TICKER</code>, gated dashboard. 14 days free, no card required.</div>
+    </div>
+    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+      <a href="https://whop.com/darkflow-signals/premium-e5-02ad/" target="_blank" rel="noopener" style="display: inline-block; background: #00E676; color: #0A0A0F; font-weight: 700; font-size: 13px; padding: 10px 22px; border-radius: 6px; text-decoration: none; font-family: var(--font-mono); letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap;">Start 14-Day Free Trial &middot; $59/mo</a>
+    </div>
+  </div>
+  <div id="last-signal-strip" style="max-width: 1200px; margin: 8px auto 0; font-family: var(--font-mono); font-size: 11px; color: #6B7280; text-align: center; display: none;">
+    <span id="last-signal-text"></span>
+  </div>
 </div>
 
 <!-- TICKER STRIP -->
@@ -2109,6 +2118,47 @@ body.premium .unlock-badge { display: none; }
     });
   }
 
+  // ---- LAST SIGNAL STRIP (free-tier only, real-time FOMO) ----
+  // Pulls the most recent signal entry timestamp and shows it under the trial
+  // CTA bar so visitors see the pipeline is actively firing right now.
+  function renderLastSignalStrip() {
+    var strip = document.getElementById('last-signal-strip');
+    var txt = document.getElementById('last-signal-text');
+    if (!strip || !txt) return;
+    if (isPremium || !allSignals || !allSignals.length) {
+      strip.style.display = 'none';
+      return;
+    }
+    // Find the most recent signal_time / entry_time across all signals.
+    var latestTs = 0;
+    var latestSig = null;
+    allSignals.forEach(function(s) {
+      var t = s.entry_time || s.signal_time || s.signal_date;
+      if (!t) return;
+      var d = new Date(t);
+      var ms = d.getTime();
+      if (!isNaN(ms) && ms > latestTs) {
+        latestTs = ms;
+        latestSig = s;
+      }
+    });
+    if (!latestSig) {
+      strip.style.display = 'none';
+      return;
+    }
+    var diffMs = Date.now() - latestTs;
+    var diffMin = Math.floor(diffMs / 60000);
+    var ago;
+    if (diffMin < 1) ago = 'just now';
+    else if (diffMin < 60) ago = diffMin + ' min ago';
+    else if (diffMin < 1440) ago = Math.floor(diffMin / 60) + 'h ago';
+    else ago = Math.floor(diffMin / 1440) + 'd ago';
+    var dir = (latestSig.direction || '').toLowerCase();
+    var optType = latestSig.option_type || (dir === 'bullish' ? 'Call' : 'Put');
+    txt.textContent = 'Last signal fired ' + ago + ' ($' + latestSig.ticker + ' ' + optType + '). Premium members saw it live.';
+    strip.style.display = 'block';
+  }
+
   // ---- FOMO SECTION ----
   function renderFomo() {
     var section = document.getElementById('fomo-section');
@@ -2169,6 +2219,7 @@ body.premium .unlock-badge { display: none; }
     renderFeed();
     renderTable();
     renderFomo();
+    renderLastSignalStrip();
     // Chart footer must stay in sync with stats bar. Re-derive after each render.
     if (typeof renderChartFooter === 'function') renderChartFooter(null);
     // Both charts respect every filter, so both redraw on each render.

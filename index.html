@@ -118,16 +118,32 @@ nav {
   font-weight: 700; font-size: 17px; letter-spacing: -0.5px;
 }
 .logo-flow { color: var(--green); }
-.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links { display: flex; gap: 22px; align-items: center; }
 .nav-links a {
   font-size: 13px; color: var(--text-secondary);
   transition: color 0.2s; font-family: var(--font-mono);
+  white-space: nowrap;
 }
 .nav-links a:hover { color: var(--text-primary); }
+.nav-signin {
+  color: #FFD700 !important;
+  font-size: 12px;
+  padding: 5px 10px;
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: border-color 0.2s, background 0.2s;
+}
+.nav-signin:hover {
+  border-color: #FFD700;
+  background: rgba(255, 215, 0, 0.06);
+  color: #FFD700 !important;
+}
 .nav-cta {
   font-size: 12px; font-weight: 600; padding: 7px 18px;
   background: var(--green); color: #000; border: none; cursor: pointer;
   font-family: var(--font-mono); transition: background 0.2s;
+  white-space: nowrap;
 }
 .nav-cta:hover { background: #00c864; }
 
@@ -755,7 +771,7 @@ nav {
       <a href="dashboard.html">Dashboard</a>
       <a href="/case-studies/" class="nav-link" style="font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); margin-right: 20px;">Cases</a>
       <a href="#methodology" class="nav-link" style="font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); margin-right: 20px;">Method</a>
-      <a href="/auth/whop/login" style="font-family: var(--font-mono); font-size: 12px; color: #FFD700; text-decoration: none; padding: 6px 12px; border: 1px solid rgba(255, 215, 0, 0.5); border-radius: 5px; margin-right: 8px;">Member sign in</a>
+      <a href="/auth/whop/login" class="nav-link nav-signin">Sign in</a>
       <a href="https://whop.com/darkflow-signals/premium-e5-02ad/?success_url=https%3A%2F%2Fdarkflowsignals.com%2Fwelcome" target="_blank" rel="noopener" class="nav-cta">Try 14 Days Free</a>
     </div>
   </div>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>DarkFlow Admin Grant</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0A0A0F; --bg-card: #12121B; --border: #1E1E2E;
+  --text: #E8E8ED; --text-secondary: #A8A8B5; --text-muted: #7A7A95;
+  --green: #00E676; --gold: #FFD700; --red: #EF4444;
+  --font-d: 'Space Grotesk', system-ui, sans-serif;
+  --font-m: 'JetBrains Mono', 'Fira Code', monospace;
+}
+body { background: var(--bg); color: var(--text); font-family: var(--font-d); min-height: 100vh; padding: 32px 20px; line-height: 1.5; }
+.wrap { max-width: 640px; margin: 0 auto; }
+.logo { font-family: var(--font-m); font-weight: 700; font-size: 16px; letter-spacing: -0.4px; margin-bottom: 6px; }
+.logo .accent { color: var(--green); }
+.tag { display: inline-block; font-family: var(--font-m); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 8px; background: rgba(255,215,0,0.10); color: var(--gold); border-radius: 4px; margin-bottom: 24px; }
+h1 { font-size: 24px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 8px; }
+.lead { color: var(--text-secondary); font-size: 14px; margin-bottom: 28px; line-height: 1.65; }
+#auth-status { padding: 12px 14px; border-radius: 6px; font-family: var(--font-m); font-size: 13px; margin-bottom: 24px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); }
+#auth-status.ok { background: rgba(0,230,118,0.06); border-color: rgba(0,230,118,0.4); color: var(--green); }
+#auth-status.err { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.4); color: var(--red); }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 22px; margin-bottom: 20px; }
+.card h2 { font-size: 14px; font-family: var(--font-m); letter-spacing: 1px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 14px; }
+.field { margin-bottom: 14px; }
+.field label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; font-family: var(--font-m); }
+.field input, .field select { width: 100%; padding: 10px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 5px; color: var(--text); font-family: var(--font-m); font-size: 14px; }
+.field input:focus, .field select:focus { outline: none; border-color: var(--gold); }
+.btn { display: block; width: 100%; padding: 12px 18px; background: var(--green); color: var(--bg); border: none; border-radius: 6px; font-family: var(--font-m); font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; }
+.btn:hover { background: #00ff7e; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+#result { display: none; background: rgba(0,230,118,0.06); border: 1px solid rgba(0,230,118,0.4); padding: 16px; border-radius: 6px; margin-top: 14px; }
+#result.show { display: block; }
+#result label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; font-family: var(--font-m); display: block; margin-bottom: 8px; }
+.url-box { background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 12px; font-family: var(--font-m); font-size: 12px; color: var(--green); word-break: break-all; margin-bottom: 12px; user-select: all; }
+.meta { font-family: var(--font-m); font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
+.copy-btn { display: inline-block; padding: 8px 14px; background: var(--gold); color: var(--bg); font-family: var(--font-m); font-size: 12px; font-weight: 700; border: none; border-radius: 5px; cursor: pointer; }
+.copy-btn:hover { background: #ffe333; }
+.copy-btn.copied { background: var(--green); }
+.dm-template { background: var(--bg); border: 1px dashed var(--border); padding: 12px; border-radius: 5px; font-family: var(--font-m); font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin-top: 14px; white-space: pre-wrap; cursor: pointer; }
+#err { display: none; color: var(--red); font-family: var(--font-m); font-size: 13px; margin-top: 10px; }
+#err.show { display: block; }
+.help-link { color: var(--gold); text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo"><span>Dark</span><span class="accent">Flow</span></div>
+  <span class="tag">Operator Tools</span>
+  <h1>Manual access grant</h1>
+  <p class="lead">Sidesteps Whop OAuth. Generates a single-use magic link you can DM to a user that signs them straight into the dashboard. Useful while we migrate off Whop.</p>
+  <div id="auth-status">Checking your session...</div>
+  <div class="card">
+    <h2>Generate sign-in link</h2>
+    <div class="field">
+      <label>Label (their email or username)</label>
+      <input type="text" id="label" placeholder="user@example.com" autocomplete="off">
+    </div>
+    <div class="field">
+      <label>Tier</label>
+      <select id="tier">
+        <option value="premium" selected>Premium</option>
+        <option value="founder">Founder (grandfathered)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Link expires after</label>
+      <select id="ttl">
+        <option value="3600" selected>1 hour</option>
+        <option value="14400">4 hours</option>
+        <option value="86400">24 hours</option>
+        <option value="604800">7 days</option>
+      </select>
+    </div>
+    <button class="btn" id="generate" type="button" disabled>Generate link</button>
+    <div id="err"></div>
+    <div id="result">
+      <label>Magic link (single-use)</label>
+      <div class="url-box" id="url-out"></div>
+      <button class="copy-btn" id="copy-btn" type="button">Copy link</button>
+      <div class="meta" id="meta"></div>
+      <label style="margin-top: 14px;">Suggested DM (click to copy)</label>
+      <div class="dm-template" id="dm-template"></div>
+    </div>
+  </div>
+  <p class="lead" style="font-size: 12px; color: var(--text-muted);">Operator-gated. Sign in to the dashboard first as operator if the auth check fails.</p>
+</div>
+<script>
+(function(){
+  var statusEl = document.getElementById('auth-status');
+  var generateBtn = document.getElementById('generate');
+  var resultEl = document.getElementById('result');
+  var urlOut = document.getElementById('url-out');
+  var copyBtn = document.getElementById('copy-btn');
+  var metaEl = document.getElementById('meta');
+  var dmTpl = document.getElementById('dm-template');
+  var errEl = document.getElementById('err');
+
+  function setStatus(cls, text, linkHref, linkText) {
+    statusEl.className = cls || '';
+    while (statusEl.firstChild) statusEl.removeChild(statusEl.firstChild);
+    statusEl.appendChild(document.createTextNode(text));
+    if (linkHref) {
+      statusEl.appendChild(document.createTextNode(' '));
+      var a = document.createElement('a');
+      a.href = linkHref;
+      a.className = 'help-link';
+      a.textContent = linkText;
+      statusEl.appendChild(a);
+    }
+  }
+
+  fetch('/api/whoami', { credentials: 'same-origin' })
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d && (d.tier === 'founder' || d.tier === 'premium')) {
+        return fetch('/api/diag', { credentials: 'same-origin' }).then(function(r){
+          if (r.status === 200) {
+            setStatus('ok', 'Operator session confirmed. Ready to grant.');
+            generateBtn.disabled = false;
+          } else {
+            setStatus('err', 'Signed in but not an operator.', '/dashboard.html', 'Back to dashboard');
+          }
+        });
+      } else {
+        setStatus('err', 'Not signed in.', '/auth/whop/login', 'Sign in first');
+      }
+    })
+    .catch(function(){ setStatus('err', 'Auth check failed. Refresh and try again.'); });
+
+  generateBtn.addEventListener('click', function(){
+    errEl.classList.remove('show');
+    var label = document.getElementById('label').value.trim();
+    var tier = document.getElementById('tier').value;
+    var ttl = document.getElementById('ttl').value;
+    if (!label) {
+      errEl.textContent = 'Please enter a label (their email).';
+      errEl.classList.add('show');
+      return;
+    }
+    generateBtn.disabled = true;
+    generateBtn.textContent = 'Generating...';
+    var qs = '?label=' + encodeURIComponent(label) + '&tier=' + tier + '&ttl_sec=' + ttl;
+    fetch('/api/admin/grant' + qs, { credentials: 'same-origin' })
+      .then(function(r){ return r.json().then(function(d){ return { ok: r.ok, body: d }; }); })
+      .then(function(res){
+        generateBtn.disabled = false;
+        generateBtn.textContent = 'Generate link';
+        if (!res.ok || !res.body.url) {
+          errEl.textContent = 'Failed: ' + (res.body.error || JSON.stringify(res.body));
+          errEl.classList.add('show');
+          return;
+        }
+        urlOut.textContent = res.body.url;
+        metaEl.textContent = 'Tier: ' + res.body.tier + ' · expires: ' + res.body.expires_at + ' · single-use';
+        var hours = Math.round(parseInt(ttl)/3600);
+        var tplText = "Hey, auth provider has been quirky for trial users this weekend. Quick fix, tap this link, signs you straight into the dashboard.\n\n" + res.body.url + "\n\nSingle-use, expires in " + hours + " hour(s). Once you're in the session lasts 7 days, no need to re-tap. Bookmark darkflowsignals.com.\n\nNew auth system ships next week. Sorry for the noise.";
+        dmTpl.textContent = tplText;
+        dmTpl.title = 'Click to copy';
+        dmTpl.onclick = function(){
+          navigator.clipboard.writeText(tplText).then(function(){
+            dmTpl.style.background = 'rgba(0,230,118,0.10)';
+            setTimeout(function(){ dmTpl.style.background = 'var(--bg)'; }, 700);
+          });
+        };
+        resultEl.classList.add('show');
+      })
+      .catch(function(e){
+        generateBtn.disabled = false;
+        generateBtn.textContent = 'Generate link';
+        errEl.textContent = 'Network error: ' + e.message;
+        errEl.classList.add('show');
+      });
+  });
+
+  copyBtn.addEventListener('click', function(){
+    navigator.clipboard.writeText(urlOut.textContent).then(function(){
+      copyBtn.textContent = 'Copied!';
+      copyBtn.classList.add('copied');
+      setTimeout(function(){
+        copyBtn.textContent = 'Copy link';
+        copyBtn.classList.remove('copied');
+      }, 1500);
+    });
+  });
+})();
+</script>
+</body>
+</html>

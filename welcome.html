@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to DarkFlow · Open Your Dashboard</title>
+<meta name="description" content="Welcome to DarkFlow. Two clicks to unlock your live dashboard with full strike, expiry, entry premium on every signal.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0A0A0F;
+  --bg-card: #12121B;
+  --border: #1E1E2E;
+  --text: #E8E8ED;
+  --text-secondary: #A8A8B5;
+  --text-muted: #7A7A95;
+  --green: #00E676;
+  --green-glow: rgba(0, 230, 118, 0.25);
+  --gold: #FFD700;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-display);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+}
+.wrap { max-width: 600px; width: 100%; }
+.logo {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.5px;
+  margin-bottom: 28px;
+  color: var(--text);
+}
+.logo .accent { color: var(--green); }
+.headline {
+  font-size: clamp(28px, 4.5vw, 40px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -1.2px;
+  margin-bottom: 14px;
+}
+.headline em {
+  font-style: normal;
+  color: var(--green);
+}
+.lead {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  line-height: 1.65;
+}
+.cta-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(0, 230, 118, 0.35);
+  border-radius: 14px;
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 0 0 1px rgba(0, 230, 118, 0.08), 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 230, 118, 0.12);
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.step-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.step-body { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6; }
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 16px 24px;
+  background: var(--green);
+  color: #0A0A0F;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 8px;
+  transition: background 0.15s, transform 0.15s;
+  box-shadow: 0 8px 28px rgba(0, 230, 118, 0.25);
+}
+.btn-primary:hover { background: #00ff7e; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-secondary {
+  display: block;
+  width: 100%;
+  padding: 13px 24px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.15s, color 0.15s;
+}
+.btn-secondary:hover { border-color: rgba(255, 215, 0, 0.5); color: var(--gold); }
+.next-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px;
+}
+.next-section h3 {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+.next-list { list-style: none; }
+.next-list li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+.next-list li:last-child { border-bottom: none; }
+.next-list a { color: var(--text); text-decoration: none; transition: color 0.15s; display: flex; align-items: center; }
+.next-list a:hover { color: var(--green); }
+.next-list .icon { width: 22px; height: 22px; border-radius: 5px; margin-right: 12px; display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.icon-discord { background: rgba(88, 101, 242, 0.15); color: #5865F2; }
+.icon-substack { background: rgba(255, 123, 77, 0.15); color: #FF7B4D; }
+.icon-reddit { background: rgba(255, 69, 0, 0.15); color: #FF4500; }
+.icon-stocktwits { background: rgba(0, 194, 194, 0.15); color: #00C2C2; }
+.icon-tradingview { background: rgba(41, 113, 237, 0.15); color: #2971ED; }
+.tip { font-size: 12px; color: var(--text-muted); margin-top: 18px; line-height: 1.65; text-align: center; padding: 14px 18px; border: 1px dashed var(--border); border-radius: 6px; background: rgba(255, 255, 255, 0.02); }
+.tip code { font-family: var(--font-mono); font-size: 11px; color: var(--green); background: rgba(0, 230, 118, 0.08); padding: 2px 6px; border-radius: 3px; }
+.footer { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 28px; }
+.footer a { color: var(--text-muted); text-decoration: underline; text-underline-offset: 2px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo"><span>Dark</span><span class="accent">Flow</span></div>
+  <h1 class="headline">You're in. Now <em>open the dashboard</em>.</h1>
+  <p class="lead">Your subscription is active. The dashboard is where every signal lives — full strike, expiry, entry premium, peak %, current %, the open book, the closed book. Every win and every loss public and auditable.</p>
+
+  <div class="cta-card">
+    <div class="step-title"><span class="step-num">1</span>Open your dashboard</div>
+    <p class="step-body">One-click sign-in via Whop. Auto-completes since you're already authenticated. The dashboard unlocks immediately with full member detail.</p>
+    <a class="btn-primary" href="/auth/whop/login">Open Dashboard →</a>
+  </div>
+
+  <div class="next-section">
+    <h3>Then explore</h3>
+    <ul class="next-list">
+      <li><a href="https://discord.gg/NsnCEmeJqA" target="_blank" rel="noopener"><span class="icon icon-discord">D</span>Discord — live signal channels + /check tool</a></li>
+      <li><a href="https://darkflowsignals.substack.com" target="_blank" rel="noopener"><span class="icon icon-substack">S</span>Substack — daily note + weekly recap</a></li>
+      <li><a href="https://www.reddit.com/r/DarkFlowSignals/" target="_blank" rel="noopener"><span class="icon icon-reddit">r</span>Reddit — r/DarkFlowSignals</a></li>
+      <li><a href="https://stocktwits.com/DarkFlowSignals" target="_blank" rel="noopener"><span class="icon icon-stocktwits">ST</span>Stocktwits</a></li>
+      <li><a href="https://www.tradingview.com/u/DarkFlowSignals/" target="_blank" rel="noopener"><span class="icon icon-tradingview">TV</span>TradingView ideas</a></li>
+    </ul>
+  </div>
+
+  <p class="tip">Bookmark <code>darkflowsignals.com</code>. The dashboard is the home — Whop is just the billing layer.</p>
+
+  <p class="footer">DarkFlow Signals · 14-day free trial · Cancel anytime via <a href="https://whop.com/orders/">Whop billing</a> · <a href="/dashboard.html">Public dashboard</a></p>
+</div>
+</body>
+</html>

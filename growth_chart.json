@@ -3,78 +3,78 @@
     {
       "date": "2026-04-09",
       "signals": 5,
-      "avg_return": 63.7,
+      "avg_return": 62.2,
       "avg_peak": 165.9,
       "win_rate": 80.0
     },
     {
       "date": "2026-04-10",
       "signals": 14,
-      "avg_return": 237.4,
+      "avg_return": 237.6,
       "avg_peak": 382.8,
       "win_rate": 93.0
     },
     {
       "date": "2026-04-13",
       "signals": 15,
-      "avg_return": 270.3,
+      "avg_return": 270.5,
       "avg_peak": 416.9,
       "win_rate": 93.0
     },
     {
       "date": "2026-04-14",
       "signals": 20,
-      "avg_return": 221.7,
+      "avg_return": 221.8,
       "avg_peak": 376.5,
       "win_rate": 90.0
     },
     {
       "date": "2026-04-15",
       "signals": 23,
-      "avg_return": 221.8,
+      "avg_return": 221.7,
       "avg_peak": 371.5,
       "win_rate": 91.0
     },
     {
       "date": "2026-04-16",
       "signals": 27,
-      "avg_return": 319.8,
+      "avg_return": 319.7,
       "avg_peak": 468.9,
       "win_rate": 93.0
     },
     {
       "date": "2026-04-17",
       "signals": 31,
-      "avg_return": 327.9,
-      "avg_peak": 465.4,
+      "avg_return": 328.2,
+      "avg_peak": 465.9,
       "win_rate": 94.0
     },
     {
       "date": "2026-04-20",
       "signals": 37,
-      "avg_return": 272.2,
-      "avg_peak": 400.0,
+      "avg_return": 272.7,
+      "avg_peak": 400.6,
       "win_rate": 95.0
     },
     {
       "date": "2026-04-22",
       "signals": 38,
-      "avg_return": 269.5,
-      "avg_peak": 395.9,
+      "avg_return": 269.9,
+      "avg_peak": 396.5,
       "win_rate": 95.0
     },
     {
       "date": "2026-04-23",
       "signals": 40,
-      "avg_return": 251.8,
-      "avg_peak": 377.0,
+      "avg_return": 252.2,
+      "avg_peak": 377.5,
       "win_rate": 95.0
     },
     {
       "date": "2026-04-24",
       "signals": 43,
-      "avg_return": 232.6,
-      "avg_peak": 351.8,
+      "avg_return": 232.8,
+      "avg_peak": 352.3,
       "win_rate": 93.0
     }
   ],
@@ -82,7 +82,7 @@
     {
       "ticker": "CRWV",
       "date": "2026-04-09",
-      "pnl": 125.0,
+      "pnl": 122.5,
       "peak": 405.8,
       "expired": false
     },
@@ -110,7 +110,7 @@
     {
       "ticker": "EOSE",
       "date": "2026-04-09",
-      "pnl": 31.7,
+      "pnl": 26.8,
       "peak": 48.8,
       "expired": false
     },
@@ -145,7 +145,7 @@
     {
       "ticker": "CRWV",
       "date": "2026-04-10",
-      "pnl": 114.0,
+      "pnl": 123.8,
       "peak": 312.1,
       "expired": false
     },
@@ -236,7 +236,7 @@
     {
       "ticker": "MSFT",
       "date": "2026-04-15",
-      "pnl": 661.8,
+      "pnl": 657.7,
       "peak": 840.8,
       "expired": false
     },
@@ -264,7 +264,7 @@
     {
       "ticker": "TSM",
       "date": "2026-04-16",
-      "pnl": 193.4,
+      "pnl": 192.2,
       "peak": 221.2,
       "expired": false
     },
@@ -285,8 +285,8 @@
     {
       "ticker": "INTC",
       "date": "2026-04-17",
-      "pnl": 296.8,
-      "peak": 296.8,
+      "pnl": 306.6,
+      "peak": 312.9,
       "expired": false
     },
     {
@@ -299,14 +299,14 @@
     {
       "ticker": "GOOGL",
       "date": "2026-04-20",
-      "pnl": 23.5,
-      "peak": 25.0,
+      "pnl": 28.8,
+      "peak": 30.2,
       "expired": false
     },
     {
       "ticker": "NVDA",
       "date": "2026-04-20",
-      "pnl": 119.4,
+      "pnl": 123.2,
       "peak": 154.5,
       "expired": false
     },
@@ -320,7 +320,7 @@
     {
       "ticker": "SLV",
       "date": "2026-04-20",
-      "pnl": -68.8,
+      "pnl": -68.2,
       "peak": 5.1,
       "expired": false
     },
@@ -362,14 +362,14 @@
     {
       "ticker": "ARM",
       "date": "2026-04-24",
-      "pnl": -8.7,
+      "pnl": -15.5,
       "peak": 30.0,
       "expired": false
     },
     {
       "ticker": "AXTI",
       "date": "2026-04-24",
-      "pnl": -44.7,
+      "pnl": -46.8,
       "peak": 19.1,
       "expired": false
     },
@@ -382,8 +382,8 @@
     }
   ],
   "total": 43,
-  "avg_return": 232.6,
-  "avg_peak": 351.8,
+  "avg_return": 232.8,
+  "avg_peak": 352.3,
   "win_rate": 0.0,
-  "generated": "2026-04-27T06:58:25.640825"
+  "generated": "2026-04-27T07:03:33.371601"
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>DarkFlow · Signing you in</title>
+<meta http-equiv="refresh" content="0; url=/auth/whop/login">
+<link rel="canonical" href="https://darkflowsignals.com/auth/whop/login">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #0A0A0F;
+  color: #E8E8ED;
+  font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 20px;
+}
+.box { max-width: 360px; }
+.logo { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 16px; letter-spacing: -0.4px; margin-bottom: 18px; }
+.logo .accent { color: #00E676; }
+.headline { font-size: 22px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.4px; }
+.sub { font-size: 14px; color: #A8A8B5; line-height: 1.55; margin-bottom: 20px; }
+.spinner {
+  display: inline-block; width: 26px; height: 26px;
+  border: 2px solid rgba(0, 230, 118, 0.18);
+  border-top-color: #00E676;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-bottom: 14px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+a.fallback { color: #00E676; font-family: 'JetBrains Mono', monospace; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="logo"><span>Dark</span><span class="accent">Flow</span></div>
+  <div class="spinner"></div>
+  <div class="headline">Opening your dashboard...</div>
+  <div class="sub">Signing you in via Whop. Auto-completes in ~1 second.</div>
+  <a class="fallback" href="/auth/whop/login">Tap here if it doesn't redirect</a>
+</div>
+<script>setTimeout(function(){ window.location.replace('/auth/whop/login'); }, 100);</script>
+</body>
+</html>

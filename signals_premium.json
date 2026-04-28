@@ -1231,6 +1231,32 @@
       "contract_cost": 2677,
       "contract_peak_pnl": 246,
       "contract_current_pnl": -3
+    },
+    {
+      "signal_date": "2026-04-28",
+      "ticker": "MU",
+      "direction": "BULLISH",
+      "conviction_score": 76.0,
+      "option_type": "Call",
+      "strike": 500.0,
+      "expiry": "2026-05-08",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "entry_premium": 31.6,
+      "current_premium": null,
+      "peak_premium": null,
+      "current_return_pct": null,
+      "peak_return_pct": null,
+      "low_return_pct": null,
+      "result": null,
+      "tracking_type": "system",
+      "signal_time": "2026-04-28T13:30:00Z",
+      "exit_reason": null,
+      "exit_date": null,
+      "exit_price": null,
+      "final_return_pct": null,
+      "contract_cost": 3160
     }
   ]
 }

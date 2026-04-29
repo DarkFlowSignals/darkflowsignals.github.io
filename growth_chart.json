@@ -3,14 +3,14 @@
     {
       "date": "2026-04-09",
       "signals": 5,
-      "avg_return": 68.0,
+      "avg_return": 68.2,
       "avg_peak": 165.9,
       "win_rate": 80.0
     },
     {
       "date": "2026-04-10",
       "signals": 14,
-      "avg_return": 244.4,
+      "avg_return": 244.5,
       "avg_peak": 382.8,
       "win_rate": 93.0
     },
@@ -59,14 +59,14 @@
     {
       "date": "2026-04-22",
       "signals": 38,
-      "avg_return": 270.5,
+      "avg_return": 270.6,
       "avg_peak": 402.7,
       "win_rate": 95.0
     },
     {
       "date": "2026-04-23",
       "signals": 40,
-      "avg_return": 252.3,
+      "avg_return": 252.4,
       "avg_peak": 383.4,
       "win_rate": 95.0
     },
@@ -117,7 +117,7 @@
     {
       "ticker": "EOSE",
       "date": "2026-04-09",
-      "pnl": -39.0,
+      "pnl": -38.2,
       "peak": 48.8,
       "expired": false
     },
@@ -420,5 +420,5 @@
   "avg_return": 214.2,
   "avg_peak": 329.5,
   "win_rate": 91.0,
-  "generated": "2026-04-29T07:39:06.295409"
+  "generated": "2026-04-29T07:39:12.846807"
 }

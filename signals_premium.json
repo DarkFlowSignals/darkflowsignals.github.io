@@ -124,9 +124,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 1.23,
-      "current_premium": 0.75,
+      "current_premium": 0.76,
       "peak_premium": 1.83,
-      "current_return_pct": -39.0,
+      "current_return_pct": -38.2,
       "peak_return_pct": 48.8,
       "low_return_pct": -44.7,
       "result": "WIN",
@@ -138,7 +138,7 @@
       "final_return_pct": null,
       "contract_cost": 123,
       "contract_peak_pnl": 60,
-      "contract_current_pnl": -48
+      "contract_current_pnl": -47
     },
     {
       "signal_date": "2026-04-10",

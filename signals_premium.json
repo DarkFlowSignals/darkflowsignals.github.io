@@ -55,24 +55,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 10,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "15-30",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
-        "best_final_pct": 3196.0,
-        "worst_final_pct": -99.6,
+        "median_peak_pct": 149.2,
+        "median_final_pct": 42.5,
+        "median_giveback_pct": 91.2,
+        "best_final_pct": 763.1,
+        "worst_final_pct": -91.9,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          22.6,
+          323.8
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 90.0,
+        "win_rate_settle_basis": 60.0
       }
     },
     {
@@ -218,7 +218,7 @@
         "match_strict_or_widened": "widened_option_type_only",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "30+",
           "moneyness_bucket": "unknown"
         },
         "median_peak_pct": 169.8,
@@ -401,24 +401,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 10,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "15-30",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
-        "best_final_pct": 3196.0,
-        "worst_final_pct": -99.6,
+        "median_peak_pct": 149.2,
+        "median_final_pct": 42.5,
+        "median_giveback_pct": 91.2,
+        "best_final_pct": 763.1,
+        "worst_final_pct": -91.9,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          22.6,
+          323.8
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 90.0,
+        "win_rate_settle_basis": 60.0
       }
     },
     {
@@ -812,24 +812,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 10,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "15-30",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
-        "best_final_pct": 3196.0,
-        "worst_final_pct": -99.6,
+        "median_peak_pct": 149.2,
+        "median_final_pct": 42.5,
+        "median_giveback_pct": 91.2,
+        "best_final_pct": 763.1,
+        "worst_final_pct": -91.9,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          22.6,
+          323.8
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 90.0,
+        "win_rate_settle_basis": 60.0
       }
     },
     {
@@ -943,24 +943,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 10,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "15-30",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
-        "best_final_pct": 3196.0,
-        "worst_final_pct": -99.6,
+        "median_peak_pct": 149.2,
+        "median_final_pct": 42.5,
+        "median_giveback_pct": 91.2,
+        "best_final_pct": 763.1,
+        "worst_final_pct": -91.9,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          22.6,
+          323.8
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 90.0,
+        "win_rate_settle_basis": 60.0
       }
     },
     {
@@ -1022,7 +1022,7 @@
         "match_strict_or_widened": "widened_option_type_only",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "30+",
           "moneyness_bucket": "unknown"
         },
         "median_peak_pct": 169.8,
@@ -1149,24 +1149,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "8-14",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
         "best_final_pct": 3196.0,
         "worst_final_pct": -99.6,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          52.6,
+          328.9
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
       }
     },
     {
@@ -1252,24 +1252,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 10,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "15-30",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
-        "best_final_pct": 3196.0,
-        "worst_final_pct": -99.6,
+        "median_peak_pct": 149.2,
+        "median_final_pct": 42.5,
+        "median_giveback_pct": 91.2,
+        "best_final_pct": 763.1,
+        "worst_final_pct": -91.9,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          22.6,
+          323.8
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 90.0,
+        "win_rate_settle_basis": 60.0
       }
     },
     {
@@ -1327,24 +1327,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 10,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "15-30",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
-        "best_final_pct": 3196.0,
-        "worst_final_pct": -99.6,
+        "median_peak_pct": 149.2,
+        "median_final_pct": 42.5,
+        "median_giveback_pct": 91.2,
+        "best_final_pct": 763.1,
+        "worst_final_pct": -91.9,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          22.6,
+          323.8
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 90.0,
+        "win_rate_settle_basis": 60.0
       }
     },
     {
@@ -1402,24 +1402,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 10,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "15-30",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
-        "best_final_pct": 3196.0,
-        "worst_final_pct": -99.6,
+        "median_peak_pct": 149.2,
+        "median_final_pct": 42.5,
+        "median_giveback_pct": 91.2,
+        "best_final_pct": 763.1,
+        "worst_final_pct": -91.9,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          22.6,
+          323.8
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 90.0,
+        "win_rate_settle_basis": 60.0
       }
     },
     {
@@ -1477,24 +1477,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 10,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "15-30",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
-        "best_final_pct": 3196.0,
-        "worst_final_pct": -99.6,
+        "median_peak_pct": 149.2,
+        "median_final_pct": 42.5,
+        "median_giveback_pct": 91.2,
+        "best_final_pct": 763.1,
+        "worst_final_pct": -91.9,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          22.6,
+          323.8
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 90.0,
+        "win_rate_settle_basis": 60.0
       }
     },
     {
@@ -1663,24 +1663,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "8-14",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
         "best_final_pct": 3196.0,
         "worst_final_pct": -99.6,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          52.6,
+          328.9
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
       }
     },
     {
@@ -1766,24 +1766,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 13,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "5-7",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
-        "best_final_pct": 3196.0,
-        "worst_final_pct": -99.6,
+        "median_peak_pct": 291.9,
+        "median_final_pct": 272.1,
+        "median_giveback_pct": 90.7,
+        "best_final_pct": 1190.1,
+        "worst_final_pct": 3.4,
         "giveback_range_pct": [
           0.0,
           414.0
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 100.0,
+        "win_rate_settle_basis": 100.0
       }
     },
     {
@@ -1841,24 +1841,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 13,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "5-7",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
-        "best_final_pct": 3196.0,
-        "worst_final_pct": -99.6,
+        "median_peak_pct": 291.9,
+        "median_final_pct": 272.1,
+        "median_giveback_pct": 90.7,
+        "best_final_pct": 1190.1,
+        "worst_final_pct": 3.4,
         "giveback_range_pct": [
           0.0,
           414.0
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 100.0,
+        "win_rate_settle_basis": 100.0
       }
     },
     {
@@ -1916,24 +1916,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 10,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "15-30",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
-        "best_final_pct": 3196.0,
-        "worst_final_pct": -99.6,
+        "median_peak_pct": 149.2,
+        "median_final_pct": 42.5,
+        "median_giveback_pct": 91.2,
+        "best_final_pct": 763.1,
+        "worst_final_pct": -91.9,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          22.6,
+          323.8
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 90.0,
+        "win_rate_settle_basis": 60.0
       }
     },
     {
@@ -1991,24 +1991,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "8-14",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
         "best_final_pct": 3196.0,
         "worst_final_pct": -99.6,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          52.6,
+          328.9
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
       }
     },
     {
@@ -2066,24 +2066,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "8-14",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
         "best_final_pct": 3196.0,
         "worst_final_pct": -99.6,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          52.6,
+          328.9
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
       }
     },
     {
@@ -2141,24 +2141,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 10,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "15-30",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
-        "best_final_pct": 3196.0,
-        "worst_final_pct": -99.6,
+        "median_peak_pct": 149.2,
+        "median_final_pct": 42.5,
+        "median_giveback_pct": 91.2,
+        "best_final_pct": 763.1,
+        "worst_final_pct": -91.9,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          22.6,
+          323.8
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 90.0,
+        "win_rate_settle_basis": 60.0
       }
     },
     {
@@ -2216,24 +2216,24 @@
         }
       },
       "cohort": {
-        "n": 44,
-        "match_strict_or_widened": "widened_option_type_only",
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
         "match_keys": {
           "option_type": "Call",
-          "dte_bucket": "unknown",
+          "dte_bucket": "8-14",
           "moneyness_bucket": "unknown"
         },
-        "median_peak_pct": 169.8,
-        "median_final_pct": 145.1,
-        "median_giveback_pct": 98.4,
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
         "best_final_pct": 3196.0,
         "worst_final_pct": -99.6,
         "giveback_range_pct": [
-          0.0,
-          414.0
+          52.6,
+          328.9
         ],
-        "win_rate_peak_basis": 90.9,
-        "win_rate_settle_basis": 72.0
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
       }
     }
   ]

@@ -38,14 +38,14 @@
     {
       "date": "2026-04-16",
       "signals": 27,
-      "avg_return": 314.6,
+      "avg_return": 314.7,
       "avg_peak": 468.9,
       "win_rate": 93.0
     },
     {
       "date": "2026-04-17",
       "signals": 31,
-      "avg_return": 327.6,
+      "avg_return": 327.7,
       "avg_peak": 469.8,
       "win_rate": 94.0
     },
@@ -59,7 +59,7 @@
     {
       "date": "2026-04-22",
       "signals": 38,
-      "avg_return": 269.9,
+      "avg_return": 270.0,
       "avg_peak": 402.8,
       "win_rate": 95.0
     },
@@ -264,7 +264,7 @@
     {
       "ticker": "HIMS",
       "date": "2026-04-16",
-      "pnl": -16.5,
+      "pnl": -14.7,
       "peak": 286.5,
       "expired": false
     },
@@ -334,7 +334,7 @@
     {
       "ticker": "IWM",
       "date": "2026-04-20",
-      "pnl": -19.0,
+      "pnl": -19.4,
       "peak": 40.0,
       "expired": false
     },
@@ -369,14 +369,14 @@
     {
       "ticker": "ARM",
       "date": "2026-04-24",
-      "pnl": -45.1,
+      "pnl": -43.9,
       "peak": 30.0,
       "expired": false
     },
     {
       "ticker": "AXTI",
       "date": "2026-04-24",
-      "pnl": -36.9,
+      "pnl": -39.0,
       "peak": 19.1,
       "expired": false
     },
@@ -420,5 +420,5 @@
   "avg_return": 213.9,
   "avg_peak": 329.6,
   "win_rate": 91.0,
-  "generated": "2026-04-29T07:45:22.987521"
+  "generated": "2026-04-29T07:45:40.430945"
 }

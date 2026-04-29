@@ -31,14 +31,14 @@
     {
       "date": "2026-04-15",
       "signals": 23,
-      "avg_return": 228.8,
+      "avg_return": 228.7,
       "avg_peak": 371.5,
       "win_rate": 91.0
     },
     {
       "date": "2026-04-16",
       "signals": 27,
-      "avg_return": 315.5,
+      "avg_return": 315.4,
       "avg_peak": 468.9,
       "win_rate": 93.0
     },
@@ -59,14 +59,14 @@
     {
       "date": "2026-04-22",
       "signals": 38,
-      "avg_return": 270.6,
+      "avg_return": 270.5,
       "avg_peak": 402.7,
       "win_rate": 95.0
     },
     {
       "date": "2026-04-23",
       "signals": 40,
-      "avg_return": 252.4,
+      "avg_return": 252.3,
       "avg_peak": 383.4,
       "win_rate": 95.0
     },
@@ -243,7 +243,7 @@
     {
       "ticker": "MSFT",
       "date": "2026-04-15",
-      "pnl": 724.3,
+      "pnl": 722.3,
       "peak": 840.8,
       "expired": false
     },
@@ -420,5 +420,5 @@
   "avg_return": 214.2,
   "avg_peak": 329.5,
   "win_rate": 91.0,
-  "generated": "2026-04-29T07:39:12.846807"
+  "generated": "2026-04-29T07:39:19.469464"
 }

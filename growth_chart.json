@@ -80,8 +80,8 @@
     {
       "date": "2026-04-28",
       "signals": 47,
-      "avg_return": 214.2,
-      "avg_peak": 329.5,
+      "avg_return": 214.4,
+      "avg_peak": 329.6,
       "win_rate": 91.0
     }
   ],
@@ -390,14 +390,14 @@
     {
       "ticker": "MU",
       "date": "2026-04-28",
-      "pnl": 36.2,
+      "pnl": 38.3,
       "peak": 44.5,
       "expired": false
     },
     {
       "ticker": "MU",
       "date": "2026-04-28",
-      "pnl": 33.2,
+      "pnl": 36.1,
       "peak": 42.4,
       "expired": false
     },
@@ -411,14 +411,14 @@
     {
       "ticker": "QQQ",
       "date": "2026-04-28",
-      "pnl": 12.5,
-      "peak": 12.5,
+      "pnl": 13.7,
+      "peak": 13.7,
       "expired": false
     }
   ],
   "total": 47,
-  "avg_return": 214.2,
-  "avg_peak": 329.5,
+  "avg_return": 214.4,
+  "avg_peak": 329.6,
   "win_rate": 91.0,
-  "generated": "2026-04-29T07:39:26.462358"
+  "generated": "2026-04-29T07:39:33.475556"
 }

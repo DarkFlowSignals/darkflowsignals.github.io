@@ -53,6 +53,26 @@
           "intrinsic_pct_of_value": null,
           "label": "9 sessions to settle."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -192,6 +212,26 @@
           "intrinsic_pct_of_value": null,
           "label": "16 sessions to settle."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -359,6 +399,26 @@
           "intrinsic_pct_of_value": null,
           "label": "9 sessions to settle."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -750,6 +810,26 @@
           "intrinsic_pct_of_value": null,
           "label": "16 sessions to settle."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -861,6 +941,26 @@
           "intrinsic_pct_of_value": null,
           "label": "2 sessions to settle. Theta accelerating."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -916,6 +1016,26 @@
           "intrinsic_pct_of_value": null,
           "label": "23 sessions to settle."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -1027,6 +1147,26 @@
           "intrinsic_pct_of_value": null,
           "label": "2 sessions to settle. Theta accelerating."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -1110,6 +1250,26 @@
           "intrinsic_pct_of_value": null,
           "label": "16 sessions to settle."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -1165,6 +1325,26 @@
           "intrinsic_pct_of_value": null,
           "label": "16 sessions to settle."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -1220,6 +1400,26 @@
           "intrinsic_pct_of_value": null,
           "label": "16 sessions to settle."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -1275,6 +1475,26 @@
           "intrinsic_pct_of_value": null,
           "label": "16 sessions to settle."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -1441,6 +1661,26 @@
           "intrinsic_pct_of_value": null,
           "label": "2 sessions to settle. Theta accelerating."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -1524,6 +1764,26 @@
           "intrinsic_pct_of_value": null,
           "label": "2 sessions to settle. Theta accelerating."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -1579,6 +1839,26 @@
           "intrinsic_pct_of_value": null,
           "label": "2 sessions to settle. Theta accelerating."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -1634,6 +1914,26 @@
           "intrinsic_pct_of_value": null,
           "label": "16 sessions to settle."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -1689,6 +1989,26 @@
           "intrinsic_pct_of_value": null,
           "label": "9 sessions to settle."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -1744,6 +2064,26 @@
           "intrinsic_pct_of_value": null,
           "label": "9 sessions to settle."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -1799,6 +2139,26 @@
           "intrinsic_pct_of_value": null,
           "label": "16 sessions to settle."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     },
     {
@@ -1854,6 +2214,26 @@
           "intrinsic_pct_of_value": null,
           "label": "9 sessions to settle."
         }
+      },
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "unknown",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
       }
     }
   ]

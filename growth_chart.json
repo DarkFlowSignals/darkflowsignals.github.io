@@ -46,35 +46,35 @@
       "date": "2026-04-17",
       "signals": 31,
       "avg_return": 328.4,
-      "avg_peak": 469.7,
+      "avg_peak": 469.8,
       "win_rate": 94.0
     },
     {
       "date": "2026-04-20",
       "signals": 37,
       "avg_return": 273.3,
-      "avg_peak": 407.0,
+      "avg_peak": 407.1,
       "win_rate": 95.0
     },
     {
       "date": "2026-04-22",
       "signals": 38,
-      "avg_return": 270.5,
-      "avg_peak": 402.7,
+      "avg_return": 270.6,
+      "avg_peak": 402.8,
       "win_rate": 95.0
     },
     {
       "date": "2026-04-23",
       "signals": 40,
-      "avg_return": 252.3,
-      "avg_peak": 383.4,
+      "avg_return": 252.4,
+      "avg_peak": 383.5,
       "win_rate": 95.0
     },
     {
       "date": "2026-04-24",
       "signals": 43,
       "avg_return": 232.7,
-      "avg_peak": 357.8,
+      "avg_peak": 357.9,
       "win_rate": 93.0
     },
     {
@@ -271,7 +271,7 @@
     {
       "ticker": "TSM",
       "date": "2026-04-16",
-      "pnl": 118.6,
+      "pnl": 118.0,
       "peak": 221.2,
       "expired": false
     },
@@ -292,8 +292,8 @@
     {
       "ticker": "INTC",
       "date": "2026-04-17",
-      "pnl": 428.8,
-      "peak": 428.8,
+      "pnl": 431.7,
+      "peak": 431.7,
       "expired": false
     },
     {
@@ -306,7 +306,7 @@
     {
       "ticker": "GOOGL",
       "date": "2026-04-20",
-      "pnl": 56.8,
+      "pnl": 56.0,
       "peak": 56.8,
       "expired": false
     },
@@ -420,5 +420,5 @@
   "avg_return": 214.2,
   "avg_peak": 329.5,
   "win_rate": 91.0,
-  "generated": "2026-04-29T07:39:19.469464"
+  "generated": "2026-04-29T07:39:26.462358"
 }

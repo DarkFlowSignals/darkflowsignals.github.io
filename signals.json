@@ -1099,6 +1099,28 @@
       "contract_cost": 2717,
       "contract_peak_pnl": 215,
       "contract_current_pnl": 215
+    },
+    {
+      "signal_date": "2026-04-30",
+      "ticker": "QQQ",
+      "direction": "BULLISH",
+      "conviction_score": 80.0,
+      "option_type": "Call",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "current_return_pct": 0.0,
+      "peak_return_pct": 0.0,
+      "low_return_pct": 0.0,
+      "result": "LOSS",
+      "tracking_type": "tracked_only",
+      "signal_time": "2026-04-30T12:21:55",
+      "exit_reason": null,
+      "exit_date": null,
+      "final_return_pct": null,
+      "contract_cost": 872,
+      "contract_peak_pnl": 0,
+      "contract_current_pnl": 0
     }
   ]
 }

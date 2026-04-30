@@ -86,10 +86,10 @@
     },
     {
       "date": "2026-04-30",
-      "signals": 50,
-      "avg_return": 197.8,
-      "avg_peak": 319.6,
-      "win_rate": 94.0
+      "signals": 51,
+      "avg_return": 193.9,
+      "avg_peak": 313.4,
+      "win_rate": 92.0
     }
   ],
   "signals": [
@@ -442,11 +442,18 @@
       "pnl": 7.9,
       "peak": 7.9,
       "expired": false
+    },
+    {
+      "ticker": "QQQ",
+      "date": "2026-04-30",
+      "pnl": 0.0,
+      "peak": 0.0,
+      "expired": false
     }
   ],
-  "total": 50,
-  "avg_return": 197.8,
-  "avg_peak": 319.6,
-  "win_rate": 94.0,
-  "generated": "2026-04-30T12:18:52.230782"
+  "total": 51,
+  "avg_return": 193.9,
+  "avg_peak": 313.4,
+  "win_rate": 92.0,
+  "generated": "2026-04-30T12:22:22.371596"
 }

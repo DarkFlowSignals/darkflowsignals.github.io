@@ -2460,6 +2460,81 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       }
+    },
+    {
+      "signal_date": "2026-04-30",
+      "ticker": "QQQ",
+      "direction": "BULLISH",
+      "conviction_score": 80.0,
+      "option_type": "Call",
+      "strike": 666.0,
+      "expiry": "2026-05-08",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "entry_premium": 8.72,
+      "current_premium": 8.72,
+      "peak_premium": 8.72,
+      "current_return_pct": 0.0,
+      "peak_return_pct": 0.0,
+      "low_return_pct": 0.0,
+      "result": "LOSS",
+      "tracking_type": "tracked_only",
+      "signal_time": "2026-04-30T12:21:55",
+      "exit_reason": null,
+      "exit_date": null,
+      "exit_price": null,
+      "final_return_pct": null,
+      "contract_cost": 872,
+      "contract_peak_pnl": 0,
+      "contract_current_pnl": 0,
+      "what_if": {
+        "hold_to_expiry": {
+          "action": "settle",
+          "label": "2026-05-08"
+        },
+        "hard_stop_50": {
+          "trigger_premium": 4.36,
+          "trigger_return_pct": -50
+        },
+        "trail_30": {
+          "trigger_premium": 6.1,
+          "trigger_return_pct": -30.0
+        },
+        "trail_50": {
+          "trigger_premium": 4.36,
+          "trigger_return_pct": -50.0
+        },
+        "trail_70": {
+          "trigger_premium": 2.62,
+          "trigger_return_pct": -70.0
+        },
+        "time_decay": {
+          "dte": 8,
+          "intrinsic_pct_of_value": null,
+          "label": "8 sessions to settle."
+        }
+      },
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      }
     }
   ]
 }

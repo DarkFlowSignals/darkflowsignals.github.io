@@ -83,13 +83,6 @@
       "avg_return": 198.1,
       "avg_peak": 334.4,
       "win_rate": 94.0
-    },
-    {
-      "date": "2026-04-30",
-      "signals": 50,
-      "avg_return": 184.4,
-      "avg_peak": 314.4,
-      "win_rate": 88.0
     }
   ],
   "signals": [
@@ -421,32 +414,11 @@
       "pnl": -5.8,
       "peak": 22.3,
       "expired": false
-    },
-    {
-      "ticker": "GOOGL",
-      "date": "2026-04-30",
-      "pnl": -24.9,
-      "peak": 0.0,
-      "expired": false
-    },
-    {
-      "ticker": "AMZN",
-      "date": "2026-04-30",
-      "pnl": -35.1,
-      "peak": 0.0,
-      "expired": false
-    },
-    {
-      "ticker": "MU",
-      "date": "2026-04-30",
-      "pnl": -33.3,
-      "peak": 0.0,
-      "expired": false
     }
   ],
-  "total": 50,
-  "avg_return": 184.4,
-  "avg_peak": 314.4,
-  "win_rate": 88.0,
-  "generated": "2026-04-30T07:34:57.323610"
+  "total": 47,
+  "avg_return": 198.1,
+  "avg_peak": 334.4,
+  "win_rate": 94.0,
+  "generated": "2026-04-30T07:36:39.152737"
 }

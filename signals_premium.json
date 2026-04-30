@@ -12,9 +12,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 4.0,
-      "current_premium": 11.25,
+      "current_premium": 11.47,
       "peak_premium": 20.23,
-      "current_return_pct": 181.2,
+      "current_return_pct": 186.8,
       "peak_return_pct": 405.8,
       "low_return_pct": -55.0,
       "result": "WIN",
@@ -26,7 +26,7 @@
       "final_return_pct": null,
       "contract_cost": 400,
       "contract_peak_pnl": 1623,
-      "contract_current_pnl": 725,
+      "contract_current_pnl": 747,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -171,9 +171,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 1.23,
-      "current_premium": 0.74,
+      "current_premium": 0.77,
       "peak_premium": 1.83,
-      "current_return_pct": -39.8,
+      "current_return_pct": -37.4,
       "peak_return_pct": 48.8,
       "low_return_pct": -48.0,
       "result": "WIN",
@@ -185,7 +185,7 @@
       "final_return_pct": null,
       "contract_cost": 123,
       "contract_peak_pnl": 60,
-      "contract_current_pnl": -49,
+      "contract_current_pnl": -46,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -769,9 +769,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 6.5,
-      "current_premium": 33.02,
+      "current_premium": 32.75,
       "peak_premium": 61.15,
-      "current_return_pct": 408.0,
+      "current_return_pct": 403.8,
       "peak_return_pct": 840.8,
       "low_return_pct": 343.5,
       "result": "WIN",
@@ -783,7 +783,7 @@
       "final_return_pct": null,
       "contract_cost": 650,
       "contract_peak_pnl": 5465,
-      "contract_current_pnl": 2652,
+      "contract_current_pnl": 2625,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -900,9 +900,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 1.7,
-      "current_premium": 1.12,
+      "current_premium": 1.21,
       "peak_premium": 6.57,
-      "current_return_pct": -34.1,
+      "current_return_pct": -28.8,
       "peak_return_pct": 286.5,
       "low_return_pct": -61.2,
       "result": "WIN",
@@ -914,7 +914,7 @@
       "final_return_pct": null,
       "contract_cost": 170,
       "contract_peak_pnl": 487,
-      "contract_current_pnl": -58,
+      "contract_current_pnl": -49,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -975,9 +975,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 12.8,
-      "current_premium": 23.55,
+      "current_premium": 24.42,
       "peak_premium": 41.12,
-      "current_return_pct": 84.0,
+      "current_return_pct": 90.8,
       "peak_return_pct": 221.2,
       "low_return_pct": 62.1,
       "result": "WIN",
@@ -989,7 +989,7 @@
       "final_return_pct": null,
       "contract_cost": 1280,
       "contract_peak_pnl": 2831,
-      "contract_current_pnl": 1075,
+      "contract_current_pnl": 1162,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1106,9 +1106,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 4.1,
-      "current_premium": 23.8,
+      "current_premium": 23.95,
       "peak_premium": 24.82,
-      "current_return_pct": 480.5,
+      "current_return_pct": 484.1,
       "peak_return_pct": 505.4,
       "low_return_pct": 176.1,
       "result": "WIN",
@@ -1120,7 +1120,7 @@
       "final_return_pct": null,
       "contract_cost": 410,
       "contract_peak_pnl": 2072,
-      "contract_current_pnl": 1970,
+      "contract_current_pnl": 1985,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1209,10 +1209,10 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 10.0,
-      "current_premium": 27.23,
-      "peak_premium": 28.32,
-      "current_return_pct": 172.3,
-      "peak_return_pct": 183.2,
+      "current_premium": 29.2,
+      "peak_premium": 29.2,
+      "current_return_pct": 192.0,
+      "peak_return_pct": 192.0,
       "low_return_pct": -2.5,
       "result": "WIN",
       "tracking_type": "system",
@@ -1222,8 +1222,8 @@
       "exit_price": null,
       "final_return_pct": null,
       "contract_cost": 1000,
-      "contract_peak_pnl": 1832,
-      "contract_current_pnl": 1723,
+      "contract_peak_pnl": 1920,
+      "contract_current_pnl": 1920,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1234,16 +1234,16 @@
           "trigger_return_pct": -50
         },
         "trail_30": {
-          "trigger_premium": 19.82,
-          "trigger_return_pct": 98.2
+          "trigger_premium": 20.44,
+          "trigger_return_pct": 104.4
         },
         "trail_50": {
-          "trigger_premium": 14.16,
-          "trigger_return_pct": 41.6
+          "trigger_premium": 14.6,
+          "trigger_return_pct": 46.0
         },
         "trail_70": {
-          "trigger_premium": 8.5,
-          "trigger_return_pct": -15.0
+          "trigger_premium": 8.76,
+          "trigger_return_pct": -12.4
         },
         "time_decay": {
           "dte": 15,
@@ -1284,9 +1284,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.45,
-      "current_premium": 3.12,
+      "current_premium": 2.96,
       "peak_premium": 12.05,
-      "current_return_pct": -9.6,
+      "current_return_pct": -14.2,
       "peak_return_pct": 249.3,
       "low_return_pct": -29.3,
       "result": "WIN",
@@ -1298,7 +1298,7 @@
       "final_return_pct": null,
       "contract_cost": 345,
       "contract_peak_pnl": 860,
-      "contract_current_pnl": -33,
+      "contract_current_pnl": -49,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1434,9 +1434,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.33,
-      "current_premium": 0.42,
+      "current_premium": 0.41,
       "peak_premium": 3.5,
-      "current_return_pct": -87.4,
+      "current_return_pct": -87.7,
       "peak_return_pct": 5.1,
       "low_return_pct": -91.3,
       "result": "WIN",
@@ -1448,7 +1448,7 @@
       "final_return_pct": null,
       "contract_cost": 333,
       "contract_peak_pnl": 17,
-      "contract_current_pnl": -291,
+      "contract_current_pnl": -292,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1509,11 +1509,11 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.15,
-      "current_premium": 1.88,
+      "current_premium": 1.82,
       "peak_premium": 4.41,
-      "current_return_pct": -40.3,
+      "current_return_pct": -42.2,
       "peak_return_pct": 40.0,
-      "low_return_pct": -41.0,
+      "low_return_pct": -42.2,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-20T06:41:02",
@@ -1523,7 +1523,7 @@
       "final_return_pct": null,
       "contract_cost": 315,
       "contract_peak_pnl": 126,
-      "contract_current_pnl": -127,
+      "contract_current_pnl": -133,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1723,9 +1723,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 47.8,
-      "current_premium": 33.8,
+      "current_premium": 35.15,
       "peak_premium": 62.15,
-      "current_return_pct": -29.3,
+      "current_return_pct": -26.5,
       "peak_return_pct": 30.0,
       "low_return_pct": -55.9,
       "result": "WIN",
@@ -1737,7 +1737,7 @@
       "final_return_pct": null,
       "contract_cost": 4780,
       "contract_peak_pnl": 1434,
-      "contract_current_pnl": -1401,
+      "contract_current_pnl": -1267,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1948,11 +1948,11 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 26.77,
-      "current_premium": 22.57,
+      "current_premium": 20.4,
       "peak_premium": 38.67,
-      "current_return_pct": -15.7,
+      "current_return_pct": -23.8,
       "peak_return_pct": 44.5,
-      "low_return_pct": -22.6,
+      "low_return_pct": -23.8,
       "result": "WIN",
       "tracking_type": "tracked_only",
       "signal_time": "2026-04-28T13:30:00Z",
@@ -1962,7 +1962,7 @@
       "final_return_pct": null,
       "contract_cost": 2677,
       "contract_peak_pnl": 1191,
-      "contract_current_pnl": -420,
+      "contract_current_pnl": -637,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2023,11 +2023,11 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 31.6,
-      "current_premium": 27.52,
+      "current_premium": 25.18,
       "peak_premium": 45.15,
-      "current_return_pct": -12.9,
+      "current_return_pct": -20.3,
       "peak_return_pct": 42.9,
-      "low_return_pct": -13.4,
+      "low_return_pct": -20.3,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-04-28T12:59:34",
@@ -2037,7 +2037,7 @@
       "final_return_pct": null,
       "contract_cost": 3160,
       "contract_peak_pnl": 1356,
-      "contract_current_pnl": -408,
+      "contract_current_pnl": -641,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2098,9 +2098,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 9.27,
-      "current_premium": 6.0,
+      "current_premium": 5.97,
       "peak_premium": 9.27,
-      "current_return_pct": -35.3,
+      "current_return_pct": -35.6,
       "peak_return_pct": 0.0,
       "low_return_pct": -40.3,
       "result": "LOSS",
@@ -2112,7 +2112,7 @@
       "final_return_pct": null,
       "contract_cost": 927,
       "contract_peak_pnl": 0,
-      "contract_current_pnl": -327,
+      "contract_current_pnl": -330,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2173,9 +2173,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 15.8,
-      "current_premium": 17.93,
+      "current_premium": 17.82,
       "peak_premium": 19.33,
-      "current_return_pct": 13.5,
+      "current_return_pct": 12.8,
       "peak_return_pct": 22.3,
       "low_return_pct": -8.2,
       "result": "WIN",
@@ -2187,7 +2187,7 @@
       "final_return_pct": null,
       "contract_cost": 1580,
       "contract_peak_pnl": 352,
-      "contract_current_pnl": 213,
+      "contract_current_pnl": 202,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",

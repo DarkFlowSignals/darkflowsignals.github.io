@@ -2303,6 +2303,156 @@
     },
     {
       "signal_date": "2026-05-01",
+      "ticker": "AXTI",
+      "direction": "BULLISH",
+      "conviction_score": 88.0,
+      "option_type": "Call",
+      "strike": 95.0,
+      "expiry": "2026-05-15",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "entry_premium": 11.4,
+      "current_premium": 10.7,
+      "peak_premium": 11.35,
+      "current_return_pct": -6.1,
+      "peak_return_pct": -0.4,
+      "low_return_pct": -30.3,
+      "result": "LOSS",
+      "tracking_type": "system",
+      "signal_time": "2026-05-01T13:30:00Z",
+      "exit_reason": null,
+      "exit_date": null,
+      "exit_price": null,
+      "final_return_pct": null,
+      "contract_cost": 1140,
+      "contract_peak_pnl": -5,
+      "contract_current_pnl": -70,
+      "what_if": {
+        "hold_to_expiry": {
+          "action": "settle",
+          "label": "2026-05-15"
+        },
+        "hard_stop_50": {
+          "trigger_premium": 5.7,
+          "trigger_return_pct": -50
+        },
+        "trail_30": {
+          "trigger_premium": 7.94,
+          "trigger_return_pct": -30.3
+        },
+        "trail_50": {
+          "trigger_premium": 5.67,
+          "trigger_return_pct": -50.2
+        },
+        "trail_70": {
+          "trigger_premium": 3.41,
+          "trigger_return_pct": -70.1
+        },
+        "time_decay": {
+          "dte": 14,
+          "intrinsic_pct_of_value": null,
+          "label": "14 sessions to settle."
+        }
+      },
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      }
+    },
+    {
+      "signal_date": "2026-05-01",
+      "ticker": "SNDK",
+      "direction": "BULLISH",
+      "conviction_score": 87.0,
+      "option_type": "Call",
+      "strike": 1110.0,
+      "expiry": "2026-05-15",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "entry_premium": 86.4,
+      "current_premium": 87.8,
+      "peak_premium": 107.6,
+      "current_return_pct": 1.6,
+      "peak_return_pct": 24.5,
+      "low_return_pct": -21.3,
+      "result": "WIN",
+      "tracking_type": "system",
+      "signal_time": "2026-05-01T13:30:00Z",
+      "exit_reason": null,
+      "exit_date": null,
+      "exit_price": null,
+      "final_return_pct": null,
+      "contract_cost": 8640,
+      "contract_peak_pnl": 2117,
+      "contract_current_pnl": 138,
+      "what_if": {
+        "hold_to_expiry": {
+          "action": "settle",
+          "label": "2026-05-15"
+        },
+        "hard_stop_50": {
+          "trigger_premium": 43.2,
+          "trigger_return_pct": -50
+        },
+        "trail_30": {
+          "trigger_premium": 75.32,
+          "trigger_return_pct": -12.8
+        },
+        "trail_50": {
+          "trigger_premium": 53.8,
+          "trigger_return_pct": -37.7
+        },
+        "trail_70": {
+          "trigger_premium": 32.28,
+          "trigger_return_pct": -62.6
+        },
+        "time_decay": {
+          "dte": 14,
+          "intrinsic_pct_of_value": null,
+          "label": "14 sessions to settle."
+        }
+      },
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      }
+    },
+    {
+      "signal_date": "2026-05-01",
       "ticker": "XLE",
       "direction": "BULLISH",
       "conviction_score": 86.0,
@@ -2312,12 +2462,12 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "entry_premium": 1.73,
+      "entry_premium": 1.5,
       "current_premium": 1.93,
       "peak_premium": 2.01,
-      "current_return_pct": 11.6,
-      "peak_return_pct": 16.2,
-      "low_return_pct": -1.2,
+      "current_return_pct": 28.7,
+      "peak_return_pct": 34.0,
+      "low_return_pct": 14.0,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-05-01T06:33:16",
@@ -2325,29 +2475,29 @@
       "exit_date": null,
       "exit_price": null,
       "final_return_pct": null,
-      "contract_cost": 173,
-      "contract_peak_pnl": 28,
-      "contract_current_pnl": 20,
+      "contract_cost": 150,
+      "contract_peak_pnl": 51,
+      "contract_current_pnl": 43,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
           "label": "2026-05-22"
         },
         "hard_stop_50": {
-          "trigger_premium": 0.86,
+          "trigger_premium": 0.75,
           "trigger_return_pct": -50
         },
         "trail_30": {
           "trigger_premium": 1.41,
-          "trigger_return_pct": -18.7
+          "trigger_return_pct": -6.2
         },
         "trail_50": {
           "trigger_premium": 1.0,
-          "trigger_return_pct": -41.9
+          "trigger_return_pct": -33.0
         },
         "trail_70": {
           "trigger_premium": 0.6,
-          "trigger_return_pct": -65.1
+          "trigger_return_pct": -59.8
         },
         "time_decay": {
           "dte": 21,
@@ -2374,6 +2524,456 @@
         ],
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
+      }
+    },
+    {
+      "signal_date": "2026-05-01",
+      "ticker": "COIN",
+      "direction": "BULLISH",
+      "conviction_score": 86.0,
+      "option_type": "Call",
+      "strike": 200.0,
+      "expiry": "2026-05-15",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "entry_premium": 8.93,
+      "current_premium": 8.6,
+      "peak_premium": 9.62,
+      "current_return_pct": -3.7,
+      "peak_return_pct": 7.7,
+      "low_return_pct": -7.1,
+      "result": "WIN",
+      "tracking_type": "system",
+      "signal_time": "2026-05-01T13:30:00Z",
+      "exit_reason": null,
+      "exit_date": null,
+      "exit_price": null,
+      "final_return_pct": null,
+      "contract_cost": 893,
+      "contract_peak_pnl": 69,
+      "contract_current_pnl": -33,
+      "what_if": {
+        "hold_to_expiry": {
+          "action": "settle",
+          "label": "2026-05-15"
+        },
+        "hard_stop_50": {
+          "trigger_premium": 4.46,
+          "trigger_return_pct": -50
+        },
+        "trail_30": {
+          "trigger_premium": 6.73,
+          "trigger_return_pct": -24.6
+        },
+        "trail_50": {
+          "trigger_premium": 4.81,
+          "trigger_return_pct": -46.1
+        },
+        "trail_70": {
+          "trigger_premium": 2.89,
+          "trigger_return_pct": -67.7
+        },
+        "time_decay": {
+          "dte": 14,
+          "intrinsic_pct_of_value": null,
+          "label": "14 sessions to settle."
+        }
+      },
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      }
+    },
+    {
+      "signal_date": "2026-05-01",
+      "ticker": "TSLA",
+      "direction": "BULLISH",
+      "conviction_score": 90.0,
+      "option_type": "Call",
+      "strike": 400.0,
+      "expiry": "2026-05-15",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "entry_premium": 10.6,
+      "current_premium": 10.95,
+      "peak_premium": 11.55,
+      "current_return_pct": 3.3,
+      "peak_return_pct": 9.0,
+      "low_return_pct": -3.8,
+      "result": "WIN",
+      "tracking_type": "system",
+      "signal_time": "2026-05-01T13:30:00Z",
+      "exit_reason": null,
+      "exit_date": null,
+      "exit_price": null,
+      "final_return_pct": null,
+      "contract_cost": 1060,
+      "contract_peak_pnl": 95,
+      "contract_current_pnl": 35,
+      "what_if": {
+        "hold_to_expiry": {
+          "action": "settle",
+          "label": "2026-05-15"
+        },
+        "hard_stop_50": {
+          "trigger_premium": 5.3,
+          "trigger_return_pct": -50
+        },
+        "trail_30": {
+          "trigger_premium": 8.09,
+          "trigger_return_pct": -23.7
+        },
+        "trail_50": {
+          "trigger_premium": 5.78,
+          "trigger_return_pct": -45.5
+        },
+        "trail_70": {
+          "trigger_premium": 3.47,
+          "trigger_return_pct": -67.3
+        },
+        "time_decay": {
+          "dte": 14,
+          "intrinsic_pct_of_value": null,
+          "label": "14 sessions to settle."
+        }
+      },
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      }
+    },
+    {
+      "signal_date": "2026-05-01",
+      "ticker": "NBIS",
+      "direction": "BULLISH",
+      "conviction_score": 87.0,
+      "option_type": "Call",
+      "strike": 150.0,
+      "expiry": "2026-05-29",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "entry_premium": 19.08,
+      "current_premium": 19.05,
+      "peak_premium": 19.93,
+      "current_return_pct": -0.2,
+      "peak_return_pct": 4.5,
+      "low_return_pct": -0.2,
+      "result": "WIN",
+      "tracking_type": "system",
+      "signal_time": "2026-05-01T13:30:00Z",
+      "exit_reason": null,
+      "exit_date": null,
+      "exit_price": null,
+      "final_return_pct": null,
+      "contract_cost": 1908,
+      "contract_peak_pnl": 86,
+      "contract_current_pnl": -4,
+      "what_if": {
+        "hold_to_expiry": {
+          "action": "settle",
+          "label": "2026-05-29"
+        },
+        "hard_stop_50": {
+          "trigger_premium": 9.54,
+          "trigger_return_pct": -50
+        },
+        "trail_30": {
+          "trigger_premium": 13.95,
+          "trigger_return_pct": -26.9
+        },
+        "trail_50": {
+          "trigger_premium": 9.96,
+          "trigger_return_pct": -47.8
+        },
+        "trail_70": {
+          "trigger_premium": 5.98,
+          "trigger_return_pct": -68.7
+        },
+        "time_decay": {
+          "dte": 28,
+          "intrinsic_pct_of_value": null,
+          "label": "28 sessions to settle."
+        }
+      },
+      "cohort": {
+        "n": 10,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "15-30",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 149.2,
+        "median_final_pct": 42.5,
+        "median_giveback_pct": 91.2,
+        "best_final_pct": 763.1,
+        "worst_final_pct": -91.9,
+        "giveback_range_pct": [
+          22.6,
+          323.8
+        ],
+        "win_rate_peak_basis": 90.0,
+        "win_rate_settle_basis": 60.0
+      }
+    },
+    {
+      "signal_date": "2026-05-01",
+      "ticker": "AAPL",
+      "direction": "BULLISH",
+      "conviction_score": 87.0,
+      "option_type": "Call",
+      "strike": 275.0,
+      "expiry": "2026-05-15",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "entry_premium": 11.35,
+      "current_premium": 10.85,
+      "peak_premium": 11.55,
+      "current_return_pct": -4.4,
+      "peak_return_pct": 1.8,
+      "low_return_pct": -4.4,
+      "result": "WIN",
+      "tracking_type": "system",
+      "signal_time": "2026-05-01T13:30:00Z",
+      "exit_reason": null,
+      "exit_date": null,
+      "exit_price": null,
+      "final_return_pct": null,
+      "contract_cost": 1135,
+      "contract_peak_pnl": 20,
+      "contract_current_pnl": -50,
+      "what_if": {
+        "hold_to_expiry": {
+          "action": "settle",
+          "label": "2026-05-15"
+        },
+        "hard_stop_50": {
+          "trigger_premium": 5.67,
+          "trigger_return_pct": -50
+        },
+        "trail_30": {
+          "trigger_premium": 8.09,
+          "trigger_return_pct": -28.8
+        },
+        "trail_50": {
+          "trigger_premium": 5.78,
+          "trigger_return_pct": -49.1
+        },
+        "trail_70": {
+          "trigger_premium": 3.47,
+          "trigger_return_pct": -69.5
+        },
+        "time_decay": {
+          "dte": 14,
+          "intrinsic_pct_of_value": null,
+          "label": "14 sessions to settle."
+        }
+      },
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      }
+    },
+    {
+      "signal_date": "2026-05-01",
+      "ticker": "WULF",
+      "direction": "BULLISH",
+      "conviction_score": 86.0,
+      "option_type": "Call",
+      "strike": 22.0,
+      "expiry": "2026-05-15",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "entry_premium": 1.77,
+      "current_premium": 1.87,
+      "peak_premium": 1.99,
+      "current_return_pct": 5.6,
+      "peak_return_pct": 12.4,
+      "low_return_pct": 5.6,
+      "result": "WIN",
+      "tracking_type": "system",
+      "signal_time": "2026-05-01T06:33:17",
+      "exit_reason": null,
+      "exit_date": null,
+      "exit_price": null,
+      "final_return_pct": null,
+      "contract_cost": 177,
+      "contract_peak_pnl": 22,
+      "contract_current_pnl": 10,
+      "what_if": {
+        "hold_to_expiry": {
+          "action": "settle",
+          "label": "2026-05-15"
+        },
+        "hard_stop_50": {
+          "trigger_premium": 0.89,
+          "trigger_return_pct": -50
+        },
+        "trail_30": {
+          "trigger_premium": 1.39,
+          "trigger_return_pct": -21.3
+        },
+        "trail_50": {
+          "trigger_premium": 0.99,
+          "trigger_return_pct": -43.8
+        },
+        "trail_70": {
+          "trigger_premium": 0.6,
+          "trigger_return_pct": -66.3
+        },
+        "time_decay": {
+          "dte": 14,
+          "intrinsic_pct_of_value": null,
+          "label": "14 sessions to settle."
+        }
+      },
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      }
+    },
+    {
+      "signal_date": "2026-05-01",
+      "ticker": "AVGO",
+      "direction": "BULLISH",
+      "conviction_score": 85.0,
+      "option_type": "Call",
+      "strike": 440.0,
+      "expiry": "2026-05-15",
+      "category": "primary",
+      "status": "open",
+      "outcome_date": null,
+      "entry_premium": 6.8,
+      "current_premium": 6.32,
+      "peak_premium": 6.75,
+      "current_return_pct": -7.1,
+      "peak_return_pct": -0.7,
+      "low_return_pct": -7.1,
+      "result": "LOSS",
+      "tracking_type": "system",
+      "signal_time": "2026-05-01T13:30:00Z",
+      "exit_reason": null,
+      "exit_date": null,
+      "exit_price": null,
+      "final_return_pct": null,
+      "contract_cost": 680,
+      "contract_peak_pnl": -5,
+      "contract_current_pnl": -48,
+      "what_if": {
+        "hold_to_expiry": {
+          "action": "settle",
+          "label": "2026-05-15"
+        },
+        "hard_stop_50": {
+          "trigger_premium": 3.4,
+          "trigger_return_pct": -50
+        },
+        "trail_30": {
+          "trigger_premium": 4.72,
+          "trigger_return_pct": -30.5
+        },
+        "trail_50": {
+          "trigger_premium": 3.38,
+          "trigger_return_pct": -50.4
+        },
+        "trail_70": {
+          "trigger_premium": 2.03,
+          "trigger_return_pct": -70.2
+        },
+        "time_decay": {
+          "dte": 14,
+          "intrinsic_pct_of_value": null,
+          "label": "14 sessions to settle."
+        }
+      },
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
       }
     }
   ]

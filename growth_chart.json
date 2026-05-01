@@ -93,10 +93,10 @@
     },
     {
       "date": "2026-05-01",
-      "signals": 52,
-      "avg_return": 203.6,
-      "avg_peak": 315.9,
-      "win_rate": 96.0
+      "signals": 60,
+      "avg_return": 176.6,
+      "avg_peak": 275.1,
+      "win_rate": 93.0
     }
   ],
   "signals": [
@@ -458,16 +458,72 @@
       "expired": false
     },
     {
+      "ticker": "AXTI",
+      "date": "2026-05-01",
+      "pnl": -6.1,
+      "peak": -0.4,
+      "expired": false
+    },
+    {
+      "ticker": "SNDK",
+      "date": "2026-05-01",
+      "pnl": 1.6,
+      "peak": 24.5,
+      "expired": false
+    },
+    {
       "ticker": "XLE",
       "date": "2026-05-01",
-      "pnl": 11.6,
-      "peak": 16.2,
+      "pnl": 28.7,
+      "peak": 34.0,
+      "expired": false
+    },
+    {
+      "ticker": "COIN",
+      "date": "2026-05-01",
+      "pnl": -3.7,
+      "peak": 7.7,
+      "expired": false
+    },
+    {
+      "ticker": "TSLA",
+      "date": "2026-05-01",
+      "pnl": 3.3,
+      "peak": 9.0,
+      "expired": false
+    },
+    {
+      "ticker": "NBIS",
+      "date": "2026-05-01",
+      "pnl": -0.2,
+      "peak": 4.5,
+      "expired": false
+    },
+    {
+      "ticker": "AAPL",
+      "date": "2026-05-01",
+      "pnl": -4.4,
+      "peak": 1.8,
+      "expired": false
+    },
+    {
+      "ticker": "WULF",
+      "date": "2026-05-01",
+      "pnl": 5.6,
+      "peak": 12.4,
+      "expired": false
+    },
+    {
+      "ticker": "AVGO",
+      "date": "2026-05-01",
+      "pnl": -7.1,
+      "peak": -0.7,
       "expired": false
     }
   ],
-  "total": 52,
-  "avg_return": 203.6,
-  "avg_peak": 315.9,
-  "win_rate": 96.0,
-  "generated": "2026-05-01T09:34:04.082199"
+  "total": 60,
+  "avg_return": 176.6,
+  "avg_peak": 275.1,
+  "win_rate": 93.0,
+  "generated": "2026-05-01T09:35:17.529572"
 }

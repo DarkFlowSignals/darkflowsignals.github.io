@@ -1131,18 +1131,18 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "current_return_pct": 25.3,
-      "peak_return_pct": 30.5,
-      "low_return_pct": 11.0,
+      "current_return_pct": 11.6,
+      "peak_return_pct": 16.2,
+      "low_return_pct": -1.2,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-05-01T06:33:16",
       "exit_reason": null,
       "exit_date": null,
       "final_return_pct": null,
-      "contract_cost": 154,
-      "contract_peak_pnl": 47,
-      "contract_current_pnl": 39
+      "contract_cost": 173,
+      "contract_peak_pnl": 28,
+      "contract_current_pnl": 20
     }
   ]
 }

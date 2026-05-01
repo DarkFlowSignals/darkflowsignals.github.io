@@ -94,8 +94,8 @@
     {
       "date": "2026-05-01",
       "signals": 52,
-      "avg_return": 204.1,
-      "avg_peak": 316.2,
+      "avg_return": 203.8,
+      "avg_peak": 315.9,
       "win_rate": 96.0
     }
   ],
@@ -460,14 +460,14 @@
     {
       "ticker": "XLE",
       "date": "2026-05-01",
-      "pnl": 25.3,
-      "peak": 30.5,
+      "pnl": 11.6,
+      "peak": 16.2,
       "expired": false
     }
   ],
   "total": 52,
-  "avg_return": 204.1,
-  "avg_peak": 316.2,
+  "avg_return": 203.8,
+  "avg_peak": 315.9,
   "win_rate": 96.0,
-  "generated": "2026-05-01T09:29:16.428034"
+  "generated": "2026-05-01T09:31:27.218638"
 }

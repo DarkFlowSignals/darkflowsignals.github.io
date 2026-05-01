@@ -2312,12 +2312,12 @@
       "category": "primary",
       "status": "open",
       "outcome_date": null,
-      "entry_premium": 1.54,
+      "entry_premium": 1.73,
       "current_premium": 1.93,
       "peak_premium": 2.01,
-      "current_return_pct": 25.3,
-      "peak_return_pct": 30.5,
-      "low_return_pct": 11.0,
+      "current_return_pct": 11.6,
+      "peak_return_pct": 16.2,
+      "low_return_pct": -1.2,
       "result": "WIN",
       "tracking_type": "system",
       "signal_time": "2026-05-01T06:33:16",
@@ -2325,29 +2325,29 @@
       "exit_date": null,
       "exit_price": null,
       "final_return_pct": null,
-      "contract_cost": 154,
-      "contract_peak_pnl": 47,
-      "contract_current_pnl": 39,
+      "contract_cost": 173,
+      "contract_peak_pnl": 28,
+      "contract_current_pnl": 20,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
           "label": "2026-05-22"
         },
         "hard_stop_50": {
-          "trigger_premium": 0.77,
+          "trigger_premium": 0.86,
           "trigger_return_pct": -50
         },
         "trail_30": {
           "trigger_premium": 1.41,
-          "trigger_return_pct": -8.6
+          "trigger_return_pct": -18.7
         },
         "trail_50": {
           "trigger_premium": 1.0,
-          "trigger_return_pct": -34.7
+          "trigger_return_pct": -41.9
         },
         "trail_70": {
           "trigger_premium": 0.6,
-          "trigger_return_pct": -60.8
+          "trigger_return_pct": -65.1
         },
         "time_decay": {
           "dte": 21,

@@ -49,9 +49,9 @@
           "trigger_return_pct": 51.7
         },
         "time_decay": {
-          "dte": 8,
+          "dte": 7,
           "intrinsic_pct_of_value": null,
-          "label": "8 sessions to settle."
+          "label": "7 sessions to settle. Time premium decays meaningfully this week."
         }
       },
       "cohort": {
@@ -208,9 +208,9 @@
           "trigger_return_pct": -55.4
         },
         "time_decay": {
-          "dte": 15,
+          "dte": 14,
           "intrinsic_pct_of_value": null,
-          "label": "15 sessions to settle."
+          "label": "14 sessions to settle."
         }
       },
       "cohort": {
@@ -395,9 +395,9 @@
           "trigger_return_pct": 23.6
         },
         "time_decay": {
-          "dte": 8,
+          "dte": 7,
           "intrinsic_pct_of_value": null,
-          "label": "8 sessions to settle."
+          "label": "7 sessions to settle. Time premium decays meaningfully this week."
         }
       },
       "cohort": {
@@ -806,9 +806,9 @@
           "trigger_return_pct": 182.2
         },
         "time_decay": {
-          "dte": 15,
+          "dte": 14,
           "intrinsic_pct_of_value": null,
-          "label": "15 sessions to settle."
+          "label": "14 sessions to settle."
         }
       },
       "cohort": {
@@ -897,8 +897,8 @@
       "strike": 26.0,
       "expiry": "2026-05-01",
       "category": "primary",
-      "status": "open",
-      "outcome_date": null,
+      "status": "expired",
+      "outcome_date": "2026-04-22",
       "entry_premium": 1.7,
       "current_premium": 1.61,
       "peak_premium": 6.57,
@@ -914,54 +914,7 @@
       "final_return_pct": null,
       "contract_cost": 170,
       "contract_peak_pnl": 487,
-      "contract_current_pnl": -9,
-      "what_if": {
-        "hold_to_expiry": {
-          "action": "settle",
-          "label": "tomorrow's close"
-        },
-        "hard_stop_50": {
-          "trigger_premium": 0.85,
-          "trigger_return_pct": -50
-        },
-        "trail_30": {
-          "trigger_premium": 4.6,
-          "trigger_return_pct": 170.5
-        },
-        "trail_50": {
-          "trigger_premium": 3.29,
-          "trigger_return_pct": 93.2
-        },
-        "trail_70": {
-          "trigger_premium": 1.97,
-          "trigger_return_pct": 15.9
-        },
-        "time_decay": {
-          "dte": 1,
-          "intrinsic_pct_of_value": null,
-          "label": "1 session to settle. Theta accelerating."
-        }
-      },
-      "cohort": {
-        "n": 10,
-        "match_strict_or_widened": "widened_no_moneyness",
-        "match_keys": {
-          "option_type": "Call",
-          "dte_bucket": "15-30",
-          "moneyness_bucket": "unknown"
-        },
-        "median_peak_pct": 149.2,
-        "median_final_pct": 42.5,
-        "median_giveback_pct": 91.2,
-        "best_final_pct": 763.1,
-        "worst_final_pct": -91.9,
-        "giveback_range_pct": [
-          22.6,
-          323.8
-        ],
-        "win_rate_peak_basis": 90.0,
-        "win_rate_settle_basis": 60.0
-      }
+      "contract_current_pnl": -9
     },
     {
       "signal_date": "2026-04-16",
@@ -1012,9 +965,9 @@
           "trigger_return_pct": -3.6
         },
         "time_decay": {
-          "dte": 22,
+          "dte": 21,
           "intrinsic_pct_of_value": null,
-          "label": "22 sessions to settle."
+          "label": "21 sessions to settle."
         }
       },
       "cohort": {
@@ -1103,8 +1056,8 @@
       "strike": 70.0,
       "expiry": "2026-05-01",
       "category": "watchlist",
-      "status": "open",
-      "outcome_date": null,
+      "status": "expired",
+      "outcome_date": "2026-05-01",
       "entry_premium": 4.1,
       "current_premium": 23.68,
       "peak_premium": 25.05,
@@ -1120,54 +1073,7 @@
       "final_return_pct": null,
       "contract_cost": 410,
       "contract_peak_pnl": 2095,
-      "contract_current_pnl": 1958,
-      "what_if": {
-        "hold_to_expiry": {
-          "action": "settle",
-          "label": "tomorrow's close"
-        },
-        "hard_stop_50": {
-          "trigger_premium": 2.05,
-          "trigger_return_pct": -50
-        },
-        "trail_30": {
-          "trigger_premium": 17.54,
-          "trigger_return_pct": 327.7
-        },
-        "trail_50": {
-          "trigger_premium": 12.53,
-          "trigger_return_pct": 205.5
-        },
-        "trail_70": {
-          "trigger_premium": 7.52,
-          "trigger_return_pct": 83.3
-        },
-        "time_decay": {
-          "dte": 1,
-          "intrinsic_pct_of_value": null,
-          "label": "1 session to settle. Theta accelerating."
-        }
-      },
-      "cohort": {
-        "n": 15,
-        "match_strict_or_widened": "widened_no_moneyness",
-        "match_keys": {
-          "option_type": "Call",
-          "dte_bucket": "8-14",
-          "moneyness_bucket": "unknown"
-        },
-        "median_peak_pct": 171.2,
-        "median_final_pct": 110.8,
-        "median_giveback_pct": 107.3,
-        "best_final_pct": 3196.0,
-        "worst_final_pct": -99.6,
-        "giveback_range_pct": [
-          52.6,
-          328.9
-        ],
-        "win_rate_peak_basis": 86.7,
-        "win_rate_settle_basis": 58.3
-      }
+      "contract_current_pnl": 1958
     },
     {
       "signal_date": "2026-04-17",
@@ -1246,9 +1152,9 @@
           "trigger_return_pct": 11.5
         },
         "time_decay": {
-          "dte": 15,
+          "dte": 14,
           "intrinsic_pct_of_value": null,
-          "label": "15 sessions to settle."
+          "label": "14 sessions to settle."
         }
       },
       "cohort": {
@@ -1321,9 +1227,9 @@
           "trigger_return_pct": 4.8
         },
         "time_decay": {
-          "dte": 15,
+          "dte": 14,
           "intrinsic_pct_of_value": null,
-          "label": "15 sessions to settle."
+          "label": "14 sessions to settle."
         }
       },
       "cohort": {
@@ -1396,9 +1302,9 @@
           "trigger_return_pct": -69.7
         },
         "time_decay": {
-          "dte": 15,
+          "dte": 14,
           "intrinsic_pct_of_value": null,
-          "label": "15 sessions to settle."
+          "label": "14 sessions to settle."
         }
       },
       "cohort": {
@@ -1471,9 +1377,9 @@
           "trigger_return_pct": -68.5
         },
         "time_decay": {
-          "dte": 15,
+          "dte": 14,
           "intrinsic_pct_of_value": null,
-          "label": "15 sessions to settle."
+          "label": "14 sessions to settle."
         }
       },
       "cohort": {
@@ -1546,9 +1452,9 @@
           "trigger_return_pct": -58.0
         },
         "time_decay": {
-          "dte": 15,
+          "dte": 14,
           "intrinsic_pct_of_value": null,
-          "label": "15 sessions to settle."
+          "label": "14 sessions to settle."
         }
       }
     },
@@ -1617,8 +1523,8 @@
       "strike": 134.0,
       "expiry": "2026-05-01",
       "category": "primary",
-      "status": "open",
-      "outcome_date": null,
+      "status": "expired",
+      "outcome_date": "2026-04-23",
       "entry_premium": 3.0,
       "current_premium": 0.02,
       "peak_premium": 3.5,
@@ -1634,54 +1540,7 @@
       "final_return_pct": null,
       "contract_cost": 300,
       "contract_peak_pnl": 50,
-      "contract_current_pnl": -298,
-      "what_if": {
-        "hold_to_expiry": {
-          "action": "settle",
-          "label": "tomorrow's close"
-        },
-        "hard_stop_50": {
-          "trigger_premium": 1.5,
-          "trigger_return_pct": -50
-        },
-        "trail_30": {
-          "trigger_premium": 2.45,
-          "trigger_return_pct": -18.3
-        },
-        "trail_50": {
-          "trigger_premium": 1.75,
-          "trigger_return_pct": -41.7
-        },
-        "trail_70": {
-          "trigger_premium": 1.05,
-          "trigger_return_pct": -65.0
-        },
-        "time_decay": {
-          "dte": 1,
-          "intrinsic_pct_of_value": null,
-          "label": "1 session to settle. Theta accelerating."
-        }
-      },
-      "cohort": {
-        "n": 15,
-        "match_strict_or_widened": "widened_no_moneyness",
-        "match_keys": {
-          "option_type": "Call",
-          "dte_bucket": "8-14",
-          "moneyness_bucket": "unknown"
-        },
-        "median_peak_pct": 171.2,
-        "median_final_pct": 110.8,
-        "median_giveback_pct": 107.3,
-        "best_final_pct": 3196.0,
-        "worst_final_pct": -99.6,
-        "giveback_range_pct": [
-          52.6,
-          328.9
-        ],
-        "win_rate_peak_basis": 86.7,
-        "win_rate_settle_basis": 58.3
-      }
+      "contract_current_pnl": -298
     },
     {
       "signal_date": "2026-04-23",
@@ -1720,8 +1579,8 @@
       "strike": 175.0,
       "expiry": "2026-05-01",
       "category": "primary",
-      "status": "open",
-      "outcome_date": null,
+      "status": "expired",
+      "outcome_date": "2026-04-28",
       "entry_premium": 47.8,
       "current_premium": 34.73,
       "peak_premium": 62.15,
@@ -1737,54 +1596,7 @@
       "final_return_pct": null,
       "contract_cost": 4780,
       "contract_peak_pnl": 1434,
-      "contract_current_pnl": -1305,
-      "what_if": {
-        "hold_to_expiry": {
-          "action": "settle",
-          "label": "tomorrow's close"
-        },
-        "hard_stop_50": {
-          "trigger_premium": 23.9,
-          "trigger_return_pct": -50
-        },
-        "trail_30": {
-          "trigger_premium": 43.5,
-          "trigger_return_pct": -9.0
-        },
-        "trail_50": {
-          "trigger_premium": 31.07,
-          "trigger_return_pct": -35.0
-        },
-        "trail_70": {
-          "trigger_premium": 18.65,
-          "trigger_return_pct": -61.0
-        },
-        "time_decay": {
-          "dte": 1,
-          "intrinsic_pct_of_value": null,
-          "label": "1 session to settle. Theta accelerating."
-        }
-      },
-      "cohort": {
-        "n": 13,
-        "match_strict_or_widened": "widened_no_moneyness",
-        "match_keys": {
-          "option_type": "Call",
-          "dte_bucket": "5-7",
-          "moneyness_bucket": "unknown"
-        },
-        "median_peak_pct": 291.9,
-        "median_final_pct": 272.1,
-        "median_giveback_pct": 90.7,
-        "best_final_pct": 1190.1,
-        "worst_final_pct": 3.4,
-        "giveback_range_pct": [
-          0.0,
-          414.0
-        ],
-        "win_rate_peak_basis": 100.0,
-        "win_rate_settle_basis": 100.0
-      }
+      "contract_current_pnl": -1305
     },
     {
       "signal_date": "2026-04-24",
@@ -1795,8 +1607,8 @@
       "strike": 84.0,
       "expiry": "2026-05-01",
       "category": "watchlist",
-      "status": "open",
-      "outcome_date": null,
+      "status": "expired",
+      "outcome_date": "2026-04-28",
       "entry_premium": 7.05,
       "current_premium": 4.3,
       "peak_premium": 8.4,
@@ -1812,54 +1624,7 @@
       "final_return_pct": null,
       "contract_cost": 705,
       "contract_peak_pnl": 135,
-      "contract_current_pnl": -275,
-      "what_if": {
-        "hold_to_expiry": {
-          "action": "settle",
-          "label": "tomorrow's close"
-        },
-        "hard_stop_50": {
-          "trigger_premium": 3.52,
-          "trigger_return_pct": -50
-        },
-        "trail_30": {
-          "trigger_premium": 5.88,
-          "trigger_return_pct": -16.6
-        },
-        "trail_50": {
-          "trigger_premium": 4.2,
-          "trigger_return_pct": -40.4
-        },
-        "trail_70": {
-          "trigger_premium": 2.52,
-          "trigger_return_pct": -64.3
-        },
-        "time_decay": {
-          "dte": 1,
-          "intrinsic_pct_of_value": null,
-          "label": "1 session to settle. Theta accelerating."
-        }
-      },
-      "cohort": {
-        "n": 13,
-        "match_strict_or_widened": "widened_no_moneyness",
-        "match_keys": {
-          "option_type": "Call",
-          "dte_bucket": "5-7",
-          "moneyness_bucket": "unknown"
-        },
-        "median_peak_pct": 291.9,
-        "median_final_pct": 272.1,
-        "median_giveback_pct": 90.7,
-        "best_final_pct": 1190.1,
-        "worst_final_pct": 3.4,
-        "giveback_range_pct": [
-          0.0,
-          414.0
-        ],
-        "win_rate_peak_basis": 100.0,
-        "win_rate_settle_basis": 100.0
-      }
+      "contract_current_pnl": -275
     },
     {
       "signal_date": "2026-04-24",
@@ -1910,9 +1675,9 @@
           "trigger_return_pct": -64.2
         },
         "time_decay": {
-          "dte": 15,
+          "dte": 14,
           "intrinsic_pct_of_value": null,
-          "label": "15 sessions to settle."
+          "label": "14 sessions to settle."
         }
       },
       "cohort": {
@@ -1985,9 +1750,9 @@
           "trigger_return_pct": -56.7
         },
         "time_decay": {
-          "dte": 8,
+          "dte": 7,
           "intrinsic_pct_of_value": null,
-          "label": "8 sessions to settle."
+          "label": "7 sessions to settle. Time premium decays meaningfully this week."
         }
       },
       "cohort": {
@@ -2060,9 +1825,9 @@
           "trigger_return_pct": -57.1
         },
         "time_decay": {
-          "dte": 8,
+          "dte": 7,
           "intrinsic_pct_of_value": null,
-          "label": "8 sessions to settle."
+          "label": "7 sessions to settle. Time premium decays meaningfully this week."
         }
       },
       "cohort": {
@@ -2135,9 +1900,9 @@
           "trigger_return_pct": -70.0
         },
         "time_decay": {
-          "dte": 15,
+          "dte": 14,
           "intrinsic_pct_of_value": null,
-          "label": "15 sessions to settle."
+          "label": "14 sessions to settle."
         }
       },
       "cohort": {
@@ -2210,9 +1975,9 @@
           "trigger_return_pct": -63.8
         },
         "time_decay": {
-          "dte": 8,
+          "dte": 7,
           "intrinsic_pct_of_value": null,
-          "label": "8 sessions to settle."
+          "label": "7 sessions to settle. Time premium decays meaningfully this week."
         }
       },
       "cohort": {
@@ -2285,9 +2050,9 @@
           "trigger_return_pct": -40.9
         },
         "time_decay": {
-          "dte": 8,
+          "dte": 7,
           "intrinsic_pct_of_value": null,
-          "label": "8 sessions to settle."
+          "label": "7 sessions to settle. Time premium decays meaningfully this week."
         }
       },
       "cohort": {
@@ -2360,9 +2125,9 @@
           "trigger_return_pct": -46.7
         },
         "time_decay": {
-          "dte": 15,
+          "dte": 14,
           "intrinsic_pct_of_value": null,
-          "label": "15 sessions to settle."
+          "label": "14 sessions to settle."
         }
       },
       "cohort": {
@@ -2435,9 +2200,9 @@
           "trigger_return_pct": -67.6
         },
         "time_decay": {
-          "dte": 15,
+          "dte": 14,
           "intrinsic_pct_of_value": null,
-          "label": "15 sessions to settle."
+          "label": "14 sessions to settle."
         }
       },
       "cohort": {
@@ -2510,9 +2275,9 @@
           "trigger_return_pct": -68.9
         },
         "time_decay": {
-          "dte": 8,
+          "dte": 7,
           "intrinsic_pct_of_value": null,
-          "label": "8 sessions to settle."
+          "label": "7 sessions to settle. Time premium decays meaningfully this week."
         }
       },
       "cohort": {

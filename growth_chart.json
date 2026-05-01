@@ -273,7 +273,7 @@
       "date": "2026-04-16",
       "pnl": -5.3,
       "peak": 286.5,
-      "expired": false
+      "expired": true
     },
     {
       "ticker": "TSM",
@@ -301,7 +301,7 @@
       "date": "2026-04-17",
       "pnl": 477.6,
       "peak": 511.0,
-      "expired": false
+      "expired": true
     },
     {
       "ticker": "MRK",
@@ -364,7 +364,7 @@
       "date": "2026-04-23",
       "pnl": -99.3,
       "peak": 16.7,
-      "expired": false
+      "expired": true
     },
     {
       "ticker": "HOOD",
@@ -378,14 +378,14 @@
       "date": "2026-04-24",
       "pnl": -27.3,
       "peak": 30.0,
-      "expired": false
+      "expired": true
     },
     {
       "ticker": "AXTI",
       "date": "2026-04-24",
       "pnl": -39.0,
       "peak": 19.1,
-      "expired": false
+      "expired": true
     },
     {
       "ticker": "VG",
@@ -455,5 +455,5 @@
   "avg_return": 193.5,
   "avg_peak": 313.7,
   "win_rate": 94.0,
-  "generated": "2026-04-30T12:39:38.053422"
+  "generated": "2026-05-01T05:38:19.258632"
 }

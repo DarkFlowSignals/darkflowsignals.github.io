@@ -13,9 +13,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 4.0,
-      "current_premium": 19.5,
+      "current_premium": 19.35,
       "peak_premium": 22.5,
-      "current_return_pct": 387.5,
+      "current_return_pct": 383.8,
       "peak_return_pct": 462.5,
       "low_return_pct": -55.0,
       "result": "WIN",
@@ -27,7 +27,7 @@
       "final_return_pct": null,
       "contract_cost": 400,
       "contract_peak_pnl": 1850,
-      "contract_current_pnl": 1550,
+      "contract_current_pnl": 1535,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -75,15 +75,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 126.98,
+      "spot_current": 127.1,
       "spot_today_open": 121.18,
-      "spot_today_pct": 4.8,
+      "spot_today_pct": 4.9,
       "greeks": {
-        "delta": 0.8163,
-        "gamma": 0.0118,
-        "theta": -0.7563,
-        "vega": 0.0353,
-        "iv": 1.6935
+        "delta": 0.8258,
+        "gamma": 0.0119,
+        "theta": -0.7031,
+        "vega": 0.0342,
+        "iv": 1.6244
       },
       "earnings_next": {
         "date": "2026-05-07",
@@ -369,9 +369,9 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 126.98,
+      "spot_current": 127.1,
       "spot_today_open": 121.18,
-      "spot_today_pct": 4.8,
+      "spot_today_pct": 4.9,
       "earnings_next": {
         "date": "2026-05-07",
         "days_to": 3,
@@ -739,9 +739,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 6.5,
-      "current_premium": 39.02,
+      "current_premium": 38.67,
       "peak_premium": 61.15,
-      "current_return_pct": 500.3,
+      "current_return_pct": 494.9,
       "peak_return_pct": 840.8,
       "low_return_pct": 310.5,
       "result": "WIN",
@@ -753,7 +753,7 @@
       "final_return_pct": null,
       "contract_cost": 650,
       "contract_peak_pnl": 5465,
-      "contract_current_pnl": 3252,
+      "contract_current_pnl": 3217,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -801,15 +801,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 412.6,
+      "spot_current": 412.98,
       "spot_today_open": 411.54,
       "spot_today_pct": 0.3,
       "greeks": {
-        "delta": 0.9486,
-        "gamma": 0.0042,
-        "theta": -0.1544,
-        "vega": 0.0755,
-        "iv": 0.3475
+        "delta": 0.9654,
+        "gamma": 0.0034,
+        "theta": -0.1143,
+        "vega": 0.0549,
+        "iv": 0.3142
       },
       "earnings_next": {
         "date": "2026-07-29",
@@ -917,9 +917,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 12.8,
-      "current_premium": 29.32,
+      "current_premium": 29.35,
       "peak_premium": 41.12,
-      "current_return_pct": 129.1,
+      "current_return_pct": 129.3,
       "peak_return_pct": 221.2,
       "low_return_pct": 62.1,
       "result": "WIN",
@@ -931,7 +931,7 @@
       "final_return_pct": null,
       "contract_cost": 1280,
       "contract_peak_pnl": 2831,
-      "contract_current_pnl": 1652,
+      "contract_current_pnl": 1655,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -979,15 +979,15 @@
         "win_rate_peak_basis": 90.9,
         "win_rate_settle_basis": 72.0
       },
-      "spot_current": 401.28,
+      "spot_current": 401.59,
       "spot_today_open": 404.51,
-      "spot_today_pct": -0.8,
+      "spot_today_pct": -0.7,
       "greeks": {
         "delta": 0.7253,
-        "gamma": 0.0081,
-        "theta": -0.4085,
-        "vega": 0.2972,
-        "iv": 0.4632
+        "gamma": 0.008,
+        "theta": -0.4144,
+        "vega": 0.2974,
+        "iv": 0.47
       },
       "earnings_next": {
         "date": "2026-07-16",
@@ -1124,9 +1124,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 10.0,
-      "current_premium": 34.25,
+      "current_premium": 34.0,
       "peak_premium": 37.58,
-      "current_return_pct": 242.5,
+      "current_return_pct": 240.0,
       "peak_return_pct": 275.8,
       "low_return_pct": -2.5,
       "result": "WIN",
@@ -1138,7 +1138,7 @@
       "final_return_pct": null,
       "contract_cost": 1000,
       "contract_peak_pnl": 2758,
-      "contract_current_pnl": 2425,
+      "contract_current_pnl": 2400,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1186,15 +1186,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 382.78,
+      "spot_current": 382.85,
       "spot_today_open": 385.63,
       "spot_today_pct": -0.7,
       "greeks": {
-        "delta": 0.9216,
-        "gamma": 0.0058,
-        "theta": -0.1986,
-        "vega": 0.0973,
-        "iv": 0.3774
+        "delta": 0.9297,
+        "gamma": 0.0056,
+        "theta": -0.1797,
+        "vega": 0.0895,
+        "iv": 0.3627
       },
       "earnings_next": {
         "date": "2026-07-23",
@@ -1277,15 +1277,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 198.68,
+      "spot_current": 198.84,
       "spot_today_open": 199.5,
-      "spot_today_pct": -0.4,
+      "spot_today_pct": -0.3,
       "greeks": {
-        "delta": 0.1946,
-        "gamma": 0.0227,
-        "theta": -0.1555,
-        "vega": 0.095,
-        "iv": 0.3515
+        "delta": 0.1965,
+        "gamma": 0.0231,
+        "theta": -0.1551,
+        "vega": 0.0956,
+        "iv": 0.3481
       },
       "earnings_next": {
         "date": "2026-05-20",
@@ -1368,7 +1368,7 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 415.19,
+      "spot_current": 415.24,
       "spot_today_open": 418.84,
       "spot_today_pct": -0.9,
       "greeks": {
@@ -1376,7 +1376,7 @@
         "gamma": 0.002,
         "theta": -0.0544,
         "vega": 0.0347,
-        "iv": 0.3395
+        "iv": 0.3392
       }
     },
     {
@@ -1454,15 +1454,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 66.03,
+      "spot_current": 66.06,
       "spot_today_open": 66.39,
       "spot_today_pct": -0.5,
       "greeks": {
-        "delta": 0.0954,
-        "gamma": 0.0276,
+        "delta": 0.0956,
+        "gamma": 0.0277,
         "theta": -0.048,
-        "vega": 0.0194,
-        "iv": 0.5366
+        "vega": 0.0195,
+        "iv": 0.5351
       }
     },
     {
@@ -1478,9 +1478,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.15,
-      "current_premium": 1.23,
+      "current_premium": 1.21,
       "peak_premium": 4.41,
-      "current_return_pct": -61.0,
+      "current_return_pct": -61.6,
       "peak_return_pct": 40.0,
       "low_return_pct": -76.8,
       "result": "WIN",
@@ -1492,7 +1492,7 @@
       "final_return_pct": null,
       "contract_cost": 315,
       "contract_peak_pnl": 126,
-      "contract_current_pnl": -192,
+      "contract_current_pnl": -194,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1520,15 +1520,15 @@
           "label": "11 sessions to settle."
         }
       },
-      "spot_current": 277.81,
+      "spot_current": 277.87,
       "spot_today_open": 278.7,
       "spot_today_pct": -0.3,
       "greeks": {
-        "delta": -0.1616,
-        "gamma": 0.0176,
-        "theta": -0.1504,
-        "vega": 0.1181,
-        "iv": 0.2888
+        "delta": -0.1604,
+        "gamma": 0.0175,
+        "theta": -0.1499,
+        "vega": 0.1176,
+        "iv": 0.289
       }
     },
     {
@@ -1718,9 +1718,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 1.55,
-      "current_premium": 1.75,
+      "current_premium": 1.77,
       "peak_premium": 1.85,
-      "current_return_pct": 12.9,
+      "current_return_pct": 14.2,
       "peak_return_pct": 19.4,
       "low_return_pct": -31.0,
       "result": "WIN",
@@ -1732,7 +1732,7 @@
       "final_return_pct": null,
       "contract_cost": 155,
       "contract_peak_pnl": 30,
-      "contract_current_pnl": 20,
+      "contract_current_pnl": 22,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1809,9 +1809,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 26.77,
-      "current_premium": 70.25,
+      "current_premium": 70.97,
       "peak_premium": 81.82,
-      "current_return_pct": 162.4,
+      "current_return_pct": 165.1,
       "peak_return_pct": 205.6,
       "low_return_pct": -23.8,
       "result": "WIN",
@@ -1823,7 +1823,7 @@
       "final_return_pct": null,
       "contract_cost": 2677,
       "contract_peak_pnl": 5504,
-      "contract_current_pnl": 4347,
+      "contract_current_pnl": 4420,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1871,15 +1871,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 578.38,
+      "spot_current": 578.28,
       "spot_today_open": 560.6,
       "spot_today_pct": 3.2,
       "greeks": {
-        "delta": 0.9103,
+        "delta": 0.9108,
         "gamma": 0.0029,
-        "theta": -1.1879,
-        "vega": 0.0981,
-        "iv": 0.9319
+        "theta": -1.1771,
+        "vega": 0.0976,
+        "iv": 0.9273
       },
       "earnings_next": {
         "date": "2026-06-24",
@@ -1900,9 +1900,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 31.6,
-      "current_premium": 79.43,
+      "current_premium": 80.12,
       "peak_premium": 91.53,
-      "current_return_pct": 151.4,
+      "current_return_pct": 153.5,
       "peak_return_pct": 189.7,
       "low_return_pct": -20.3,
       "result": "WIN",
@@ -1914,7 +1914,7 @@
       "final_return_pct": null,
       "contract_cost": 3160,
       "contract_peak_pnl": 5995,
-      "contract_current_pnl": 4784,
+      "contract_current_pnl": 4851,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1962,15 +1962,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 578.38,
+      "spot_current": 578.28,
       "spot_today_open": 560.6,
       "spot_today_pct": 3.2,
       "greeks": {
-        "delta": 0.9346,
+        "delta": 0.9358,
         "gamma": 0.0022,
-        "theta": -0.9672,
-        "vega": 0.0772,
-        "iv": 0.955
+        "theta": -0.9451,
+        "vega": 0.076,
+        "iv": 0.9464
       },
       "earnings_next": {
         "date": "2026-06-24",
@@ -1991,9 +1991,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 13.5,
-      "current_premium": 17.85,
+      "current_premium": 17.98,
       "peak_premium": 20.05,
-      "current_return_pct": 32.2,
+      "current_return_pct": 33.2,
       "peak_return_pct": 48.5,
       "low_return_pct": -19.3,
       "result": "WIN",
@@ -2005,7 +2005,7 @@
       "final_return_pct": null,
       "contract_cost": 1350,
       "contract_peak_pnl": 655,
-      "contract_current_pnl": 435,
+      "contract_current_pnl": 448,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2053,15 +2053,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 180.93,
+      "spot_current": 181.26,
       "spot_today_open": 176.02,
-      "spot_today_pct": 2.8,
+      "spot_today_pct": 3.0,
       "greeks": {
-        "delta": 0.8332,
-        "gamma": 0.0136,
-        "theta": -0.2226,
-        "vega": 0.0785,
-        "iv": 0.5866
+        "delta": 0.8399,
+        "gamma": 0.0133,
+        "theta": -0.2157,
+        "vega": 0.0766,
+        "iv": 0.5811
       },
       "earnings_next": {
         "date": "2026-06-10",
@@ -2082,9 +2082,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 17.94,
-      "current_premium": 24.95,
+      "current_premium": 25.07,
       "peak_premium": 28.68,
-      "current_return_pct": 39.1,
+      "current_return_pct": 39.7,
       "peak_return_pct": 59.9,
       "low_return_pct": -3.3,
       "result": "WIN",
@@ -2096,7 +2096,7 @@
       "final_return_pct": null,
       "contract_cost": 1794,
       "contract_peak_pnl": 1075,
-      "contract_current_pnl": 701,
+      "contract_current_pnl": 712,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2144,15 +2144,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 672.68,
+      "spot_current": 672.98,
       "spot_today_open": 674.66,
-      "spot_today_pct": -0.3,
+      "spot_today_pct": -0.2,
       "greeks": {
-        "delta": 0.8883,
-        "gamma": 0.0094,
-        "theta": -0.5388,
-        "vega": 0.1339,
-        "iv": 0.2879
+        "delta": 0.8909,
+        "gamma": 0.0092,
+        "theta": -0.5315,
+        "vega": 0.1317,
+        "iv": 0.2881
       }
     },
     {
@@ -2168,9 +2168,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 18.5,
-      "current_premium": 33.7,
+      "current_premium": 33.5,
       "peak_premium": 36.9,
-      "current_return_pct": 82.2,
+      "current_return_pct": 81.1,
       "peak_return_pct": 99.5,
       "low_return_pct": 0.0,
       "result": "WIN",
@@ -2182,7 +2182,7 @@
       "final_return_pct": null,
       "contract_cost": 1850,
       "contract_peak_pnl": 1841,
-      "contract_current_pnl": 1521,
+      "contract_current_pnl": 1500,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2230,17 +2230,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 382.78,
+      "spot_current": 382.85,
       "spot_today_open": 385.63,
       "spot_at_entry": 349.94,
       "spot_since_entry_pct": 9.4,
       "spot_today_pct": -0.7,
       "greeks": {
-        "delta": 0.9421,
-        "gamma": 0.0052,
-        "theta": -0.3557,
-        "vega": 0.0464,
-        "iv": 0.5571
+        "delta": 0.9531,
+        "gamma": 0.0047,
+        "theta": -0.2901,
+        "vega": 0.0393,
+        "iv": 0.5236
       },
       "earnings_next": {
         "date": "2026-07-23",
@@ -2261,9 +2261,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 5.88,
-      "current_premium": 13.75,
+      "current_premium": 13.43,
       "peak_premium": 17.48,
-      "current_return_pct": 133.8,
+      "current_return_pct": 128.4,
       "peak_return_pct": 197.3,
       "low_return_pct": 0.0,
       "result": "WIN",
@@ -2275,7 +2275,7 @@
       "final_return_pct": null,
       "contract_cost": 588,
       "contract_peak_pnl": 1160,
-      "contract_current_pnl": 787,
+      "contract_current_pnl": 755,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2323,17 +2323,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 271.48,
+      "spot_current": 271.35,
       "spot_today_open": 268.8,
       "spot_at_entry": 263.04,
       "spot_since_entry_pct": 3.2,
-      "spot_today_pct": 1.0,
+      "spot_today_pct": 0.9,
       "greeks": {
-        "delta": 0.7879,
-        "gamma": 0.0186,
-        "theta": -0.2249,
-        "vega": 0.1366,
-        "iv": 0.3301
+        "delta": 0.7908,
+        "gamma": 0.0189,
+        "theta": -0.2185,
+        "vega": 0.1354,
+        "iv": 0.3223
       },
       "earnings_next": {
         "date": "2026-07-30",
@@ -2354,9 +2354,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 27.17,
-      "current_premium": 67.83,
+      "current_premium": 68.8,
       "peak_premium": 80.93,
-      "current_return_pct": 149.7,
+      "current_return_pct": 153.2,
       "peak_return_pct": 197.9,
       "low_return_pct": -4.6,
       "result": "WIN",
@@ -2368,7 +2368,7 @@
       "final_return_pct": null,
       "contract_cost": 2717,
       "contract_peak_pnl": 5377,
-      "contract_current_pnl": 4067,
+      "contract_current_pnl": 4162,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2416,17 +2416,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 578.38,
+      "spot_current": 578.28,
       "spot_today_open": 560.6,
       "spot_at_entry": 518.46,
-      "spot_since_entry_pct": 11.6,
+      "spot_since_entry_pct": 11.5,
       "spot_today_pct": 3.2,
       "greeks": {
-        "delta": 0.796,
+        "delta": 0.7988,
         "gamma": 0.0034,
-        "theta": -1.0985,
-        "vega": 0.2845,
-        "iv": 0.8194
+        "theta": -1.0811,
+        "vega": 0.2823,
+        "iv": 0.8121
       },
       "earnings_next": {
         "date": "2026-06-24",
@@ -2447,9 +2447,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 8.72,
-      "current_premium": 10.56,
+      "current_premium": 10.72,
       "peak_premium": 13.44,
-      "current_return_pct": 21.1,
+      "current_return_pct": 22.9,
       "peak_return_pct": 54.1,
       "low_return_pct": -0.7,
       "result": "WIN",
@@ -2461,7 +2461,7 @@
       "final_return_pct": null,
       "contract_cost": 872,
       "contract_peak_pnl": 472,
-      "contract_current_pnl": 184,
+      "contract_current_pnl": 200,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2509,17 +2509,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 672.68,
+      "spot_current": 672.98,
       "spot_today_open": 674.66,
       "spot_at_entry": 667.46,
       "spot_since_entry_pct": 0.8,
-      "spot_today_pct": -0.3,
+      "spot_today_pct": -0.2,
       "greeks": {
-        "delta": 0.6661,
-        "gamma": 0.0217,
-        "theta": -0.8054,
-        "vega": 0.2562,
-        "iv": 0.2379
+        "delta": 0.6726,
+        "gamma": 0.0215,
+        "theta": -0.8001,
+        "vega": 0.2543,
+        "iv": 0.2378
       }
     },
     {
@@ -2535,10 +2535,10 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 11.1,
-      "current_premium": 17.55,
-      "peak_premium": 17.75,
-      "current_return_pct": 58.1,
-      "peak_return_pct": 59.9,
+      "current_premium": 17.95,
+      "peak_premium": 17.95,
+      "current_return_pct": 61.7,
+      "peak_return_pct": 61.7,
       "low_return_pct": -62.2,
       "result": "WIN",
       "tracking_type": "system",
@@ -2548,8 +2548,8 @@
       "exit_price": null,
       "final_return_pct": null,
       "contract_cost": 1110,
-      "contract_peak_pnl": 665,
-      "contract_current_pnl": 645,
+      "contract_peak_pnl": 685,
+      "contract_current_pnl": 685,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2560,16 +2560,16 @@
           "trigger_return_pct": -50
         },
         "trail_30": {
-          "trigger_premium": 12.42,
-          "trigger_return_pct": 11.9
+          "trigger_premium": 12.56,
+          "trigger_return_pct": 13.2
         },
         "trail_50": {
-          "trigger_premium": 8.88,
-          "trigger_return_pct": -20.0
+          "trigger_premium": 8.97,
+          "trigger_return_pct": -19.1
         },
         "trail_70": {
-          "trigger_premium": 5.33,
-          "trigger_return_pct": -52.0
+          "trigger_premium": 5.39,
+          "trigger_return_pct": -51.5
         },
         "time_decay": {
           "dte": 11,
@@ -2597,15 +2597,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 106.77,
+      "spot_current": 106.4,
       "spot_today_open": 96.88,
-      "spot_today_pct": 10.2,
+      "spot_today_pct": 9.8,
       "greeks": {
-        "delta": 0.7145,
-        "gamma": 0.0116,
-        "theta": -0.459,
-        "vega": 0.063,
-        "iv": 1.583
+        "delta": 0.7081,
+        "gamma": 0.0115,
+        "theta": -0.4736,
+        "vega": 0.0634,
+        "iv": 1.6227
       },
       "earnings_next": {
         "date": "2026-07-30",
@@ -2626,9 +2626,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 86.4,
-      "current_premium": 184.5,
+      "current_premium": 182.35,
       "peak_premium": 189.45,
-      "current_return_pct": 113.5,
+      "current_return_pct": 111.1,
       "peak_return_pct": 119.3,
       "low_return_pct": -26.0,
       "result": "WIN",
@@ -2640,7 +2640,7 @@
       "final_return_pct": null,
       "contract_cost": 8640,
       "contract_peak_pnl": 10308,
-      "contract_current_pnl": 9806,
+      "contract_current_pnl": 9599,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2688,15 +2688,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 1260.98,
+      "spot_current": 1259.59,
       "spot_today_open": 1222.18,
-      "spot_today_pct": 3.2,
+      "spot_today_pct": 3.1,
       "greeks": {
-        "delta": 0.7812,
-        "gamma": 0.0012,
-        "theta": -3.266,
-        "vega": 0.646,
-        "iv": 1.0851
+        "delta": 0.784,
+        "gamma": 0.0013,
+        "theta": -3.1686,
+        "vega": 0.6408,
+        "iv": 1.0603
       },
       "earnings_next": {
         "date": "2026-04-30",
@@ -2779,15 +2779,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 59.3,
+      "spot_current": 59.33,
       "spot_today_open": 58.73,
       "spot_today_pct": 1.0,
       "greeks": {
-        "delta": 0.5536,
-        "gamma": 0.0997,
-        "theta": -0.0466,
-        "vega": 0.0521,
-        "iv": 0.3012
+        "delta": 0.5569,
+        "gamma": 0.1006,
+        "theta": -0.0462,
+        "vega": 0.052,
+        "iv": 0.298
       }
     },
     {
@@ -2803,9 +2803,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 8.93,
-      "current_premium": 13.5,
+      "current_premium": 13.78,
       "peak_premium": 16.52,
-      "current_return_pct": 51.2,
+      "current_return_pct": 54.3,
       "peak_return_pct": 85.0,
       "low_return_pct": -9.3,
       "result": "WIN",
@@ -2817,7 +2817,7 @@
       "final_return_pct": null,
       "contract_cost": 893,
       "contract_peak_pnl": 759,
-      "contract_current_pnl": 457,
+      "contract_current_pnl": 485,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2865,15 +2865,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 203.22,
+      "spot_current": 203.59,
       "spot_today_open": 199.41,
-      "spot_today_pct": 1.9,
+      "spot_today_pct": 2.1,
       "greeks": {
-        "delta": 0.5731,
-        "gamma": 0.0128,
-        "theta": -0.5581,
-        "vega": 0.1383,
-        "iv": 0.8717
+        "delta": 0.5798,
+        "gamma": 0.0129,
+        "theta": -0.547,
+        "vega": 0.1382,
+        "iv": 0.8545
       },
       "earnings_next": {
         "date": "2026-05-07",
@@ -2894,9 +2894,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 10.82,
-      "current_premium": 8.6,
+      "current_premium": 8.75,
       "peak_premium": 12.15,
-      "current_return_pct": -20.5,
+      "current_return_pct": -19.1,
       "peak_return_pct": 12.3,
       "low_return_pct": -51.9,
       "result": "WIN",
@@ -2908,7 +2908,7 @@
       "final_return_pct": null,
       "contract_cost": 1082,
       "contract_peak_pnl": 133,
-      "contract_current_pnl": -222,
+      "contract_current_pnl": -207,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2956,15 +2956,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 392.6,
+      "spot_current": 392.83,
       "spot_today_open": 390.23,
-      "spot_today_pct": 0.6,
+      "spot_today_pct": 0.7,
       "greeks": {
-        "delta": 0.4221,
+        "delta": 0.4252,
         "gamma": 0.0133,
-        "theta": -0.5398,
-        "vega": 0.2667,
-        "iv": 0.4324
+        "theta": -0.541,
+        "vega": 0.2673,
+        "iv": 0.4323
       },
       "earnings_next": {
         "date": "2026-07-22",
@@ -2985,10 +2985,10 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 19.08,
-      "current_premium": 36.05,
-      "peak_premium": 36.05,
-      "current_return_pct": 88.9,
-      "peak_return_pct": 88.9,
+      "current_premium": 36.1,
+      "peak_premium": 36.1,
+      "current_return_pct": 89.2,
+      "peak_return_pct": 89.2,
       "low_return_pct": -41.0,
       "result": "WIN",
       "tracking_type": "system",
@@ -2998,8 +2998,8 @@
       "exit_price": null,
       "final_return_pct": null,
       "contract_cost": 1908,
-      "contract_peak_pnl": 1696,
-      "contract_current_pnl": 1696,
+      "contract_peak_pnl": 1702,
+      "contract_current_pnl": 1702,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -3010,16 +3010,16 @@
           "trigger_return_pct": -50
         },
         "trail_30": {
-          "trigger_premium": 25.23,
-          "trigger_return_pct": 32.3
+          "trigger_premium": 25.27,
+          "trigger_return_pct": 32.4
         },
         "trail_50": {
-          "trigger_premium": 18.02,
-          "trigger_return_pct": -5.5
+          "trigger_premium": 18.05,
+          "trigger_return_pct": -5.4
         },
         "trail_70": {
-          "trigger_premium": 10.82,
-          "trigger_return_pct": -43.3
+          "trigger_premium": 10.83,
+          "trigger_return_pct": -43.2
         },
         "time_decay": {
           "dte": 25,
@@ -3047,15 +3047,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 178.77,
+      "spot_current": 178.87,
       "spot_today_open": 160.38,
       "spot_today_pct": 11.5,
       "greeks": {
-        "delta": 0.7842,
+        "delta": 0.7845,
         "gamma": 0.006,
-        "theta": -0.2968,
-        "vega": 0.137,
-        "iv": 1.0455
+        "theta": -0.2963,
+        "vega": 0.1369,
+        "iv": 1.0444
       },
       "earnings_next": {
         "date": "2026-05-13",
@@ -3076,9 +3076,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 11.66,
-      "current_premium": 5.92,
+      "current_premium": 5.83,
       "peak_premium": 13.81,
-      "current_return_pct": -49.2,
+      "current_return_pct": -50.0,
       "peak_return_pct": 18.4,
       "low_return_pct": -56.7,
       "result": "WIN",
@@ -3090,7 +3090,7 @@
       "final_return_pct": null,
       "contract_cost": 1166,
       "contract_peak_pnl": 215,
-      "contract_current_pnl": -574,
+      "contract_current_pnl": -583,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -3138,15 +3138,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 277.1,
+      "spot_current": 276.88,
       "spot_today_open": 279.65,
-      "spot_today_pct": -0.9,
+      "spot_today_pct": -1.0,
       "greeks": {
-        "delta": 0.5919,
+        "delta": 0.5831,
         "gamma": 0.0338,
-        "theta": -0.2185,
-        "vega": 0.1868,
-        "iv": 0.2388
+        "theta": -0.2201,
+        "vega": 0.1876,
+        "iv": 0.24
       },
       "earnings_next": {
         "date": "2026-07-30",
@@ -3167,9 +3167,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 1.72,
-      "current_premium": 1.86,
+      "current_premium": 1.88,
       "peak_premium": 2.07,
-      "current_return_pct": 8.1,
+      "current_return_pct": 9.3,
       "peak_return_pct": 20.3,
       "low_return_pct": -23.8,
       "result": "WIN",
@@ -3181,7 +3181,7 @@
       "final_return_pct": null,
       "contract_cost": 172,
       "contract_peak_pnl": 35,
-      "contract_current_pnl": 14,
+      "contract_current_pnl": 16,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -3229,15 +3229,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 22.44,
+      "spot_current": 22.39,
       "spot_today_open": 21.49,
-      "spot_today_pct": 4.4,
+      "spot_today_pct": 4.2,
       "greeks": {
-        "delta": 0.5809,
-        "gamma": 0.0933,
-        "theta": -0.0754,
+        "delta": 0.5766,
+        "gamma": 0.0925,
+        "theta": -0.0764,
         "vega": 0.0152,
-        "iv": 1.0747
+        "iv": 1.0885
       },
       "earnings_next": {
         "date": "2026-05-08",
@@ -3258,9 +3258,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 6.8,
-      "current_premium": 4.6,
+      "current_premium": 4.58,
       "peak_premium": 7.3,
-      "current_return_pct": -32.4,
+      "current_return_pct": -32.6,
       "peak_return_pct": 7.4,
       "low_return_pct": -44.4,
       "result": "WIN",
@@ -3272,7 +3272,7 @@
       "final_return_pct": null,
       "contract_cost": 680,
       "contract_peak_pnl": 50,
-      "contract_current_pnl": -220,
+      "contract_current_pnl": -222,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -3320,15 +3320,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 416.32,
+      "spot_current": 416.56,
       "spot_today_open": 418.21,
-      "spot_today_pct": -0.5,
+      "spot_today_pct": -0.4,
       "greeks": {
-        "delta": 0.2511,
-        "gamma": 0.01,
-        "theta": -0.4709,
-        "vega": 0.2302,
-        "iv": 0.4405
+        "delta": 0.2516,
+        "gamma": 0.0101,
+        "theta": -0.4677,
+        "vega": 0.2306,
+        "iv": 0.4368
       },
       "earnings_next": {
         "date": "2026-06-03",

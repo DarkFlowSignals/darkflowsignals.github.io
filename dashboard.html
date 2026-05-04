@@ -3085,10 +3085,18 @@ body.premium .unlock-badge { display: none; }
     dr.className = 'row-detail';
     var dtd = document.createElement('td');
     dtd.colSpan = colSpan;
-    dtd.style.cssText = 'padding:14px 16px 18px;background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);';
+    // Wide td (spans the full 1100px+ table) but the inner stays sticky to the
+    // viewport's left edge so the detail content is always visible regardless
+    // of horizontal scroll position. Width capped to the page-wrap width so it
+    // sits tight beneath the collapsed row.
+    dtd.style.cssText = 'padding:0;background:rgba(91,159,255,0.04);border-bottom:1px solid var(--border);';
 
     var inner = document.createElement('div');
-    inner.style.cssText = 'display:flex;flex-direction:column;gap:14px;';
+    inner.style.cssText = 'display:flex;flex-direction:column;gap:14px;' +
+      'position:sticky;left:0;' +
+      'max-width:920px;' +
+      'padding:16px 18px 20px;' +
+      'box-sizing:border-box;';
 
     // Spot panel (always visible if data present)
     if (s.spot_at_entry != null && s.spot_current != null) {

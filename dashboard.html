@@ -858,6 +858,9 @@ body.premium .unlock-badge { display: none; }
 
 .col-pnl.positive { color: var(--green); font-weight: 600; }
 .col-pnl.negative { color: var(--red); font-weight: 600; }
+.data-table tr.row-expanded td { background: rgba(91,159,255,0.05); }
+.data-table tr.row-detail td { padding: 0; }
+.data-table tr.row-detail:hover td { background: rgba(255,255,255,0.02); }
 
 .badge-win { background: var(--green-dim); color: var(--green); }
 .badge-loss { background: var(--red-dim); color: var(--red); }
@@ -925,7 +928,7 @@ body.premium .unlock-badge { display: none; }
 
   /* Table: horizontal scroll instead of hiding */
   .table-view { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .data-table { min-width: 600px; }
+  .data-table { min-width: 1100px; }
   .data-table th, .data-table td { padding: 8px 10px; font-size: 12px; }
 
   /* FOMO */
@@ -1356,6 +1359,7 @@ body.premium .unlock-badge { display: none; }
 
   <!-- TABLE VIEW -->
   <div class="table-view" id="table-view">
+    <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 10px 0;">Click any row to expand the full thesis + spot panel + cohort base rate. Sort by clicking column headers.</p>
     <table class="data-table">
       <thead>
         <tr>
@@ -1364,12 +1368,16 @@ body.premium .unlock-badge { display: none; }
           <th data-sort="direction">Dir <span class="sort-arrow"></span></th>
           <th data-sort="category">Tag <span class="sort-arrow"></span></th>
           <th data-sort="conviction_score">Score <span class="sort-arrow"></span></th>
+          <th data-sort="state">State <span class="sort-arrow"></span></th>
           <th data-sort="strike">Strike <span class="sort-arrow"></span></th>
           <th data-sort="expiry">Expiry <span class="sort-arrow"></span></th>
           <th data-sort="entry_premium">Entry $ <span class="sort-arrow"></span></th>
           <th data-sort="current_premium">Now $ <span class="sort-arrow"></span></th>
+          <th data-sort="spot_current">Spot <span class="sort-arrow"></span></th>
+          <th data-sort="spot_since_entry_pct">Since <span class="sort-arrow"></span></th>
           <th data-sort="current_return_pct">Current <span class="sort-arrow"></span></th>
           <th data-sort="peak_return_pct">Peak <span class="sort-arrow"></span></th>
+          <th data-sort="earnings_days">Ern <span class="sort-arrow"></span></th>
           <th data-sort="status">Status <span class="sort-arrow"></span></th>
           <th data-sort="result">Result <span class="sort-arrow"></span></th>
         </tr>
@@ -2814,6 +2822,23 @@ body.premium .unlock-badge { display: none; }
       if (col === 'current_return_pct') return currentPct(s);
       if (col === 'status') return isOpen(s) ? 'open' : 'expired';
       if (col === 'result') return signalResult(s);
+      if (col === 'state') {
+        var b = v16StateBadge(s);
+        // Numeric ordering: stop=0, faded=1, fading=2, near peak=3, runner=4, none=5
+        if (!b) return 5;
+        if (b.indexOf('runner') >= 0) return 4;
+        if (b.indexOf('near peak') >= 0) return 3;
+        if (b.indexOf('fading') >= 0) return 2;
+        if (b.indexOf('faded') >= 0) return 1;
+        if (b.indexOf('near stop') >= 0) return 0;
+        return 5;
+      }
+      if (col === 'spot_current') return s.spot_current;
+      if (col === 'spot_since_entry_pct') return s.spot_since_entry_pct;
+      if (col === 'earnings_days') {
+        var e = s.earnings_next;
+        return (e && typeof e.days_to === 'number') ? e.days_to : 9999;
+      }
       return s[col];
     }
 
@@ -2886,6 +2911,22 @@ body.premium .unlock-badge { display: none; }
       tdScore.textContent = Math.round(s.conviction_score);
       tr.appendChild(tdScore);
 
+      // State badge (runner / faded / fading / near peak / near stop). Visible
+      // to everyone since pk + cur are already public.
+      var tdState = document.createElement('td');
+      var stateLabel = v16StateBadge(s);
+      if (stateLabel) {
+        var stSpan = document.createElement('span');
+        stSpan.className = 'badge';
+        stSpan.style.cssText = 'background:rgba(255,193,7,0.15);color:var(--amber);font-size:9px;white-space:nowrap;';
+        stSpan.textContent = stateLabel;
+        tdState.appendChild(stSpan);
+      } else {
+        tdState.textContent = '--';
+        tdState.style.color = 'var(--text-muted)';
+      }
+      tr.appendChild(tdState);
+
       // Strike (premium only)
       var tdStrike = document.createElement('td');
       if (s.strike && isPremium) { tdStrike.textContent = '$' + s.strike; }
@@ -2918,11 +2959,64 @@ body.premium .unlock-badge { display: none; }
       else { tdNow.textContent = '--'; }
       tr.appendChild(tdNow);
 
+      // Spot (current underlying price - visible to everyone, public data)
+      var tdSpot = document.createElement('td');
+      if (s.spot_current != null) {
+        tdSpot.textContent = '$' + Number(s.spot_current).toFixed(2);
+      } else {
+        tdSpot.textContent = '--';
+        tdSpot.style.color = 'var(--text-muted)';
+      }
+      tr.appendChild(tdSpot);
+
+      // Since-entry % (spot move since signal fired - visible to everyone)
+      var tdSince = document.createElement('td');
+      if (s.spot_since_entry_pct != null) {
+        var sv = Number(s.spot_since_entry_pct);
+        tdSince.textContent = (sv >= 0 ? '+' : '') + sv.toFixed(1) + '%';
+        tdSince.classList.add(sv >= 0 ? 'positive' : 'negative');
+        tdSince.style.fontWeight = '600';
+      } else {
+        tdSince.textContent = '--';
+        tdSince.style.color = 'var(--text-muted)';
+      }
+      tr.appendChild(tdSince);
+
       // Current Return % (live while open; settles to intrinsic at expiry)
       tr.appendChild(pctCell(currentPct(s)));
 
       // Peak Return % (signal quality)
       tr.appendChild(pctCell(peakPct(s)));
+
+      // Earnings days (binary catalyst risk indicator)
+      var tdErn = document.createElement('td');
+      var ern = s.earnings_next;
+      if (ern && typeof ern.days_to === 'number') {
+        var d2e = ern.days_to;
+        var ernSpan = document.createElement('span');
+        ernSpan.style.fontFamily = 'var(--font-mono)';
+        ernSpan.style.fontSize = '11px';
+        if (d2e <= 0) {
+          ernSpan.textContent = 'today';
+          ernSpan.style.color = '#F08585';
+          ernSpan.style.fontWeight = '600';
+        } else if (d2e <= 7) {
+          ernSpan.textContent = d2e + 'd';
+          ernSpan.style.color = 'var(--amber)';
+          ernSpan.style.fontWeight = '600';
+        } else if (d2e <= 14) {
+          ernSpan.textContent = d2e + 'd';
+          ernSpan.style.color = 'var(--text-secondary)';
+        } else {
+          ernSpan.textContent = d2e + 'd';
+          ernSpan.style.color = 'var(--text-muted)';
+        }
+        tdErn.appendChild(ernSpan);
+      } else {
+        tdErn.textContent = '--';
+        tdErn.style.color = 'var(--text-muted)';
+      }
+      tr.appendChild(tdErn);
 
       // Status: OPEN or EXPIRED (no STOPPED / PEAK public labels)
       var tdStatus = document.createElement('td');
@@ -2951,8 +3045,122 @@ body.premium .unlock-badge { display: none; }
       }
       tr.appendChild(tdResult);
 
+      // CLICK-TO-EXPAND: opens a detail row beneath with thesis + cohort +
+      // (members) Greeks. Visible content matches what the feed-card expand
+      // shows so the table mode doesn't lose the new richness.
+      tr.style.cursor = 'pointer';
+      var detailRow = null;
+      tr.addEventListener('click', function(ev) {
+        // Don't toggle when user clicked an inline link/button (e.g. ticker chart open)
+        if (ev.target && (ev.target.tagName === 'A' || ev.target.tagName === 'BUTTON')) return;
+        if (detailRow && detailRow.parentNode) {
+          detailRow.parentNode.removeChild(detailRow);
+          detailRow = null;
+          tr.classList.remove('row-expanded');
+          return;
+        }
+        detailRow = buildTableDetailRow(s, tr.children.length);
+        tr.parentNode.insertBefore(detailRow, tr.nextSibling);
+        tr.classList.add('row-expanded');
+      });
+
       tbody.appendChild(tr);
     });
+  }
+
+  // Build the detail row content for click-to-expand. Uses the same data the
+  // feed-card expand panel uses (thesis, cohort, spot, Greeks for members).
+  function buildTableDetailRow(s, colSpan) {
+    var dr = document.createElement('tr');
+    dr.className = 'row-detail';
+    var dtd = document.createElement('td');
+    dtd.colSpan = colSpan;
+    dtd.style.cssText = 'padding:14px 16px 18px;background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);';
+
+    var inner = document.createElement('div');
+    inner.style.cssText = 'display:flex;flex-direction:column;gap:14px;';
+
+    // Spot panel (always visible if data present)
+    if (s.spot_at_entry != null && s.spot_current != null) {
+      var sp = document.createElement('div');
+      sp.style.cssText = 'font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);';
+      var entry = '$' + Number(s.spot_at_entry).toFixed(2);
+      var now = '$' + Number(s.spot_current).toFixed(2);
+      var since = (s.spot_since_entry_pct != null) ? ((s.spot_since_entry_pct >= 0 ? '+' : '') + Number(s.spot_since_entry_pct).toFixed(1) + '%') : '';
+      var today = (s.spot_today_pct != null) ? ((s.spot_today_pct >= 0 ? '+' : '') + Number(s.spot_today_pct).toFixed(1) + '%') : '';
+      sp.innerHTML = '<span style="color:var(--text-muted);">Spot:</span> ' + entry + ' at entry  →  ' + now + ' now  ' +
+        (since ? '<span style="margin-left:8px;color:' + (s.spot_since_entry_pct >= 0 ? 'var(--green)' : 'var(--red)') + ';font-weight:600;">' + since + ' since entry</span>' : '') +
+        (today ? '<span style="margin-left:14px;color:' + (s.spot_today_pct >= 0 ? 'var(--green)' : 'var(--red)') + ';">' + today + ' today</span>' : '');
+      inner.appendChild(sp);
+    }
+
+    // Earnings indicator
+    if (s.earnings_next && s.earnings_next.date) {
+      var en = document.createElement('div');
+      en.style.cssText = 'font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);';
+      var d2e = s.earnings_next.days_to;
+      var label = (d2e <= 0) ? 'today' : (d2e + 'd away');
+      en.innerHTML = '<span style="color:var(--text-muted);">Earnings:</span> ' + esc(s.earnings_next.date) + ' (' + label + ')';
+      inner.appendChild(en);
+    }
+
+    // Cohort base rate
+    if (s.cohort && s.cohort.n) {
+      var co = document.createElement('div');
+      co.style.cssText = 'font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);';
+      var bits = ['<span style="color:var(--text-muted);">Similar setups (n=' + s.cohort.n + '):</span>'];
+      if (s.cohort.win_rate_peak_basis != null) bits.push(Math.round(s.cohort.win_rate_peak_basis) + '% won');
+      if (s.cohort.median_peak_pct != null) bits.push('median peak ' + (s.cohort.median_peak_pct >= 0 ? '+' : '') + Number(s.cohort.median_peak_pct).toFixed(0) + '%');
+      co.innerHTML = bits.join('  ·  ');
+      inner.appendChild(co);
+    }
+
+    // Greeks (members only) or locked teaser (free)
+    if (s.greeks) {
+      var gh = document.createElement('div');
+      gh.style.cssText = 'font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);';
+      var parts = ['<span style="color:var(--text-muted);">Greeks:</span>'];
+      ['delta','gamma','theta','vega','iv','iv_rank'].forEach(function(k) {
+        if (s.greeks[k] == null) return;
+        var v = s.greeks[k];
+        var fmt = (k === 'iv') ? (v*100).toFixed(0) + '%' : (k === 'iv_rank') ? v.toFixed(0) : v.toFixed(k === 'gamma' ? 3 : 2);
+        var sym = ({delta:'Δ',gamma:'Γ',theta:'Θ',vega:'ν',iv:'IV',iv_rank:'IVR'})[k];
+        parts.push(sym + ' ' + fmt);
+      });
+      gh.innerHTML = parts.join('  ·  ');
+      inner.appendChild(gh);
+    } else if (!isPremium) {
+      var gl = document.createElement('div');
+      gl.style.cssText = 'font-family:var(--font-mono);font-size:11.5px;color:var(--text-muted);padding:8px 12px;background:rgba(91,159,255,0.07);border:1px solid rgba(91,159,255,0.18);border-radius:6px;';
+      gl.innerHTML = '🔒 Live Greeks + strike + expiry + entry premium are member-only. <a href="/auth/whop/login" style="color:#5B9FFF;font-weight:600;">Sign in</a> or start a 14-day free trial.';
+      inner.appendChild(gl);
+    }
+
+    // Thesis pillars
+    var pillars = [
+      ['Setup', s.thesis_setup, '#5B9FFF'],
+      ['Catalyst', s.thesis_catalyst, '#5B9FFF'],
+      ['Macro', s.thesis_macro, '#5B9FFF'],
+      ['Risk + invalidates', s.thesis_risk, 'var(--amber)']
+    ];
+    pillars.forEach(function(p) {
+      if (!p[1]) return;
+      var sec = document.createElement('div');
+      sec.style.cssText = 'border-left:2px solid ' + p[2] + ';padding-left:10px;';
+      var lab = document.createElement('div');
+      lab.style.cssText = 'font-family:var(--font-mono);font-size:9.5px;color:' + p[2] + ';text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:3px;';
+      lab.textContent = p[0];
+      sec.appendChild(lab);
+      var bod = document.createElement('div');
+      bod.style.cssText = 'font-size:12.5px;color:var(--text-primary);line-height:1.55;';
+      bod.textContent = p[1];
+      sec.appendChild(bod);
+      inner.appendChild(sec);
+    });
+
+    dtd.appendChild(inner);
+    dr.appendChild(dtd);
+    return dr;
   }
 
   // ---- LAST SIGNAL STRIP (free-tier only, real-time FOMO) ----

@@ -1969,9 +1969,13 @@ body.premium .unlock-badge { display: none; }
   }
   function v16StateBadge(s) {
     var pk = peakPct(s); var cur = currentPct(s); var dte = v16DTE(s.expiry);
-    if (pk != null && pk >= 200 && dte != null && dte <= 5) return '🔥 runner';
-    if (pk != null && cur != null && cur >= pk * 0.95 && pk >= 100) return '⚡ near peak';
+    // Order matters: most-current-state-relevant labels first.
     if (cur != null && cur <= -40) return '🚨 near stop';
+    if (pk != null && cur != null && pk >= 100 && cur < 0) return '📉 faded';
+    if (pk != null && cur != null && pk >= 100 && cur < pk * 0.5) return '📉 fading';
+    if (pk != null && cur != null && cur >= pk * 0.95 && pk >= 100) return '⚡ near peak';
+    if (pk != null && cur != null && pk >= 200 && cur >= 100 && dte != null && dte <= 5) return '🔥 runner';
+    if (pk != null && cur != null && cur >= 100) return '🔥 runner';
     return null;
   }
   function v16Strength(c) {
@@ -2251,23 +2255,24 @@ body.premium .unlock-badge { display: none; }
     var expand = document.createElement('div'); expand.className = 'v16-expand';
 
     var GREEK_META = {
-      delta:  { sym: 'Δ',  name: 'Delta',         desc: 'Move per $1 in underlying.' },
-      gamma:  { sym: 'Γ',  name: 'Gamma',         desc: 'How fast delta changes.' },
-      theta:  { sym: 'Θ',  name: 'Theta',         desc: 'Daily time decay.' },
-      vega:   { sym: 'ν',  name: 'Vega',          desc: 'Sensitivity to vol shifts.' },
-      iv:     { sym: 'IV', name: 'Implied Vol',   desc: 'Market vol expectation.' },
-      iv_pct: { sym: 'IV%', name: 'IV Percentile', desc: 'Where IV sits vs past year.' }
+      delta:   { sym: 'Δ',   name: 'Delta',         desc: 'Move per $1 in underlying.' },
+      gamma:   { sym: 'Γ',   name: 'Gamma',         desc: 'How fast delta changes.' },
+      theta:   { sym: 'Θ',   name: 'Theta',         desc: 'Daily time decay.' },
+      vega:    { sym: 'ν',   name: 'Vega',          desc: 'Sensitivity to vol shifts.' },
+      iv:      { sym: 'IV',  name: 'Implied Vol',   desc: 'Market vol expectation.' },
+      iv_rank: { sym: 'IVR', name: 'IV Rank',       desc: 'Current IV in past-year range.' },
+      iv_pct:  { sym: 'IV%', name: 'IV Percentile', desc: 'Days IV sat below current.' }
     };
     if (s.greeks) {
       var gs = document.createElement('div'); gs.className = 'v16-expand-section';
       var gl = document.createElement('div'); gl.className = 'v16-expand-label'; gl.textContent = 'Greeks (live, every 5min)'; gs.appendChild(gl);
       var gg = document.createElement('div'); gg.className = 'v16-greeks';
-      ['delta','gamma','theta','vega','iv','iv_pct'].forEach(function(k) {
+      ['delta','gamma','theta','vega','iv','iv_rank','iv_pct'].forEach(function(k) {
         if (s.greeks[k] == null) return;
         var meta = GREEK_META[k];
         var v = s.greeks[k];
         var formatted = (k === 'iv' ? (v*100).toFixed(1) + '%'
-                       : k === 'iv_pct' ? v.toFixed(0)
+                       : (k === 'iv_pct' || k === 'iv_rank') ? v.toFixed(0)
                        : v.toFixed(k === 'gamma' ? 3 : 2));
         var card = document.createElement('div'); card.className = 'v16-greek';
         var top = document.createElement('div'); top.className = 'top';
@@ -2284,7 +2289,7 @@ body.premium .unlock-badge { display: none; }
       var gs = document.createElement('div'); gs.className = 'v16-expand-section';
       var gl = document.createElement('div'); gl.className = 'v16-expand-label'; gl.textContent = 'Greeks  ·  Member only'; gs.appendChild(gl);
       var gg = document.createElement('div'); gg.className = 'v16-greeks v16-greeks-locked';
-      ['delta','gamma','theta','vega','iv','iv_pct'].forEach(function(k) {
+      ['delta','gamma','theta','vega','iv','iv_rank','iv_pct'].forEach(function(k) {
         var meta = GREEK_META[k];
         var card = document.createElement('div'); card.className = 'v16-greek v16-greek-locked';
         var top = document.createElement('div'); top.className = 'top';

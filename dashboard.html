@@ -814,7 +814,14 @@ body.premium .unlock-badge { display: none; }
    TABLE VIEW: compact data mode
    ============================================================ */
 .table-view { display: none; }
-.table-view.active { display: block; }
+.table-view.active {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  /* Table stays inside the centered page-wrap; horizontal scroll within. */
+}
+.table-view.active .data-table { min-width: 1100px; margin: 0 auto; }
 .signal-feed.hidden { display: none; }
 
 .data-table {
@@ -1046,52 +1053,55 @@ body.premium .unlock-badge { display: none; }
 }
 .v16-greeks {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
   width: 100%;
   justify-content: center;
   justify-items: center;
 }
+@media (max-width: 880px) {
+  .v16-greeks { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 .v16-greek {
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 8px;
-  padding: 10px 8px 11px;
-  display: flex; flex-direction: column; gap: 4px;
+  border-radius: 7px;
+  padding: 8px 5px 9px;
+  display: flex; flex-direction: column; gap: 3px;
   min-width: 0;
   width: 100%;
   text-align: center;
 }
 .v16-greek .top {
   display: flex; align-items: baseline; justify-content: center;
-  gap: 8px; line-height: 1;
+  gap: 5px; line-height: 1;
 }
 .v16-greek .sym {
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 12.5px;
   color: var(--text-muted);
   font-weight: 600;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.3px;
 }
 .v16-greek .val {
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 12.5px;
   font-weight: 700;
   color: var(--text-primary);
 }
 .v16-greek .val.theta { color: #F08585; }
 .v16-greek .name {
-  font-size: 10px;
+  font-size: 9px;
   color: #5B9FFF;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.4px;
   font-weight: 600;
 }
 .v16-greek .desc {
-  font-size: 10.5px;
+  font-size: 9.5px;
   color: var(--text-muted);
-  line-height: 1.35;
-  margin-top: 2px;
+  line-height: 1.3;
+  margin-top: 1px;
 }
 @media (max-width: 600px) {
   .v16-greeks {

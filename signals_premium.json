@@ -26,9 +26,9 @@
       "exit_price": null,
       "final_return_pct": null,
       "thesis_setup": "Bullish call entry on 2026-04-09 at $4.0/contract. underlying was $90.40 at entry (OTM strike, 17.8% from spot).",
-      "thesis_catalyst": "AI infrastructure pure-play (cloud GPU + inference compute). Next earnings 2026-05-07 (3d away \u2014 binary catalyst inside DTE).",
+      "thesis_catalyst": "AI infrastructure pure-play (cloud GPU + inference compute). Next earnings 2026-05-07 (3d away, binary catalyst inside DTE).",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $2.00 (-50% from entry) \u00b7 Tight DTE (4d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Earnings 2026-05-07 inside DTE \u2014 IV crush risk on print regardless of direction \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $2.00 (entry x 0.5, the published rule) \u00b7 Tight DTE (4d), theta decay accelerated and vega risk elevated \u00b7 Earnings 2026-05-07 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 400,
       "contract_peak_pnl": 1850,
       "contract_current_pnl": 1407,
@@ -79,11 +79,11 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 125.43,
+      "spot_current": 125.68,
       "spot_today_open": 121.18,
       "spot_at_entry": 90.4,
-      "spot_since_entry_pct": 38.8,
-      "spot_today_pct": 3.5,
+      "spot_since_entry_pct": 39.0,
+      "spot_today_pct": 3.7,
       "earnings_next": {
         "date": "2026-05-07",
         "days_to": 3,
@@ -118,7 +118,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-09 at $6.5/contract. underlying was $225.23 at entry (OTM strike, 4.2% from spot).",
       "thesis_catalyst": "AWS cloud leader; retail + ads; AI infra via Anthropic.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $3.25 (-50% from entry) \u00b7 Tight DTE (-17d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $3.25 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 650,
       "contract_peak_pnl": 1448,
       "contract_current_pnl": 943
@@ -150,8 +150,8 @@
       "final_return_pct": null,
       "thesis_setup": "Bearish put entry on 2026-04-09 at $6.0/contract. underlying was $139.40 at entry (OTM strike, 7.2% from spot).",
       "thesis_catalyst": "Government + commercial AI deployment.",
-      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $3.00 (-50% from entry) \u00b7 Tight DTE (-17d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position aligns with the macro read (downside / hedge).",
+      "thesis_risk": "Stop at $3.00 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 600,
       "contract_peak_pnl": -97,
       "contract_current_pnl": -596
@@ -183,8 +183,8 @@
       "final_return_pct": null,
       "thesis_setup": "Bullish call entry on 2026-04-09 at $2.85/contract. underlying was $67.62 at entry (ATM strike, 0.6% from spot).",
       "thesis_catalyst": "Spot silver ETF.",
-      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $1.43 (-50% from entry) \u00b7 Tight DTE (-17d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position fights the macro read; idiosyncratic catalyst would need to overcome rate pressure.",
+      "thesis_risk": "Stop at $1.43 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 285,
       "contract_peak_pnl": 480,
       "contract_current_pnl": 330
@@ -217,7 +217,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-10 at $2.1/contract. underlying was $61.52 at entry (ATM strike, 0.8% from spot).",
       "thesis_catalyst": "CPU + foundry turnaround; AI catch-up bet.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $1.05 (-50% from entry) \u00b7 Tight DTE (-17d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $1.05 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 210,
       "contract_peak_pnl": 613,
       "contract_current_pnl": 440
@@ -248,9 +248,9 @@
       "exit_price": null,
       "final_return_pct": null,
       "thesis_setup": "Bullish call entry on 2026-04-10 at $43.7/contract. underlying was $873.95 at entry (ITM strike, 1.6% from spot).",
-      "thesis_catalyst": "NAND flash; AI server demand. Next earnings 2026-04-30 (-4d away \u2014 binary catalyst inside DTE).",
+      "thesis_catalyst": "NAND flash; AI server demand. Most recent print: 2026-04-30 (4d ago); reaction is the working-thesis input.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $21.85 (-50% from entry) \u00b7 Tight DTE (-17d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $21.85 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 4370,
       "contract_peak_pnl": 6035,
       "contract_current_pnl": 1770
@@ -283,7 +283,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-10 at $5.2/contract. underlying was $134.88 at entry (OTM strike, 3.7% from spot).",
       "thesis_catalyst": "AI cloud + datacenter; Nvidia partnership. Next earnings 2026-05-13 in 9 days.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $2.60 (-50% from entry) \u00b7 Tight DTE (-17d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Earnings 2026-05-13 inside DTE \u2014 IV crush risk on print regardless of direction \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $2.60 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Earnings 2026-05-13 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 520,
       "contract_peak_pnl": 2190,
       "contract_current_pnl": 1198
@@ -316,7 +316,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-10 at $3.85/contract. underlying was $235.30 at entry (ATM strike, 0.1% from spot).",
       "thesis_catalyst": "AWS cloud leader; retail + ads; AI infra via Anthropic.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $1.93 (-50% from entry) \u00b7 Tight DTE (-17d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $1.93 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 385,
       "contract_peak_pnl": 1713,
       "contract_current_pnl": 1208
@@ -347,9 +347,9 @@
       "exit_price": null,
       "final_return_pct": null,
       "thesis_setup": "Bullish call entry on 2026-04-10 at $15.18/contract. underlying was $93.44 at entry (OTM strike, 1.6% from spot).",
-      "thesis_catalyst": "AI infrastructure pure-play (cloud GPU + inference compute). Next earnings 2026-05-07 (3d away \u2014 binary catalyst inside DTE).",
+      "thesis_catalyst": "AI infrastructure pure-play (cloud GPU + inference compute). Next earnings 2026-05-07 (3d away, binary catalyst inside DTE).",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $7.59 (-50% from entry) \u00b7 Tight DTE (4d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Earnings 2026-05-07 inside DTE \u2014 IV crush risk on print regardless of direction \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $7.59 (entry x 0.5, the published rule) \u00b7 Tight DTE (4d), theta decay accelerated and vega risk elevated \u00b7 Earnings 2026-05-07 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 770,
       "contract_peak_pnl": 2742,
       "contract_current_pnl": 2377,
@@ -400,11 +400,11 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 125.43,
+      "spot_current": 125.68,
       "spot_today_open": 121.18,
       "spot_at_entry": 93.44,
-      "spot_since_entry_pct": 34.2,
-      "spot_today_pct": 3.5,
+      "spot_since_entry_pct": 34.5,
+      "spot_today_pct": 3.7,
       "earnings_next": {
         "date": "2026-05-07",
         "days_to": 3,
@@ -439,7 +439,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-10 at $4.2/contract. underlying was $74.30 at entry (ITM strike, 1.8% from spot).",
       "thesis_catalyst": "SOXL; thesis context pending operator detail.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $2.10 (-50% from entry) \u00b7 Tight DTE (-17d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $2.10 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 420,
       "contract_peak_pnl": 1795,
       "contract_current_pnl": 1795
@@ -470,9 +470,9 @@
       "exit_price": null,
       "final_return_pct": null,
       "thesis_setup": "Bullish call entry on 2026-04-10 at $0.85/contract. underlying was $19.24 at entry (OTM strike, 1.3% from spot).",
-      "thesis_catalyst": "Bitcoin miner + AI hosting pivot. Next earnings 2026-05-08 (4d away \u2014 binary catalyst inside DTE).",
+      "thesis_catalyst": "Bitcoin miner + AI hosting pivot. Next earnings 2026-05-08 (4d away, binary catalyst inside DTE).",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $0.42 (-50% from entry) \u00b7 Tight DTE (-17d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Earnings 2026-05-08 inside DTE \u2014 IV crush risk on print regardless of direction \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $0.42 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Earnings 2026-05-08 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 85,
       "contract_peak_pnl": 76,
       "contract_current_pnl": 76
@@ -505,7 +505,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-10 at $0.43/contract. underlying was $61.52 at entry (OTM strike, 3.9% from spot).",
       "thesis_catalyst": "CPU + foundry turnaround; AI catch-up bet.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $0.21 (-50% from entry) \u00b7 Tight DTE (-17d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $0.21 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 43,
       "contract_peak_pnl": 585,
       "contract_current_pnl": 407
@@ -538,7 +538,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-10 at $3.38/contract. underlying was $420.29 at entry (OTM strike, 2.3% from spot).",
       "thesis_catalyst": "HBM memory leader for AI accelerators; commoditization risk.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $1.69 (-50% from entry) \u00b7 Tight DTE (-17d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $1.69 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 338,
       "contract_peak_pnl": 3529,
       "contract_current_pnl": 2142
@@ -571,7 +571,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-13 at $3.48/contract. underlying was $129.97 at entry (OTM strike, 3.7% from spot).",
       "thesis_catalyst": "MRVL; thesis context pending operator detail.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $1.74 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $1.74 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 348,
       "contract_peak_pnl": 3112,
       "contract_current_pnl": 2545
@@ -602,9 +602,9 @@
       "exit_price": null,
       "final_return_pct": null,
       "thesis_setup": "Bullish call entry on 2026-04-14 at $34.0/contract. underlying was $964.02 at entry (OTM strike, 8.2% from spot).",
-      "thesis_catalyst": "NAND flash; AI server demand. Next earnings 2026-04-30 (-4d away \u2014 binary catalyst inside DTE).",
+      "thesis_catalyst": "NAND flash; AI server demand. Most recent print: 2026-04-30 (4d ago); reaction is the working-thesis input.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $17.00 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $17.00 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 3400,
       "contract_peak_pnl": 0,
       "contract_current_pnl": -3373
@@ -637,7 +637,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-14 at $4.6/contract. underlying was $167.93 at entry (ITM strike, 5.0% from spot).",
       "thesis_catalyst": "Database + cloud transition; OpenAI compute partnership.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $2.30 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $2.30 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 460,
       "contract_peak_pnl": 2433,
       "contract_current_pnl": 920
@@ -668,9 +668,9 @@
       "exit_price": null,
       "final_return_pct": null,
       "thesis_setup": "Bullish call entry on 2026-04-14 at $3.45/contract. underlying was $114.94 at entry (OTM strike, 4.2% from spot).",
-      "thesis_catalyst": "AI infrastructure pure-play (cloud GPU + inference compute). Next earnings 2026-05-07 (3d away \u2014 binary catalyst inside DTE).",
+      "thesis_catalyst": "AI infrastructure pure-play (cloud GPU + inference compute). Next earnings 2026-05-07 (3d away, binary catalyst inside DTE).",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $1.73 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Earnings 2026-05-07 inside DTE \u2014 IV crush risk on print regardless of direction \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $1.73 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Earnings 2026-05-07 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 345,
       "contract_peak_pnl": 411,
       "contract_current_pnl": -224
@@ -703,7 +703,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-14 at $8.84/contract. underlying was $202.78 at entry (ITM strike, 9.6% from spot).",
       "thesis_catalyst": "BE; thesis context pending operator detail.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $4.42 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $4.42 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 884,
       "contract_peak_pnl": 4701,
       "contract_current_pnl": 3774
@@ -736,7 +736,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-14 at $5.66/contract. underlying was $161.10 at entry (OTM strike, 2.4% from spot).",
       "thesis_catalyst": "AI cloud + datacenter; Nvidia partnership. Next earnings 2026-05-13 in 9 days.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $2.83 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Earnings 2026-05-13 inside DTE \u2014 IV crush risk on print regardless of direction \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $2.83 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Earnings 2026-05-13 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 566,
       "contract_peak_pnl": 549,
       "contract_current_pnl": -477
@@ -769,7 +769,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-15 at $4.0/contract. underlying was $196.54 at entry (OTM strike, 1.7% from spot).",
       "thesis_catalyst": "AI accelerator near-monopoly; HBM-supply-constrained. Next earnings 2026-05-20 in 16 days.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $2.00 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $2.00 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 400,
       "contract_peak_pnl": 685,
       "contract_current_pnl": 423
@@ -801,8 +801,8 @@
       "final_return_pct": null,
       "thesis_setup": "Bullish call entry on 2026-04-15 at $5.5/contract. underlying was $442.88 at entry (OTM strike, 1.6% from spot).",
       "thesis_catalyst": "Spot gold ETF.",
-      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $2.75 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position fights the macro read; idiosyncratic catalyst would need to overcome rate pressure.",
+      "thesis_risk": "Stop at $2.75 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 550,
       "contract_peak_pnl": 10,
       "contract_current_pnl": -548
@@ -835,7 +835,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-15 at $19.45/contract. underlying was $398.00 at entry (ITM strike, 6.1% from spot).",
       "thesis_catalyst": "Cloud + AI leader; Azure + OpenAI partnership.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $9.72 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $9.72 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 650,
       "contract_peak_pnl": 5465,
       "contract_current_pnl": 3245,
@@ -886,17 +886,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 412.45,
+      "spot_current": 412.96,
       "spot_today_open": 411.54,
       "spot_at_entry": 398.0,
-      "spot_since_entry_pct": 3.6,
-      "spot_today_pct": 0.2,
+      "spot_since_entry_pct": 3.8,
+      "spot_today_pct": 0.3,
       "greeks": {
-        "delta": 0.9204,
-        "gamma": 0.0051,
-        "theta": -0.2289,
-        "vega": 0.1061,
-        "iv": 0.4043
+        "delta": 0.9465,
+        "gamma": 0.0043,
+        "theta": -0.161,
+        "vega": 0.078,
+        "iv": 0.3552
       },
       "earnings_next": {
         "date": "2026-07-29",
@@ -932,7 +932,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-16 at $2.0/contract. underlying was $266.80 at entry (OTM strike, 1.2% from spot).",
       "thesis_catalyst": "iPhone + Services giant; Apple Intelligence AI integration.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $1.00 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $1.00 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 200,
       "contract_peak_pnl": 425,
       "contract_current_pnl": -97
@@ -965,7 +965,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-16 at $2.5/contract. underlying was $264.99 at entry (ATM strike, 0.0% from spot).",
       "thesis_catalyst": "AI accelerator challenger; HBM + CPU revenue mix.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $1.25 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $1.25 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 250,
       "contract_peak_pnl": 8490,
       "contract_current_pnl": 7990
@@ -998,7 +998,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-16 at $1.7/contract. underlying was $26.15 at entry (ATM strike, 0.6% from spot).",
       "thesis_catalyst": "Telehealth + GLP-1 compounding.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $0.85 (-50% from entry) \u00b7 Tight DTE (-3d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $0.85 (entry x 0.5, the published rule) \u00b7 Tight DTE (-3d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 170,
       "contract_peak_pnl": 487,
       "contract_current_pnl": -39
@@ -1031,7 +1031,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-16 at $12.8/contract. underlying was $368.86 at entry (OTM strike, 2.9% from spot).",
       "thesis_catalyst": "Foundry monopoly on advanced nodes; Taiwan-strait risk.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $6.40 (-50% from entry) \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $6.40 (entry x 0.5, the published rule) \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 1280,
       "contract_peak_pnl": 2831,
       "contract_current_pnl": 1705,
@@ -1082,17 +1082,17 @@
         "win_rate_peak_basis": 90.9,
         "win_rate_settle_basis": 72.0
       },
-      "spot_current": 400.75,
+      "spot_current": 401.15,
       "spot_today_open": 404.51,
       "spot_at_entry": 368.86,
-      "spot_since_entry_pct": 8.6,
-      "spot_today_pct": -0.9,
+      "spot_since_entry_pct": 8.8,
+      "spot_today_pct": -0.8,
       "greeks": {
-        "delta": 0.7078,
-        "gamma": 0.0077,
-        "theta": -0.4483,
-        "vega": 0.3055,
-        "iv": 0.4984
+        "delta": 0.7155,
+        "gamma": 0.0078,
+        "theta": -0.4339,
+        "vega": 0.3021,
+        "iv": 0.4865
       },
       "earnings_next": {
         "date": "2026-07-16",
@@ -1128,7 +1128,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-17 at $4.87/contract. underlying was $281.00 at entry (OTM strike, 1.4% from spot).",
       "thesis_catalyst": "AI accelerator challenger; HBM + CPU revenue mix.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $2.44 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $2.44 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 487,
       "contract_peak_pnl": 6241,
       "contract_current_pnl": 5796
@@ -1161,7 +1161,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-17 at $4.45/contract. underlying was $337.65 at entry (ATM strike, 0.7% from spot).",
       "thesis_catalyst": "Search + Cloud + Gemini AI; YouTube optionality.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $2.23 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $2.23 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 445,
       "contract_peak_pnl": 260,
       "contract_current_pnl": 15
@@ -1194,7 +1194,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-17 at $15.47/contract. underlying was $68.85 at entry (OTM strike, 1.6% from spot).",
       "thesis_catalyst": "CPU + foundry turnaround; AI catch-up bet.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $7.74 (-50% from entry) \u00b7 Tight DTE (-3d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $7.74 (entry x 0.5, the published rule) \u00b7 Tight DTE (-3d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 410,
       "contract_peak_pnl": 2595,
       "contract_current_pnl": 2552
@@ -1226,8 +1226,8 @@
       "final_return_pct": null,
       "thesis_setup": "Bearish put entry on 2026-04-17 at $0.9/contract. underlying was $115.56 at entry (OTM strike, 2.3% from spot).",
       "thesis_catalyst": "MRK; thesis context pending operator detail.",
-      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $0.45 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position aligns with the macro read (downside / hedge).",
+      "thesis_risk": "Stop at $0.45 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 90,
       "contract_peak_pnl": 118,
       "contract_current_pnl": 37
@@ -1260,7 +1260,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-20 at $10.0/contract. underlying was $340.76 at entry (OTM strike, 2.6% from spot).",
       "thesis_catalyst": "Search + Cloud + Gemini AI; YouTube optionality.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $5.00 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $5.00 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 1000,
       "contract_peak_pnl": 2758,
       "contract_current_pnl": 2435,
@@ -1311,17 +1311,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 382.4,
+      "spot_current": 382.62,
       "spot_today_open": 385.63,
       "spot_at_entry": 340.76,
-      "spot_since_entry_pct": 12.2,
+      "spot_since_entry_pct": 12.3,
       "spot_today_pct": -0.8,
       "greeks": {
-        "delta": 0.8844,
-        "gamma": 0.0066,
-        "theta": -0.2909,
-        "vega": 0.1293,
-        "iv": 0.4436
+        "delta": 0.8967,
+        "gamma": 0.0064,
+        "theta": -0.2602,
+        "vega": 0.1194,
+        "iv": 0.4228
       },
       "earnings_next": {
         "date": "2026-07-23",
@@ -1357,7 +1357,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-20 at $3.45/contract. underlying was $199.98 at entry (OTM strike, 4.8% from spot).",
       "thesis_catalyst": "AI accelerator near-monopoly; HBM-supply-constrained. Next earnings 2026-05-20 in 16 days.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $1.73 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $1.73 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 345,
       "contract_peak_pnl": 860,
       "contract_current_pnl": -225,
@@ -1408,17 +1408,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 197.78,
+      "spot_current": 197.99,
       "spot_today_open": 199.5,
       "spot_at_entry": 199.98,
-      "spot_since_entry_pct": -1.1,
-      "spot_today_pct": -0.9,
+      "spot_since_entry_pct": -1.0,
+      "spot_today_pct": -0.8,
       "greeks": {
-        "delta": 0.1827,
-        "gamma": 0.0213,
-        "theta": -0.1529,
-        "vega": 0.091,
-        "iv": 0.3615
+        "delta": 0.1842,
+        "gamma": 0.0217,
+        "theta": -0.1522,
+        "vega": 0.0915,
+        "iv": 0.3574
       },
       "earnings_next": {
         "date": "2026-05-20",
@@ -1453,8 +1453,8 @@
       "final_return_pct": null,
       "thesis_setup": "Bullish call entry on 2026-04-20 at $3.69/contract. underlying was $443.13 at entry (OTM strike, 5.7% from spot).",
       "thesis_catalyst": "Spot gold ETF.",
-      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $1.84 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position fights the macro read; idiosyncratic catalyst would need to overcome rate pressure.",
+      "thesis_risk": "Stop at $1.84 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 369,
       "contract_peak_pnl": 4,
       "contract_current_pnl": -352,
@@ -1505,17 +1505,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 414.37,
+      "spot_current": 415.18,
       "spot_today_open": 418.84,
       "spot_at_entry": 443.13,
-      "spot_since_entry_pct": -6.5,
-      "spot_today_pct": -1.1,
+      "spot_since_entry_pct": -6.3,
+      "spot_today_pct": -0.9,
       "greeks": {
-        "delta": 0.0192,
+        "delta": 0.0194,
         "gamma": 0.0019,
-        "theta": -0.0533,
-        "vega": 0.0337,
-        "iv": 0.3431
+        "theta": -0.0531,
+        "vega": 0.0341,
+        "iv": 0.3382
       }
     },
     {
@@ -1545,8 +1545,8 @@
       "final_return_pct": null,
       "thesis_setup": "Bullish call entry on 2026-04-20 at $3.33/contract. underlying was $72.65 at entry (OTM strike, 3.1% from spot).",
       "thesis_catalyst": "Spot silver ETF.",
-      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $1.67 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position fights the macro read; idiosyncratic catalyst would need to overcome rate pressure.",
+      "thesis_risk": "Stop at $1.67 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 333,
       "contract_peak_pnl": 17,
       "contract_current_pnl": -307,
@@ -1597,17 +1597,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 65.81,
+      "spot_current": 65.91,
       "spot_today_open": 66.39,
       "spot_at_entry": 72.65,
-      "spot_since_entry_pct": -9.4,
-      "spot_today_pct": -0.9,
+      "spot_since_entry_pct": -9.3,
+      "spot_today_pct": -0.7,
       "greeks": {
-        "delta": 0.093,
-        "gamma": 0.0267,
-        "theta": -0.0477,
-        "vega": 0.019,
-        "iv": 0.5445
+        "delta": 0.0939,
+        "gamma": 0.0272,
+        "theta": -0.0475,
+        "vega": 0.0192,
+        "iv": 0.5374
       }
     },
     {
@@ -1637,8 +1637,8 @@
       "final_return_pct": null,
       "thesis_setup": "Bearish put entry on 2026-04-20 at $3.15/contract. underlying was $274.65 at entry (OTM strike, 3.6% from spot).",
       "thesis_catalyst": "Russell 2000 ETF (small caps).",
-      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $1.57 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position aligns with the macro read (downside / hedge).",
+      "thesis_risk": "Stop at $1.57 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 315,
       "contract_peak_pnl": 126,
       "contract_current_pnl": -194,
@@ -1669,17 +1669,17 @@
           "label": "11 sessions to settle."
         }
       },
-      "spot_current": 277.44,
+      "spot_current": 277.87,
       "spot_today_open": 278.7,
       "spot_at_entry": 274.65,
-      "spot_since_entry_pct": 1.0,
-      "spot_today_pct": -0.5,
+      "spot_since_entry_pct": 1.2,
+      "spot_today_pct": -0.3,
       "greeks": {
-        "delta": -0.1637,
-        "gamma": 0.0181,
-        "theta": -0.1486,
-        "vega": 0.1189,
-        "iv": 0.2836
+        "delta": -0.1603,
+        "gamma": 0.0174,
+        "theta": -0.1506,
+        "vega": 0.1175,
+        "iv": 0.2904
       }
     },
     {
@@ -1710,7 +1710,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-20 at $4.47/contract. underlying was $162.30 at entry (OTM strike, 7.3% from spot).",
       "thesis_catalyst": "BTC treasury proxy; equity beta to crypto.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $2.23 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $2.23 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 447,
       "contract_peak_pnl": 658,
       "contract_current_pnl": -242
@@ -1743,7 +1743,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-22 at $11.00/contract. underlying was $462.93 at entry (ATM strike, 0.6% from spot).",
       "thesis_catalyst": "HBM memory leader for AI accelerators; commoditization risk.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $5.50 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $5.50 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 1350,
       "contract_peak_pnl": 3298,
       "contract_current_pnl": 2273
@@ -1776,7 +1776,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-23 at $2.5/contract. underlying was $129.14 at entry (OTM strike, 3.6% from spot).",
       "thesis_catalyst": "CCJ; thesis context pending operator detail.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $1.25 (-50% from entry) \u00b7 Tight DTE (-3d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $1.25 (entry x 0.5, the published rule) \u00b7 Tight DTE (-3d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 300,
       "contract_peak_pnl": 50,
       "contract_current_pnl": -299
@@ -1809,7 +1809,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-23 at $1.8/contract. underlying was $86.69 at entry (OTM strike, 1.5% from spot).",
       "thesis_catalyst": "Retail brokerage + crypto + options.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $0.90 (-50% from entry) \u00b7 Tight DTE (-10d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $0.90 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 123,
       "contract_peak_pnl": 20,
       "contract_current_pnl": -109
@@ -1842,7 +1842,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-24 at $47.0/contract. underlying was $221.96 at entry (ITM strike, 26.8% from spot).",
       "thesis_catalyst": "CPU IP licensing; AI mobile + datacenter.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $23.50 (-50% from entry) \u00b7 Tight DTE (-3d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $23.50 (entry x 0.5, the published rule) \u00b7 Tight DTE (-3d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 4780,
       "contract_peak_pnl": 1434,
       "contract_current_pnl": -1123
@@ -1875,7 +1875,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-24 at $2.4/contract. underlying was $77.07 at entry (OTM strike, 8.3% from spot).",
       "thesis_catalyst": "Compound semiconductor (InP, GaAs); AI optics demand.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $1.20 (-50% from entry) \u00b7 Tight DTE (-3d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $1.20 (entry x 0.5, the published rule) \u00b7 Tight DTE (-3d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 705,
       "contract_peak_pnl": 445,
       "contract_current_pnl": 445
@@ -1908,7 +1908,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-24 at $0.65/contract. underlying was $12.52 at entry (ATM strike, 0.2% from spot).",
       "thesis_catalyst": "Vistagen biotech; FDA milestones. Next earnings 2026-05-12 in 8 days.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $0.33 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Earnings 2026-05-12 inside DTE \u2014 IV crush risk on print regardless of direction \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $0.33 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Earnings 2026-05-12 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 155,
       "contract_peak_pnl": 30,
       "contract_current_pnl": 27,
@@ -1959,17 +1959,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 13.63,
+      "spot_current": 13.68,
       "spot_today_open": 12.94,
       "spot_at_entry": 12.52,
-      "spot_since_entry_pct": 8.9,
-      "spot_today_pct": 5.3,
+      "spot_since_entry_pct": 9.3,
+      "spot_today_pct": 5.7,
       "greeks": {
-        "delta": 0.6792,
-        "gamma": 0.1122,
-        "theta": -0.0526,
-        "vega": 0.0084,
-        "iv": 1.356
+        "delta": 0.7036,
+        "gamma": 0.1172,
+        "theta": -0.0471,
+        "vega": 0.0082,
+        "iv": 1.241
       },
       "earnings_next": {
         "date": "2026-05-12",
@@ -2005,7 +2005,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-28 at $27.0/contract. underlying was $503.54 at entry (OTM strike, 1.3% from spot).",
       "thesis_catalyst": "HBM memory leader for AI accelerators; commoditization risk.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $13.50 (-50% from entry) \u00b7 Tight DTE (4d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $13.50 (entry x 0.5, the published rule) \u00b7 Tight DTE (4d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 2677,
       "contract_peak_pnl": 5504,
       "contract_current_pnl": 4272,
@@ -2056,17 +2056,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 575.75,
+      "spot_current": 579.11,
       "spot_today_open": 560.6,
       "spot_at_entry": 503.54,
-      "spot_since_entry_pct": 14.3,
-      "spot_today_pct": 2.7,
+      "spot_since_entry_pct": 15.0,
+      "spot_today_pct": 3.3,
       "greeks": {
-        "delta": 0.8819,
-        "gamma": 0.0032,
-        "theta": -1.5698,
-        "vega": 0.1192,
-        "iv": 1.0246
+        "delta": 0.9904,
+        "gamma": 0.0008,
+        "theta": -0.153,
+        "vega": 0.0156,
+        "iv": 0.5269
       },
       "earnings_next": {
         "date": "2026-06-24",
@@ -2102,7 +2102,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-28 at $30.0/contract. underlying was $503.54 at entry (ATM strike, 0.7% from spot).",
       "thesis_catalyst": "HBM memory leader for AI accelerators; commoditization risk.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $15.00 (-50% from entry) \u00b7 Tight DTE (4d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $15.00 (entry x 0.5, the published rule) \u00b7 Tight DTE (4d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 3160,
       "contract_peak_pnl": 5995,
       "contract_current_pnl": 4683,
@@ -2153,18 +2153,11 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 575.75,
+      "spot_current": 579.11,
       "spot_today_open": 560.6,
       "spot_at_entry": 503.54,
-      "spot_since_entry_pct": 14.3,
-      "spot_today_pct": 2.7,
-      "greeks": {
-        "delta": 0.9117,
-        "gamma": 0.0026,
-        "theta": -1.2984,
-        "vega": 0.0965,
-        "iv": 1.0396
-      },
+      "spot_since_entry_pct": 15.0,
+      "spot_today_pct": 3.3,
       "earnings_next": {
         "date": "2026-06-24",
         "days_to": 51,
@@ -2199,7 +2192,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-28 at $11.5/contract. underlying was $162.16 at entry (OTM strike, 1.7% from spot).",
       "thesis_catalyst": "Database + cloud transition; OpenAI compute partnership.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $5.75 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $5.75 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 1350,
       "contract_peak_pnl": 655,
       "contract_current_pnl": 400,
@@ -2250,17 +2243,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 180.35,
+      "spot_current": 180.28,
       "spot_today_open": 176.02,
       "spot_at_entry": 162.16,
       "spot_since_entry_pct": 11.2,
-      "spot_today_pct": 2.5,
+      "spot_today_pct": 2.4,
       "greeks": {
-        "delta": 0.815,
+        "delta": 0.8117,
         "gamma": 0.0139,
-        "theta": -0.2455,
-        "vega": 0.0836,
-        "iv": 0.6126
+        "theta": -0.2505,
+        "vega": 0.0844,
+        "iv": 0.6194
       },
       "earnings_next": {
         "date": "2026-06-10",
@@ -2296,7 +2289,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-28 at $15.0/contract. underlying was $657.41 at entry (ITM strike, 1.3% from spot).",
       "thesis_catalyst": "Nasdaq 100 ETF (mega-cap tech).",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $7.50 (-50% from entry) \u00b7 Tight DTE (4d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $7.50 (entry x 0.5, the published rule) \u00b7 Tight DTE (4d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 1794,
       "contract_peak_pnl": 1075,
       "contract_current_pnl": 741,
@@ -2347,17 +2340,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 672.11,
+      "spot_current": 672.08,
       "spot_today_open": 674.66,
       "spot_at_entry": 657.41,
       "spot_since_entry_pct": 2.2,
       "spot_today_pct": -0.4,
       "greeks": {
-        "delta": 0.8446,
+        "delta": 0.8437,
         "gamma": 0.01,
-        "theta": -0.767,
-        "vega": 0.1679,
-        "iv": 0.3396
+        "theta": -0.7717,
+        "vega": 0.1686,
+        "iv": 0.3406
       }
     },
     {
@@ -2388,7 +2381,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-30 at $14.50/contract. underlying was $349.94 at entry (ATM strike, 0.0% from spot).",
       "thesis_catalyst": "Search + Cloud + Gemini AI; YouTube optionality.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $7.25 (-50% from entry) \u00b7 Tight DTE (4d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $7.25 (entry x 0.5, the published rule) \u00b7 Tight DTE (4d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 1850,
       "contract_peak_pnl": 1841,
       "contract_current_pnl": 1517,
@@ -2439,17 +2432,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 382.4,
+      "spot_current": 382.62,
       "spot_today_open": 385.63,
       "spot_at_entry": 349.94,
       "spot_since_entry_pct": 9.3,
       "spot_today_pct": -0.8,
       "greeks": {
-        "delta": 0.9018,
-        "gamma": 0.0064,
-        "theta": -0.6142,
-        "vega": 0.0693,
-        "iv": 0.6731
+        "delta": 0.9265,
+        "gamma": 0.0058,
+        "theta": -0.4543,
+        "vega": 0.0559,
+        "iv": 0.6046
       },
       "earnings_next": {
         "date": "2026-07-23",
@@ -2485,7 +2478,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-30 at $5.80/contract. underlying was $263.04 at entry (ITM strike, 1.2% from spot).",
       "thesis_catalyst": "AWS cloud leader; retail + ads; AI infra via Anthropic.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $2.90 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $2.90 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 588,
       "contract_peak_pnl": 1160,
       "contract_current_pnl": 814,
@@ -2536,17 +2529,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 271.66,
+      "spot_current": 271.91,
       "spot_today_open": 268.8,
       "spot_at_entry": 263.04,
-      "spot_since_entry_pct": 3.3,
-      "spot_today_pct": 1.1,
+      "spot_since_entry_pct": 3.4,
+      "spot_today_pct": 1.2,
       "greeks": {
-        "delta": 0.7792,
+        "delta": 0.7959,
         "gamma": 0.0181,
-        "theta": -0.2413,
-        "vega": 0.1399,
-        "iv": 0.3485
+        "theta": -0.2214,
+        "vega": 0.1338,
+        "iv": 0.3309
       },
       "earnings_next": {
         "date": "2026-07-30",
@@ -2582,7 +2575,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-30 at $24.00/contract. underlying was $518.46 at entry (ATM strike, 0.3% from spot).",
       "thesis_catalyst": "HBM memory leader for AI accelerators; commoditization risk.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $12.00 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $12.00 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 2717,
       "contract_peak_pnl": 5377,
       "contract_current_pnl": 4018,
@@ -2633,17 +2626,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 575.75,
+      "spot_current": 579.11,
       "spot_today_open": 560.6,
       "spot_at_entry": 518.46,
-      "spot_since_entry_pct": 11.1,
-      "spot_today_pct": 2.7,
+      "spot_since_entry_pct": 11.7,
+      "spot_today_pct": 3.3,
       "greeks": {
-        "delta": 0.7819,
+        "delta": 0.8187,
         "gamma": 0.0035,
-        "theta": -1.1587,
-        "vega": 0.2944,
-        "iv": 0.8373
+        "theta": -0.9306,
+        "vega": 0.265,
+        "iv": 0.739
       },
       "earnings_next": {
         "date": "2026-06-24",
@@ -2679,7 +2672,7 @@
       "thesis_setup": "Bullish call entry on 2026-04-30 at $8.50/contract. underlying was $667.46 at entry (ATM strike, 0.2% from spot).",
       "thesis_catalyst": "Nasdaq 100 ETF (mega-cap tech).",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $4.25 (-50% from entry) \u00b7 Tight DTE (4d) \u2014 theta decay accelerated, vega risk elevated \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $4.25 (entry x 0.5, the published rule) \u00b7 Tight DTE (4d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 872,
       "contract_peak_pnl": 472,
       "contract_current_pnl": 199,
@@ -2730,17 +2723,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 672.11,
+      "spot_current": 672.08,
       "spot_today_open": 674.66,
       "spot_at_entry": 667.46,
       "spot_since_entry_pct": 0.7,
       "spot_today_pct": -0.4,
       "greeks": {
-        "delta": 0.6457,
+        "delta": 0.645,
         "gamma": 0.0209,
-        "theta": -0.8701,
-        "vega": 0.2618,
-        "iv": 0.253
+        "theta": -0.8722,
+        "vega": 0.2619,
+        "iv": 0.2535
       }
     },
     {
@@ -2771,7 +2764,7 @@
       "thesis_setup": "Bullish call entry on 2026-05-01 at $10.36/contract. underlying was $78.80 at entry (OTM strike, 17.1% from spot).",
       "thesis_catalyst": "Compound semiconductor (InP, GaAs); AI optics demand.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $5.18 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $5.18 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 1110,
       "contract_peak_pnl": 685,
       "contract_current_pnl": 635,
@@ -2822,17 +2815,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 106.16,
+      "spot_current": 105.69,
       "spot_today_open": 96.88,
       "spot_at_entry": 78.8,
-      "spot_since_entry_pct": 34.7,
-      "spot_today_pct": 9.6,
+      "spot_since_entry_pct": 34.1,
+      "spot_today_pct": 9.1,
       "greeks": {
-        "delta": 0.7105,
-        "gamma": 0.0119,
-        "theta": -0.4525,
-        "vega": 0.0631,
-        "iv": 1.5571
+        "delta": 0.6983,
+        "gamma": 0.0116,
+        "theta": -0.4799,
+        "vega": 0.0639,
+        "iv": 1.6325
       },
       "earnings_next": {
         "date": "2026-07-30",
@@ -2866,9 +2859,9 @@
       "exit_price": null,
       "final_return_pct": null,
       "thesis_setup": "Bullish call entry on 2026-05-01 at $81.94/contract. underlying was $1059.02 at entry (OTM strike, 4.6% from spot).",
-      "thesis_catalyst": "NAND flash; AI server demand. Next earnings 2026-04-30 (-4d away \u2014 binary catalyst inside DTE).",
+      "thesis_catalyst": "NAND flash; AI server demand. Most recent print: 2026-04-30 (4d ago); reaction is the working-thesis input.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $40.97 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $40.97 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 8640,
       "contract_peak_pnl": 10308,
       "contract_current_pnl": 9020,
@@ -2919,17 +2912,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 1244.93,
+      "spot_current": 1247.25,
       "spot_today_open": 1222.18,
       "spot_at_entry": 1059.02,
-      "spot_since_entry_pct": 17.6,
-      "spot_today_pct": 1.9,
+      "spot_since_entry_pct": 17.8,
+      "spot_today_pct": 2.1,
       "greeks": {
-        "delta": 0.7506,
+        "delta": 0.7586,
         "gamma": 0.0013,
-        "theta": -3.6668,
-        "vega": 0.6855,
-        "iv": 1.1525
+        "theta": -3.5168,
+        "vega": 0.6752,
+        "iv": 1.1208
       },
       "earnings_next": {
         "date": "2026-04-30",
@@ -2964,8 +2957,8 @@
       "final_return_pct": null,
       "thesis_setup": "Bullish call entry on 2026-05-01 at $1.43/contract. underlying was $59.06 at entry (ATM strike, 0.1% from spot).",
       "thesis_catalyst": "Energy sector ETF.",
-      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $0.71 (-50% from entry) \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position aligns with the macro read (sector benefits from tightening).",
+      "thesis_risk": "Stop at $0.71 (entry x 0.5, the published rule) \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 150,
       "contract_peak_pnl": 51,
       "contract_current_pnl": 37,
@@ -3016,17 +3009,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 59.37,
+      "spot_current": 59.33,
       "spot_today_open": 58.73,
       "spot_at_entry": 59.06,
       "spot_since_entry_pct": 0.5,
-      "spot_today_pct": 1.1,
+      "spot_today_pct": 1.0,
       "greeks": {
-        "delta": 0.5613,
-        "gamma": 0.0969,
-        "theta": -0.0477,
-        "vega": 0.052,
-        "iv": 0.3084
+        "delta": 0.5479,
+        "gamma": 0.0935,
+        "theta": -0.0497,
+        "vega": 0.0521,
+        "iv": 0.3221
       }
     },
     {
@@ -3055,9 +3048,9 @@
       "exit_price": null,
       "final_return_pct": null,
       "thesis_setup": "Bullish call entry on 2026-05-01 at $8.67/contract. underlying was $191.88 at entry (OTM strike, 4.1% from spot).",
-      "thesis_catalyst": "Crypto exchange + custody; BTC/ETH cycle leverage. Next earnings 2026-05-07 (3d away \u2014 binary catalyst inside DTE).",
+      "thesis_catalyst": "Crypto exchange + custody; BTC/ETH cycle leverage. Next earnings 2026-05-07 (3d away, binary catalyst inside DTE).",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $4.33 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Earnings 2026-05-07 inside DTE \u2014 IV crush risk on print regardless of direction \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $4.33 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Earnings 2026-05-07 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 893,
       "contract_peak_pnl": 759,
       "contract_current_pnl": 482,
@@ -3108,17 +3101,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 203.35,
+      "spot_current": 202.71,
       "spot_today_open": 199.41,
       "spot_at_entry": 191.88,
-      "spot_since_entry_pct": 6.0,
-      "spot_today_pct": 2.0,
+      "spot_since_entry_pct": 5.6,
+      "spot_today_pct": 1.7,
       "greeks": {
-        "delta": 0.5739,
-        "gamma": 0.0129,
-        "theta": -0.5511,
+        "delta": 0.5695,
+        "gamma": 0.0128,
+        "theta": -0.5597,
         "vega": 0.1383,
-        "iv": 0.8606
+        "iv": 0.8741
       },
       "earnings_next": {
         "date": "2026-05-07",
@@ -3154,7 +3147,7 @@
       "thesis_setup": "Bullish call entry on 2026-05-01 at $10.63/contract. underlying was $382.49 at entry (OTM strike, 4.4% from spot).",
       "thesis_catalyst": "EV leader + AI/Optimus/FSD; Musk distraction risk.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $5.32 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $5.32 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 1082,
       "contract_peak_pnl": 133,
       "contract_current_pnl": -217,
@@ -3205,17 +3198,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 392.15,
+      "spot_current": 392.48,
       "spot_today_open": 390.23,
       "spot_at_entry": 382.49,
-      "spot_since_entry_pct": 2.5,
-      "spot_today_pct": 0.5,
+      "spot_since_entry_pct": 2.6,
+      "spot_today_pct": 0.6,
       "greeks": {
-        "delta": 0.4174,
-        "gamma": 0.0131,
-        "theta": -0.544,
-        "vega": 0.2657,
-        "iv": 0.4376
+        "delta": 0.4205,
+        "gamma": 0.0133,
+        "theta": -0.5392,
+        "vega": 0.2664,
+        "iv": 0.4324
       },
       "earnings_next": {
         "date": "2026-07-22",
@@ -3251,7 +3244,7 @@
       "thesis_setup": "Bullish call entry on 2026-05-01 at $18.93/contract. underlying was $141.33 at entry (OTM strike, 5.8% from spot).",
       "thesis_catalyst": "AI cloud + datacenter; Nvidia partnership. Next earnings 2026-05-13 in 9 days.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $9.46 (-50% from entry) \u00b7 Earnings 2026-05-13 inside DTE \u2014 IV crush risk on print regardless of direction \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $9.46 (entry x 0.5, the published rule) \u00b7 Earnings 2026-05-13 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 1908,
       "contract_peak_pnl": 1702,
       "contract_current_pnl": 1544,
@@ -3302,17 +3295,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 175.5,
+      "spot_current": 175.9,
       "spot_today_open": 160.38,
       "spot_at_entry": 141.33,
-      "spot_since_entry_pct": 24.2,
-      "spot_today_pct": 9.4,
+      "spot_since_entry_pct": 24.5,
+      "spot_today_pct": 9.7,
       "greeks": {
-        "delta": 0.7571,
-        "gamma": 0.0061,
-        "theta": -0.3289,
-        "vega": 0.1438,
-        "iv": 1.1093
+        "delta": 0.7618,
+        "gamma": 0.0062,
+        "theta": -0.3206,
+        "vega": 0.1426,
+        "iv": 1.0891
       },
       "earnings_next": {
         "date": "2026-05-13",
@@ -3348,7 +3341,7 @@
       "thesis_setup": "Bullish call entry on 2026-05-01 at $11.47/contract. underlying was $278.86 at entry (ITM strike, 1.4% from spot).",
       "thesis_catalyst": "iPhone + Services giant; Apple Intelligence AI integration.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $5.74 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $5.74 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 1166,
       "contract_peak_pnl": 215,
       "contract_current_pnl": -596,
@@ -3399,17 +3392,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 276.62,
+      "spot_current": 276.48,
       "spot_today_open": 279.65,
       "spot_at_entry": 278.86,
-      "spot_since_entry_pct": -0.8,
+      "spot_since_entry_pct": -0.9,
       "spot_today_pct": -1.1,
       "greeks": {
-        "delta": 0.5743,
-        "gamma": 0.0334,
-        "theta": -0.2244,
-        "vega": 0.1883,
-        "iv": 0.2444
+        "delta": 0.5667,
+        "gamma": 0.0328,
+        "theta": -0.2297,
+        "vega": 0.1888,
+        "iv": 0.2501
       },
       "earnings_next": {
         "date": "2026-07-30",
@@ -3443,9 +3436,9 @@
       "exit_price": null,
       "final_return_pct": null,
       "thesis_setup": "Bullish call entry on 2026-05-01 at $1.7/contract. underlying was $21.99 at entry (ATM strike, 0.0% from spot).",
-      "thesis_catalyst": "Bitcoin miner + AI hosting pivot. Next earnings 2026-05-08 (4d away \u2014 binary catalyst inside DTE).",
+      "thesis_catalyst": "Bitcoin miner + AI hosting pivot. Next earnings 2026-05-08 (4d away, binary catalyst inside DTE).",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $0.85 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Earnings 2026-05-08 inside DTE \u2014 IV crush risk on print regardless of direction \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $0.85 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Earnings 2026-05-08 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 172,
       "contract_peak_pnl": 35,
       "contract_current_pnl": 10,
@@ -3496,17 +3489,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 22.24,
+      "spot_current": 22.27,
       "spot_today_open": 21.49,
       "spot_at_entry": 21.99,
-      "spot_since_entry_pct": 1.1,
-      "spot_today_pct": 3.5,
+      "spot_since_entry_pct": 1.3,
+      "spot_today_pct": 3.6,
       "greeks": {
-        "delta": 0.5637,
-        "gamma": 0.0928,
-        "theta": -0.077,
+        "delta": 0.5664,
+        "gamma": 0.0936,
+        "theta": -0.0763,
         "vega": 0.0152,
-        "iv": 1.0983
+        "iv": 1.0871
       },
       "earnings_next": {
         "date": "2026-05-08",
@@ -3542,7 +3535,7 @@
       "thesis_setup": "Bullish call entry on 2026-05-01 at $6.44/contract. underlying was $415.09 at entry (OTM strike, 5.7% from spot).",
       "thesis_catalyst": "AI networking + custom silicon; VMware integration. Next earnings 2026-06-03 in 30 days.",
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
-      "thesis_risk": "Hard stop at $3.22 (-50% from entry) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at hard stop OR expiry. Nothing else.",
+      "thesis_risk": "Stop at $3.22 (entry x 0.5, the published rule) \u00b7 DTE 11d gives moderate cushion \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 680,
       "contract_peak_pnl": 50,
       "contract_current_pnl": -240,
@@ -3593,17 +3586,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 415.46,
+      "spot_current": 416.12,
       "spot_today_open": 418.21,
       "spot_at_entry": 415.09,
-      "spot_since_entry_pct": 0.1,
-      "spot_today_pct": -0.7,
+      "spot_since_entry_pct": 0.2,
+      "spot_today_pct": -0.5,
       "greeks": {
-        "delta": 0.243,
-        "gamma": 0.0098,
-        "theta": -0.4619,
-        "vega": 0.2257,
-        "iv": 0.4408
+        "delta": 0.2451,
+        "gamma": 0.01,
+        "theta": -0.4589,
+        "vega": 0.2271,
+        "iv": 0.4352
       },
       "earnings_next": {
         "date": "2026-06-03",

@@ -1088,6 +1088,27 @@ body.premium .unlock-badge { display: none; }
   line-height: 1.35;
   margin-top: 2px;
 }
+.v16-greek-locked {
+  opacity: 0.55;
+  filter: blur(0.3px);
+}
+.v16-greek-locked .val { color: var(--text-muted); }
+.v16-locked-cta {
+  margin-top: 10px;
+  padding: 9px 12px;
+  background: rgba(91,159,255,0.07);
+  border: 1px solid rgba(91,159,255,0.18);
+  border-radius: 8px;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.45;
+}
+.v16-locked-cta a {
+  color: #5B9FFF;
+  text-decoration: underline;
+  font-weight: 600;
+}
 .v16-thesis-section { margin-bottom: 9px; }
 .v16-thesis-section:last-child { margin-bottom: 0; }
 .v16-thesis-section .label {
@@ -2209,19 +2230,18 @@ body.premium .unlock-badge { display: none; }
     detail.style.display = 'none';
     var expand = document.createElement('div'); expand.className = 'v16-expand';
 
+    var GREEK_META = {
+      delta:  { sym: 'Δ',  name: 'Delta',         desc: 'Move per $1 in underlying.' },
+      gamma:  { sym: 'Γ',  name: 'Gamma',         desc: 'How fast delta changes.' },
+      theta:  { sym: 'Θ',  name: 'Theta',         desc: 'Daily time decay.' },
+      vega:   { sym: 'ν',  name: 'Vega',          desc: 'Sensitivity to vol shifts.' },
+      iv:     { sym: 'IV', name: 'Implied Vol',   desc: 'Market vol expectation.' },
+      iv_pct: { sym: 'IV%', name: 'IV Percentile', desc: 'Where IV sits vs past year.' }
+    };
     if (s.greeks) {
       var gs = document.createElement('div'); gs.className = 'v16-expand-section';
       var gl = document.createElement('div'); gl.className = 'v16-expand-label'; gl.textContent = 'Greeks (live, every 5min)'; gs.appendChild(gl);
       var gg = document.createElement('div'); gg.className = 'v16-greeks';
-      // Per-Greek metadata: symbol, full name, plain-English meaning
-      var GREEK_META = {
-        delta:  { sym: 'Δ',  name: 'Delta',         desc: 'Move per $1 in underlying.' },
-        gamma:  { sym: 'Γ',  name: 'Gamma',         desc: 'How fast delta changes.' },
-        theta:  { sym: 'Θ',  name: 'Theta',         desc: 'Daily time decay.' },
-        vega:   { sym: 'ν',  name: 'Vega',          desc: 'Sensitivity to vol shifts.' },
-        iv:     { sym: 'IV', name: 'Implied Vol',   desc: 'Market vol expectation.' },
-        iv_pct: { sym: 'IV%', name: 'IV Percentile', desc: 'Where IV sits vs past year.' }
-      };
       ['delta','gamma','theta','vega','iv','iv_pct'].forEach(function(k) {
         if (s.greeks[k] == null) return;
         var meta = GREEK_META[k];
@@ -2239,6 +2259,27 @@ body.premium .unlock-badge { display: none; }
         gg.appendChild(card);
       });
       gs.appendChild(gg); expand.appendChild(gs);
+    } else if (!isPremium) {
+      // FREE-tier teaser: show Greeks structure with locked values + sign-in CTA
+      var gs = document.createElement('div'); gs.className = 'v16-expand-section';
+      var gl = document.createElement('div'); gl.className = 'v16-expand-label'; gl.textContent = 'Greeks  ·  Member only'; gs.appendChild(gl);
+      var gg = document.createElement('div'); gg.className = 'v16-greeks v16-greeks-locked';
+      ['delta','gamma','theta','vega','iv','iv_pct'].forEach(function(k) {
+        var meta = GREEK_META[k];
+        var card = document.createElement('div'); card.className = 'v16-greek v16-greek-locked';
+        var top = document.createElement('div'); top.className = 'top';
+        var sym = document.createElement('span'); sym.className = 'sym'; sym.textContent = meta.sym; top.appendChild(sym);
+        var val = document.createElement('span'); val.className = 'val'; val.textContent = '—'; top.appendChild(val);
+        card.appendChild(top);
+        var name = document.createElement('div'); name.className = 'name'; name.textContent = meta.name; card.appendChild(name);
+        var desc = document.createElement('div'); desc.className = 'desc'; desc.textContent = meta.desc; card.appendChild(desc);
+        gg.appendChild(card);
+      });
+      gs.appendChild(gg);
+      var cta = document.createElement('div'); cta.className = 'v16-locked-cta';
+      cta.innerHTML = '🔒 Live Greeks + strike + expiry + entry premium are member-only. <a href="/auth/whop/login">Sign in</a> or start a 14-day free trial.';
+      gs.appendChild(cta);
+      expand.appendChild(gs);
     }
 
     var hasThesis = s.thesis_setup || s.thesis_catalyst || s.thesis_macro || s.thesis_risk;

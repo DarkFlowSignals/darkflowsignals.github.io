@@ -1043,27 +1043,23 @@ body.premium .unlock-badge { display: none; }
 }
 .v16-greeks {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 10px 12px;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
   width: 100%;
-}
-@media (max-width: 720px) {
-  .v16-greeks { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 480px) {
-  .v16-greeks { grid-template-columns: repeat(2, 1fr); }
+  justify-content: center;
 }
 .v16-greek {
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 8px;
-  padding: 9px 10px 10px;
-  display: flex; flex-direction: column; gap: 3px;
+  padding: 10px 8px 11px;
+  display: flex; flex-direction: column; gap: 4px;
   min-width: 0;
+  text-align: center;
 }
 .v16-greek .top {
-  display: flex; align-items: baseline; justify-content: space-between;
-  gap: 6px; line-height: 1;
+  display: flex; align-items: baseline; justify-content: center;
+  gap: 8px; line-height: 1;
 }
 .v16-greek .sym {
   font-family: var(--font-mono);

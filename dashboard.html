@@ -2219,12 +2219,12 @@ body.premium .unlock-badge { display: none; }
       var gg = document.createElement('div'); gg.className = 'v16-greeks';
       // Per-Greek metadata: symbol, full name, plain-English meaning
       var GREEK_META = {
-        delta:  { sym: 'Δ',  name: 'Delta',    desc: 'Option price change per $1 move in the underlying. Calls 0 to +1, puts -1 to 0. Higher = more directional exposure.' },
-        gamma:  { sym: 'Γ',  name: 'Gamma',    desc: 'How fast delta changes per $1 underlying move. Highest near-the-money. Measure of delta acceleration.' },
-        theta:  { sym: 'Θ',  name: 'Theta',    desc: 'Daily premium decay. Long options bleed this much per day from time passing alone. Accelerates near expiry.' },
-        vega:   { sym: 'ν',  name: 'Vega',     desc: 'Option price change per +1 point of implied volatility. Long options gain on IV expansion, lose on IV contraction.' },
-        iv:     { sym: 'IV', name: 'Implied Vol', desc: 'Market\'s bet on future underlying volatility. Higher IV = more expensive options. Earnings + macro events inflate it.' },
-        iv_pct: { sym: 'IV%', name: 'IV Percentile', desc: 'Where current IV sits in the past year\'s range, 0 to 100. Above 70 = options expensive vs history, below 30 = cheap.' }
+        delta:  { sym: 'Δ',  name: 'Delta',         desc: 'Move per $1 in underlying.' },
+        gamma:  { sym: 'Γ',  name: 'Gamma',         desc: 'How fast delta changes.' },
+        theta:  { sym: 'Θ',  name: 'Theta',         desc: 'Daily time decay.' },
+        vega:   { sym: 'ν',  name: 'Vega',          desc: 'Sensitivity to vol shifts.' },
+        iv:     { sym: 'IV', name: 'Implied Vol',   desc: 'Market vol expectation.' },
+        iv_pct: { sym: 'IV%', name: 'IV Percentile', desc: 'Where IV sits vs past year.' }
       };
       ['delta','gamma','theta','vega','iv','iv_pct'].forEach(function(k) {
         if (s.greeks[k] == null) return;

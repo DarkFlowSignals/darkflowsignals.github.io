@@ -1042,14 +1042,56 @@ body.premium .unlock-badge { display: none; }
   margin-bottom: 7px; font-weight: 600;
 }
 .v16-greeks {
-  font-family: var(--font-mono); font-size: 12px;
-  color: var(--text-secondary);
-  display: flex; flex-wrap: wrap;
-  gap: 4px 18px; align-items: baseline;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px 12px;
+  width: 100%;
 }
-.v16-greeks .greek-lbl { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; margin-right: 4px; }
-.v16-greeks .greek-val { color: var(--text-primary); font-weight: 600; }
-.v16-greeks .greek-val.theta { color: #F08585; }
+@media (max-width: 720px) {
+  .v16-greeks { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 480px) {
+  .v16-greeks { grid-template-columns: repeat(2, 1fr); }
+}
+.v16-greek {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 9px 10px 10px;
+  display: flex; flex-direction: column; gap: 3px;
+  min-width: 0;
+}
+.v16-greek .top {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 6px; line-height: 1;
+}
+.v16-greek .sym {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+.v16-greek .val {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.v16-greek .val.theta { color: #F08585; }
+.v16-greek .name {
+  font-size: 10px;
+  color: #5B9FFF;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+}
+.v16-greek .desc {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  line-height: 1.35;
+  margin-top: 2px;
+}
 .v16-thesis-section { margin-bottom: 9px; }
 .v16-thesis-section:last-child { margin-bottom: 0; }
 .v16-thesis-section .label {
@@ -2175,17 +2217,30 @@ body.premium .unlock-badge { display: none; }
       var gs = document.createElement('div'); gs.className = 'v16-expand-section';
       var gl = document.createElement('div'); gl.className = 'v16-expand-label'; gl.textContent = 'Greeks (live, every 5min)'; gs.appendChild(gl);
       var gg = document.createElement('div'); gg.className = 'v16-greeks';
-      var lblMap = {delta:'Δ',gamma:'Γ',theta:'Θ',vega:'ν',iv:'IV',iv_pct:'IV %ile'};
+      // Per-Greek metadata: symbol, full name, plain-English meaning
+      var GREEK_META = {
+        delta:  { sym: 'Δ',  name: 'Delta',    desc: 'Option price change per $1 move in the underlying. Calls 0 to +1, puts -1 to 0. Higher = more directional exposure.' },
+        gamma:  { sym: 'Γ',  name: 'Gamma',    desc: 'How fast delta changes per $1 underlying move. Highest near-the-money. Measure of delta acceleration.' },
+        theta:  { sym: 'Θ',  name: 'Theta',    desc: 'Daily premium decay. Long options bleed this much per day from time passing alone. Accelerates near expiry.' },
+        vega:   { sym: 'ν',  name: 'Vega',     desc: 'Option price change per +1 point of implied volatility. Long options gain on IV expansion, lose on IV contraction.' },
+        iv:     { sym: 'IV', name: 'Implied Vol', desc: 'Market\'s bet on future underlying volatility. Higher IV = more expensive options. Earnings + macro events inflate it.' },
+        iv_pct: { sym: 'IV%', name: 'IV Percentile', desc: 'Where current IV sits in the past year\'s range, 0 to 100. Above 70 = options expensive vs history, below 30 = cheap.' }
+      };
       ['delta','gamma','theta','vega','iv','iv_pct'].forEach(function(k) {
-        if (s.greeks[k] != null) {
-          var w = document.createElement('span');
-          var lbl = document.createElement('span'); lbl.className = 'greek-lbl'; lbl.textContent = lblMap[k]; w.appendChild(lbl);
-          var val = document.createElement('span'); val.className = 'greek-val ' + (k === 'theta' ? 'theta' : '');
-          var v = s.greeks[k];
-          val.textContent = (k === 'iv' ? (v*100).toFixed(1) + '%' : (k === 'iv_pct' ? v.toFixed(0) : v.toFixed(k === 'gamma' ? 3 : 2)));
-          w.appendChild(val);
-          gg.appendChild(w);
-        }
+        if (s.greeks[k] == null) return;
+        var meta = GREEK_META[k];
+        var v = s.greeks[k];
+        var formatted = (k === 'iv' ? (v*100).toFixed(1) + '%'
+                       : k === 'iv_pct' ? v.toFixed(0)
+                       : v.toFixed(k === 'gamma' ? 3 : 2));
+        var card = document.createElement('div'); card.className = 'v16-greek';
+        var top = document.createElement('div'); top.className = 'top';
+        var sym = document.createElement('span'); sym.className = 'sym'; sym.textContent = meta.sym; top.appendChild(sym);
+        var val = document.createElement('span'); val.className = 'val' + (k === 'theta' ? ' theta' : ''); val.textContent = formatted; top.appendChild(val);
+        card.appendChild(top);
+        var name = document.createElement('div'); name.className = 'name'; name.textContent = meta.name; card.appendChild(name);
+        var desc = document.createElement('div'); desc.className = 'desc'; desc.textContent = meta.desc; card.appendChild(desc);
+        gg.appendChild(card);
       });
       gs.appendChild(gg); expand.appendChild(gs);
     }

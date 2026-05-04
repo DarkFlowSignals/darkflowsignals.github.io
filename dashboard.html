@@ -865,9 +865,10 @@ body.premium .unlock-badge { display: none; }
 
 .col-pnl.positive { color: var(--green); font-weight: 600; }
 .col-pnl.negative { color: var(--red); font-weight: 600; }
-.data-table tr.row-expanded td { background: rgba(91,159,255,0.05); }
-.data-table tr.row-detail td { padding: 0; }
-.data-table tr.row-detail:hover td { background: rgba(255,255,255,0.02); }
+/* Collapsed row stays VISUALLY UNCHANGED when expanded. The detail row below
+   is the only thing that appears. No background highlight on the parent. */
+.data-table tr.row-detail td { padding: 0; border-bottom: 1px solid var(--border); }
+.data-table tr.row-detail:hover td { background: transparent; }
 
 .badge-win { background: var(--green-dim); color: var(--green); }
 .badge-loss { background: var(--red-dim); color: var(--red); }
@@ -3087,9 +3088,9 @@ body.premium .unlock-badge { display: none; }
     dtd.colSpan = colSpan;
     // Wide td (spans the full 1100px+ table) but the inner stays sticky to the
     // viewport's left edge so the detail content is always visible regardless
-    // of horizontal scroll position. Width capped to the page-wrap width so it
-    // sits tight beneath the collapsed row.
-    dtd.style.cssText = 'padding:0;background:rgba(91,159,255,0.04);border-bottom:1px solid var(--border);';
+    // of horizontal scroll. Width capped to page-wrap so it sits tight beneath
+    // the collapsed row. No background tint - blends with the table.
+    dtd.style.cssText = 'padding:0;background:transparent;border-bottom:1px solid var(--border);';
 
     var inner = document.createElement('div');
     inner.style.cssText = 'display:flex;flex-direction:column;gap:14px;' +

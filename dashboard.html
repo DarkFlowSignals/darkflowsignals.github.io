@@ -816,28 +816,27 @@ body.premium .unlock-badge { display: none; }
 .table-view { display: none; }
 .table-view.active {
   display: block;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   width: 100%;
-  /* Table stays inside the centered page-wrap; horizontal scroll within. */
+  /* No horizontal scroll. Columns squeeze to fit. */
 }
-.table-view.active .data-table { min-width: 1100px; margin: 0 auto; }
+.table-view.active .data-table { width: 100%; margin: 0 auto; }
 .signal-feed.hidden { display: none; }
 
 .data-table {
   width: 100%;
   border-collapse: collapse;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 11px;
+  table-layout: auto;
 }
 
 .data-table th {
   text-align: left;
-  padding: 10px 12px;
+  padding: 8px 5px;
   color: var(--text-muted);
-  font-size: 10px;
+  font-size: 9px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.4px;
   font-weight: 500;
   border-bottom: 1px solid var(--border);
   cursor: pointer;
@@ -845,14 +844,16 @@ body.premium .unlock-badge { display: none; }
   user-select: none;
 }
 .data-table th:hover { color: var(--text-secondary); }
-.data-table th .sort-arrow { margin-left: 4px; font-size: 9px; }
+.data-table th .sort-arrow { margin-left: 2px; font-size: 8px; }
 
 .data-table td {
-  padding: 10px 12px;
+  padding: 7px 5px;
   border-bottom: 1px solid var(--border);
   color: var(--text-secondary);
   white-space: nowrap;
+  font-size: 11px;
 }
+.data-table .badge { font-size: 9px; padding: 2px 5px; }
 
 .data-table tr:hover td { background: var(--bg-card); }
 
@@ -935,9 +936,16 @@ body.premium .unlock-badge { display: none; }
   .card-chart-frame { height: 250px; }
 
   /* Table: horizontal scroll instead of hiding */
-  .table-view { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .data-table { min-width: 1100px; }
-  .data-table th, .data-table td { padding: 8px 10px; font-size: 12px; }
+  /* Mobile: still no side-scroll. Drop low-priority columns to keep it readable. */
+  .data-table th, .data-table td { padding: 6px 4px; font-size: 10px; }
+  .data-table th:nth-child(4),  /* Tag */
+  .data-table td:nth-child(4),
+  .data-table th:nth-child(7),  /* Expiry (Strike already shows date in Contract feel) */
+  .data-table td:nth-child(7),
+  .data-table th:nth-child(9),  /* Now $ */
+  .data-table td:nth-child(9),
+  .data-table th:nth-child(15), /* Ern */
+  .data-table td:nth-child(15) { display: none; }
 
   /* FOMO */
   .fomo-grid { grid-template-columns: 1fr; }
@@ -3086,23 +3094,17 @@ body.premium .unlock-badge { display: none; }
     dr.className = 'row-detail';
     var dtd = document.createElement('td');
     dtd.colSpan = colSpan;
-    // Wide td (spans the full 1100px+ table) but the inner stays sticky to the
-    // viewport's left edge so the detail content is always visible regardless
-    // of horizontal scroll. Width capped to page-wrap so it sits tight beneath
-    // the collapsed row. No background tint - blends with the table.
-    dtd.style.cssText = 'padding:0;background:transparent;border-bottom:1px solid var(--border);';
+    // Table is no-side-scroll now, so detail row sits inside the page-wrap.
+    // Inner content fills available width and wraps naturally.
+    dtd.style.cssText = 'padding:14px 16px 18px;background:transparent;border-bottom:1px solid var(--border);white-space:normal;word-wrap:break-word;overflow-wrap:break-word;';
 
     var inner = document.createElement('div');
-    inner.style.cssText = 'display:flex;flex-direction:column;gap:14px;' +
-      'position:sticky;left:0;' +
-      'max-width:920px;' +
-      'padding:16px 18px 20px;' +
-      'box-sizing:border-box;';
+    inner.style.cssText = 'display:flex;flex-direction:column;gap:12px;width:100%;max-width:100%;box-sizing:border-box;word-wrap:break-word;overflow-wrap:break-word;';
 
     // Spot panel (always visible if data present)
     if (s.spot_at_entry != null && s.spot_current != null) {
       var sp = document.createElement('div');
-      sp.style.cssText = 'font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);';
+      sp.style.cssText = 'font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);white-space:normal;word-wrap:break-word;';
       var entry = '$' + Number(s.spot_at_entry).toFixed(2);
       var now = '$' + Number(s.spot_current).toFixed(2);
       var since = (s.spot_since_entry_pct != null) ? ((s.spot_since_entry_pct >= 0 ? '+' : '') + Number(s.spot_since_entry_pct).toFixed(1) + '%') : '';
@@ -3116,7 +3118,7 @@ body.premium .unlock-badge { display: none; }
     // Earnings indicator
     if (s.earnings_next && s.earnings_next.date) {
       var en = document.createElement('div');
-      en.style.cssText = 'font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);';
+      en.style.cssText = 'font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);white-space:normal;word-wrap:break-word;';
       var d2e = s.earnings_next.days_to;
       var label = (d2e <= 0) ? 'today' : (d2e + 'd away');
       en.innerHTML = '<span style="color:var(--text-muted);">Earnings:</span> ' + esc(s.earnings_next.date) + ' (' + label + ')';
@@ -3126,7 +3128,7 @@ body.premium .unlock-badge { display: none; }
     // Cohort base rate
     if (s.cohort && s.cohort.n) {
       var co = document.createElement('div');
-      co.style.cssText = 'font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);';
+      co.style.cssText = 'font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);white-space:normal;word-wrap:break-word;';
       var bits = ['<span style="color:var(--text-muted);">Similar setups (n=' + s.cohort.n + '):</span>'];
       if (s.cohort.win_rate_peak_basis != null) bits.push(Math.round(s.cohort.win_rate_peak_basis) + '% won');
       if (s.cohort.median_peak_pct != null) bits.push('median peak ' + (s.cohort.median_peak_pct >= 0 ? '+' : '') + Number(s.cohort.median_peak_pct).toFixed(0) + '%');
@@ -3137,7 +3139,7 @@ body.premium .unlock-badge { display: none; }
     // Greeks (members only) or locked teaser (free)
     if (s.greeks) {
       var gh = document.createElement('div');
-      gh.style.cssText = 'font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);';
+      gh.style.cssText = 'font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);white-space:normal;word-wrap:break-word;';
       var parts = ['<span style="color:var(--text-muted);">Greeks:</span>'];
       ['delta','gamma','theta','vega','iv','iv_rank'].forEach(function(k) {
         if (s.greeks[k] == null) return;
@@ -3165,13 +3167,13 @@ body.premium .unlock-badge { display: none; }
     pillars.forEach(function(p) {
       if (!p[1]) return;
       var sec = document.createElement('div');
-      sec.style.cssText = 'border-left:2px solid ' + p[2] + ';padding-left:10px;';
+      sec.style.cssText = 'border-left:2px solid ' + p[2] + ';padding-left:10px;width:100%;max-width:100%;box-sizing:border-box;';
       var lab = document.createElement('div');
       lab.style.cssText = 'font-family:var(--font-mono);font-size:9.5px;color:' + p[2] + ';text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:3px;';
       lab.textContent = p[0];
       sec.appendChild(lab);
       var bod = document.createElement('div');
-      bod.style.cssText = 'font-size:12.5px;color:var(--text-primary);line-height:1.55;';
+      bod.style.cssText = 'font-size:12.5px;color:var(--text-primary);line-height:1.55;white-space:normal;word-wrap:break-word;overflow-wrap:break-word;';
       bod.textContent = p[1];
       sec.appendChild(bod);
       inner.appendChild(sec);

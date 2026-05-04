@@ -2073,6 +2073,25 @@ body.premium .unlock-badge { display: none; }
       var sepC = document.createElement('span'); sepC.className = 'v16-sep'; sepC.textContent = '·'; opt.appendChild(sepC);
       var hot = document.createElement('span'); hot.className = 'v16-hot'; hot.textContent = stateBadge; opt.appendChild(hot);
     }
+    if (s.earnings_next && s.earnings_next.date) {
+      var sepE = document.createElement('span'); sepE.className = 'v16-sep'; sepE.textContent = '·'; opt.appendChild(sepE);
+      var earnLbl = document.createElement('span'); earnLbl.className = 'v16-lbl'; earnLbl.textContent = 'Earnings'; opt.appendChild(earnLbl);
+      var earnVal = document.createElement('span');
+      var dt = s.earnings_next.date;
+      // Format MM/DD
+      var parts = dt.split('-');
+      var earnText = parts.length >= 3 ? (parseInt(parts[1]) + '/' + parseInt(parts[2])) : dt;
+      if (s.earnings_next.time_of_day) earnText += ' ' + s.earnings_next.time_of_day;
+      if (s.earnings_next.days_to != null && s.earnings_next.days_to <= 14) {
+        earnText += ' · ' + s.earnings_next.days_to + 'd';
+      }
+      earnVal.textContent = earnText;
+      // Color upcoming binary risk amber if inside DTE
+      if (s.earnings_next.status === 'PRE_PRINT_TIGHT' || (s.earnings_next.days_to != null && s.earnings_next.days_to <= 7)) {
+        earnVal.style.color = 'var(--amber)';
+      }
+      opt.appendChild(earnVal);
+    }
     L.appendChild(opt);
 
     if (isPremium && s.entry_premium != null) {
@@ -2197,9 +2216,10 @@ body.premium .unlock-badge { display: none; }
         var v = document.createElement('span'); v.className = 'val ' + (cls || ''); v.textContent = val; w.appendChild(v);
         return w;
       }
+      // Cohort fields stored as already-percentage values (0-100), not decimals
       var cells = [
         chCell('N matches', s.cohort.n, ''),
-        chCell('Won (peak)', s.cohort.win_rate_peak_basis != null ? Math.round(s.cohort.win_rate_peak_basis*100) + '%' : null, 'green'),
+        chCell('Won (peak)', s.cohort.win_rate_peak_basis != null ? Math.round(s.cohort.win_rate_peak_basis) + '%' : null, 'green'),
         chCell('Median peak', s.cohort.median_peak_pct != null ? '+' + s.cohort.median_peak_pct.toFixed(0) + '%' : null, 'green'),
         chCell('Median final', s.cohort.median_final_pct != null ? (s.cohort.median_final_pct >= 0 ? '+' : '') + s.cohort.median_final_pct.toFixed(0) + '%' : null, ''),
         chCell('Best', s.cohort.best_final_pct != null ? '+' + s.cohort.best_final_pct.toFixed(0) + '%' : null, 'green'),

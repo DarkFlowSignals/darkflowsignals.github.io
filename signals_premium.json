@@ -74,6 +74,21 @@
         ],
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
+      },
+      "spot_current": 126.98,
+      "spot_today_open": 121.18,
+      "spot_today_pct": 4.8,
+      "greeks": {
+        "delta": 0.8163,
+        "gamma": 0.0118,
+        "theta": -0.7563,
+        "vega": 0.0353,
+        "iv": 1.6935
+      },
+      "earnings_next": {
+        "date": "2026-05-07",
+        "days_to": 3,
+        "status": "PRE_PRINT_TIGHT"
       }
     },
     {
@@ -353,6 +368,14 @@
         ],
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
+      },
+      "spot_current": 126.98,
+      "spot_today_open": 121.18,
+      "spot_today_pct": 4.8,
+      "earnings_next": {
+        "date": "2026-05-07",
+        "days_to": 3,
+        "status": "PRE_PRINT_TIGHT"
       }
     },
     {
@@ -777,6 +800,21 @@
         ],
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
+      },
+      "spot_current": 412.6,
+      "spot_today_open": 411.54,
+      "spot_today_pct": 0.3,
+      "greeks": {
+        "delta": 0.9486,
+        "gamma": 0.0042,
+        "theta": -0.1544,
+        "vega": 0.0755,
+        "iv": 0.3475
+      },
+      "earnings_next": {
+        "date": "2026-07-29",
+        "days_to": 86,
+        "status": "CLEAN"
       }
     },
     {
@@ -940,6 +978,21 @@
         ],
         "win_rate_peak_basis": 90.9,
         "win_rate_settle_basis": 72.0
+      },
+      "spot_current": 401.28,
+      "spot_today_open": 404.51,
+      "spot_today_pct": -0.8,
+      "greeks": {
+        "delta": 0.7253,
+        "gamma": 0.0081,
+        "theta": -0.4085,
+        "vega": 0.2972,
+        "iv": 0.4632
+      },
+      "earnings_next": {
+        "date": "2026-07-16",
+        "days_to": 73,
+        "status": "CLEAN"
       }
     },
     {
@@ -1132,6 +1185,21 @@
         ],
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
+      },
+      "spot_current": 382.78,
+      "spot_today_open": 385.63,
+      "spot_today_pct": -0.7,
+      "greeks": {
+        "delta": 0.9216,
+        "gamma": 0.0058,
+        "theta": -0.1986,
+        "vega": 0.0973,
+        "iv": 0.3774
+      },
+      "earnings_next": {
+        "date": "2026-07-23",
+        "days_to": 80,
+        "status": "CLEAN"
       }
     },
     {
@@ -1208,6 +1276,21 @@
         ],
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
+      },
+      "spot_current": 198.68,
+      "spot_today_open": 199.5,
+      "spot_today_pct": -0.4,
+      "greeks": {
+        "delta": 0.1946,
+        "gamma": 0.0227,
+        "theta": -0.1555,
+        "vega": 0.095,
+        "iv": 0.3515
+      },
+      "earnings_next": {
+        "date": "2026-05-20",
+        "days_to": 16,
+        "status": "PRE_PRINT_IDEAL"
       }
     },
     {
@@ -1284,6 +1367,16 @@
         ],
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
+      },
+      "spot_current": 415.19,
+      "spot_today_open": 418.84,
+      "spot_today_pct": -0.9,
+      "greeks": {
+        "delta": 0.0199,
+        "gamma": 0.002,
+        "theta": -0.0544,
+        "vega": 0.0347,
+        "iv": 0.3395
       }
     },
     {
@@ -1360,6 +1453,16 @@
         ],
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
+      },
+      "spot_current": 66.03,
+      "spot_today_open": 66.39,
+      "spot_today_pct": -0.5,
+      "greeks": {
+        "delta": 0.0954,
+        "gamma": 0.0276,
+        "theta": -0.048,
+        "vega": 0.0194,
+        "iv": 0.5366
       }
     },
     {
@@ -1416,6 +1519,16 @@
           "intrinsic_pct_of_value": null,
           "label": "11 sessions to settle."
         }
+      },
+      "spot_current": 277.81,
+      "spot_today_open": 278.7,
+      "spot_today_pct": -0.3,
+      "greeks": {
+        "delta": -0.1616,
+        "gamma": 0.0176,
+        "theta": -0.1504,
+        "vega": 0.1181,
+        "iv": 0.2888
       }
     },
     {
@@ -1666,6 +1779,21 @@
         ],
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
+      },
+      "spot_current": 13.71,
+      "spot_today_open": 12.94,
+      "spot_today_pct": 6.0,
+      "greeks": {
+        "delta": 0.7148,
+        "gamma": 0.1232,
+        "theta": -0.0434,
+        "vega": 0.0081,
+        "iv": 1.1579
+      },
+      "earnings_next": {
+        "date": "2026-05-12",
+        "days_to": 8,
+        "status": "PRE_PRINT_IDEAL"
       }
     },
     {
@@ -1742,6 +1870,21 @@
         ],
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 578.38,
+      "spot_today_open": 560.6,
+      "spot_today_pct": 3.2,
+      "greeks": {
+        "delta": 0.9103,
+        "gamma": 0.0029,
+        "theta": -1.1879,
+        "vega": 0.0981,
+        "iv": 0.9319
+      },
+      "earnings_next": {
+        "date": "2026-06-24",
+        "days_to": 51,
+        "status": "CLEAN"
       }
     },
     {
@@ -1818,6 +1961,21 @@
         ],
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 578.38,
+      "spot_today_open": 560.6,
+      "spot_today_pct": 3.2,
+      "greeks": {
+        "delta": 0.9346,
+        "gamma": 0.0022,
+        "theta": -0.9672,
+        "vega": 0.0772,
+        "iv": 0.955
+      },
+      "earnings_next": {
+        "date": "2026-06-24",
+        "days_to": 51,
+        "status": "CLEAN"
       }
     },
     {
@@ -1894,6 +2052,21 @@
         ],
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
+      },
+      "spot_current": 180.93,
+      "spot_today_open": 176.02,
+      "spot_today_pct": 2.8,
+      "greeks": {
+        "delta": 0.8332,
+        "gamma": 0.0136,
+        "theta": -0.2226,
+        "vega": 0.0785,
+        "iv": 0.5866
+      },
+      "earnings_next": {
+        "date": "2026-06-10",
+        "days_to": 37,
+        "status": "CLEAN"
       }
     },
     {
@@ -1970,6 +2143,16 @@
         ],
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 672.68,
+      "spot_today_open": 674.66,
+      "spot_today_pct": -0.3,
+      "greeks": {
+        "delta": 0.8883,
+        "gamma": 0.0094,
+        "theta": -0.5388,
+        "vega": 0.1339,
+        "iv": 0.2879
       }
     },
     {
@@ -2046,6 +2229,23 @@
         ],
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 382.78,
+      "spot_today_open": 385.63,
+      "spot_at_entry": 349.94,
+      "spot_since_entry_pct": 9.4,
+      "spot_today_pct": -0.7,
+      "greeks": {
+        "delta": 0.9421,
+        "gamma": 0.0052,
+        "theta": -0.3557,
+        "vega": 0.0464,
+        "iv": 0.5571
+      },
+      "earnings_next": {
+        "date": "2026-07-23",
+        "days_to": 80,
+        "status": "CLEAN"
       }
     },
     {
@@ -2122,6 +2322,23 @@
         ],
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
+      },
+      "spot_current": 271.48,
+      "spot_today_open": 268.8,
+      "spot_at_entry": 263.04,
+      "spot_since_entry_pct": 3.2,
+      "spot_today_pct": 1.0,
+      "greeks": {
+        "delta": 0.7879,
+        "gamma": 0.0186,
+        "theta": -0.2249,
+        "vega": 0.1366,
+        "iv": 0.3301
+      },
+      "earnings_next": {
+        "date": "2026-07-30",
+        "days_to": 87,
+        "status": "CLEAN"
       }
     },
     {
@@ -2198,6 +2415,23 @@
         ],
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
+      },
+      "spot_current": 578.38,
+      "spot_today_open": 560.6,
+      "spot_at_entry": 518.46,
+      "spot_since_entry_pct": 11.6,
+      "spot_today_pct": 3.2,
+      "greeks": {
+        "delta": 0.796,
+        "gamma": 0.0034,
+        "theta": -1.0985,
+        "vega": 0.2845,
+        "iv": 0.8194
+      },
+      "earnings_next": {
+        "date": "2026-06-24",
+        "days_to": 51,
+        "status": "CLEAN"
       }
     },
     {
@@ -2274,6 +2508,18 @@
         ],
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 672.68,
+      "spot_today_open": 674.66,
+      "spot_at_entry": 667.46,
+      "spot_since_entry_pct": 0.8,
+      "spot_today_pct": -0.3,
+      "greeks": {
+        "delta": 0.6661,
+        "gamma": 0.0217,
+        "theta": -0.8054,
+        "vega": 0.2562,
+        "iv": 0.2379
       }
     },
     {
@@ -2350,6 +2596,21 @@
         ],
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 106.77,
+      "spot_today_open": 96.88,
+      "spot_today_pct": 10.2,
+      "greeks": {
+        "delta": 0.7145,
+        "gamma": 0.0116,
+        "theta": -0.459,
+        "vega": 0.063,
+        "iv": 1.583
+      },
+      "earnings_next": {
+        "date": "2026-07-30",
+        "days_to": 87,
+        "status": "CLEAN"
       }
     },
     {
@@ -2426,6 +2687,21 @@
         ],
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 1260.98,
+      "spot_today_open": 1222.18,
+      "spot_today_pct": 3.2,
+      "greeks": {
+        "delta": 0.7812,
+        "gamma": 0.0012,
+        "theta": -3.266,
+        "vega": 0.646,
+        "iv": 1.0851
+      },
+      "earnings_next": {
+        "date": "2026-04-30",
+        "days_to": -4,
+        "status": "CLEAN"
       }
     },
     {
@@ -2502,6 +2778,16 @@
         ],
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
+      },
+      "spot_current": 59.3,
+      "spot_today_open": 58.73,
+      "spot_today_pct": 1.0,
+      "greeks": {
+        "delta": 0.5536,
+        "gamma": 0.0997,
+        "theta": -0.0466,
+        "vega": 0.0521,
+        "iv": 0.3012
       }
     },
     {
@@ -2578,6 +2864,21 @@
         ],
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 203.22,
+      "spot_today_open": 199.41,
+      "spot_today_pct": 1.9,
+      "greeks": {
+        "delta": 0.5731,
+        "gamma": 0.0128,
+        "theta": -0.5581,
+        "vega": 0.1383,
+        "iv": 0.8717
+      },
+      "earnings_next": {
+        "date": "2026-05-07",
+        "days_to": 3,
+        "status": "PRE_PRINT_TIGHT"
       }
     },
     {
@@ -2654,6 +2955,21 @@
         ],
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 392.6,
+      "spot_today_open": 390.23,
+      "spot_today_pct": 0.6,
+      "greeks": {
+        "delta": 0.4221,
+        "gamma": 0.0133,
+        "theta": -0.5398,
+        "vega": 0.2667,
+        "iv": 0.4324
+      },
+      "earnings_next": {
+        "date": "2026-07-22",
+        "days_to": 79,
+        "status": "CLEAN"
       }
     },
     {
@@ -2730,6 +3046,21 @@
         ],
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
+      },
+      "spot_current": 178.77,
+      "spot_today_open": 160.38,
+      "spot_today_pct": 11.5,
+      "greeks": {
+        "delta": 0.7842,
+        "gamma": 0.006,
+        "theta": -0.2968,
+        "vega": 0.137,
+        "iv": 1.0455
+      },
+      "earnings_next": {
+        "date": "2026-05-13",
+        "days_to": 9,
+        "status": "PRE_PRINT_IDEAL"
       }
     },
     {
@@ -2806,6 +3137,21 @@
         ],
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 277.1,
+      "spot_today_open": 279.65,
+      "spot_today_pct": -0.9,
+      "greeks": {
+        "delta": 0.5919,
+        "gamma": 0.0338,
+        "theta": -0.2185,
+        "vega": 0.1868,
+        "iv": 0.2388
+      },
+      "earnings_next": {
+        "date": "2026-07-30",
+        "days_to": 87,
+        "status": "CLEAN"
       }
     },
     {
@@ -2882,6 +3228,21 @@
         ],
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 22.44,
+      "spot_today_open": 21.49,
+      "spot_today_pct": 4.4,
+      "greeks": {
+        "delta": 0.5809,
+        "gamma": 0.0933,
+        "theta": -0.0754,
+        "vega": 0.0152,
+        "iv": 1.0747
+      },
+      "earnings_next": {
+        "date": "2026-05-08",
+        "days_to": 4,
+        "status": "PRE_PRINT_TIGHT"
       }
     },
     {
@@ -2958,6 +3319,21 @@
         ],
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 416.32,
+      "spot_today_open": 418.21,
+      "spot_today_pct": -0.5,
+      "greeks": {
+        "delta": 0.2511,
+        "gamma": 0.01,
+        "theta": -0.4709,
+        "vega": 0.2302,
+        "iv": 0.4405
+      },
+      "earnings_next": {
+        "date": "2026-06-03",
+        "days_to": 30,
+        "status": "CLEAN"
       }
     }
   ]

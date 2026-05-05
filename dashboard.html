@@ -844,6 +844,44 @@ body.premium .unlock-badge { display: none; }
 .table-view.active .data-table { width: 100%; margin: 0 auto; }
 .signal-feed.hidden { display: none; }
 
+/* MOBILE: 14-column table doesn't fit a 390px viewport. Switch to
+   horizontal scroll + sticky Ticker column so members can swipe through
+   the full table while always seeing which row they're on. Reported by
+   kate 2026-05-05 from iPhone screenshot. */
+@media (max-width: 720px) {
+  .table-view.active {
+    overflow-x: auto;
+    /* Subtle scroll hint shadow on the right edge */
+    -webkit-overflow-scrolling: touch;
+  }
+  .table-view.active .data-table {
+    table-layout: auto;     /* let columns size to natural content */
+    min-width: 920px;       /* ensures all 14 columns get readable width */
+    width: 920px;
+  }
+  /* Ticker column (2nd visible) pinned left so the row identity is always
+     visible. Date column (1st) is low-value on mobile -- hide it to keep
+     the sticky Ticker right at the left edge of the viewport. */
+  .data-table th:nth-child(1),
+  .data-table td:nth-child(1) { display: none; }
+  .data-table th:nth-child(2),
+  .data-table td:nth-child(2) {
+    position: sticky;
+    left: 0;
+    z-index: 5;
+    background: var(--bg-base);
+    box-shadow: 1px 0 0 var(--border);
+    min-width: 64px;
+  }
+  /* Hovered/expanded row keeps sticky cell on top of the highlight */
+  .data-table tr:hover td:nth-child(2) { background: var(--bg-card); }
+  /* Detail row (expanded thesis) spans full width and shouldn't pin */
+  .data-table tr.row-detail td:nth-child(2) {
+    position: static;
+    box-shadow: none;
+  }
+}
+
 .data-table {
   width: 100%;
   max-width: 100%;

@@ -684,6 +684,28 @@ body.premium .premium-blur {
 body.premium .unlock-badge { display: none; }
 
 /* Expanded card detail */
+.v16-expand-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 7px 12px;
+  background: rgba(91,159,255,0.06);
+  border: 1px dashed rgba(91,159,255,0.22);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #5B9FFF;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+.v16-expand-hint:hover { background: rgba(91,159,255,0.11); }
+.v16-hint-chevron {
+  display: inline-block;
+  transition: transform 0.18s;
+  font-size: 12px;
+}
 .card-detail {
   display: none;
   margin-top: 14px;
@@ -2344,21 +2366,21 @@ body.premium .unlock-badge { display: none; }
           var lab = document.createElement('div'); lab.className = 'label'; lab.textContent = pillar[0]; sec.appendChild(lab);
           var bod = document.createElement('div'); bod.className = 'body'; bod.textContent = pillar[1];
           if (!isPremium) {
-            // Free: show first ~12 words clear, blur the rest. Conversion lever:
-            // free reader sees the thesis EXISTS and starts strong, but full
-            // depth is gated.
-            var words = pillar[1].split(/\s+/);
-            var teaser = words.slice(0, 12).join(' ');
-            var rest = words.slice(12).join(' ');
+            // Free: blur the ENTIRE body. Showing the first sentence of Setup
+            // gives away strike + entry premium, defeating the gate. Free
+            // readers see only the structure (section labels) + a generic
+            // teaser of how long the analysis is.
             bod.textContent = '';
-            bod.appendChild(document.createTextNode(teaser + (rest ? ' ' : '')));
-            if (rest) {
-              var bspan = document.createElement('span');
-              bspan.className = 'premium-blur';
-              bspan.textContent = rest;
-              bspan.addEventListener('click', function(e) { e.stopPropagation(); window.open(WHOP_URL, '_blank'); });
-              bod.appendChild(bspan);
-            }
+            var wcount = pillar[1].split(/\s+/).length;
+            var bspan = document.createElement('span');
+            bspan.className = 'premium-blur';
+            bspan.textContent = pillar[1];
+            bspan.addEventListener('click', function(e) { e.stopPropagation(); window.open(WHOP_URL, '_blank'); });
+            bod.appendChild(bspan);
+            var meta = document.createElement('div');
+            meta.style.cssText = 'font-size:9.5px;color:var(--text-muted);margin-top:3px;font-style:italic;';
+            meta.textContent = wcount + '-word ' + pillar[0].toLowerCase() + ' analysis (member only)';
+            sec.appendChild(meta);
           }
           sec.appendChild(bod);
           ts.appendChild(sec);
@@ -2427,14 +2449,28 @@ body.premium .unlock-badge { display: none; }
     expand.appendChild(chs);
 
     detail.appendChild(expand);
+
+    // Visible "click for more" hint between collapsed card + expandable detail
+    var hint = document.createElement('div');
+    hint.className = 'v16-expand-hint';
+    var hintText = isPremium
+      ? 'Click for full thesis, live Greeks, spot panel, similar-setup history'
+      : 'Click for thesis preview + cohort + member-only details';
+    hint.innerHTML = '<span class="v16-hint-chevron">&#9662;</span> ' + hintText;
+    card.appendChild(hint);
     card.appendChild(detail);
 
-    (function(cardEl, detailEl, frame, ticker, rotation, idx) {
+    (function(cardEl, detailEl, hintEl, frame, ticker, rotation, idx) {
       var chartLoaded = false;
       cardEl.addEventListener('click', function(e) {
         if (e.target.closest('iframe')) return;
         var isExpanded = detailEl.style.display === 'block';
         detailEl.style.display = isExpanded ? 'none' : 'block';
+        // Flip chevron + update hint text on toggle
+        if (hintEl) {
+          var chev = hintEl.querySelector('.v16-hint-chevron');
+          if (chev) chev.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
         if (!isExpanded) {
           cardEl.style.transform = 'rotate(0deg)';
           if (!chartLoaded) {
@@ -2446,7 +2482,7 @@ body.premium .unlock-badge { display: none; }
           cardEl.style.transform = 'rotate(' + rotation.toFixed(2) + 'deg)';
         }
       });
-    })(card, detail, iframe, s.ticker, rot, i);
+    })(card, detail, hint, iframe, s.ticker, rot, i);
 
     return card;
   }
@@ -3205,18 +3241,17 @@ body.premium .unlock-badge { display: none; }
       if (isPremium) {
         bod.textContent = p[1];
       } else {
-        // Free: first ~12 words clear, blur the rest
-        var words = p[1].split(/\s+/);
-        var teaser = words.slice(0, 12).join(' ');
-        var rest = words.slice(12).join(' ');
-        bod.appendChild(document.createTextNode(teaser + (rest ? ' ' : '')));
-        if (rest) {
-          var bspan = document.createElement('span');
-          bspan.className = 'premium-blur';
-          bspan.textContent = rest;
-          bspan.addEventListener('click', function(e) { e.stopPropagation(); window.open(WHOP_URL, '_blank'); });
-          bod.appendChild(bspan);
-        }
+        // Free: blur entire body to keep strike/premium gated
+        var wcountTbl = p[1].split(/\s+/).length;
+        var bspanTbl = document.createElement('span');
+        bspanTbl.className = 'premium-blur';
+        bspanTbl.textContent = p[1];
+        bspanTbl.addEventListener('click', function(e) { e.stopPropagation(); window.open(WHOP_URL, '_blank'); });
+        bod.appendChild(bspanTbl);
+        var metaTbl = document.createElement('div');
+        metaTbl.style.cssText = 'font-size:9.5px;color:var(--text-muted);margin-top:3px;font-style:italic;';
+        metaTbl.textContent = wcountTbl + '-word ' + p[0].toLowerCase() + ' analysis (member only)';
+        sec.appendChild(metaTbl);
       }
       sec.appendChild(bod);
       inner.appendChild(sec);

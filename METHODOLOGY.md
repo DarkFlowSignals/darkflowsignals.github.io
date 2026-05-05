@@ -50,10 +50,10 @@ Current can swing between positive and negative as the option trades. It is not 
 
 ### WIN and LOSS
 
-- **WIN** = peak went above 0% at some point during the signal's life.
-- **LOSS** = peak never went positive. The thesis was wrong from entry.
+- **WIN** = peak reached at least +20% at some point during the signal's life.
+- **LOSS** = peak never cleared the +20% threshold. The thesis didn't deliver a meaningful move.
 
-This definition matters. An option can peak at +300%, pull back, and expire worthless. On the dashboard, that still shows as WIN because peak crossed zero. The trader's exit timing is a separate discipline from the signal's underlying quality. We track the signal, not the exit.
+This definition matters. An option can peak at +300%, pull back, and expire worthless. On the dashboard, that still shows as WIN because peak cleared +20%. The trader's exit timing is a separate discipline from the signal's underlying quality. We track the signal, not the exit.
 
 ### Expiry date
 

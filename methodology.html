@@ -129,10 +129,10 @@ footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: ce
 
   <h3>WIN and LOSS</h3>
   <ul>
-    <li><strong>WIN</strong> = peak went above 0% at some point during the signal's life.</li>
-    <li><strong>LOSS</strong> = peak never went positive. The thesis was wrong from entry.</li>
+    <li><strong>WIN</strong> = peak reached at least +20% at some point during the signal's life.</li>
+    <li><strong>LOSS</strong> = peak never cleared the +20% threshold. The thesis didn't deliver a meaningful move.</li>
   </ul>
-  <p>This definition matters. An option can peak at +300%, pull back, and expire worthless. On the dashboard, that still shows as WIN because peak crossed zero. The trader's exit timing is a separate discipline from the signal's underlying quality. We track the signal, not the exit.</p>
+  <p>This definition matters. An option can peak at +300%, pull back, and expire worthless. On the dashboard, that still shows as WIN because peak cleared +20%. The trader's exit timing is a separate discipline from the signal's underlying quality. We track the signal, not the exit.</p>
 
   <h3>Expiry date</h3>
   <p>Every option has a contract expiration date. On the dashboard you'll see that date on each card. When expiry passes, the card flips from <em>open</em> to <em>expired</em>, the current % locks to settled intrinsic value, and the signal stops updating.</p>

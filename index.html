@@ -1013,7 +1013,7 @@ nav {
       <div class="pillar-item">
         <div class="pillar-weight">Principle 6</div>
         <h4>Show every win and every loss</h4>
-        <p>Peak % is the signal-quality metric. Win = peak went above 0%. Loss = peak never crossed zero. Losses are not hidden. That is the whole point.</p>
+        <p>Peak % is the signal-quality metric. Win = peak reached at least +20%. Loss = peak never reached the threshold. Losses are not hidden. That is the whole point.</p>
       </div>
     </div>
 
@@ -1102,7 +1102,7 @@ nav {
       <div class="record-stat">
         <div class="rl" id="lp-winrate-label">Win Rate</div>
         <div class="rv" id="lp-winrate">--</div>
-        <div class="rs" id="lp-winrate-sub">Signal quality: peak &gt; 0%</div>
+        <div class="rs" id="lp-winrate-sub">Signal quality: peak &gt;= 20%</div>
       </div>
       <div class="record-stat">
         <div class="rl">Avg Peak</div>
@@ -1468,7 +1468,7 @@ nav {
       wrEl.textContent = wr + '%';
       wrEl.className = 'rv ' + (wr >= 50 ? 'green' : 'red');
       if (wrLbl) wrLbl.textContent = 'Win Rate';
-      if (wrSub) wrSub.textContent = 'Signal quality: peak > 0%';
+      if (wrSub) wrSub.textContent = 'Signal quality: peak >= 20%';
     } else {
       var openCount = signals.filter(isOpen).length;
       wrEl.textContent = openCount + ' open';

@@ -2337,37 +2337,72 @@ body.premium .unlock-badge { display: none; }
     var hasThesis = s.thesis_setup || s.thesis_catalyst || s.thesis_macro || s.thesis_risk;
     if (hasThesis) {
       var ts = document.createElement('div'); ts.className = 'v16-expand-section';
-      var tl = document.createElement('div'); tl.className = 'v16-expand-label'; tl.textContent = 'Full thesis'; ts.appendChild(tl);
+      var tl = document.createElement('div'); tl.className = 'v16-expand-label'; tl.textContent = isPremium ? 'Full thesis' : 'Full thesis  ·  Member only'; ts.appendChild(tl);
       [['Setup', s.thesis_setup, false], ['Catalyst', s.thesis_catalyst, false], ['Macro', s.thesis_macro, false], ['Risk + invalidates', s.thesis_risk, true]].forEach(function(pillar) {
         if (pillar[1]) {
           var sec = document.createElement('div'); sec.className = 'v16-thesis-section' + (pillar[2] ? ' risk' : '');
           var lab = document.createElement('div'); lab.className = 'label'; lab.textContent = pillar[0]; sec.appendChild(lab);
-          var bod = document.createElement('div'); bod.className = 'body'; bod.textContent = pillar[1]; sec.appendChild(bod);
+          var bod = document.createElement('div'); bod.className = 'body'; bod.textContent = pillar[1];
+          if (!isPremium) {
+            // Free: show first ~12 words clear, blur the rest. Conversion lever:
+            // free reader sees the thesis EXISTS and starts strong, but full
+            // depth is gated.
+            var words = pillar[1].split(/\s+/);
+            var teaser = words.slice(0, 12).join(' ');
+            var rest = words.slice(12).join(' ');
+            bod.textContent = '';
+            bod.appendChild(document.createTextNode(teaser + (rest ? ' ' : '')));
+            if (rest) {
+              var bspan = document.createElement('span');
+              bspan.className = 'premium-blur';
+              bspan.textContent = rest;
+              bspan.addEventListener('click', function(e) { e.stopPropagation(); window.open(WHOP_URL, '_blank'); });
+              bod.appendChild(bspan);
+            }
+          }
+          sec.appendChild(bod);
           ts.appendChild(sec);
         }
       });
+      if (!isPremium) {
+        var cta = document.createElement('div');
+        cta.className = 'v16-locked-cta';
+        cta.style.marginTop = '10px';
+        cta.innerHTML = '🔒 Full 4-section thesis (Setup, Catalyst, Macro, Risk) is member-only. <a href="/auth/whop/login">Sign in</a> or start a 14-day free trial.';
+        ts.appendChild(cta);
+      }
       expand.appendChild(ts);
     }
 
     if (s.cohort && s.cohort.n) {
       var cs2 = document.createElement('div'); cs2.className = 'v16-expand-section';
-      var cl2 = document.createElement('div'); cl2.className = 'v16-expand-label'; cl2.textContent = 'Cohort base rate (similar setups)'; cs2.appendChild(cl2);
+      var cl2 = document.createElement('div'); cl2.className = 'v16-expand-label'; cl2.textContent = isPremium ? 'Cohort base rate (similar setups)' : 'Cohort base rate  ·  Member only'; cs2.appendChild(cl2);
       var co = document.createElement('div'); co.className = 'v16-cohort';
-      function chCell(label, val, cls) {
+      function chCell(label, val, cls, blurForFree) {
         if (val == null) return null;
         var w = document.createElement('span');
         var l = document.createElement('span'); l.className = 'lbl'; l.textContent = label; w.appendChild(l);
-        var v = document.createElement('span'); v.className = 'val ' + (cls || ''); v.textContent = val; w.appendChild(v);
+        var v = document.createElement('span'); v.className = 'val ' + (cls || '');
+        if (blurForFree && !isPremium) {
+          var bspan = document.createElement('span');
+          bspan.className = 'premium-blur';
+          bspan.textContent = val;
+          bspan.addEventListener('click', function(e) { e.stopPropagation(); window.open(WHOP_URL, '_blank'); });
+          v.appendChild(bspan);
+        } else {
+          v.textContent = val;
+        }
+        w.appendChild(v);
         return w;
       }
-      // Cohort fields stored as already-percentage values (0-100), not decimals
+      // N visible to free (proves sample exists). Performance metrics blurred.
       var cells = [
-        chCell('N matches', s.cohort.n, ''),
-        chCell('Won (peak)', s.cohort.win_rate_peak_basis != null ? Math.round(s.cohort.win_rate_peak_basis) + '%' : null, 'green'),
-        chCell('Median peak', s.cohort.median_peak_pct != null ? '+' + s.cohort.median_peak_pct.toFixed(0) + '%' : null, 'green'),
-        chCell('Median final', s.cohort.median_final_pct != null ? (s.cohort.median_final_pct >= 0 ? '+' : '') + s.cohort.median_final_pct.toFixed(0) + '%' : null, ''),
-        chCell('Best', s.cohort.best_final_pct != null ? '+' + s.cohort.best_final_pct.toFixed(0) + '%' : null, 'green'),
-        chCell('Worst', s.cohort.worst_final_pct != null ? s.cohort.worst_final_pct.toFixed(0) + '%' : null, 'red-soft')
+        chCell('N matches', s.cohort.n, '', false),
+        chCell('Won (peak)', s.cohort.win_rate_peak_basis != null ? Math.round(s.cohort.win_rate_peak_basis) + '%' : null, 'green', true),
+        chCell('Median peak', s.cohort.median_peak_pct != null ? '+' + s.cohort.median_peak_pct.toFixed(0) + '%' : null, 'green', true),
+        chCell('Median final', s.cohort.median_final_pct != null ? (s.cohort.median_final_pct >= 0 ? '+' : '') + s.cohort.median_final_pct.toFixed(0) + '%' : null, '', true),
+        chCell('Best', s.cohort.best_final_pct != null ? '+' + s.cohort.best_final_pct.toFixed(0) + '%' : null, 'green', true),
+        chCell('Worst', s.cohort.worst_final_pct != null ? s.cohort.worst_final_pct.toFixed(0) + '%' : null, 'red-soft', true)
       ];
       cells.forEach(function(el) { if (el) co.appendChild(el); });
       cs2.appendChild(co); expand.appendChild(cs2);
@@ -3109,14 +3144,23 @@ body.premium .unlock-badge { display: none; }
       inner.appendChild(en);
     }
 
-    // Cohort base rate
+    // Cohort base rate (N visible to free, performance metrics blurred)
     if (s.cohort && s.cohort.n) {
       var co = document.createElement('div');
       co.style.cssText = 'font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);white-space:normal;word-wrap:break-word;';
-      var bits = ['<span style="color:var(--text-muted);">Similar setups (n=' + s.cohort.n + '):</span>'];
-      if (s.cohort.win_rate_peak_basis != null) bits.push(Math.round(s.cohort.win_rate_peak_basis) + '% won');
-      if (s.cohort.median_peak_pct != null) bits.push('median peak ' + (s.cohort.median_peak_pct >= 0 ? '+' : '') + Number(s.cohort.median_peak_pct).toFixed(0) + '%');
-      co.innerHTML = bits.join('  ·  ');
+      var labelHtml = '<span style="color:var(--text-muted);">Similar setups (n=' + s.cohort.n + '):</span>';
+      if (isPremium) {
+        var bits = [labelHtml];
+        if (s.cohort.win_rate_peak_basis != null) bits.push(Math.round(s.cohort.win_rate_peak_basis) + '% won');
+        if (s.cohort.median_peak_pct != null) bits.push('median peak ' + (s.cohort.median_peak_pct >= 0 ? '+' : '') + Number(s.cohort.median_peak_pct).toFixed(0) + '%');
+        co.innerHTML = bits.join('  ·  ');
+      } else {
+        // Free: blur the actual numbers but keep structure visible
+        var blurredBits = [];
+        if (s.cohort.win_rate_peak_basis != null) blurredBits.push('<span class="premium-blur">' + Math.round(s.cohort.win_rate_peak_basis) + '% won</span>');
+        if (s.cohort.median_peak_pct != null) blurredBits.push('median peak <span class="premium-blur">' + (s.cohort.median_peak_pct >= 0 ? '+' : '') + Number(s.cohort.median_peak_pct).toFixed(0) + '%</span>');
+        co.innerHTML = labelHtml + '  ·  ' + blurredBits.join('  ·  ');
+      }
       inner.appendChild(co);
     }
 
@@ -3158,10 +3202,32 @@ body.premium .unlock-badge { display: none; }
       sec.appendChild(lab);
       var bod = document.createElement('div');
       bod.style.cssText = 'font-size:12.5px;color:var(--text-primary);line-height:1.55;white-space:normal;word-wrap:break-word;overflow-wrap:break-word;';
-      bod.textContent = p[1];
+      if (isPremium) {
+        bod.textContent = p[1];
+      } else {
+        // Free: first ~12 words clear, blur the rest
+        var words = p[1].split(/\s+/);
+        var teaser = words.slice(0, 12).join(' ');
+        var rest = words.slice(12).join(' ');
+        bod.appendChild(document.createTextNode(teaser + (rest ? ' ' : '')));
+        if (rest) {
+          var bspan = document.createElement('span');
+          bspan.className = 'premium-blur';
+          bspan.textContent = rest;
+          bspan.addEventListener('click', function(e) { e.stopPropagation(); window.open(WHOP_URL, '_blank'); });
+          bod.appendChild(bspan);
+        }
+      }
       sec.appendChild(bod);
       inner.appendChild(sec);
     });
+    if (!isPremium && (s.thesis_setup || s.thesis_catalyst || s.thesis_macro || s.thesis_risk)) {
+      var ctaTbl = document.createElement('div');
+      ctaTbl.className = 'v16-locked-cta';
+      ctaTbl.style.marginTop = '4px';
+      ctaTbl.innerHTML = '🔒 Full 4-section thesis is member-only. <a href="/auth/whop/login">Sign in</a> or start a 14-day free trial.';
+      inner.appendChild(ctaTbl);
+    }
 
     dtd.appendChild(inner);
     dr.appendChild(dtd);

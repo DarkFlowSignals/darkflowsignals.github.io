@@ -847,38 +847,40 @@ body.premium .unlock-badge { display: none; }
 /* MOBILE: 14-column table doesn't fit a 390px viewport. Switch to
    horizontal scroll + sticky Ticker column so members can swipe through
    the full table while always seeing which row they're on. Reported by
-   kate 2026-05-05 from iPhone screenshot. */
+   kate 2026-05-05 from iPhone screenshot.
+   v2 fix (kate followup): bg-base var was undefined -> sticky cell was
+   transparent -> State badge bled through. Switched to bg-primary, made
+   the divider into a proper wall with both a hard line and drop shadow. */
 @media (max-width: 720px) {
   .table-view.active {
     overflow-x: auto;
-    /* Subtle scroll hint shadow on the right edge */
     -webkit-overflow-scrolling: touch;
   }
   .table-view.active .data-table {
-    table-layout: auto;     /* let columns size to natural content */
-    min-width: 920px;       /* ensures all 14 columns get readable width */
+    table-layout: auto;
+    min-width: 920px;
     width: 920px;
   }
-  /* Ticker column (2nd visible) pinned left so the row identity is always
-     visible. Date column (1st) is low-value on mobile -- hide it to keep
-     the sticky Ticker right at the left edge of the viewport. */
+  /* Hide Date column (1st) -- low value on mobile, just clutters scroll. */
   .data-table th:nth-child(1),
   .data-table td:nth-child(1) { display: none; }
+  /* Ticker column (2nd) pinned left. Solid bg + 2px hard wall + soft drop
+     shadow so scrolling content can't bleed through. */
   .data-table th:nth-child(2),
   .data-table td:nth-child(2) {
     position: sticky;
     left: 0;
     z-index: 5;
-    background: var(--bg-base);
-    box-shadow: 1px 0 0 var(--border);
-    min-width: 64px;
+    background: var(--bg-primary);
+    box-shadow: 2px 0 0 var(--border-accent), 6px 0 10px rgba(0,0,0,0.5);
+    min-width: 72px;
   }
-  /* Hovered/expanded row keeps sticky cell on top of the highlight */
   .data-table tr:hover td:nth-child(2) { background: var(--bg-card); }
   /* Detail row (expanded thesis) spans full width and shouldn't pin */
   .data-table tr.row-detail td:nth-child(2) {
     position: static;
     box-shadow: none;
+    background: transparent;
   }
 }
 
@@ -1448,6 +1450,7 @@ body.premium .unlock-badge { display: none; }
           <th data-sort="signal_date">Date <span class="sort-arrow"></span></th>
           <th data-sort="ticker">Ticker <span class="sort-arrow"></span></th>
           <th data-sort="conviction_score">Score <span class="sort-arrow"></span></th>
+          <th data-sort="current_return_pct">Current <span class="sort-arrow"></span></th>
           <th data-sort="state">State <span class="sort-arrow"></span></th>
           <th data-sort="strike">Strike <span class="sort-arrow"></span></th>
           <th data-sort="expiry">Expiry <span class="sort-arrow"></span></th>
@@ -1455,7 +1458,6 @@ body.premium .unlock-badge { display: none; }
           <th data-sort="current_premium">Now $ <span class="sort-arrow"></span></th>
           <th data-sort="spot_current">Spot <span class="sort-arrow"></span></th>
           <th data-sort="spot_since_entry_pct">Since <span class="sort-arrow"></span></th>
-          <th data-sort="current_return_pct">Current <span class="sort-arrow"></span></th>
           <th data-sort="peak_return_pct">Peak <span class="sort-arrow"></span></th>
           <th data-sort="earnings_days">Ern <span class="sort-arrow"></span></th>
           <th data-sort="result">Result <span class="sort-arrow"></span></th>
@@ -3034,6 +3036,12 @@ body.premium .unlock-badge { display: none; }
       tdScore.textContent = Math.round(s.conviction_score);
       tr.appendChild(tdScore);
 
+      // Current Return % -- moved adjacent to Score on 2026-05-05 per kate
+      // feedback. Putting the most actionable cell next to Ticker means the
+      // first three sticky-leftish columns (Ticker / Score / Current) tell
+      // members what they need to know at a glance on mobile.
+      tr.appendChild(pctCell(currentPct(s)));
+
       // State badge (runner / faded / fading / near peak / near stop). Visible
       // to everyone since pk + cur are already public.
       var tdState = document.createElement('td');
@@ -3105,8 +3113,8 @@ body.premium .unlock-badge { display: none; }
       }
       tr.appendChild(tdSince);
 
-      // Current Return % (live while open; settles to intrinsic at expiry)
-      tr.appendChild(pctCell(currentPct(s)));
+      // (Current Return % is rendered earlier, just after Score, per the
+      // 2026-05-05 column reorder. Don't render it twice here.)
 
       // Peak Return % (signal quality)
       tr.appendChild(pctCell(peakPct(s)));

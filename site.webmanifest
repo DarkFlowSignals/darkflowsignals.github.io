@@ -1,7 +1,7 @@
 {
   "name": "DarkFlow Signals",
   "short_name": "DarkFlow",
-  "description": "Multi-source institutional flow convergence. Every trade tracked publicly.",
+  "description": "Smart money. Decoded. Every trade tracked publicly through expiry.",
   "icons": [
     { "src": "/favicon-32.png", "sizes": "32x32", "type": "image/png" },
     { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },

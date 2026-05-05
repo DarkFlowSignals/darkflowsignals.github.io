@@ -112,7 +112,7 @@ footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: ce
   <div class="promise-card">
     <h3>3. We close only at calendar expiry.</h3>
     <p>A signal closes publicly when its option contract reaches its expiration date. Not when we decide we've made enough. Not when the chart looks toppy. The dashboard shows the settled value at expiry, win or lose, and that becomes the final record.</p>
-    <p>The one exception to "only expiry closes" is a display tool on the dashboard called the -50% stop view. That's a toggle you can click to see what the cumulative returns would look like under a strict -50% hard-stop rule. It caps the displayed current return of any losing signal at -50% to model the risk-managed view. It does not close signals. Peak is never capped.</p>
+    <p>The one exception to "only expiry closes" is a display tool on the dashboard called the -50% stop view. That's a toggle you can click to see what the cumulative returns would look like under a strict -50% premium-decay exit rule. It caps the displayed current return of any losing signal at -50% to model the risk-managed view. It does not close signals. Peak is never capped.</p>
   </div>
 
   <hr>
@@ -142,12 +142,12 @@ footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: ce
   <h2>Our trade style</h2>
   <p>DarkFlow is a near-term swing system. Typical trade characteristics:</p>
   <ul>
-    <li><strong>DTE:</strong> 7-30 days to expiration. Sweet spot is 7-14 DTE.</li>
-    <li><strong>Holding period:</strong> 2-10 trading days, depending on how the thesis plays out.</li>
+    <li><strong>DTE:</strong> typically 7 to 30 days to expiration.</li>
+    <li><strong>Holding period:</strong> 2 to 10 trading days, depending on how the thesis plays out.</li>
     <li><strong>Vehicle:</strong> single-leg options (calls or puts). We don't publish spreads, strangles, or exotic structures.</li>
     <li><strong>Direction:</strong> bullish, bearish, or tactical hedge. Roughly two thirds bullish historically, reflecting the general market bias in the signal set.</li>
   </ul>
-  <p>DTE is a consideration, not a hard filter. Short DTE means higher theta risk and a lower ceiling. Long DTE waters down the time-sensitivity that makes near-term flow predictive. The 7-14 DTE sweet spot is where the edge tends to land, so that is where most published signals fall.</p>
+  <p>DTE is a scoring factor, not a hard cutoff. Short DTE means higher theta risk and a lower ceiling. Long DTE waters down the time-sensitivity that makes near-term reads predictive.</p>
 
   <hr>
 

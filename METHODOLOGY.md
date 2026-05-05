@@ -8,7 +8,7 @@ A plain-English guide to what you see on darkflowsignals.com, how the dashboard 
 
 ## The one-paragraph version
 
-DarkFlow is a near-term swing signal system focused on options. We monitor institutional flow and dark pool activity continuously, overlay chart and macro context on every candidate, and publish only the strongest multi-source confirmations. Every published signal goes on a public dashboard at signal fire, tracks live through calendar expiry, and stays on the dashboard forever. The winners and the losers. That's the promise.
+DarkFlow is a near-term swing signal system focused on options. The system reads what institutions are doing across multiple data layers and publishes the highest-conviction setups it finds, in plain English. Every published signal goes on a public dashboard at signal fire, tracks live through calendar expiry, and stays on the dashboard forever. The winners and the losers. That's the promise.
 
 ---
 
@@ -26,7 +26,7 @@ When a signal fires, the entry price is captured from the live option chain at t
 
 A signal closes publicly when its option contract reaches its expiration date. Not when we decide we've made enough. Not when the chart looks toppy. The dashboard shows the settled value at expiry, win or lose, and that becomes the final record.
 
-The one exception to "only expiry closes" is a display tool on the dashboard called the -50% stop view. That's a toggle you can click to see what the cumulative returns would look like under a strict -50% hard-stop rule. It caps the displayed current return of any losing signal at -50% to model the risk-managed view. It does not close signals. Peak is never capped.
+The one exception to "only expiry closes" is a display tool on the dashboard called the -50% stop view. That's a toggle you can click to see what the cumulative returns would look like under a strict -50% premium-decay exit rule. It caps the displayed current return of any losing signal at -50% to model the risk-managed view. It does not close signals. Peak is never capped.
 
 ---
 
@@ -65,12 +65,12 @@ Every option has a contract expiration date. On the dashboard you'll see that da
 
 DarkFlow is a near-term swing system. Typical trade characteristics:
 
-- **DTE**: 7-30 days to expiration. Sweet spot is 7-14 DTE.
-- **Holding period**: 2-10 trading days, depending on how the thesis plays out.
+- **DTE**: typically 7 to 30 days to expiration.
+- **Holding period**: 2 to 10 trading days, depending on how the thesis plays out.
 - **Vehicle**: single-leg options (calls or puts). We don't publish spreads, strangles, or exotic structures.
 - **Direction**: bullish, bearish, or tactical hedge. Roughly two thirds bullish historically, reflecting the general market bias in the signal set.
 
-DTE is a scoring factor, not a hard filter. If the system sees a strong multi-source confirmation on a 5-DTE or a 45-DTE option, it gets graded honestly. Short DTE means higher theta risk and a lower ceiling; long DTE dilutes the conviction signal. The 7-14 DTE sweet spot is where institutional positioning has the strongest predictive edge, so that's where most primary signals land.
+DTE is a scoring factor, not a hard cutoff. If the system sees a strong setup on a shorter or longer DTE option, it gets graded honestly. Short DTE means higher theta risk and a lower ceiling; long DTE dilutes the time-sensitivity that makes near-term reads predictive.
 
 ---
 
@@ -99,31 +99,26 @@ That's the verifiable edge. That's why the dashboard is public and will stay pub
 - **Track record is still building.** Live trading data since early 2026. Meaningful statistical significance requires hundreds more closed trades, not tens.
 - **Option pricing feeds can disagree.** The dashboard uses broker-confirmed prices during market hours with a delayed-data fallback after hours. When feeds disagree by more than a few cents, we flag it.
 - **Solo-operated.** One person, one set of judgment. That's a strength (no conflicting incentives) and a limit (no backup on sick days, no second set of eyes in real time).
-- **Options are risky.** Even multi-source confirmations fail. The -50% stop view and hard risk discipline exist because no service, including this one, is right every time.
+- **Options are risky.** Even high-conviction setups fail. The -50% stop view exists because no service, including this one, is right every time.
 
 ---
 
 ## What you get when you subscribe
 
 **Free tier:**
-- Yesterday's picks (1-week delayed view of the signal record)
+- Last week's picks (3 to 7 day delayed view of the signal record)
 - Weekly performance scorecard
 - Access to the community Discord
 - Substack newsletter
 
-**Premium ($59/mo, 14-day trial):**
-- Real-time premarket and midday alerts with entry, strike, expiry
-- Live dashboard with strike prices, option premium, and full signal detail
-- Premium Discord channels
-- Daily briefings during market hours
-
-**Founder ($149/mo, limited seats):**
-- Everything in Premium
-- Founder-only daily briefing
-- On-demand ticker check command in Discord
-- Direct access and priority feature input
+**Member ($59/mo, 14-day free trial):**
+- Real-time alerts the moment a signal fires, with strike + entry premium
+- Live signed-in dashboard with full signal detail and live Greeks
+- Member Discord channels: pre-market briefing, midday check-in, post-market debrief
+- On-demand `/check TICKER` deep read and `/pulse TICKER` quick snapshot in Discord
+- Cancel anytime before day 14 of the trial and never get charged
 
 ---
 
-**Last updated:** 2026-04-19
+**Last updated:** 2026-05-05
 **DarkFlow Signals** · darkflowsignals.com

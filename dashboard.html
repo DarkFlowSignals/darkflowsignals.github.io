@@ -132,8 +132,6 @@ body {
   margin: 0 auto;
   padding: 0 20px;
 }
-/* Table view needs more breathing room - bump page-wrap wider when active. */
-body.table-active .page-wrap { max-width: 1280px; }
 
 /* ============================================================
    HEADER
@@ -3419,7 +3417,6 @@ body.premium .unlock-badge { display: none; }
     currentView = btn.dataset.view;
     document.getElementById('signal-feed').classList.toggle('hidden', currentView === 'table');
     document.getElementById('table-view').classList.toggle('active', currentView === 'table');
-    document.body.classList.toggle('table-active', currentView === 'table');
   });
 
   // ---- EVENT: TABLE SORT ----

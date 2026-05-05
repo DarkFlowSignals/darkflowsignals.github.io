@@ -79,11 +79,9 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 125.82,
-      "spot_today_open": 121.18,
+      "spot_current": 125.77,
       "spot_at_entry": 92.0,
-      "spot_since_entry_pct": 36.8,
-      "spot_today_pct": 3.8,
+      "spot_since_entry_pct": 36.7,
       "greeks": {
         "iv_rank": 19.0,
         "iv_pct": 31.0
@@ -125,7 +123,35 @@
       "thesis_risk": "Stop at $3.25 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 650,
       "contract_peak_pnl": 1448,
-      "contract_current_pnl": 943
+      "contract_current_pnl": 943,
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 272.0,
+      "spot_at_entry": 233.65,
+      "spot_since_entry_pct": 16.4,
+      "earnings_next": {
+        "date": "2026-07-30",
+        "days_to": 87,
+        "status": "CLEAN"
+      }
     },
     {
       "signal_date": "2026-04-09",
@@ -158,7 +184,10 @@
       "thesis_risk": "Stop at $3.00 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 600,
       "contract_peak_pnl": -97,
-      "contract_current_pnl": -596
+      "contract_current_pnl": -596,
+      "spot_current": 142.07,
+      "spot_at_entry": 130.49,
+      "spot_since_entry_pct": 8.9
     },
     {
       "signal_date": "2026-04-09",
@@ -191,7 +220,30 @@
       "thesis_risk": "Stop at $1.43 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 285,
       "contract_peak_pnl": 480,
-      "contract_current_pnl": 330
+      "contract_current_pnl": 330,
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 65.72,
+      "spot_at_entry": 68.39,
+      "spot_since_entry_pct": -3.9
     },
     {
       "signal_date": "2026-04-10",
@@ -224,7 +276,30 @@
       "thesis_risk": "Stop at $1.05 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 210,
       "contract_peak_pnl": 613,
-      "contract_current_pnl": 440
+      "contract_current_pnl": 440,
+      "cohort": {
+        "n": 13,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "5-7",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 291.9,
+        "median_final_pct": 272.1,
+        "median_giveback_pct": 90.7,
+        "best_final_pct": 1190.1,
+        "worst_final_pct": 3.4,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 100.0,
+        "win_rate_settle_basis": 100.0
+      },
+      "spot_current": 95.81,
+      "spot_at_entry": 62.38,
+      "spot_since_entry_pct": 53.6
     },
     {
       "signal_date": "2026-04-10",
@@ -257,7 +332,35 @@
       "thesis_risk": "Stop at $21.85 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 4370,
       "contract_peak_pnl": 6035,
-      "contract_current_pnl": 1770
+      "contract_current_pnl": 1770,
+      "cohort": {
+        "n": 13,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "5-7",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 291.9,
+        "median_final_pct": 272.1,
+        "median_giveback_pct": 90.7,
+        "best_final_pct": 1190.1,
+        "worst_final_pct": 3.4,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 100.0,
+        "win_rate_settle_basis": 100.0
+      },
+      "spot_current": 1244.5,
+      "spot_at_entry": 851.77,
+      "spot_since_entry_pct": 46.1,
+      "earnings_next": {
+        "date": "2026-04-30",
+        "days_to": -4,
+        "status": "CLEAN"
+      }
     },
     {
       "signal_date": "2026-04-10",
@@ -290,7 +393,35 @@
       "thesis_risk": "Stop at $2.60 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Earnings 2026-05-13 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 520,
       "contract_peak_pnl": 2190,
-      "contract_current_pnl": 1198
+      "contract_current_pnl": 1198,
+      "cohort": {
+        "n": 13,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "5-7",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 291.9,
+        "median_final_pct": 272.1,
+        "median_giveback_pct": 90.7,
+        "best_final_pct": 1190.1,
+        "worst_final_pct": 3.4,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 100.0,
+        "win_rate_settle_basis": 100.0
+      },
+      "spot_current": 175.48,
+      "spot_at_entry": 144.97,
+      "spot_since_entry_pct": 21.0,
+      "earnings_next": {
+        "date": "2026-05-13",
+        "days_to": 9,
+        "status": "PRE_PRINT_IDEAL"
+      }
     },
     {
       "signal_date": "2026-04-10",
@@ -323,7 +454,35 @@
       "thesis_risk": "Stop at $1.93 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 385,
       "contract_peak_pnl": 1713,
-      "contract_current_pnl": 1208
+      "contract_current_pnl": 1208,
+      "cohort": {
+        "n": 13,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "5-7",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 291.9,
+        "median_final_pct": 272.1,
+        "median_giveback_pct": 90.7,
+        "best_final_pct": 1190.1,
+        "worst_final_pct": 3.4,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 100.0,
+        "win_rate_settle_basis": 100.0
+      },
+      "spot_current": 272.0,
+      "spot_at_entry": 238.38,
+      "spot_since_entry_pct": 14.1,
+      "earnings_next": {
+        "date": "2026-07-30",
+        "days_to": 87,
+        "status": "CLEAN"
+      }
     },
     {
       "signal_date": "2026-04-10",
@@ -404,11 +563,9 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 125.82,
-      "spot_today_open": 121.18,
+      "spot_current": 125.77,
       "spot_at_entry": 102.0,
-      "spot_since_entry_pct": 23.4,
-      "spot_today_pct": 3.8,
+      "spot_since_entry_pct": 23.3,
       "greeks": {
         "iv_rank": 19.0,
         "iv_pct": 31.0
@@ -450,7 +607,30 @@
       "thesis_risk": "Stop at $2.10 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 420,
       "contract_peak_pnl": 1795,
-      "contract_current_pnl": 1795
+      "contract_current_pnl": 1795,
+      "cohort": {
+        "n": 13,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "5-7",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 291.9,
+        "median_final_pct": 272.1,
+        "median_giveback_pct": 90.7,
+        "best_final_pct": 1190.1,
+        "worst_final_pct": 3.4,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 100.0,
+        "win_rate_settle_basis": 100.0
+      },
+      "spot_current": 126.35,
+      "spot_at_entry": 76.39,
+      "spot_since_entry_pct": 65.4
     },
     {
       "signal_date": "2026-04-10",
@@ -483,7 +663,35 @@
       "thesis_risk": "Stop at $0.42 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Earnings 2026-05-08 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 85,
       "contract_peak_pnl": 76,
-      "contract_current_pnl": 76
+      "contract_current_pnl": 76,
+      "cohort": {
+        "n": 13,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "5-7",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 291.9,
+        "median_final_pct": 272.1,
+        "median_giveback_pct": 90.7,
+        "best_final_pct": 1190.1,
+        "worst_final_pct": 3.4,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 100.0,
+        "win_rate_settle_basis": 100.0
+      },
+      "spot_current": 22.26,
+      "spot_at_entry": 18.87,
+      "spot_since_entry_pct": 18.0,
+      "earnings_next": {
+        "date": "2026-05-08",
+        "days_to": 4,
+        "status": "PRE_PRINT_TIGHT"
+      }
     },
     {
       "signal_date": "2026-04-10",
@@ -516,7 +724,30 @@
       "thesis_risk": "Stop at $0.21 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 43,
       "contract_peak_pnl": 585,
-      "contract_current_pnl": 407
+      "contract_current_pnl": 407,
+      "cohort": {
+        "n": 13,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "5-7",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 291.9,
+        "median_final_pct": 272.1,
+        "median_giveback_pct": 90.7,
+        "best_final_pct": 1190.1,
+        "worst_final_pct": 3.4,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 100.0,
+        "win_rate_settle_basis": 100.0
+      },
+      "spot_current": 95.81,
+      "spot_at_entry": 62.38,
+      "spot_since_entry_pct": 53.6
     },
     {
       "signal_date": "2026-04-10",
@@ -549,7 +780,35 @@
       "thesis_risk": "Stop at $1.69 (entry x 0.5, the published rule) \u00b7 Tight DTE (-17d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 338,
       "contract_peak_pnl": 3529,
-      "contract_current_pnl": 2142
+      "contract_current_pnl": 2142,
+      "cohort": {
+        "n": 13,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "5-7",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 291.9,
+        "median_final_pct": 272.1,
+        "median_giveback_pct": 90.7,
+        "best_final_pct": 1190.1,
+        "worst_final_pct": 3.4,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 100.0,
+        "win_rate_settle_basis": 100.0
+      },
+      "spot_current": 577.98,
+      "spot_at_entry": 420.59,
+      "spot_since_entry_pct": 37.4,
+      "earnings_next": {
+        "date": "2026-06-24",
+        "days_to": 51,
+        "status": "CLEAN"
+      }
     },
     {
       "signal_date": "2026-04-13",
@@ -582,7 +841,30 @@
       "thesis_risk": "Stop at $1.74 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 348,
       "contract_peak_pnl": 3112,
-      "contract_current_pnl": 2545
+      "contract_current_pnl": 2545,
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 162.85,
+      "spot_at_entry": 131.3,
+      "spot_since_entry_pct": 24.0
     },
     {
       "signal_date": "2026-04-14",
@@ -615,7 +897,35 @@
       "thesis_risk": "Stop at $17.00 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 3400,
       "contract_peak_pnl": 0,
-      "contract_current_pnl": -3373
+      "contract_current_pnl": -3373,
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 1244.5,
+      "spot_at_entry": 944.46,
+      "spot_since_entry_pct": 31.8,
+      "earnings_next": {
+        "date": "2026-04-30",
+        "days_to": -4,
+        "status": "CLEAN"
+      }
     },
     {
       "signal_date": "2026-04-14",
@@ -648,7 +958,35 @@
       "thesis_risk": "Stop at $2.30 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 460,
       "contract_peak_pnl": 2433,
-      "contract_current_pnl": 920
+      "contract_current_pnl": 920,
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 180.91,
+      "spot_at_entry": 163.0,
+      "spot_since_entry_pct": 11.0,
+      "earnings_next": {
+        "date": "2026-06-10",
+        "days_to": 37,
+        "status": "CLEAN"
+      }
     },
     {
       "signal_date": "2026-04-14",
@@ -681,7 +1019,35 @@
       "thesis_risk": "Stop at $1.73 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Earnings 2026-05-07 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 345,
       "contract_peak_pnl": 411,
-      "contract_current_pnl": -224
+      "contract_current_pnl": -224,
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 125.77,
+      "spot_at_entry": 117.2,
+      "spot_since_entry_pct": 7.3,
+      "earnings_next": {
+        "date": "2026-05-07",
+        "days_to": 3,
+        "status": "PRE_PRINT_TIGHT"
+      }
     },
     {
       "signal_date": "2026-04-14",
@@ -714,7 +1080,30 @@
       "thesis_risk": "Stop at $4.42 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 884,
       "contract_peak_pnl": 4701,
-      "contract_current_pnl": 3774
+      "contract_current_pnl": 3774,
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 287.55,
+      "spot_at_entry": 219.03,
+      "spot_since_entry_pct": 31.3
     },
     {
       "signal_date": "2026-04-14",
@@ -747,7 +1136,35 @@
       "thesis_risk": "Stop at $2.83 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Earnings 2026-05-13 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 566,
       "contract_peak_pnl": 549,
-      "contract_current_pnl": -477
+      "contract_current_pnl": -477,
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 175.48,
+      "spot_at_entry": 161.94,
+      "spot_since_entry_pct": 8.4,
+      "earnings_next": {
+        "date": "2026-05-13",
+        "days_to": 9,
+        "status": "PRE_PRINT_IDEAL"
+      }
     },
     {
       "signal_date": "2026-04-15",
@@ -780,7 +1197,35 @@
       "thesis_risk": "Stop at $2.00 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 400,
       "contract_peak_pnl": 685,
-      "contract_current_pnl": 423
+      "contract_current_pnl": 423,
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 197.67,
+      "spot_at_entry": 198.87,
+      "spot_since_entry_pct": -0.6,
+      "earnings_next": {
+        "date": "2026-05-20",
+        "days_to": 16,
+        "status": "PRE_PRINT_IDEAL"
+      }
     },
     {
       "signal_date": "2026-04-15",
@@ -813,7 +1258,30 @@
       "thesis_risk": "Stop at $2.75 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 550,
       "contract_peak_pnl": 10,
-      "contract_current_pnl": -548
+      "contract_current_pnl": -548,
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 414.92,
+      "spot_at_entry": 440.46,
+      "spot_since_entry_pct": -5.8
     },
     {
       "signal_date": "2026-04-15",
@@ -894,17 +1362,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 412.91,
-      "spot_today_open": 411.54,
+      "spot_current": 412.75,
       "spot_at_entry": 411.22,
       "spot_since_entry_pct": 0.4,
-      "spot_today_pct": 0.3,
       "greeks": {
-        "delta": 0.9465,
-        "gamma": 0.0043,
-        "theta": -0.161,
-        "vega": 0.078,
-        "iv": 0.3552,
+        "delta": 0.9322,
+        "gamma": 0.0048,
+        "theta": -0.1977,
+        "vega": 0.0939,
+        "iv": 0.3825,
         "iv_rank": 61.0,
         "iv_pct": 81.0
       },
@@ -945,7 +1411,35 @@
       "thesis_risk": "Stop at $1.00 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 200,
       "contract_peak_pnl": 425,
-      "contract_current_pnl": -97
+      "contract_current_pnl": -97,
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 276.51,
+      "spot_at_entry": 263.4,
+      "spot_since_entry_pct": 5.0,
+      "earnings_next": {
+        "date": "2026-07-30",
+        "days_to": 87,
+        "status": "CLEAN"
+      }
     },
     {
       "signal_date": "2026-04-16",
@@ -978,7 +1472,30 @@
       "thesis_risk": "Stop at $1.25 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 250,
       "contract_peak_pnl": 8490,
-      "contract_current_pnl": 7990
+      "contract_current_pnl": 7990,
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 343.15,
+      "spot_at_entry": 278.26,
+      "spot_since_entry_pct": 23.3
     },
     {
       "signal_date": "2026-04-16",
@@ -1011,7 +1528,30 @@
       "thesis_risk": "Stop at $0.85 (entry x 0.5, the published rule) \u00b7 Tight DTE (-3d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 170,
       "contract_peak_pnl": 487,
-      "contract_current_pnl": -39
+      "contract_current_pnl": -39,
+      "cohort": {
+        "n": 10,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "15-30",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 149.2,
+        "median_final_pct": 42.5,
+        "median_giveback_pct": 91.2,
+        "best_final_pct": 763.1,
+        "worst_final_pct": -91.9,
+        "giveback_range_pct": [
+          22.6,
+          323.8
+        ],
+        "win_rate_peak_basis": 90.0,
+        "win_rate_settle_basis": 60.0
+      },
+      "spot_current": 27.12,
+      "spot_at_entry": 26.99,
+      "spot_since_entry_pct": 0.5
     },
     {
       "signal_date": "2026-04-16",
@@ -1092,17 +1632,15 @@
         "win_rate_peak_basis": 90.9,
         "win_rate_settle_basis": 72.0
       },
-      "spot_current": 400.4,
-      "spot_today_open": 404.51,
+      "spot_current": 400.13,
       "spot_at_entry": 363.35,
-      "spot_since_entry_pct": 10.2,
-      "spot_today_pct": -1.0,
+      "spot_since_entry_pct": 10.1,
       "greeks": {
-        "delta": 0.7016,
+        "delta": 0.7005,
         "gamma": 0.0077,
-        "theta": -0.4601,
-        "vega": 0.3082,
-        "iv": 0.5083,
+        "theta": -0.4622,
+        "vega": 0.3086,
+        "iv": 0.5101,
         "iv_rank": 52.0,
         "iv_pct": 85.0
       },
@@ -1143,7 +1681,30 @@
       "thesis_risk": "Stop at $2.44 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 487,
       "contract_peak_pnl": 6241,
-      "contract_current_pnl": 5796
+      "contract_current_pnl": 5796,
+      "cohort": {
+        "n": 13,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "5-7",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 291.9,
+        "median_final_pct": 272.1,
+        "median_giveback_pct": 90.7,
+        "best_final_pct": 1190.1,
+        "worst_final_pct": 3.4,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 100.0,
+        "win_rate_settle_basis": 100.0
+      },
+      "spot_current": 343.15,
+      "spot_at_entry": 278.39,
+      "spot_since_entry_pct": 23.3
     },
     {
       "signal_date": "2026-04-17",
@@ -1176,7 +1737,35 @@
       "thesis_risk": "Stop at $2.23 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 445,
       "contract_peak_pnl": 260,
-      "contract_current_pnl": 15
+      "contract_current_pnl": 15,
+      "cohort": {
+        "n": 13,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "5-7",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 291.9,
+        "median_final_pct": 272.1,
+        "median_giveback_pct": 90.7,
+        "best_final_pct": 1190.1,
+        "worst_final_pct": 3.4,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 100.0,
+        "win_rate_settle_basis": 100.0
+      },
+      "spot_current": 382.8,
+      "spot_at_entry": 341.68,
+      "spot_since_entry_pct": 12.0,
+      "earnings_next": {
+        "date": "2026-07-23",
+        "days_to": 80,
+        "status": "CLEAN"
+      }
     },
     {
       "signal_date": "2026-04-17",
@@ -1209,7 +1798,30 @@
       "thesis_risk": "Stop at $7.74 (entry x 0.5, the published rule) \u00b7 Tight DTE (-3d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 410,
       "contract_peak_pnl": 2595,
-      "contract_current_pnl": 2552
+      "contract_current_pnl": 2552,
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 95.81,
+      "spot_at_entry": 68.5,
+      "spot_since_entry_pct": 39.9
     },
     {
       "signal_date": "2026-04-17",
@@ -1242,7 +1854,10 @@
       "thesis_risk": "Stop at $0.45 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 90,
       "contract_peak_pnl": 118,
-      "contract_current_pnl": 37
+      "contract_current_pnl": 37,
+      "spot_current": 112.23,
+      "spot_at_entry": 119.07,
+      "spot_since_entry_pct": -5.7
     },
     {
       "signal_date": "2026-04-20",
@@ -1323,17 +1938,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 382.84,
-      "spot_today_open": 385.63,
+      "spot_current": 382.8,
       "spot_at_entry": 337.42,
-      "spot_since_entry_pct": 13.5,
-      "spot_today_pct": -0.7,
+      "spot_since_entry_pct": 13.4,
       "greeks": {
-        "delta": 0.9164,
-        "gamma": 0.0059,
-        "theta": -0.2124,
-        "vega": 0.1022,
-        "iv": 0.3893,
+        "delta": 0.9118,
+        "gamma": 0.0061,
+        "theta": -0.2234,
+        "vega": 0.1063,
+        "iv": 0.3972,
         "iv_rank": 75.0,
         "iv_pct": 93.0
       },
@@ -1422,17 +2035,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 197.75,
-      "spot_today_open": 199.5,
+      "spot_current": 197.67,
       "spot_at_entry": 202.06,
-      "spot_since_entry_pct": -2.1,
-      "spot_today_pct": -0.9,
+      "spot_since_entry_pct": -2.2,
       "greeks": {
-        "delta": 0.1822,
+        "delta": 0.1819,
         "gamma": 0.0212,
-        "theta": -0.1532,
-        "vega": 0.0907,
-        "iv": 0.3631,
+        "theta": -0.1534,
+        "vega": 0.0906,
+        "iv": 0.3639,
         "iv_rank": 24.0,
         "iv_pct": 67.0
       },
@@ -1521,17 +2132,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 414.95,
-      "spot_today_open": 418.84,
+      "spot_current": 414.92,
       "spot_at_entry": 442.09,
       "spot_since_entry_pct": -6.1,
-      "spot_today_pct": -0.9,
       "greeks": {
-        "delta": 0.0194,
+        "delta": 0.0193,
         "gamma": 0.0019,
         "theta": -0.0532,
         "vega": 0.0339,
-        "iv": 0.3397,
+        "iv": 0.3407,
         "iv_rank": 42.0,
         "iv_pct": 60.0
       }
@@ -1615,17 +2224,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 65.78,
-      "spot_today_open": 66.39,
+      "spot_current": 65.72,
       "spot_at_entry": 72.15,
-      "spot_since_entry_pct": -8.8,
-      "spot_today_pct": -0.9,
+      "spot_since_entry_pct": -8.9,
       "greeks": {
-        "delta": 0.0929,
-        "gamma": 0.0267,
-        "theta": -0.0477,
-        "vega": 0.019,
-        "iv": 0.546,
+        "delta": 0.0937,
+        "gamma": 0.0271,
+        "theta": -0.0475,
+        "vega": 0.0192,
+        "iv": 0.5387,
         "iv_rank": 26.0,
         "iv_pct": 66.0
       }
@@ -1690,16 +2297,14 @@
         }
       },
       "spot_current": 277.78,
-      "spot_today_open": 278.7,
       "spot_at_entry": 277.35,
       "spot_since_entry_pct": 0.2,
-      "spot_today_pct": -0.3,
       "greeks": {
-        "delta": -0.1614,
-        "gamma": 0.0176,
-        "theta": -0.1499,
-        "vega": 0.118,
-        "iv": 0.2881,
+        "delta": -0.1607,
+        "gamma": 0.0175,
+        "theta": -0.1503,
+        "vega": 0.1177,
+        "iv": 0.2895,
         "iv_rank": 25.0,
         "iv_pct": 59.0
       }
@@ -1735,7 +2340,30 @@
       "thesis_risk": "Stop at $2.23 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 447,
       "contract_peak_pnl": 658,
-      "contract_current_pnl": -242
+      "contract_current_pnl": -242,
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "0-4",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
+      },
+      "spot_current": 184.01,
+      "spot_at_entry": 170.81,
+      "spot_since_entry_pct": 7.7
     },
     {
       "signal_date": "2026-04-22",
@@ -1768,7 +2396,35 @@
       "thesis_risk": "Stop at $5.50 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 1350,
       "contract_peak_pnl": 3298,
-      "contract_current_pnl": 2273
+      "contract_current_pnl": 2273,
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "0-4",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
+      },
+      "spot_current": 577.98,
+      "spot_at_entry": 487.48,
+      "spot_since_entry_pct": 18.6,
+      "earnings_next": {
+        "date": "2026-06-24",
+        "days_to": 51,
+        "status": "CLEAN"
+      }
     },
     {
       "signal_date": "2026-04-23",
@@ -1801,7 +2457,30 @@
       "thesis_risk": "Stop at $1.25 (entry x 0.5, the published rule) \u00b7 Tight DTE (-3d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 300,
       "contract_peak_pnl": 50,
-      "contract_current_pnl": -299
+      "contract_current_pnl": -299,
+      "cohort": {
+        "n": 15,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "8-14",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 171.2,
+        "median_final_pct": 110.8,
+        "median_giveback_pct": 107.3,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          52.6,
+          328.9
+        ],
+        "win_rate_peak_basis": 86.7,
+        "win_rate_settle_basis": 58.3
+      },
+      "spot_current": 119.31,
+      "spot_at_entry": 123.85,
+      "spot_since_entry_pct": -3.7
     },
     {
       "signal_date": "2026-04-23",
@@ -1834,7 +2513,30 @@
       "thesis_risk": "Stop at $0.90 (entry x 0.5, the published rule) \u00b7 Tight DTE (-10d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 123,
       "contract_peak_pnl": 20,
-      "contract_current_pnl": -109
+      "contract_current_pnl": -109,
+      "cohort": {
+        "n": 44,
+        "match_strict_or_widened": "widened_option_type_only",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "0-4",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 169.8,
+        "median_final_pct": 145.1,
+        "median_giveback_pct": 98.4,
+        "best_final_pct": 3196.0,
+        "worst_final_pct": -99.6,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 90.9,
+        "win_rate_settle_basis": 72.0
+      },
+      "spot_current": 76.44,
+      "spot_at_entry": 83.54,
+      "spot_since_entry_pct": -8.5
     },
     {
       "signal_date": "2026-04-24",
@@ -1867,7 +2569,30 @@
       "thesis_risk": "Stop at $23.50 (entry x 0.5, the published rule) \u00b7 Tight DTE (-3d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 4780,
       "contract_peak_pnl": 1434,
-      "contract_current_pnl": -1123
+      "contract_current_pnl": -1123,
+      "cohort": {
+        "n": 13,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "5-7",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 291.9,
+        "median_final_pct": 272.1,
+        "median_giveback_pct": 90.7,
+        "best_final_pct": 1190.1,
+        "worst_final_pct": 3.4,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 100.0,
+        "win_rate_settle_basis": 100.0
+      },
+      "spot_current": 201.43,
+      "spot_at_entry": 234.81,
+      "spot_since_entry_pct": -14.2
     },
     {
       "signal_date": "2026-04-24",
@@ -1900,7 +2625,35 @@
       "thesis_risk": "Stop at $1.20 (entry x 0.5, the published rule) \u00b7 Tight DTE (-3d), theta decay accelerated and vega risk elevated \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 705,
       "contract_peak_pnl": 445,
-      "contract_current_pnl": 445
+      "contract_current_pnl": 445,
+      "cohort": {
+        "n": 13,
+        "match_strict_or_widened": "widened_no_moneyness",
+        "match_keys": {
+          "option_type": "Call",
+          "dte_bucket": "5-7",
+          "moneyness_bucket": "unknown"
+        },
+        "median_peak_pct": 291.9,
+        "median_final_pct": 272.1,
+        "median_giveback_pct": 90.7,
+        "best_final_pct": 1190.1,
+        "worst_final_pct": 3.4,
+        "giveback_range_pct": [
+          0.0,
+          414.0
+        ],
+        "win_rate_peak_basis": 100.0,
+        "win_rate_settle_basis": 100.0
+      },
+      "spot_current": 105.72,
+      "spot_at_entry": 76.16,
+      "spot_since_entry_pct": 38.8,
+      "earnings_next": {
+        "date": "2026-07-30",
+        "days_to": 87,
+        "status": "CLEAN"
+      }
     },
     {
       "signal_date": "2026-04-24",
@@ -1981,17 +2734,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 13.69,
-      "spot_today_open": 12.94,
+      "spot_current": 13.68,
       "spot_at_entry": 11.9,
       "spot_since_entry_pct": 15.0,
-      "spot_today_pct": 5.8,
       "greeks": {
-        "delta": 0.7036,
-        "gamma": 0.1172,
-        "theta": -0.0471,
-        "vega": 0.0082,
-        "iv": 1.241,
+        "delta": 0.6998,
+        "gamma": 0.1165,
+        "theta": -0.048,
+        "vega": 0.0083,
+        "iv": 1.258,
         "iv_rank": 67.0,
         "iv_pct": 62.0
       },
@@ -2080,17 +2831,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 577.45,
-      "spot_today_open": 560.6,
+      "spot_current": 577.98,
       "spot_at_entry": 504.29,
-      "spot_since_entry_pct": 14.5,
-      "spot_today_pct": 3.0,
+      "spot_since_entry_pct": 14.6,
       "greeks": {
-        "delta": 0.9198,
-        "gamma": 0.0028,
-        "theta": -1.0307,
-        "vega": 0.09,
-        "iv": 0.8749,
+        "delta": 0.9395,
+        "gamma": 0.0025,
+        "theta": -0.7683,
+        "vega": 0.0726,
+        "iv": 0.795,
         "iv_rank": 60.0,
         "iv_pct": 84.0
       },
@@ -2179,17 +2928,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 577.45,
-      "spot_today_open": 560.6,
+      "spot_current": 577.98,
       "spot_at_entry": 504.29,
-      "spot_since_entry_pct": 14.5,
-      "spot_today_pct": 3.0,
+      "spot_since_entry_pct": 14.6,
       "greeks": {
-        "delta": 0.9562,
-        "gamma": 0.0019,
-        "theta": -0.6268,
-        "vega": 0.0561,
-        "iv": 0.8272,
+        "delta": 0.9844,
+        "gamma": 0.001,
+        "theta": -0.2432,
+        "vega": 0.0237,
+        "iv": 0.6551,
         "iv_rank": 60.0,
         "iv_pct": 84.0
       },
@@ -2278,17 +3025,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 180.85,
-      "spot_today_open": 176.02,
+      "spot_current": 180.91,
       "spot_at_entry": 165.96,
       "spot_since_entry_pct": 9.0,
-      "spot_today_pct": 2.7,
       "greeks": {
-        "delta": 0.8426,
-        "gamma": 0.0138,
-        "theta": -0.2049,
-        "vega": 0.0756,
-        "iv": 0.5575,
+        "delta": 0.8509,
+        "gamma": 0.0137,
+        "theta": -0.1932,
+        "vega": 0.073,
+        "iv": 0.5415,
         "iv_rank": 45.0,
         "iv_pct": 88.0
       },
@@ -2377,17 +3122,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 672.31,
-      "spot_today_open": 674.66,
+      "spot_current": 672.03,
       "spot_at_entry": 657.55,
       "spot_since_entry_pct": 2.2,
-      "spot_today_pct": -0.3,
       "greeks": {
-        "delta": 0.8547,
-        "gamma": 0.0099,
-        "theta": -0.7137,
-        "vega": 0.1606,
-        "iv": 0.3282,
+        "delta": 0.8394,
+        "gamma": 0.01,
+        "theta": -0.795,
+        "vega": 0.1716,
+        "iv": 0.3456,
         "iv_rank": 28.0,
         "iv_pct": 79.0
       }
@@ -2471,17 +3214,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 382.84,
-      "spot_today_open": 385.63,
+      "spot_current": 382.8,
       "spot_at_entry": 384.8,
       "spot_since_entry_pct": -0.5,
-      "spot_today_pct": -0.7,
       "greeks": {
-        "delta": 0.9409,
-        "gamma": 0.0052,
-        "theta": -0.3644,
-        "vega": 0.0472,
-        "iv": 0.563,
+        "delta": 0.935,
+        "gamma": 0.0055,
+        "theta": -0.4008,
+        "vega": 0.0508,
+        "iv": 0.5802,
         "iv_rank": 75.0,
         "iv_pct": 93.0
       },
@@ -2570,17 +3311,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 272.3,
-      "spot_today_open": 268.8,
+      "spot_current": 272.0,
       "spot_at_entry": 265.06,
-      "spot_since_entry_pct": 2.7,
-      "spot_today_pct": 1.3,
+      "spot_since_entry_pct": 2.6,
       "greeks": {
-        "delta": 0.8173,
-        "gamma": 0.0181,
-        "theta": -0.1966,
-        "vega": 0.1252,
-        "iv": 0.3091,
+        "delta": 0.8017,
+        "gamma": 0.0182,
+        "theta": -0.2145,
+        "vega": 0.1315,
+        "iv": 0.3249,
         "iv_rank": 27.0,
         "iv_pct": 46.0
       },
@@ -2669,17 +3408,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 577.45,
-      "spot_today_open": 560.6,
+      "spot_current": 577.98,
       "spot_at_entry": 517.16,
-      "spot_since_entry_pct": 11.7,
-      "spot_today_pct": 3.0,
+      "spot_since_entry_pct": 11.8,
       "greeks": {
-        "delta": 0.8036,
+        "delta": 0.807,
         "gamma": 0.0035,
-        "theta": -1.0219,
-        "vega": 0.2777,
-        "iv": 0.7782,
+        "theta": -1.0009,
+        "vega": 0.2749,
+        "iv": 0.7691,
         "iv_rank": 60.0,
         "iv_pct": 84.0
       },
@@ -2768,17 +3505,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 672.31,
-      "spot_today_open": 674.66,
+      "spot_current": 672.03,
       "spot_at_entry": 667.74,
-      "spot_since_entry_pct": 0.7,
-      "spot_today_pct": -0.3,
+      "spot_since_entry_pct": 0.6,
       "greeks": {
-        "delta": 0.6532,
-        "gamma": 0.0212,
-        "theta": -0.8467,
-        "vega": 0.2598,
-        "iv": 0.2475,
+        "delta": 0.6417,
+        "gamma": 0.0207,
+        "theta": -0.8826,
+        "vega": 0.2628,
+        "iv": 0.256,
         "iv_rank": 28.0,
         "iv_pct": 79.0
       }
@@ -2862,17 +3597,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 105.74,
-      "spot_today_open": 96.88,
+      "spot_current": 105.72,
       "spot_at_entry": 96.0,
       "spot_since_entry_pct": 10.1,
-      "spot_today_pct": 9.1,
       "greeks": {
-        "delta": 0.6981,
-        "gamma": 0.0116,
-        "theta": -0.4803,
-        "vega": 0.0639,
-        "iv": 1.6336,
+        "delta": 0.6999,
+        "gamma": 0.0117,
+        "theta": -0.4763,
+        "vega": 0.0638,
+        "iv": 1.6226,
         "iv_rank": 93.0,
         "iv_pct": 94.0
       },
@@ -2961,17 +3694,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 1247.56,
-      "spot_today_open": 1222.18,
+      "spot_current": 1244.5,
       "spot_at_entry": 1187.0,
-      "spot_since_entry_pct": 5.1,
-      "spot_today_pct": 2.1,
+      "spot_since_entry_pct": 4.8,
       "greeks": {
-        "delta": 0.7607,
+        "delta": 0.7523,
         "gamma": 0.0013,
-        "theta": -3.4773,
-        "vega": 0.6724,
-        "iv": 1.1126,
+        "theta": -3.6342,
+        "vega": 0.6834,
+        "iv": 1.1456,
         "iv_rank": 52.0,
         "iv_pct": 45.0
       },
@@ -3061,16 +3792,14 @@
         "win_rate_settle_basis": 60.0
       },
       "spot_current": 59.38,
-      "spot_today_open": 58.73,
       "spot_at_entry": 58.85,
       "spot_since_entry_pct": 0.9,
-      "spot_today_pct": 1.1,
       "greeks": {
-        "delta": 0.5613,
-        "gamma": 0.0969,
-        "theta": -0.0477,
+        "delta": 0.5624,
+        "gamma": 0.0972,
+        "theta": -0.0475,
         "vega": 0.052,
-        "iv": 0.3084,
+        "iv": 0.3073,
         "iv_rank": 29.0,
         "iv_pct": 94.0
       }
@@ -3154,17 +3883,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 203.36,
-      "spot_today_open": 199.41,
+      "spot_current": 203.03,
       "spot_at_entry": 191.25,
-      "spot_since_entry_pct": 6.3,
-      "spot_today_pct": 2.0,
+      "spot_since_entry_pct": 6.2,
       "greeks": {
-        "delta": 0.5749,
-        "gamma": 0.013,
-        "theta": -0.5492,
+        "delta": 0.5735,
+        "gamma": 0.0129,
+        "theta": -0.5519,
         "vega": 0.1383,
-        "iv": 0.8577,
+        "iv": 0.8618,
         "iv_rank": 47.0,
         "iv_pct": 51.0
       },
@@ -3253,17 +3980,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 391.84,
-      "spot_today_open": 390.23,
+      "spot_current": 391.88,
       "spot_at_entry": 390.82,
       "spot_since_entry_pct": 0.3,
-      "spot_today_pct": 0.4,
       "greeks": {
-        "delta": 0.4143,
-        "gamma": 0.0129,
-        "theta": -0.5491,
-        "vega": 0.2651,
-        "iv": 0.4431,
+        "delta": 0.4151,
+        "gamma": 0.013,
+        "theta": -0.5478,
+        "vega": 0.2652,
+        "iv": 0.4416,
         "iv_rank": 18.0,
         "iv_pct": 38.0
       },
@@ -3352,17 +4077,15 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 175.8,
-      "spot_today_open": 160.38,
+      "spot_current": 175.48,
       "spot_at_entry": 154.49,
-      "spot_since_entry_pct": 13.8,
-      "spot_today_pct": 9.6,
+      "spot_since_entry_pct": 13.6,
       "greeks": {
-        "delta": 0.7598,
-        "gamma": 0.0062,
-        "theta": -0.3241,
-        "vega": 0.1431,
-        "iv": 1.0977,
+        "delta": 0.7544,
+        "gamma": 0.0061,
+        "theta": -0.3336,
+        "vega": 0.1445,
+        "iv": 1.1208,
         "iv_rank": 34.0,
         "iv_pct": 56.0
       },
@@ -3451,17 +4174,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 276.47,
-      "spot_today_open": 279.65,
+      "spot_current": 276.51,
       "spot_at_entry": 280.14,
       "spot_since_entry_pct": -1.3,
-      "spot_today_pct": -1.1,
       "greeks": {
-        "delta": 0.5652,
-        "gamma": 0.0326,
-        "theta": -0.2308,
-        "vega": 0.1889,
-        "iv": 0.2513,
+        "delta": 0.5667,
+        "gamma": 0.0328,
+        "theta": -0.2297,
+        "vega": 0.1888,
+        "iv": 0.2501,
         "iv_rank": 24.0,
         "iv_pct": 51.0
       },
@@ -3550,17 +4271,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 22.27,
-      "spot_today_open": 21.49,
+      "spot_current": 22.26,
       "spot_at_entry": 21.31,
       "spot_since_entry_pct": 4.5,
-      "spot_today_pct": 3.6,
       "greeks": {
-        "delta": 0.571,
-        "gamma": 0.0948,
-        "theta": -0.075,
+        "delta": 0.5628,
+        "gamma": 0.0926,
+        "theta": -0.0773,
         "vega": 0.0152,
-        "iv": 1.0684,
+        "iv": 1.102,
         "iv_rank": 26.0,
         "iv_pct": 12.0
       },
@@ -3649,17 +4368,15 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 415.65,
-      "spot_today_open": 418.21,
+      "spot_current": 415.18,
       "spot_at_entry": 421.28,
-      "spot_since_entry_pct": -1.3,
-      "spot_today_pct": -0.6,
+      "spot_since_entry_pct": -1.4,
       "greeks": {
-        "delta": 0.2424,
-        "gamma": 0.0098,
-        "theta": -0.4628,
-        "vega": 0.2254,
-        "iv": 0.4424,
+        "delta": 0.2406,
+        "gamma": 0.0097,
+        "theta": -0.4655,
+        "vega": 0.2242,
+        "iv": 0.4475,
         "iv_rank": 31.0,
         "iv_pct": 52.0
       },

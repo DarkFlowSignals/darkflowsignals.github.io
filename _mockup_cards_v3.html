@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DarkFlow Card Mockups v3 - Polished</title>
+<style>
+  :root {
+    --bg-primary: #0A0A0F;
+    --bg-card: #12121B;
+    --bg-card-hover: #18182A;
+    --bg-surface: #0E0E16;
+    --bg-deep: #07070C;
+    --border: #1E1E2E;
+    --border-accent: #2A2A3F;
+    --text-primary: #E8E8ED;
+    --text-secondary: #8B8BA8;
+    --text-muted: #5D5D75;
+    --green: #00E676;
+    --green-soft: #4FD68F;
+    --green-deep: #00B85C;
+    --green-dim: rgba(0, 230, 118, 0.12);
+    --red: #FF5252;
+    --red-soft: #F08585;
+    --red-dim: rgba(255, 82, 82, 0.12);
+    --amber: #FFC107;
+    --amber-soft: #E6B656;
+    --amber-dim: rgba(255, 193, 7, 0.12);
+    --blue: #5B9FFF;
+    --blue-soft: #7DB1FF;
+    --blue-dim: rgba(91, 159, 255, 0.10);
+    --purple: #B074E0;
+    --purple-dim: rgba(176, 116, 224, 0.10);
+    --font-mono: 'IBM Plex Mono', 'JetBrains Mono', Consolas, monospace;
+    --font-sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    margin: 0;
+    padding: 32px 24px;
+    line-height: 1.4;
+  }
+  .page-header {
+    max-width: 1080px;
+    margin: 0 auto 36px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-header h1 {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    margin: 0 0 4px;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .page-header p { margin: 0; color: var(--text-secondary); font-size: 12px; }
+
+  .section {
+    max-width: 1080px;
+    margin: 0 auto 56px;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .section-name {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .section-desc { font-size: 12px; color: var(--text-secondary); }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* ================================================================
+     POLISHED PRIMARY CARD
+     ================================================================ */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    position: relative;
+  }
+  .card:hover { background: var(--bg-card-hover); border-color: var(--border-accent); }
+  .card.bullish { border-left-color: var(--green); }
+  .card.bearish { border-left-color: var(--red); }
+
+  .pri-grid {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 22px;
+    align-items: start;
+  }
+  .pri-left { min-width: 0; }
+  .pri-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  /* HEADER ROW */
+  .pri-row1 {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .pri-ticker {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+  }
+  .pri-strike {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text-secondary);
+  }
+  .pri-direction {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 600;
+  }
+  .pri-direction.down { color: var(--red); }
+  .pri-tier {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    background: var(--amber-dim);
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  /* META LINES */
+  .pri-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+  }
+  .pri-meta .label {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 9.5px;
+    letter-spacing: 0.5px;
+    margin-right: 4px;
+  }
+  .pri-meta .sep { color: var(--text-muted); margin: 0 8px; }
+  .pri-meta .hot { color: var(--amber); }
+  .pri-meta .warn { color: var(--red); }
+  .pri-meta .beat { color: var(--green-soft); }
+  .pri-meta .miss { color: var(--red-soft); }
+  .pri-meta .upcoming { color: var(--amber-soft); font-weight: 500; }
+  .pri-meta strong { color: var(--text-primary); font-weight: 500; }
+
+  /* THESIS */
+  .pri-thesis {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    font-style: italic;
+    padding-left: 11px;
+    border-left: 2px solid rgba(91, 159, 255, 0.25);
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+  .pri-thesis .tag {
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-right: 8px;
+  }
+
+  /* RIGHT RAIL — METRIC OPTIONS */
+  /* Layout A: current on top */
+  .metric-stack-current {
+    text-align: right;
+    line-height: 1;
+  }
+  .metric-stack-current .now-val {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .metric-stack-current .now-val.up { color: var(--green); }
+  .metric-stack-current .now-val.down { color: var(--red); }
+  .metric-stack-current .now-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 3px;
+  }
+  .metric-stack-current .peak-val {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--green-soft);
+    font-weight: 600;
+    margin-top: 8px;
+  }
+  .metric-stack-current .peak-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 2px;
+  }
+
+  /* Layout B: peak on top */
+  .metric-stack-peak {
+    text-align: right;
+    line-height: 1;
+  }
+  .metric-stack-peak .peak-val {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--green-soft);
+    letter-spacing: -0.5px;
+  }
+  .metric-stack-peak .peak-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 3px;
+  }
+  .metric-stack-peak .now-val {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+  .metric-stack-peak .now-val.up { color: var(--green); }
+  .metric-stack-peak .now-val.down { color: var(--red); }
+  .metric-stack-peak .now-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 2px;
+  }
+
+  /* Layout C: equal side-by-side */
+  .metric-pair {
+    display: flex;
+    gap: 18px;
+    text-align: right;
+  }
+  .metric-pair .cell {
+    line-height: 1;
+  }
+  .metric-pair .val {
+    font-family: var(--font-mono);
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  .metric-pair .val.up { color: var(--green); }
+  .metric-pair .val.down { color: var(--red); }
+  .metric-pair .val.peak { color: var(--green-soft); }
+  .metric-pair .lbl {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 4px;
+  }
+
+  /* SPARKLINE */
+  .pri-spark {
+    width: 100%;
+    height: 38px;
+    margin-top: 10px;
+  }
+
+  /* CLICK HINT */
+  .click-hint {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: 0.4px;
+  }
+  .click-hint .left {
+    color: var(--text-secondary);
+  }
+  .click-hint .left strong { color: var(--text-primary); font-weight: 500; }
+  .click-hint .right { color: var(--blue-soft); }
+
+  /* ================================================================
+     POLISHED WATCHLIST CARD (visually different from primary)
+     ================================================================ */
+  .card.watchlist {
+    border-left: 2px dashed var(--blue);
+    background: var(--bg-deep);
+  }
+  .card.watchlist:hover { background: var(--bg-card); }
+  .watch-grid {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 22px;
+    align-items: start;
+  }
+  .watch-tier {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    background: var(--blue-dim);
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .watch-status {
+    text-align: right;
+    line-height: 1;
+  }
+  .watch-status .label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 3px;
+  }
+  .watch-status .val {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--blue);
+    letter-spacing: -0.2px;
+  }
+  .watch-status .sub {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .watch-trigger {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    margin-top: 2px;
+  }
+  .watch-trigger .arrow { color: var(--blue); }
+
+  /* ================================================================
+     EXPANDED PANEL (Greeks + thorough thesis + chart)
+     ================================================================ */
+  .expand {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .expand-section {
+    margin-bottom: 18px;
+  }
+  .expand-section:last-child { margin-bottom: 0; }
+  .expand-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  /* Premium + return row (already exists in current dashboard, sleeker styling) */
+  .price-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    background: var(--bg-surface);
+    padding: 12px 14px;
+    border-radius: 4px;
+  }
+  .price-cell {
+    font-family: var(--font-mono);
+  }
+  .price-cell .lbl {
+    font-size: 9.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 3px;
+  }
+  .price-cell .val {
+    font-size: 15px;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .price-cell .val.up { color: var(--green); }
+  .price-cell .val.down { color: var(--red); }
+  .price-cell .val.peak { color: var(--green-soft); }
+  .price-cell .sub {
+    font-size: 10.5px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* GREEKS */
+  .greeks-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+    background: var(--bg-surface);
+    padding: 12px 14px;
+    border-radius: 4px;
+  }
+  .greek-cell { font-family: var(--font-mono); }
+  .greek-cell .lbl {
+    font-size: 9.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 3px;
+  }
+  .greek-cell .val {
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .greek-cell .val.theta { color: var(--red-soft); }
+  .greek-cell .sub {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* THOROUGH THESIS */
+  .thesis-section {
+    margin-bottom: 12px;
+  }
+  .thesis-section:last-child { margin-bottom: 0; }
+  .thesis-section .thesis-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  .thesis-section .thesis-body {
+    font-size: 13px;
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding-left: 11px;
+    border-left: 2px solid rgba(91, 159, 255, 0.20);
+  }
+  .thesis-section.risk .thesis-label { color: var(--amber); }
+  .thesis-section.risk .thesis-body { border-left-color: rgba(255, 193, 7, 0.20); }
+
+  /* COHORT */
+  .cohort-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    background: var(--bg-surface);
+    padding: 10px 14px;
+    border-radius: 4px;
+  }
+  .cohort-cell {
+    font-family: var(--font-mono);
+  }
+  .cohort-cell .lbl {
+    font-size: 9.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 2px;
+  }
+  .cohort-cell .val {
+    font-size: 13px;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .cohort-cell .val.green { color: var(--green-soft); }
+
+  /* TradingView placeholder */
+  .tv-frame {
+    width: 100%;
+    height: 280px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    position: relative;
+  }
+  .tv-pill {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    z-index: 2;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    background: rgba(0, 230, 118, 0.12);
+    color: var(--green);
+    border: 1px solid rgba(0, 230, 118, 0.25);
+    padding: 3px 9px;
+    border-radius: 3px;
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: var(--bg-surface);
+    border-left: 3px solid var(--amber);
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .callout strong { color: var(--text-primary); }
+  .callout code {
+    font-family: var(--font-mono);
+    background: var(--bg-card);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--text-primary);
+    font-size: 11.5px;
+  }
+  .question {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .question strong { color: var(--amber); }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Card Mockups v3 - Polished</h1>
+  <p>Refined Variant D with all the additions you asked for: entry details on the card, primary/watchlist differentiation, "Day N" instead of "Held N", thorough 3-section thesis on click, Greeks panel on click. Three metric-layout choices to compare.</p>
+</div>
+
+<!-- ================================================================
+     METRIC LAYOUT COMPARISON (current vs peak vs equal)
+     ================================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-name">Metric layout — pick one</div>
+    <div class="section-desc">Three ways to lead the right rail. Same card otherwise.</div>
+  </div>
+
+  <div class="question"><strong>Q:</strong> Lead with current % (decision-relevant), peak % (signal-quality), or show both equally?</div>
+
+  <div class="card-grid">
+
+    <!-- Layout A: Current leads -->
+    <div class="card bullish">
+      <div class="pri-grid">
+        <div class="pri-left">
+          <div class="pri-row1">
+            <span class="pri-ticker">CRWV</span>
+            <span class="pri-strike">$110C 5/8</span>
+            <span class="pri-direction">▲ Bullish</span>
+            <span class="pri-tier" style="margin-left:auto;">Primary</span>
+          </div>
+          <div class="pri-meta">
+            <span><span class="label">Entered</span><strong>4/9 @ $4.00</strong></span>
+            <span class="sep">·</span>
+            <span>Day 24</span>
+            <span class="sep">·</span>
+            <span class="warn">5d to expiry</span>
+            <span class="sep">·</span>
+            <span class="hot">🔥 runner</span>
+          </div>
+          <div class="pri-meta">
+            <span><span class="label">Earnings</span><span class="upcoming">5/7 Wed AH · 4d</span></span>
+            <span class="sep">·</span>
+            <span><span class="label">Prev print</span><span class="beat">2/12 beat (+8%)</span></span>
+          </div>
+          <div class="pri-thesis">
+            <span class="tag">why</span>Block buyers building the $110 strike across multiple sessions, with long-dated calls held and short-dated puts protecting the binary into the 5/7 print. AI infrastructure cohort still bid.
+          </div>
+        </div>
+        <div class="pri-right">
+          <div class="metric-stack-current">
+            <div class="now-val up">+254%</div>
+            <div class="now-label">Current</div>
+            <div class="peak-val">+406%</div>
+            <div class="peak-label">Peak</div>
+          </div>
+          <svg class="pri-spark" viewBox="0 0 200 38" preserveAspectRatio="none">
+            <line x1="0" y1="36" x2="200" y2="36" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+            <polyline fill="none" stroke="#00E676" stroke-width="1.4"
+              points="5,18 22,16 40,12 58,8 76,4 94,3 112,5 130,9 148,12 166,9 184,11 195,13"/>
+            <polygon fill="rgba(0,230,118,0.08)"
+              points="5,18 22,16 40,12 58,8 76,4 94,3 112,5 130,9 148,12 166,9 184,11 195,13 195,38 5,38"/>
+            <circle cx="195" cy="13" r="2.5" fill="#FFC107"/>
+          </svg>
+        </div>
+      </div>
+      <div class="click-hint">
+        <span class="left"><strong>Layout A</strong> — Current % leads (decision-relevant)</span>
+        <span class="right">↓ click for greeks, full thesis, chart</span>
+      </div>
+    </div>
+
+    <!-- Layout B: Peak leads -->
+    <div class="card bullish">
+      <div class="pri-grid">
+        <div class="pri-left">
+          <div class="pri-row1">
+            <span class="pri-ticker">CRWV</span>
+            <span class="pri-strike">$110C 5/8</span>
+            <span class="pri-direction">▲ Bullish</span>
+            <span class="pri-tier" style="margin-left:auto;">Primary</span>
+          </div>
+          <div class="pri-meta">
+            <span><span class="label">Entered</span><strong>4/9 @ $4.00</strong></span>
+            <span class="sep">·</span>
+            <span>Day 24</span>
+            <span class="sep">·</span>
+            <span class="warn">5d to expiry</span>
+            <span class="sep">·</span>
+            <span class="hot">🔥 runner</span>
+          </div>
+          <div class="pri-meta">
+            <span><span class="label">Earnings</span><span class="upcoming">5/7 Wed AH · 4d</span></span>
+            <span class="sep">·</span>
+            <span><span class="label">Prev print</span><span class="beat">2/12 beat (+8%)</span></span>
+          </div>
+          <div class="pri-thesis">
+            <span class="tag">why</span>Block buyers building the $110 strike across multiple sessions, with long-dated calls held and short-dated puts protecting the binary into the 5/7 print. AI infrastructure cohort still bid.
+          </div>
+        </div>
+        <div class="pri-right">
+          <div class="metric-stack-peak">
+            <div class="peak-val">+406%</div>
+            <div class="peak-label">Peak</div>
+            <div class="now-val up">+254%</div>
+            <div class="now-label">Current</div>
+          </div>
+          <svg class="pri-spark" viewBox="0 0 200 38" preserveAspectRatio="none">
+            <line x1="0" y1="36" x2="200" y2="36" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+            <polyline fill="none" stroke="#00E676" stroke-width="1.4"
+              points="5,18 22,16 40,12 58,8 76,4 94,3 112,5 130,9 148,12 166,9 184,11 195,13"/>
+            <polygon fill="rgba(0,230,118,0.08)"
+              points="5,18 22,16 40,12 58,8 76,4 94,3 112,5 130,9 148,12 166,9 184,11 195,13 195,38 5,38"/>
+            <circle cx="195" cy="13" r="2.5" fill="#FFC107"/>
+          </svg>
+        </div>
+      </div>
+      <div class="click-hint">
+        <span class="left"><strong>Layout B</strong> — Peak % leads (brand identity, signal quality)</span>
+        <span class="right">↓ click for greeks, full thesis, chart</span>
+      </div>
+    </div>
+
+    <!-- Layout C: Equal pair -->
+    <div class="card bullish">
+      <div class="pri-grid">
+        <div class="pri-left">
+          <div class="pri-row1">
+            <span class="pri-ticker">CRWV</span>
+            <span class="pri-strike">$110C 5/8</span>
+            <span class="pri-direction">▲ Bullish</span>
+            <span class="pri-tier" style="margin-left:auto;">Primary</span>
+          </div>
+          <div class="pri-meta">
+            <span><span class="label">Entered</span><strong>4/9 @ $4.00</strong></span>
+            <span class="sep">·</span>
+            <span>Day 24</span>
+            <span class="sep">·</span>
+            <span class="warn">5d to expiry</span>
+            <span class="sep">·</span>
+            <span class="hot">🔥 runner</span>
+          </div>
+          <div class="pri-meta">
+            <span><span class="label">Earnings</span><span class="upcoming">5/7 Wed AH · 4d</span></span>
+            <span class="sep">·</span>
+            <span><span class="label">Prev print</span><span class="beat">2/12 beat (+8%)</span></span>
+          </div>
+          <div class="pri-thesis">
+            <span class="tag">why</span>Block buyers building the $110 strike across multiple sessions, with long-dated calls held and short-dated puts protecting the binary into the 5/7 print. AI infrastructure cohort still bid.
+          </div>
+        </div>
+        <div class="pri-right">
+          <div class="metric-pair">
+            <div class="cell">
+              <div class="val up">+254%</div>
+              <div class="lbl">Current</div>
+            </div>
+            <div class="cell">
+              <div class="val peak">+406%</div>
+              <div class="lbl">Peak</div>
+            </div>
+          </div>
+          <svg class="pri-spark" viewBox="0 0 200 38" preserveAspectRatio="none">
+            <line x1="0" y1="36" x2="200" y2="36" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+            <polyline fill="none" stroke="#00E676" stroke-width="1.4"
+              points="5,18 22,16 40,12 58,8 76,4 94,3 112,5 130,9 148,12 166,9 184,11 195,13"/>
+            <polygon fill="rgba(0,230,118,0.08)"
+              points="5,18 22,16 40,12 58,8 76,4 94,3 112,5 130,9 148,12 166,9 184,11 195,13 195,38 5,38"/>
+            <circle cx="195" cy="13" r="2.5" fill="#FFC107"/>
+          </svg>
+        </div>
+      </div>
+      <div class="click-hint">
+        <span class="left"><strong>Layout C</strong> — Both equal, side-by-side</span>
+        <span class="right">↓ click for greeks, full thesis, chart</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================================================================
+     POLISHED PRIMARY CARDS (using Layout A — recommended)
+     ================================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-name">Polished primary cards (Layout A)</div>
+    <div class="section-desc">Recommended layout. Three real positions: bull runner, bull underwater, neutral developing.</div>
+  </div>
+
+  <div class="card-grid">
+
+    <!-- COIN — neutral developing -->
+    <div class="card bullish">
+      <div class="pri-grid">
+        <div class="pri-left">
+          <div class="pri-row1">
+            <span class="pri-ticker">COIN</span>
+            <span class="pri-strike">$200C 5/15</span>
+            <span class="pri-direction">▲ Bullish</span>
+            <span class="pri-tier" style="margin-left:auto;">Primary</span>
+          </div>
+          <div class="pri-meta">
+            <span><span class="label">Entered</span><strong>4/25 @ $8.50</strong></span>
+            <span class="sep">·</span>
+            <span>Day 8</span>
+            <span class="sep">·</span>
+            <span>12d to expiry</span>
+          </div>
+          <div class="pri-meta">
+            <span><span class="label">Earnings</span><span class="upcoming">5/7 Wed AH · 4d</span></span>
+            <span class="sep">·</span>
+            <span><span class="label">Prev print</span><span class="miss">2/13 miss (-12%)</span></span>
+          </div>
+          <div class="pri-thesis">
+            <span class="tag">why</span>Buyers chasing fills on the $200 strike, paying up through the offer. Crypto bid +1.69% BTC overnight reinforces the directional setup into the 5/7 print.
+          </div>
+        </div>
+        <div class="pri-right">
+          <div class="metric-stack-current">
+            <div class="now-val down">-7%</div>
+            <div class="now-label">Current</div>
+            <div class="peak-val">+11%</div>
+            <div class="peak-label">Peak</div>
+          </div>
+          <svg class="pri-spark" viewBox="0 0 200 38" preserveAspectRatio="none">
+            <line x1="0" y1="36" x2="200" y2="36" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+            <polyline fill="none" stroke="#FFC107" stroke-width="1.4"
+              points="5,17 30,16 60,14 90,11 120,15 150,19 180,22 195,23"/>
+            <polygon fill="rgba(255,193,7,0.06)"
+              points="5,17 30,16 60,14 90,11 120,15 150,19 180,22 195,23 195,38 5,38"/>
+            <circle cx="195" cy="23" r="2.5" fill="#FFC107"/>
+          </svg>
+        </div>
+      </div>
+      <div class="click-hint">
+        <span class="left">Cohort: <strong>n=8 · won 62% · median peak +127%</strong></span>
+        <span class="right">↓ click for greeks, full thesis, chart</span>
+      </div>
+    </div>
+
+    <!-- WULF — underwater -->
+    <div class="card bullish">
+      <div class="pri-grid">
+        <div class="pri-left">
+          <div class="pri-row1">
+            <span class="pri-ticker">WULF</span>
+            <span class="pri-strike">$22C 5/15</span>
+            <span class="pri-direction">▲ Bullish</span>
+            <span class="pri-tier" style="margin-left:auto;">Primary</span>
+          </div>
+          <div class="pri-meta">
+            <span><span class="label">Entered</span><strong>4/22 @ $0.85</strong></span>
+            <span class="sep">·</span>
+            <span>Day 11</span>
+            <span class="sep">·</span>
+            <span>12d to expiry</span>
+          </div>
+          <div class="pri-meta">
+            <span><span class="label">Earnings</span><span class="upcoming">5/8 Thu AH · 5d</span></span>
+            <span class="sep">·</span>
+            <span><span class="label">Prev print</span><span class="beat">2/14 beat (+15%)</span></span>
+          </div>
+          <div class="pri-thesis">
+            <span class="tag">why</span>Block buyers building positions over multiple days; long-dated call buys reinforce the long thesis. Position is underwater today but the read into the print stays bullish.
+          </div>
+        </div>
+        <div class="pri-right">
+          <div class="metric-stack-current">
+            <div class="now-val down">-23%</div>
+            <div class="now-label">Current</div>
+            <div class="peak-val">+20%</div>
+            <div class="peak-label">Peak</div>
+          </div>
+          <svg class="pri-spark" viewBox="0 0 200 38" preserveAspectRatio="none">
+            <line x1="0" y1="36" x2="200" y2="36" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+            <polyline fill="none" stroke="#FF5252" stroke-width="1.4"
+              points="5,18 28,16 51,13 74,15 97,20 120,25 143,28 166,30 195,31"/>
+            <polygon fill="rgba(255,82,82,0.06)"
+              points="5,18 28,16 51,13 74,15 97,20 120,25 143,28 166,30 195,31 195,38 5,38"/>
+            <circle cx="195" cy="31" r="2.5" fill="#FF5252"/>
+          </svg>
+        </div>
+      </div>
+      <div class="click-hint">
+        <span class="left">Cohort: <strong>n=6 · won 50% · median peak +43%</strong></span>
+        <span class="right">↓ click for greeks, full thesis, chart</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================================================================
+     POLISHED WATCHLIST CARD (visually different)
+     ================================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-name">Polished watchlist card</div>
+    <div class="section-desc">Different visual treatment — dashed blue rail, no P&L, distance-to-trigger instead of entered price, monitoring-mode feel.</div>
+  </div>
+
+  <div class="card-grid">
+
+    <!-- NBIS watchlist -->
+    <div class="card watchlist">
+      <div class="watch-grid">
+        <div class="pri-left">
+          <div class="pri-row1">
+            <span class="pri-ticker">NBIS</span>
+            <span class="pri-strike">$150C 5/29</span>
+            <span class="pri-direction" style="color: var(--blue);">▲ Bullish</span>
+            <span class="watch-tier" style="margin-left:auto;">Watchlist</span>
+          </div>
+          <div class="pri-meta">
+            <span class="watch-trigger"><span class="label">Trigger zone</span><strong style="color: var(--blue);">$148-149</strong> <span class="arrow">↑</span> spot $145.20</span>
+            <span class="sep">·</span>
+            <span>26d to expiry</span>
+          </div>
+          <div class="pri-meta">
+            <span><span class="label">Earnings</span><span class="upcoming">5/13 Tue BMO · 10d</span></span>
+            <span class="sep">·</span>
+            <span><span class="label">Prev print</span><span class="beat">2/19 beat (+22%)</span></span>
+          </div>
+          <div class="pri-thesis" style="border-left-color: rgba(91, 159, 255, 0.30);">
+            <span class="tag">setup</span>AI infrastructure cohort getting institutional bid as cloud-cap rotation accelerates. Monitoring for confirmation above $148 with volume; current spot 1.9% below trigger.
+          </div>
+        </div>
+        <div class="pri-right">
+          <div class="watch-status">
+            <div class="label">Status</div>
+            <div class="val">monitoring</div>
+            <div class="sub">+1.9% to trigger</div>
+          </div>
+          <svg class="pri-spark" viewBox="0 0 200 38" preserveAspectRatio="none">
+            <line x1="0" y1="6" x2="200" y2="6" stroke="rgba(91,159,255,0.25)" stroke-width="1" stroke-dasharray="3,3"/>
+            <text x="195" y="4" font-family="IBM Plex Mono,monospace" font-size="7" fill="#5B9FFF" text-anchor="end">trigger</text>
+            <polyline fill="none" stroke="#5B9FFF" stroke-width="1.4"
+              points="5,28 25,26 45,24 65,22 85,18 105,20 125,16 145,14 165,12 185,11 195,11"/>
+            <polygon fill="rgba(91,159,255,0.05)"
+              points="5,28 25,26 45,24 65,22 85,18 105,20 125,16 145,14 165,12 185,11 195,11 195,38 5,38"/>
+            <circle cx="195" cy="11" r="2.5" fill="#5B9FFF"/>
+          </svg>
+        </div>
+      </div>
+      <div class="click-hint">
+        <span class="left">Cohort: <strong>n=4 · won 100% · median peak +81%</strong></span>
+        <span class="right">↓ click for setup detail, levels, chart</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================================================================
+     EXPANDED PANEL — Greeks + Thorough thesis + Chart
+     ================================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-name">Click-expanded panel (CRWV example)</div>
+    <div class="section-desc">What appears when a card is clicked. Greeks live, thorough 3-section thesis, cohort math, TradingView chart at bottom.</div>
+  </div>
+
+  <div class="card bullish" style="cursor:default;">
+    <!-- Top stays the same as collapsed -->
+    <div class="pri-grid">
+      <div class="pri-left">
+        <div class="pri-row1">
+          <span class="pri-ticker">CRWV</span>
+          <span class="pri-strike">$110C 5/8</span>
+          <span class="pri-direction">▲ Bullish</span>
+          <span class="pri-tier" style="margin-left:auto;">Primary</span>
+        </div>
+        <div class="pri-meta">
+          <span><span class="label">Entered</span><strong>4/9 @ $4.00</strong></span>
+          <span class="sep">·</span>
+          <span>Day 24</span>
+          <span class="sep">·</span>
+          <span class="warn">5d to expiry</span>
+          <span class="sep">·</span>
+          <span class="hot">🔥 runner</span>
+        </div>
+        <div class="pri-meta">
+          <span><span class="label">Earnings</span><span class="upcoming">5/7 Wed AH · 4d</span></span>
+          <span class="sep">·</span>
+          <span><span class="label">Prev print</span><span class="beat">2/12 beat (+8%)</span></span>
+        </div>
+        <div class="pri-thesis">
+          <span class="tag">why</span>Block buyers building the $110 strike across multiple sessions, with long-dated calls held and short-dated puts protecting the binary into the 5/7 print. AI infrastructure cohort still bid.
+        </div>
+      </div>
+      <div class="pri-right">
+        <div class="metric-stack-current">
+          <div class="now-val up">+254%</div>
+          <div class="now-label">Current</div>
+          <div class="peak-val">+406%</div>
+          <div class="peak-label">Peak</div>
+        </div>
+        <svg class="pri-spark" viewBox="0 0 200 38" preserveAspectRatio="none">
+          <line x1="0" y1="36" x2="200" y2="36" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+          <polyline fill="none" stroke="#00E676" stroke-width="1.4"
+            points="5,18 22,16 40,12 58,8 76,4 94,3 112,5 130,9 148,12 166,9 184,11 195,13"/>
+          <polygon fill="rgba(0,230,118,0.08)"
+            points="5,18 22,16 40,12 58,8 76,4 94,3 112,5 130,9 148,12 166,9 184,11 195,13 195,38 5,38"/>
+          <circle cx="195" cy="13" r="2.5" fill="#FFC107"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- EXPANDED CONTENT BELOW -->
+    <div class="expand">
+
+      <!-- Premium row -->
+      <div class="expand-section">
+        <div class="expand-label">Position pricing</div>
+        <div class="price-row">
+          <div class="price-cell">
+            <div class="lbl">Entry</div>
+            <div class="val">$4.00</div>
+            <div class="sub">2026-04-09</div>
+          </div>
+          <div class="price-cell">
+            <div class="lbl">Current</div>
+            <div class="val up">$14.18</div>
+            <div class="sub">+254% from entry</div>
+          </div>
+          <div class="price-cell">
+            <div class="lbl">Peak</div>
+            <div class="val peak">$20.23</div>
+            <div class="sub">+406% on 4/22</div>
+          </div>
+          <div class="price-cell">
+            <div class="lbl">Stop (-50%)</div>
+            <div class="val">$2.00</div>
+            <div class="sub">$12.18 below current</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Greeks -->
+      <div class="expand-section">
+        <div class="expand-label">Greeks (live, refreshed every 5min)</div>
+        <div class="greeks-grid">
+          <div class="greek-cell">
+            <div class="lbl">Delta</div>
+            <div class="val">0.62</div>
+            <div class="sub">$0.62 / $1 spot</div>
+          </div>
+          <div class="greek-cell">
+            <div class="lbl">Gamma</div>
+            <div class="val">0.018</div>
+            <div class="sub">delta accel</div>
+          </div>
+          <div class="greek-cell">
+            <div class="lbl">Theta</div>
+            <div class="val theta">-0.31</div>
+            <div class="sub">decay/day</div>
+          </div>
+          <div class="greek-cell">
+            <div class="lbl">Vega</div>
+            <div class="val">0.42</div>
+            <div class="sub">per 1% IV</div>
+          </div>
+          <div class="greek-cell">
+            <div class="lbl">IV</div>
+            <div class="val">78.5%</div>
+            <div class="sub">implied vol</div>
+          </div>
+          <div class="greek-cell">
+            <div class="lbl">IV %ile</div>
+            <div class="val">84</div>
+            <div class="sub">52w rank</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thorough Thesis -->
+      <div class="expand-section">
+        <div class="expand-label">Full thesis</div>
+
+        <div class="thesis-section">
+          <div class="thesis-label">Setup</div>
+          <div class="thesis-body">Block buyers building positions at the $110 strike across multiple sessions starting 4/8, with a $252K long-dated call buy on 4/8 anchoring the long-term thesis. Same-strike short-dated puts at -19% OTM accumulating in parallel — passive insurance on the long, not a directional short. Net positioning is bullish-with-hedge into the binary.</div>
+        </div>
+
+        <div class="thesis-section">
+          <div class="thesis-label">Macro</div>
+          <div class="thesis-body">AI infrastructure cohort still institutional-bid through the rally despite late-cycle leadership exhaustion in broader semis. Yields rolling lower on softer growth data tilts the regime toward duration-tech tailwind. Crypto bid overnight (+1.69% BTC) reinforces risk-on tape. NFP Friday is the macro tail risk; broader cohort would be hit harder than CRWV-specific thesis.</div>
+        </div>
+
+        <div class="thesis-section risk">
+          <div class="thesis-label">Risk + invalidates</div>
+          <div class="thesis-body">5/7 earnings is the binary. Sized into the print — partial trim before the call removes binary risk. Hard stop at -50% from entry ($2.00 premium / 5d expiry = need $108 spot to settle ITM by Fri close). Macro risk: NFP miss + sharp risk-off Fri morning. Theta is steep at 5d (-$0.31/day) so the print needs to deliver inside 24h.</div>
+        </div>
+      </div>
+
+      <!-- Cohort -->
+      <div class="expand-section">
+        <div class="expand-label">Cohort base rate (similar setups historically)</div>
+        <div class="cohort-row">
+          <div class="cohort-cell">
+            <div class="lbl">N matches</div>
+            <div class="val">11</div>
+          </div>
+          <div class="cohort-cell">
+            <div class="lbl">Won (peak basis)</div>
+            <div class="val green">73%</div>
+          </div>
+          <div class="cohort-cell">
+            <div class="lbl">Median peak</div>
+            <div class="val green">+94%</div>
+          </div>
+          <div class="cohort-cell">
+            <div class="lbl">Median final</div>
+            <div class="val">+22%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="expand-section">
+        <div class="expand-label">Chart</div>
+        <div class="tv-frame">
+          <div class="tv-pill">Signal 2026-04-09 | $110 Call exp 5/8 | Entry $4.00</div>
+          [TradingView CRWV daily chart embedded here, lazy-loaded]
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     DATA REQUIREMENTS NOTE
+     ================================================================ -->
+<div class="section">
+  <div class="callout">
+    <strong>Data requirements summary:</strong>
+    <ul style="margin: 8px 0 0; padding-left: 18px; line-height: 1.7;">
+      <li><strong>Entry date + price</strong>: already in <code>signals_premium.json</code> as <code>signal_date</code> and <code>entry_premium</code></li>
+      <li><strong>Day N counter</strong>: compute from <code>signal_date</code> on render</li>
+      <li><strong>DTE</strong>: compute from <code>expiry</code> on render</li>
+      <li><strong>Sparkline</strong>: needs new per-signal time-series capture (add JSONL append in <code>position_manager.py</code> 5min cycle, ~2-3 hr to wire)</li>
+      <li><strong>Greeks</strong>: <code>alpaca_extras.get_option_chain_with_greeks()</code> already exists — wire into the 5min cycle and write <code>greeks</code> field to <code>signals_premium.json</code></li>
+      <li><strong>Earnings (next + prev)</strong>: next is in <code>{today}_earnings_calendar.json</code>; prev needs weekly yfinance cron writing <code>earnings_history.json</code></li>
+      <li><strong>Cohort</strong>: already in <code>signals_premium.json</code> per signal — just surface</li>
+      <li><strong>Thorough thesis</strong>: needs schema upgrade. Currently <code>cowork_fire.py --thesis</code> takes one string. Change to accept <code>--thesis-setup</code> + <code>--thesis-macro</code> + <code>--thesis-risk</code> (or one structured arg). Backfill from <code>Smart_Money_Trades.md</code> per-candidate sections — those already have setup + macro + risk paragraphs in the operator's writeup</li>
+      <li><strong>Watchlist trigger zone</strong>: currently in signal metadata as <code>entry_trigger</code> block (per <code>signal_trigger_monitor.py</code>). Add to JSON for watchlist-tier signals</li>
+    </ul>
+    <br>
+    <strong>My recommendation:</strong> Layout A (current % leading). Reasons: (1) it's the live decision-relevant number for a member checking their book, (2) peak still gets prominent secondary placement so signal-quality story isn't lost, (3) most trading apps lead with current — we don't need to fight the convention since peak is already differentiated by color treatment (green-soft) and label.
+  </div>
+</div>
+
+</body>
+</html>

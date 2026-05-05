@@ -55,6 +55,24 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://darkflowsignals.com/case-studies/crwv-may-2026.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://darkflowsignals.com/case-studies/mu-510-may-2026.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://darkflowsignals.com/case-studies/nbis-may-2026.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://darkflowsignals.com/.well-known/security.txt</loc>
     <lastmod>2026-05-04</lastmod>
     <changefreq>yearly</changefreq>

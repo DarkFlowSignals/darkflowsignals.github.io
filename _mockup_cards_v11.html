@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DarkFlow Card Mockups v11 - Live + subtle additions</title>
+<style>
+  :root {
+    --bg-primary: #0A0A0F;
+    --bg-card: #12121B;
+    --bg-card-hover: #18182A;
+    --bg-surface: #0E0E16;
+    --border: #1E1E2E;
+    --border-accent: #2A2A3F;
+    --text-primary: #E8E8ED;
+    --text-secondary: #8B8BA8;
+    --text-muted: #5D5D75;
+    --green: #00E676;
+    --green-soft: #4FD68F;
+    --green-dim: rgba(0, 230, 118, 0.15);
+    --red: #FF5252;
+    --red-soft: #F08585;
+    --red-dim: rgba(255, 82, 82, 0.15);
+    --amber: #FFC107;
+    --amber-soft: #E6B656;
+    --amber-dim: rgba(255, 193, 7, 0.15);
+    --blue: #5B9FFF;
+    --blue-dim: rgba(91, 159, 255, 0.15);
+    --font-mono: 'IBM Plex Mono', 'JetBrains Mono', Consolas, monospace;
+    --font-sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    margin: 0;
+    padding: 32px 24px;
+    line-height: 1.4;
+  }
+  .page-header {
+    max-width: 1080px;
+    margin: 0 auto 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-header h1 {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    margin: 0 0 4px;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .page-header p { margin: 0; color: var(--text-secondary); font-size: 12px; }
+
+  .callout {
+    max-width: 1080px;
+    margin: 0 auto 28px;
+    background: var(--bg-surface);
+    border-left: 3px solid var(--amber);
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .callout strong { color: var(--text-primary); }
+  .callout em { color: var(--amber-soft); font-style: normal; }
+
+  .section {
+    max-width: 1080px;
+    margin: 0 auto 48px;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .section-name {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .section-desc { font-size: 12px; color: var(--text-secondary); }
+
+  .card-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+
+  /* ================================================================
+     LIVE-STRUCTURE CARD (matching dashboard.html exactly)
+     ================================================================ */
+  .signal-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .signal-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-accent);
+  }
+  .signal-card.bullish { border-left-color: var(--green); }
+  .signal-card.bearish { border-left-color: var(--red); }
+
+  /* TOP ROW (matches live) */
+  .card-row-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .card-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    flex: 1;
+  }
+  .card-left-line1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .card-ticker {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .badge-bullish { background: var(--green-dim); color: var(--green); }
+  .badge-bearish { background: var(--red-dim); color: var(--red); }
+  .badge-primary { background: var(--amber-dim); color: var(--amber); font-size: 9px; }
+  .badge-watchlist { background: var(--blue-dim); color: var(--blue); font-size: 9px; }
+  .badge-state { background: rgba(255, 193, 7, 0.15); color: var(--amber); font-size: 9px; }
+  .badge-win { background: var(--green-dim); color: var(--green); font-size: 9.5px; }
+  .badge-loss { background: var(--red-dim); color: var(--red); font-size: 9.5px; }
+
+  /* NEW: spot sub-line under ticker badges (subtle addition to live) */
+  .card-spot {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .card-spot .label {
+    color: var(--text-muted);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  .card-spot .val {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .card-spot .pct.up { color: var(--green); font-weight: 600; }
+  .card-spot .pct.down { color: var(--red); font-weight: 600; }
+  .card-spot .name {
+    color: var(--text-muted);
+    font-size: 10.5px;
+    margin-left: 2px;
+  }
+  .card-spot .sep { color: var(--text-muted); margin: 0 4px; }
+  .card-spot .lifecycle {
+    font-size: 10.5px;
+    color: var(--text-secondary);
+  }
+  .card-spot .lifecycle .warn { color: var(--red); }
+
+  /* RIGHT COLUMN (matches live) */
+  .card-right {
+    text-align: right;
+    min-width: 130px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .card-pnl {
+    font-family: var(--font-mono);
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .card-pnl.positive { color: var(--green-soft); }
+  .card-pnl.negative { color: var(--red); }
+  .card-max-return {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+  .card-max-return .lbl { color: var(--text-muted); }
+  .card-max-return .val.pos { color: var(--green); }
+  .card-max-return .val.neg { color: var(--red); }
+
+  .card-status-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 4px;
+  }
+  .card-status-open {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--blue);
+  }
+  .open-dot {
+    width: 7px; height: 7px;
+    background: var(--blue);
+    border-radius: 50%;
+    animation: open-pulse 2s ease-in-out infinite;
+  }
+  @keyframes open-pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(91,159,255,0.4); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(91,159,255,0); }
+  }
+  .badge-expired {
+    background: var(--border);
+    color: var(--text-secondary);
+    font-size: 9.5px;
+  }
+
+  /* BOTTOM ROW (matches live + subtle additions) */
+  .card-row-bottom {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* CONVICTION (LIVE EXACT - 2px gap, 6×10 blocks) */
+  .conviction-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .conviction-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .conviction-bar {
+    display: flex;
+    gap: 2px;        /* LIVE: 2px equal spacing */
+    height: 10px;
+  }
+  .conviction-block {
+    width: 6px;
+    height: 10px;
+    border-radius: 1px;
+  }
+  .conviction-block.filled { background: var(--green); }
+  .conviction-block.empty { background: var(--border); }
+
+  .card-spec {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .card-spec .dte {
+    color: var(--text-secondary);
+    margin-left: 4px;
+  }
+  .card-spec .dte.warn { color: var(--red); }
+
+  /* PREMIUM ARROW (LIVE) + STOP (NEW SUBTLE ADD) */
+  .card-prem {
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+  .card-prem .px-entry { color: var(--text-secondary); }
+  .card-prem .arrow { color: var(--text-muted); margin: 0 3px; }
+  .card-prem .px-now { font-weight: 600; }
+  .card-prem .px-now.up { color: var(--green); }
+  .card-prem .px-now.down { color: var(--red); }
+  .card-prem .stop {
+    color: var(--text-muted);
+    margin-left: 8px;
+    font-size: 11px;
+  }
+  .card-prem .stop .stop-val { color: var(--red-soft); font-weight: 600; }
+
+  .card-meta {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    margin-left: auto;
+  }
+  .card-meta .lbl {
+    color: var(--text-muted);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 4px;
+  }
+
+  /* SIDE BY SIDE COMPARISON */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .compare-col {
+    background: var(--bg-card);
+    border: 1px dashed var(--border-accent);
+    border-radius: 4px;
+    padding: 12px;
+  }
+  .compare-col-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .compare-col-title.live { color: var(--text-secondary); }
+
+  .notes {
+    background: var(--bg-card);
+    border: 1px dashed var(--border-accent);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .notes strong { color: var(--text-primary); }
+  .notes em { color: var(--amber-soft); font-style: normal; }
+
+  /* MOBILE FRAME */
+  .mobile-frame-row { display: flex; gap: 28px; flex-wrap: wrap; }
+  .mobile-frame {
+    width: 380px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-accent);
+    border-radius: 16px;
+    padding: 16px 12px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.4);
+  }
+  .mobile-frame-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  /* MOBILE CARD - keeps 2-col feel, just compresses */
+  .mobile-frame .signal-card {
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .mobile-frame .card-row-top {
+    margin-bottom: 12px;
+    gap: 10px;
+  }
+  .mobile-frame .card-ticker { font-size: 18px; }
+  .mobile-frame .card-pnl { font-size: 22px; }
+  .mobile-frame .card-right { min-width: 100px; }
+  .mobile-frame .card-spot { font-size: 11px; }
+  .mobile-frame .card-row-bottom {
+    gap: 10px 14px;
+    flex-wrap: wrap;
+  }
+  .mobile-frame .card-spec { font-size: 11px; }
+  .mobile-frame .card-prem { font-size: 11px; }
+  .mobile-frame .card-meta { font-size: 10.5px; margin-left: 0; width: 100%; }
+  .mobile-frame .conviction-bar-wrap { gap: 6px; }
+  .mobile-frame .conviction-label { font-size: 11px; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Card Mockups v11 - Live structure + subtle additions</h1>
+  <p>This time starts FROM the live dashboard structure (familiar) and adds new info SUBTLY. Conviction blocks fixed to live's 2px equal spacing. OPEN/EXPIRED + WIN/LOSS preserved. Mobile redesigned to actually work.</p>
+</div>
+
+<div class="callout">
+  <strong>v11 strategy:</strong> Don't redesign — augment.
+  <ul style="margin: 6px 0 0; padding-left: 18px;">
+    <li><strong>Kept from live:</strong> ticker + direction badge + category badge layout, peak as lead metric, OPEN dot + WIN/LOSS badge, current sub-line, conviction (numeric label + 20-block bar @ 2px spacing), strike spec, premium arrow, timestamp.</li>
+    <li><strong>SUBTLY ADDED:</strong>
+      <br>(1) <em>Spot sub-line under ticker</em> — live underlying price + intraday move + Day N + DTE
+      <br>(2) <em>Stop appended to premium arrow</em> — "$4.00 → $14.18 · stop $2.00"
+      <br>(3) <em>State badge in status row</em> — "🔥 runner" alongside OPEN/WIN
+    </li>
+    <li><strong>Mobile rebuilt:</strong> keeps 2-col feel by stacking only at the bottom row, not the top.</li>
+  </ul>
+</div>
+
+<!-- ================================================================
+     SIDE BY SIDE: LIVE vs v11
+     ================================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-name">Side by side — LIVE today vs v11 polished</div>
+    <div class="section-desc">CRWV signal in both layouts. Same data; v11 just surfaces more of it inline.</div>
+  </div>
+
+  <div class="compare-grid">
+    <div class="compare-col">
+      <div class="compare-col-title live">LIVE TODAY</div>
+      <div class="signal-card bullish">
+        <div class="card-row-top">
+          <div class="card-left">
+            <div class="card-left-line1">
+              <span class="card-ticker">$CRWV</span>
+              <span class="badge badge-bullish">Bullish</span>
+              <span class="badge badge-primary">Primary</span>
+            </div>
+          </div>
+          <div class="card-right">
+            <div class="card-pnl positive">+406%</div>
+            <div class="card-max-return">peak</div>
+            <div class="card-status-row">
+              <span class="card-status-open"><span class="open-dot"></span> OPEN</span>
+              <span class="badge badge-win">WIN</span>
+            </div>
+            <div class="card-max-return"><span class="lbl">current </span><span class="val pos">+254%</span></div>
+          </div>
+        </div>
+        <div class="card-row-bottom">
+          <div class="conviction-bar-wrap">
+            <span class="conviction-label">87</span>
+            <div class="conviction-bar">
+              <div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+            </div>
+          </div>
+          <span class="card-spec">Call $110 exp 5/8</span>
+          <span class="card-prem"><span class="px-entry">$4.00</span><span class="arrow">→</span><span class="px-now up">$14.18</span></span>
+          <span class="card-meta">04/09 09:32 ET</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-col">
+      <div class="compare-col-title">v11 POLISHED</div>
+      <div class="signal-card bullish">
+        <div class="card-row-top">
+          <div class="card-left">
+            <div class="card-left-line1">
+              <span class="card-ticker">$CRWV</span>
+              <span class="badge badge-bullish">Bullish</span>
+              <span class="badge badge-primary">Primary</span>
+            </div>
+            <div class="card-spot">
+              <span class="label">Spot</span>
+              <span class="val">$124.50</span>
+              <span class="pct up">▲+2.1% today</span>
+              <span class="name">CoreWeave</span>
+              <span class="sep">·</span>
+              <span class="lifecycle">Day 24 · <span class="warn">5d to expiry</span></span>
+            </div>
+          </div>
+          <div class="card-right">
+            <div class="card-pnl positive">+406%</div>
+            <div class="card-max-return">peak</div>
+            <div class="card-status-row">
+              <span class="card-status-open"><span class="open-dot"></span> OPEN</span>
+              <span class="badge badge-state">🔥 runner</span>
+              <span class="badge badge-win">WIN</span>
+            </div>
+            <div class="card-max-return"><span class="lbl">current </span><span class="val pos">+254%</span></div>
+          </div>
+        </div>
+        <div class="card-row-bottom">
+          <div class="conviction-bar-wrap">
+            <span class="conviction-label">87</span>
+            <div class="conviction-bar">
+              <div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+            </div>
+          </div>
+          <span class="card-spec">Call $110 exp 5/8</span>
+          <span class="card-prem">
+            <span class="px-entry">$4.00</span><span class="arrow">→</span><span class="px-now up">$14.18</span>
+            <span class="stop">stop <span class="stop-val">$2.00</span></span>
+          </span>
+          <span class="card-meta"><span class="lbl">Entered</span>4/9 9:32a ET</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <strong>What's new in v11 (visible diff from LIVE):</strong>
+    <ul style="margin: 6px 0 0; padding-left: 18px;">
+      <li><strong>New sub-line under ticker:</strong> "Spot $124.50 ▲+2.1% today · CoreWeave · Day 24 · 5d to expiry" — live underlying + company name + lifecycle in one tight row that fills the empty space below the badges</li>
+      <li><strong>State badge added to status row:</strong> 🔥 runner sits between OPEN and WIN. Other states: ⚡ near peak, 🚨 near stop, 📅 earnings binary</li>
+      <li><strong>Stop appended to premium arrow:</strong> "$4.00 → $14.18 · stop $2.00" — public-safe, shows the floor</li>
+      <li><strong>Entered label added to timestamp:</strong> "Entered 4/9 9:32a ET" instead of just "04/09 09:32 ET"</li>
+    </ul>
+    <strong>What's preserved:</strong> EVERY existing visual element — ticker styling, badge colors, peak metric size, OPEN dot animation, WIN/LOSS badge, conviction (numeric + 20 blocks @ 2px equal spacing), strike spec format, premium arrow, timestamp position.
+  </div>
+</div>
+
+<!-- ================================================================
+     STACK OF v11 CARDS
+     ================================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-name">v11 — full stack (3 positions, desktop)</div>
+    <div class="section-desc">Runner / underwater / underwater. Each card uses the spot sub-line + state badges to add information density without changing the live shape.</div>
+  </div>
+
+  <div class="card-grid">
+
+    <!-- CRWV runner -->
+    <div class="signal-card bullish">
+      <div class="card-row-top">
+        <div class="card-left">
+          <div class="card-left-line1">
+            <span class="card-ticker">$CRWV</span>
+            <span class="badge badge-bullish">Bullish</span>
+            <span class="badge badge-primary">Primary</span>
+          </div>
+          <div class="card-spot">
+            <span class="label">Spot</span>
+            <span class="val">$124.50</span>
+            <span class="pct up">▲+2.1% today</span>
+            <span class="name">CoreWeave</span>
+            <span class="sep">·</span>
+            <span class="lifecycle">Day 24 · <span class="warn">5d to expiry</span></span>
+          </div>
+        </div>
+        <div class="card-right">
+          <div class="card-pnl positive">+406%</div>
+          <div class="card-max-return">peak</div>
+          <div class="card-status-row">
+            <span class="card-status-open"><span class="open-dot"></span> OPEN</span>
+            <span class="badge badge-state">🔥 runner</span>
+            <span class="badge badge-win">WIN</span>
+          </div>
+          <div class="card-max-return"><span class="lbl">current </span><span class="val pos">+254%</span></div>
+        </div>
+      </div>
+      <div class="card-row-bottom">
+        <div class="conviction-bar-wrap">
+          <span class="conviction-label">87</span>
+          <div class="conviction-bar">
+            <div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+          </div>
+        </div>
+        <span class="card-spec">Call $110 exp 5/8</span>
+        <span class="card-prem">
+          <span class="px-entry">$4.00</span><span class="arrow">→</span><span class="px-now up">$14.18</span>
+          <span class="stop">stop <span class="stop-val">$2.00</span></span>
+        </span>
+        <span class="card-meta"><span class="lbl">Entered</span>4/9 9:32a ET</span>
+      </div>
+    </div>
+
+    <!-- COIN underwater -->
+    <div class="signal-card bullish">
+      <div class="card-row-top">
+        <div class="card-left">
+          <div class="card-left-line1">
+            <span class="card-ticker">$COIN</span>
+            <span class="badge badge-bullish">Bullish</span>
+            <span class="badge badge-primary">Primary</span>
+          </div>
+          <div class="card-spot">
+            <span class="label">Spot</span>
+            <span class="val">$184.20</span>
+            <span class="pct down">▼-1.4% today</span>
+            <span class="name">Coinbase</span>
+            <span class="sep">·</span>
+            <span class="lifecycle">Day 8 · 12d to expiry</span>
+          </div>
+        </div>
+        <div class="card-right">
+          <div class="card-pnl positive">+11%</div>
+          <div class="card-max-return">peak</div>
+          <div class="card-status-row">
+            <span class="card-status-open"><span class="open-dot"></span> OPEN</span>
+            <span class="badge badge-win">WIN</span>
+          </div>
+          <div class="card-max-return"><span class="lbl">current </span><span class="val neg">-7%</span></div>
+        </div>
+      </div>
+      <div class="card-row-bottom">
+        <div class="conviction-bar-wrap">
+          <span class="conviction-label">82</span>
+          <div class="conviction-bar">
+            <div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+          </div>
+        </div>
+        <span class="card-spec">Call $200 exp 5/15</span>
+        <span class="card-prem">
+          <span class="px-entry">$8.50</span><span class="arrow">→</span><span class="px-now down">$7.90</span>
+          <span class="stop">stop <span class="stop-val">$4.25</span></span>
+        </span>
+        <span class="card-meta"><span class="lbl">Entered</span>4/25 10:14a ET</span>
+      </div>
+    </div>
+
+    <!-- WULF deeper underwater -->
+    <div class="signal-card bullish">
+      <div class="card-row-top">
+        <div class="card-left">
+          <div class="card-left-line1">
+            <span class="card-ticker">$WULF</span>
+            <span class="badge badge-bullish">Bullish</span>
+            <span class="badge badge-primary">Primary</span>
+          </div>
+          <div class="card-spot">
+            <span class="label">Spot</span>
+            <span class="val">$19.84</span>
+            <span class="pct up">▲+0.6% today</span>
+            <span class="name">TeraWulf</span>
+            <span class="sep">·</span>
+            <span class="lifecycle">Day 11 · 12d to expiry</span>
+          </div>
+        </div>
+        <div class="card-right">
+          <div class="card-pnl positive">+20%</div>
+          <div class="card-max-return">peak</div>
+          <div class="card-status-row">
+            <span class="card-status-open"><span class="open-dot"></span> OPEN</span>
+            <span class="badge badge-win">WIN</span>
+          </div>
+          <div class="card-max-return"><span class="lbl">current </span><span class="val neg">-23%</span></div>
+        </div>
+      </div>
+      <div class="card-row-bottom">
+        <div class="conviction-bar-wrap">
+          <span class="conviction-label">78</span>
+          <div class="conviction-bar">
+            <div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+          </div>
+        </div>
+        <span class="card-spec">Call $22 exp 5/15</span>
+        <span class="card-prem">
+          <span class="px-entry">$0.85</span><span class="arrow">→</span><span class="px-now down">$0.65</span>
+          <span class="stop">stop <span class="stop-val">$0.43</span></span>
+        </span>
+        <span class="card-meta"><span class="lbl">Entered</span>4/22 9:45a ET</span>
+      </div>
+    </div>
+
+    <!-- Example EXPIRED (showing different status) -->
+    <div class="signal-card bullish">
+      <div class="card-row-top">
+        <div class="card-left">
+          <div class="card-left-line1">
+            <span class="card-ticker">$AMZN</span>
+            <span class="badge badge-bullish">Bullish</span>
+            <span class="badge badge-primary">Primary</span>
+          </div>
+          <div class="card-spot">
+            <span class="label">Spot</span>
+            <span class="val">$268.40</span>
+            <span class="pct up">▲+3.2% on print</span>
+            <span class="name">Amazon</span>
+            <span class="sep">·</span>
+            <span class="lifecycle">Closed Day 16 · expired 4/17</span>
+          </div>
+        </div>
+        <div class="card-right">
+          <div class="card-pnl positive">+133%</div>
+          <div class="card-max-return">peak</div>
+          <div class="card-status-row">
+            <span class="badge badge-expired">Expired</span>
+            <span class="badge badge-win">WIN</span>
+          </div>
+          <div class="card-max-return"><span class="lbl">final </span><span class="val pos">+91%</span></div>
+        </div>
+      </div>
+      <div class="card-row-bottom">
+        <div class="conviction-bar-wrap">
+          <span class="conviction-label">86</span>
+          <div class="conviction-bar">
+            <div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+          </div>
+        </div>
+        <span class="card-spec">Call $260 exp 5/15</span>
+        <span class="card-prem">
+          <span class="px-entry">$6.50</span><span class="arrow">→</span><span class="px-now up">$12.40</span>
+          <span class="stop">stop <span class="stop-val">$3.25</span></span>
+        </span>
+        <span class="card-meta"><span class="lbl">Entered</span>4/30 9:18a ET</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================================================================
+     MOBILE
+     ================================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-name">v11 — mobile (380px frame, redesigned)</div>
+    <div class="section-desc">Top row keeps the 2-column ticker/peak feel. Spot sub-line wraps tightly. Bottom row stacks naturally with new info on its own line. Card-meta gets full width as the last line.</div>
+  </div>
+
+  <div class="mobile-frame-row">
+    <div>
+      <div class="mobile-frame-label">iPhone width (380px)</div>
+      <div class="mobile-frame">
+
+        <!-- CRWV mobile -->
+        <div class="signal-card bullish">
+          <div class="card-row-top">
+            <div class="card-left">
+              <div class="card-left-line1">
+                <span class="card-ticker">$CRWV</span>
+                <span class="badge badge-bullish">Bullish</span>
+                <span class="badge badge-primary">Primary</span>
+              </div>
+              <div class="card-spot">
+                <span class="label">Spot</span>
+                <span class="val">$124.50</span>
+                <span class="pct up">▲+2.1%</span>
+                <span class="sep">·</span>
+                <span class="lifecycle">Day 24 · <span class="warn">5d</span></span>
+              </div>
+            </div>
+            <div class="card-right">
+              <div class="card-pnl positive">+406%</div>
+              <div class="card-max-return">peak</div>
+              <div class="card-status-row">
+                <span class="card-status-open"><span class="open-dot"></span> OPEN</span>
+              </div>
+              <div class="card-max-return"><span class="lbl">cur </span><span class="val pos">+254%</span></div>
+            </div>
+          </div>
+          <div class="card-row-bottom">
+            <div class="conviction-bar-wrap">
+              <span class="conviction-label">87</span>
+              <div class="conviction-bar">
+                <div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+              </div>
+            </div>
+            <span class="card-spec">Call $110 exp 5/8</span>
+            <span class="card-prem">
+              <span class="px-entry">$4.00</span><span class="arrow">→</span><span class="px-now up">$14.18</span>
+              <span class="stop">· stop <span class="stop-val">$2.00</span></span>
+            </span>
+            <span class="card-meta"><span class="lbl">Entered</span>4/9 9:32a · 🔥 runner · WIN</span>
+          </div>
+        </div>
+
+        <!-- COIN mobile -->
+        <div class="signal-card bullish">
+          <div class="card-row-top">
+            <div class="card-left">
+              <div class="card-left-line1">
+                <span class="card-ticker">$COIN</span>
+                <span class="badge badge-bullish">Bullish</span>
+                <span class="badge badge-primary">Primary</span>
+              </div>
+              <div class="card-spot">
+                <span class="label">Spot</span>
+                <span class="val">$184.20</span>
+                <span class="pct down">▼-1.4%</span>
+                <span class="sep">·</span>
+                <span class="lifecycle">Day 8 · 12d</span>
+              </div>
+            </div>
+            <div class="card-right">
+              <div class="card-pnl positive">+11%</div>
+              <div class="card-max-return">peak</div>
+              <div class="card-status-row">
+                <span class="card-status-open"><span class="open-dot"></span> OPEN</span>
+              </div>
+              <div class="card-max-return"><span class="lbl">cur </span><span class="val neg">-7%</span></div>
+            </div>
+          </div>
+          <div class="card-row-bottom">
+            <div class="conviction-bar-wrap">
+              <span class="conviction-label">82</span>
+              <div class="conviction-bar">
+                <div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+              </div>
+            </div>
+            <span class="card-spec">Call $200 exp 5/15</span>
+            <span class="card-prem">
+              <span class="px-entry">$8.50</span><span class="arrow">→</span><span class="px-now down">$7.90</span>
+              <span class="stop">· stop <span class="stop-val">$4.25</span></span>
+            </span>
+            <span class="card-meta"><span class="lbl">Entered</span>4/25 10:14a · WIN</span>
+          </div>
+        </div>
+
+        <!-- WULF mobile -->
+        <div class="signal-card bullish">
+          <div class="card-row-top">
+            <div class="card-left">
+              <div class="card-left-line1">
+                <span class="card-ticker">$WULF</span>
+                <span class="badge badge-bullish">Bullish</span>
+                <span class="badge badge-primary">Primary</span>
+              </div>
+              <div class="card-spot">
+                <span class="label">Spot</span>
+                <span class="val">$19.84</span>
+                <span class="pct up">▲+0.6%</span>
+                <span class="sep">·</span>
+                <span class="lifecycle">Day 11 · 12d</span>
+              </div>
+            </div>
+            <div class="card-right">
+              <div class="card-pnl positive">+20%</div>
+              <div class="card-max-return">peak</div>
+              <div class="card-status-row">
+                <span class="card-status-open"><span class="open-dot"></span> OPEN</span>
+              </div>
+              <div class="card-max-return"><span class="lbl">cur </span><span class="val neg">-23%</span></div>
+            </div>
+          </div>
+          <div class="card-row-bottom">
+            <div class="conviction-bar-wrap">
+              <span class="conviction-label">78</span>
+              <div class="conviction-bar">
+                <div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+              </div>
+            </div>
+            <span class="card-spec">Call $22 exp 5/15</span>
+            <span class="card-prem">
+              <span class="px-entry">$0.85</span><span class="arrow">→</span><span class="px-now down">$0.65</span>
+              <span class="stop">· stop <span class="stop-val">$0.43</span></span>
+            </span>
+            <span class="card-meta"><span class="lbl">Entered</span>4/22 9:45a · WIN</span>
+          </div>
+        </div>
+
+        <!-- AMZN expired mobile -->
+        <div class="signal-card bullish">
+          <div class="card-row-top">
+            <div class="card-left">
+              <div class="card-left-line1">
+                <span class="card-ticker">$AMZN</span>
+                <span class="badge badge-bullish">Bullish</span>
+                <span class="badge badge-primary">Primary</span>
+              </div>
+              <div class="card-spot">
+                <span class="label">Spot</span>
+                <span class="val">$268.40</span>
+                <span class="pct up">▲+3.2%</span>
+                <span class="sep">·</span>
+                <span class="lifecycle">Closed · expired 4/17</span>
+              </div>
+            </div>
+            <div class="card-right">
+              <div class="card-pnl positive">+133%</div>
+              <div class="card-max-return">peak</div>
+              <div class="card-status-row">
+                <span class="badge badge-expired">Expired</span>
+              </div>
+              <div class="card-max-return"><span class="lbl">final </span><span class="val pos">+91%</span></div>
+            </div>
+          </div>
+          <div class="card-row-bottom">
+            <div class="conviction-bar-wrap">
+              <span class="conviction-label">86</span>
+              <div class="conviction-bar">
+                <div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block filled"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+              </div>
+            </div>
+            <span class="card-spec">Call $260 exp 5/15</span>
+            <span class="card-prem">
+              <span class="px-entry">$6.50</span><span class="arrow">→</span><span class="px-now up">$12.40</span>
+              <span class="stop">· stop <span class="stop-val">$3.25</span></span>
+            </span>
+            <span class="card-meta"><span class="lbl">Entered</span>4/30 9:18a · WIN</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="notes">
+    <strong>Mobile fix:</strong>
+    <ul style="margin: 6px 0 0; padding-left: 18px;">
+      <li>Top row keeps the 2-col ticker/peak split (no more vertical stack at the top)</li>
+      <li>Spot sub-line wraps inside the left column — when it gets long, lifecycle drops to a second visual line naturally</li>
+      <li>Bottom row uses <code>flex-wrap</code> so conviction + spec + premium each get their own line if needed, but flow naturally on wider phones</li>
+      <li><code>card-meta</code> always gets full width as the LAST line on mobile, becoming a "footer summary" with entered date + state badge + WIN/LOSS</li>
+      <li>State badge (🔥 runner) moves from the top status row to the meta footer on mobile to save vertical space</li>
+    </ul>
+    <strong>What's locked:</strong> The expanded panel from v6+ stays as-is (you said you liked that). v11 is purely the COLLAPSED card refinement.
+  </div>
+</div>
+
+</body>
+</html>

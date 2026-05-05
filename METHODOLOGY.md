@@ -2,7 +2,7 @@
 
 **Version 2.0 · April 2026**
 
-A plain-English guide to what you see on darkflowsignals.github.io, how the dashboard works, and what we promise about every trade we publish. This is the user manual for our transparency, not a description of our scoring internals.
+A plain-English guide to what you see on darkflowsignals.com, how the dashboard works, and what we promise about every trade we publish. This is the user manual for our transparency, not a description of our scoring internals.
 
 ---
 
@@ -126,4 +126,4 @@ That's the verifiable edge. That's why the dashboard is public and will stay pub
 ---
 
 **Last updated:** 2026-04-19
-**DarkFlow Signals** · darkflowsignals.github.io
+**DarkFlow Signals** · darkflowsignals.com

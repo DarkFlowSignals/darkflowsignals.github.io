@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DarkFlow Card Mockups v13 - Conviction promoted, axis labels back</title>
+<style>
+  :root {
+    --bg-primary: #0A0A0F;
+    --bg-card: #12121B;
+    --bg-card-hover: #18182A;
+    --bg-surface: #0E0E16;
+    --border: #1E1E2E;
+    --border-accent: #2A2A3F;
+    --text-primary: #E8E8ED;
+    --text-secondary: #8B8BA8;
+    --text-muted: #5D5D75;
+    --green: #00E676;
+    --green-soft: #4FD68F;
+    --green-dim: rgba(0, 230, 118, 0.15);
+    --red: #FF5252;
+    --red-soft: #F08585;
+    --red-dim: rgba(255, 82, 82, 0.15);
+    --amber: #FFC107;
+    --amber-soft: #E6B656;
+    --amber-dim: rgba(255, 193, 7, 0.15);
+    --blue: #5B9FFF;
+    --blue-dim: rgba(91, 159, 255, 0.15);
+    --font-mono: 'IBM Plex Mono', 'JetBrains Mono', Consolas, monospace;
+    --font-sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    margin: 0;
+    padding: 32px 24px;
+    line-height: 1.4;
+  }
+  .page-header {
+    max-width: 1080px;
+    margin: 0 auto 22px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-header h1 {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    margin: 0 0 4px;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .page-header p { margin: 0; color: var(--text-secondary); font-size: 12px; }
+
+  .callout {
+    max-width: 1080px;
+    margin: 0 auto 24px;
+    background: var(--bg-surface);
+    border-left: 3px solid var(--amber);
+    padding: 12px 16px;
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .callout strong { color: var(--text-primary); }
+
+  .section {
+    max-width: 1080px;
+    margin: 0 auto 40px;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .section-name {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .section-desc { font-size: 12px; color: var(--text-secondary); }
+
+  .card-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+
+  /* ================================================================
+     v13 CARD
+     ================================================================ */
+  .signal-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .signal-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-accent);
+  }
+  .signal-card.bullish { border-left-color: var(--green); }
+  .signal-card.bearish { border-left-color: var(--red); }
+
+  /* MAIN GRID — left col stacks all info, right col has metrics + spark */
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 20px;
+    align-items: stretch;
+  }
+  .col-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 6px;
+    min-width: 0;
+  }
+  .col-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  /* ROW 1 — HEADER */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-wrap: wrap;
+  }
+  .ticker {
+    font-family: var(--font-mono);
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .badge-bullish { background: var(--green-dim); color: var(--green); }
+  .badge-bearish { background: var(--red-dim); color: var(--red); }
+  .badge-primary { background: var(--amber-dim); color: var(--amber); font-size: 9px; }
+  .badge-watchlist { background: var(--blue-dim); color: var(--blue); font-size: 9px; }
+  .badge-state { background: rgba(255, 193, 7, 0.15); color: var(--amber); font-size: 9px; }
+  .badge-win { background: var(--green-dim); color: var(--green); font-size: 9.5px; }
+  .badge-loss { background: var(--red-dim); color: var(--red); font-size: 9.5px; }
+  .badge-expired {
+    background: var(--border);
+    color: var(--text-secondary);
+    font-size: 9.5px;
+  }
+
+  /* ROW 2 — CONVICTION (PROMOTED, slightly bigger blocks) */
+  .conviction-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+  }
+  .conv-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .conviction-bar {
+    display: flex;
+    gap: 2px;
+    height: 12px;     /* bumped 10 → 12 for higher visibility */
+  }
+  .conviction-block {
+    width: 7px;       /* bumped 6 → 7 */
+    height: 12px;     /* bumped 10 → 12 */
+    border-radius: 1px;
+  }
+  .conviction-block.filled.high { background: var(--green); }
+  .conviction-block.filled.mid { background: var(--amber-soft); }
+  .conviction-block.filled.low { background: var(--text-muted); }
+  .conviction-block.empty { background: var(--border); }
+  .conv-strength {
+    font-size: 10px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-left: 4px;
+  }
+
+  /* ROW 3 — SPOT */
+  .spot-row {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .spot-row .lbl {
+    color: var(--text-muted);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  .spot-row .val {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .spot-row .pct.up { color: var(--green); font-weight: 600; }
+  .spot-row .pct.down { color: var(--red); font-weight: 600; }
+  .spot-row .name {
+    color: var(--text-muted);
+    font-size: 10.5px;
+    margin-left: 2px;
+  }
+
+  /* ROW 4 — OPTION + LIFECYCLE (combined) */
+  .opt-row {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .opt-row .opt-spec {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .opt-row .sep { color: var(--text-muted); }
+  .opt-row .warn { color: var(--red); }
+  .opt-row .lbl {
+    color: var(--text-muted);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-right: 2px;
+  }
+
+  /* ROW 5 — PREMIUM ARROW + STOP */
+  .prem-row {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .prem-row .px-entry { color: var(--text-secondary); }
+  .prem-row .arrow { color: var(--text-muted); margin: 0 2px; }
+  .prem-row .px-now { font-weight: 600; }
+  .prem-row .px-now.up { color: var(--green); }
+  .prem-row .px-now.down { color: var(--red); }
+  .prem-row .stop {
+    color: var(--text-muted);
+    margin-left: 6px;
+    font-size: 11px;
+  }
+  .prem-row .stop .stop-val { color: var(--red-soft); font-weight: 600; }
+
+  /* ROW 6 — ENTERED */
+  .entered-row {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  .entered-row .lbl {
+    margin-right: 5px;
+  }
+  .entered-row .val {
+    color: var(--text-secondary);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 11px;
+  }
+
+  /* RIGHT COLUMN: peak/status/current/spark + axis labels */
+  .pnl-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .card-pnl {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .card-pnl.positive { color: var(--green-soft); }
+  .card-pnl.negative { color: var(--red); }
+  .pnl-lbl {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .status-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  .status-open {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--blue);
+  }
+  .open-dot {
+    width: 6px; height: 6px;
+    background: var(--blue);
+    border-radius: 50%;
+    animation: open-pulse 2s ease-in-out infinite;
+  }
+  @keyframes open-pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(91,159,255,0.4); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(91,159,255,0); }
+  }
+  .current-line {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .current-line .lbl { color: var(--text-muted); }
+  .current-line .val.pos { color: var(--green); font-weight: 600; }
+  .current-line .val.neg { color: var(--red); font-weight: 600; }
+
+  /* SPARKLINE + AXIS LABELS (the 3-dot data is back) */
+  .spark {
+    width: 100%;
+    height: 50px;
+    margin-top: 3px;
+  }
+  .spark-axis {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    letter-spacing: 0.3px;
+    width: 100%;
+  }
+  .spark-axis .a-entry { color: var(--text-secondary); }
+  .spark-axis .a-peak { color: var(--green-soft); }
+  .spark-axis .a-now { color: var(--amber-soft); }
+  .spark-axis .a-now.down { color: var(--red); }
+
+  .notes {
+    background: var(--bg-card);
+    border: 1px dashed var(--border-accent);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .notes strong { color: var(--text-primary); }
+  .notes em { color: var(--amber-soft); font-style: normal; }
+
+  /* MOBILE */
+  .mobile-frame-row { display: flex; gap: 28px; flex-wrap: wrap; }
+  .mobile-frame {
+    width: 380px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-accent);
+    border-radius: 16px;
+    padding: 16px 12px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.4);
+  }
+  .mobile-frame-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  /* Mobile rebuild — TRUE single-column flow */
+  .mobile-frame .signal-card {
+    padding: 14px 14px;
+    margin-bottom: 9px;
+  }
+  .mobile-frame .layout {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  /* Right column collapses to inline metric row + status row + spark — no awkward stacking */
+  .mobile-frame .col-right {
+    align-items: stretch;
+    width: 100%;
+    gap: 6px;
+  }
+  /* Mobile: peak + current INLINE (saves a row) */
+  .mobile-frame .pnl-row {
+    justify-content: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .mobile-frame .pnl-current-mobile {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+  }
+  .mobile-frame .pnl-current-mobile .val.pos { color: var(--green); font-weight: 600; }
+  .mobile-frame .pnl-current-mobile .val.neg { color: var(--red); font-weight: 600; }
+  .mobile-frame .status-row {
+    justify-content: flex-start;
+  }
+  .mobile-frame .ticker { font-size: 18px; }
+  .mobile-frame .card-pnl { font-size: 22px; }
+  .mobile-frame .conv-label { font-size: 11.5px; }
+  .mobile-frame .conviction-block { width: 6px; height: 11px; }
+  .mobile-frame .spark { height: 44px; }
+  .mobile-frame .spot-row { font-size: 11px; }
+  .mobile-frame .opt-row { font-size: 11px; }
+  .mobile-frame .prem-row { font-size: 11.5px; }
+  .mobile-frame .entered-row { font-size: 10px; }
+
+  /* Hide desktop's separate current-line on mobile (already inline above) */
+  .mobile-frame .current-line { display: none; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Card Mockups v13 - Conviction promoted, 3-dot axis back</h1>
+  <p>Conviction moves up to row 2 (right under header) with bigger blocks. Option spec + lifecycle merged into one row. Sparkline gets the 3-dot axis labels back ($entry · $peak · $now). Mobile rebuilt with true single-column flow.</p>
+</div>
+
+<div class="callout">
+  <strong>Hierarchy fix:</strong>
+  <ol style="margin: 6px 0 0; padding-left: 22px;">
+    <li><strong>Header</strong> (identity)</li>
+    <li><strong>Conviction</strong> ← <em>PROMOTED here, bigger blocks (12px tall vs 10px)</em></li>
+    <li>Spot + intraday + company</li>
+    <li>Option spec + lifecycle (Call $110 exp 5/8 · 5d · Day 24 · Earn 5/7 AH)</li>
+    <li>Premium arrow + stop</li>
+    <li>Entered timestamp</li>
+  </ol>
+  <strong>Right rail:</strong> peak metric → status row → current → sparkline → 3-dot axis labels under ($4.00 · peak $20.23 · now $14.18)
+</div>
+
+<!-- ================================================================
+     DESKTOP — v13
+     ================================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-name">Desktop — v13</div>
+    <div class="section-desc">Conviction at top, option + expiry merged, 3-dot axis labels under spark.</div>
+  </div>
+
+  <div class="card-grid">
+
+    <!-- CRWV runner -->
+    <div class="signal-card bullish">
+      <div class="layout">
+        <div class="col-left">
+          <div class="header">
+            <span class="ticker">$CRWV</span>
+            <span class="badge badge-bullish">Bullish</span>
+            <span class="badge badge-primary">Primary</span>
+          </div>
+          <div class="conviction-row">
+            <span class="conv-label">87</span>
+            <div class="conviction-bar">
+              <div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+            </div>
+            <span class="conv-strength">strong</span>
+          </div>
+          <div class="spot-row">
+            <span class="lbl">Spot</span>
+            <span class="val">$124.50</span>
+            <span class="pct up">▲+2.1% today</span>
+            <span class="name">CoreWeave</span>
+          </div>
+          <div class="opt-row">
+            <span class="opt-spec">Call $110 exp 5/8</span>
+            <span class="sep">·</span>
+            <span class="warn">5d to expiry</span>
+            <span class="sep">·</span>
+            <span>Day 24</span>
+            <span class="sep">·</span>
+            <span><span class="lbl">Earnings</span>5/7 Wed AH</span>
+          </div>
+          <div class="prem-row">
+            <span class="px-entry">$4.00</span><span class="arrow">→</span><span class="px-now up">$14.18</span>
+            <span class="stop">stop <span class="stop-val">$2.00</span></span>
+          </div>
+          <div class="entered-row">
+            <span class="lbl">Entered</span><span class="val">4/9 9:32a ET</span>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="pnl-row">
+            <span class="card-pnl positive">+406%</span>
+            <span class="pnl-lbl">peak</span>
+          </div>
+          <div class="status-row">
+            <span class="status-open"><span class="open-dot"></span> OPEN</span>
+            <span class="badge badge-state">🔥 runner</span>
+            <span class="badge badge-win">WIN</span>
+          </div>
+          <div class="current-line"><span class="lbl">current </span><span class="val pos">+254%</span></div>
+          <svg class="spark" viewBox="0 0 220 50" preserveAspectRatio="none">
+            <line x1="0" y1="46" x2="220" y2="46" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+            <polyline fill="none" stroke="#00E676" stroke-width="1.6"
+              points="5,28 22,24 40,19 60,12 82,5 102,3 122,8 142,14 162,11 182,13 202,15 215,16"/>
+            <polygon fill="rgba(0,230,118,0.08)"
+              points="5,28 22,24 40,19 60,12 82,5 102,3 122,8 142,14 162,11 182,13 202,15 215,16 215,50 5,50"/>
+            <circle cx="102" cy="3" r="3.5" fill="#4FD68F"/>
+            <circle cx="215" cy="16" r="2.5" fill="#FFC107"/>
+          </svg>
+          <div class="spark-axis">
+            <span class="a-entry">$4.00 entry</span>
+            <span class="a-peak">peak $20.23</span>
+            <span class="a-now">now $14.18</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COIN -->
+    <div class="signal-card bullish">
+      <div class="layout">
+        <div class="col-left">
+          <div class="header">
+            <span class="ticker">$COIN</span>
+            <span class="badge badge-bullish">Bullish</span>
+            <span class="badge badge-primary">Primary</span>
+          </div>
+          <div class="conviction-row">
+            <span class="conv-label">82</span>
+            <div class="conviction-bar">
+              <div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+            </div>
+            <span class="conv-strength">developing</span>
+          </div>
+          <div class="spot-row">
+            <span class="lbl">Spot</span>
+            <span class="val">$184.20</span>
+            <span class="pct down">▼-1.4% today</span>
+            <span class="name">Coinbase</span>
+          </div>
+          <div class="opt-row">
+            <span class="opt-spec">Call $200 exp 5/15</span>
+            <span class="sep">·</span>
+            <span>12d to expiry</span>
+            <span class="sep">·</span>
+            <span>Day 8</span>
+            <span class="sep">·</span>
+            <span><span class="lbl">Earnings</span>5/7 Wed AH</span>
+          </div>
+          <div class="prem-row">
+            <span class="px-entry">$8.50</span><span class="arrow">→</span><span class="px-now down">$7.90</span>
+            <span class="stop">stop <span class="stop-val">$4.25</span></span>
+          </div>
+          <div class="entered-row">
+            <span class="lbl">Entered</span><span class="val">4/25 10:14a ET</span>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="pnl-row">
+            <span class="card-pnl positive">+11%</span>
+            <span class="pnl-lbl">peak</span>
+          </div>
+          <div class="status-row">
+            <span class="status-open"><span class="open-dot"></span> OPEN</span>
+            <span class="badge badge-win">WIN</span>
+          </div>
+          <div class="current-line"><span class="lbl">current </span><span class="val neg">-7%</span></div>
+          <svg class="spark" viewBox="0 0 220 50" preserveAspectRatio="none">
+            <line x1="0" y1="25" x2="220" y2="25" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="2,3"/>
+            <line x1="0" y1="46" x2="220" y2="46" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+            <polyline fill="none" stroke="#FFC107" stroke-width="1.6"
+              points="5,28 35,25 65,22 95,17 125,24 155,30 185,33 215,34"/>
+            <polygon fill="rgba(255,193,7,0.06)"
+              points="5,28 35,25 65,22 95,17 125,24 155,30 185,33 215,34 215,50 5,50"/>
+            <circle cx="95" cy="17" r="3.5" fill="#4FD68F"/>
+            <circle cx="215" cy="34" r="2.5" fill="#FFC107"/>
+          </svg>
+          <div class="spark-axis">
+            <span class="a-entry">$8.50 entry</span>
+            <span class="a-peak">peak $9.45</span>
+            <span class="a-now down">now $7.90</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WULF -->
+    <div class="signal-card bullish">
+      <div class="layout">
+        <div class="col-left">
+          <div class="header">
+            <span class="ticker">$WULF</span>
+            <span class="badge badge-bullish">Bullish</span>
+            <span class="badge badge-primary">Primary</span>
+          </div>
+          <div class="conviction-row">
+            <span class="conv-label">78</span>
+            <div class="conviction-bar">
+              <div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+            </div>
+            <span class="conv-strength">developing</span>
+          </div>
+          <div class="spot-row">
+            <span class="lbl">Spot</span>
+            <span class="val">$19.84</span>
+            <span class="pct up">▲+0.6% today</span>
+            <span class="name">TeraWulf</span>
+          </div>
+          <div class="opt-row">
+            <span class="opt-spec">Call $22 exp 5/15</span>
+            <span class="sep">·</span>
+            <span>12d to expiry</span>
+            <span class="sep">·</span>
+            <span>Day 11</span>
+            <span class="sep">·</span>
+            <span><span class="lbl">Earnings</span>5/8 Thu AH</span>
+          </div>
+          <div class="prem-row">
+            <span class="px-entry">$0.85</span><span class="arrow">→</span><span class="px-now down">$0.65</span>
+            <span class="stop">stop <span class="stop-val">$0.43</span></span>
+          </div>
+          <div class="entered-row">
+            <span class="lbl">Entered</span><span class="val">4/22 9:45a ET</span>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="pnl-row">
+            <span class="card-pnl positive">+20%</span>
+            <span class="pnl-lbl">peak</span>
+          </div>
+          <div class="status-row">
+            <span class="status-open"><span class="open-dot"></span> OPEN</span>
+            <span class="badge badge-win">WIN</span>
+          </div>
+          <div class="current-line"><span class="lbl">current </span><span class="val neg">-23%</span></div>
+          <svg class="spark" viewBox="0 0 220 50" preserveAspectRatio="none">
+            <line x1="0" y1="25" x2="220" y2="25" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="2,3"/>
+            <line x1="0" y1="46" x2="220" y2="46" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+            <polyline fill="none" stroke="#FF5252" stroke-width="1.6"
+              points="5,25 30,20 55,15 85,21 115,30 145,38 175,42 200,44 215,45"/>
+            <polygon fill="rgba(255,82,82,0.06)"
+              points="5,25 30,20 55,15 85,21 115,30 145,38 175,42 200,44 215,45 215,50 5,50"/>
+            <circle cx="55" cy="15" r="3.5" fill="#4FD68F"/>
+            <circle cx="215" cy="45" r="2.5" fill="#FF5252"/>
+          </svg>
+          <div class="spark-axis">
+            <span class="a-entry">$0.85 entry</span>
+            <span class="a-peak">peak $1.02</span>
+            <span class="a-now down">now $0.65</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================================================================
+     MOBILE — TRUE single-column flow
+     ================================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-name">Mobile — v13 (true single column, no more crazy stacking)</div>
+    <div class="section-desc">Layout collapses cleanly: header → conviction → spot → option/lifecycle → peak inline with current → status row → sparkline + axis → premium arrow → entered.</div>
+  </div>
+
+  <div class="mobile-frame-row">
+    <div>
+      <div class="mobile-frame-label">iPhone width (380px)</div>
+      <div class="mobile-frame">
+
+        <!-- CRWV mobile -->
+        <div class="signal-card bullish">
+          <div class="layout">
+            <div class="col-left">
+              <div class="header">
+                <span class="ticker">$CRWV</span>
+                <span class="badge badge-bullish">Bullish</span>
+                <span class="badge badge-primary">Primary</span>
+              </div>
+              <div class="conviction-row">
+                <span class="conv-label">87</span>
+                <div class="conviction-bar">
+                  <div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block filled high"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+                </div>
+                <span class="conv-strength">strong</span>
+              </div>
+              <div class="spot-row">
+                <span class="lbl">Spot</span>
+                <span class="val">$124.50</span>
+                <span class="pct up">▲+2.1%</span>
+                <span class="name">CoreWeave</span>
+              </div>
+              <div class="opt-row">
+                <span class="opt-spec">Call $110 exp 5/8</span>
+                <span class="sep">·</span>
+                <span class="warn">5d</span>
+                <span class="sep">·</span>
+                <span>Day 24</span>
+                <span class="sep">·</span>
+                <span>Earn 5/7 AH</span>
+              </div>
+            </div>
+            <div class="col-right">
+              <div class="pnl-row">
+                <span class="card-pnl positive">+406%</span>
+                <span class="pnl-lbl">peak</span>
+                <span class="pnl-current-mobile"><span class="lbl">·</span><span class="val pos">+254%</span> now</span>
+              </div>
+              <div class="status-row">
+                <span class="status-open"><span class="open-dot"></span> OPEN</span>
+                <span class="badge badge-state">🔥 runner</span>
+                <span class="badge badge-win">WIN</span>
+              </div>
+              <svg class="spark" viewBox="0 0 220 44" preserveAspectRatio="none">
+                <line x1="0" y1="40" x2="220" y2="40" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+                <polyline fill="none" stroke="#00E676" stroke-width="1.5"
+                  points="5,24 22,21 40,17 60,11 80,5 100,3 120,7 140,12 160,9 180,11 200,13 215,14"/>
+                <polygon fill="rgba(0,230,118,0.08)"
+                  points="5,24 22,21 40,17 60,11 80,5 100,3 120,7 140,12 160,9 180,11 200,13 215,14 215,44 5,44"/>
+                <circle cx="100" cy="3" r="3" fill="#4FD68F"/>
+                <circle cx="215" cy="14" r="2.5" fill="#FFC107"/>
+              </svg>
+              <div class="spark-axis">
+                <span class="a-entry">$4.00 entry</span>
+                <span class="a-peak">peak $20.23</span>
+                <span class="a-now">now $14.18</span>
+              </div>
+            </div>
+          </div>
+          <!-- Premium arrow + entered as final lines (full-width below the 2-col flex) -->
+          <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 4px;">
+            <div class="prem-row">
+              <span class="px-entry">$4.00</span><span class="arrow">→</span><span class="px-now up">$14.18</span>
+              <span class="stop">stop <span class="stop-val">$2.00</span></span>
+            </div>
+            <div class="entered-row">
+              <span class="lbl">Entered</span><span class="val">4/9 9:32a ET</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- COIN mobile -->
+        <div class="signal-card bullish">
+          <div class="layout">
+            <div class="col-left">
+              <div class="header">
+                <span class="ticker">$COIN</span>
+                <span class="badge badge-bullish">Bullish</span>
+                <span class="badge badge-primary">Primary</span>
+              </div>
+              <div class="conviction-row">
+                <span class="conv-label">82</span>
+                <div class="conviction-bar">
+                  <div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+                </div>
+                <span class="conv-strength">developing</span>
+              </div>
+              <div class="spot-row">
+                <span class="lbl">Spot</span>
+                <span class="val">$184.20</span>
+                <span class="pct down">▼-1.4%</span>
+                <span class="name">Coinbase</span>
+              </div>
+              <div class="opt-row">
+                <span class="opt-spec">Call $200 exp 5/15</span>
+                <span class="sep">·</span>
+                <span>12d</span>
+                <span class="sep">·</span>
+                <span>Day 8</span>
+                <span class="sep">·</span>
+                <span>Earn 5/7 AH</span>
+              </div>
+            </div>
+            <div class="col-right">
+              <div class="pnl-row">
+                <span class="card-pnl positive">+11%</span>
+                <span class="pnl-lbl">peak</span>
+                <span class="pnl-current-mobile"><span class="lbl">·</span><span class="val neg">-7%</span> now</span>
+              </div>
+              <div class="status-row">
+                <span class="status-open"><span class="open-dot"></span> OPEN</span>
+                <span class="badge badge-win">WIN</span>
+              </div>
+              <svg class="spark" viewBox="0 0 220 44" preserveAspectRatio="none">
+                <line x1="0" y1="22" x2="220" y2="22" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="2,3"/>
+                <line x1="0" y1="40" x2="220" y2="40" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+                <polyline fill="none" stroke="#FFC107" stroke-width="1.5"
+                  points="5,24 35,22 65,20 95,16 125,21 155,26 185,29 215,30"/>
+                <polygon fill="rgba(255,193,7,0.06)"
+                  points="5,24 35,22 65,20 95,16 125,21 155,26 185,29 215,30 215,44 5,44"/>
+                <circle cx="95" cy="16" r="3" fill="#4FD68F"/>
+                <circle cx="215" cy="30" r="2.5" fill="#FFC107"/>
+              </svg>
+              <div class="spark-axis">
+                <span class="a-entry">$8.50 entry</span>
+                <span class="a-peak">peak $9.45</span>
+                <span class="a-now down">now $7.90</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 4px;">
+            <div class="prem-row">
+              <span class="px-entry">$8.50</span><span class="arrow">→</span><span class="px-now down">$7.90</span>
+              <span class="stop">stop <span class="stop-val">$4.25</span></span>
+            </div>
+            <div class="entered-row">
+              <span class="lbl">Entered</span><span class="val">4/25 10:14a ET</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- WULF mobile -->
+        <div class="signal-card bullish">
+          <div class="layout">
+            <div class="col-left">
+              <div class="header">
+                <span class="ticker">$WULF</span>
+                <span class="badge badge-bullish">Bullish</span>
+                <span class="badge badge-primary">Primary</span>
+              </div>
+              <div class="conviction-row">
+                <span class="conv-label">78</span>
+                <div class="conviction-bar">
+                  <div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block filled mid"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div><div class="conviction-block empty"></div>
+                </div>
+                <span class="conv-strength">developing</span>
+              </div>
+              <div class="spot-row">
+                <span class="lbl">Spot</span>
+                <span class="val">$19.84</span>
+                <span class="pct up">▲+0.6%</span>
+                <span class="name">TeraWulf</span>
+              </div>
+              <div class="opt-row">
+                <span class="opt-spec">Call $22 exp 5/15</span>
+                <span class="sep">·</span>
+                <span>12d</span>
+                <span class="sep">·</span>
+                <span>Day 11</span>
+                <span class="sep">·</span>
+                <span>Earn 5/8 AH</span>
+              </div>
+            </div>
+            <div class="col-right">
+              <div class="pnl-row">
+                <span class="card-pnl positive">+20%</span>
+                <span class="pnl-lbl">peak</span>
+                <span class="pnl-current-mobile"><span class="lbl">·</span><span class="val neg">-23%</span> now</span>
+              </div>
+              <div class="status-row">
+                <span class="status-open"><span class="open-dot"></span> OPEN</span>
+                <span class="badge badge-win">WIN</span>
+              </div>
+              <svg class="spark" viewBox="0 0 220 44" preserveAspectRatio="none">
+                <line x1="0" y1="22" x2="220" y2="22" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="2,3"/>
+                <line x1="0" y1="40" x2="220" y2="40" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+                <polyline fill="none" stroke="#FF5252" stroke-width="1.5"
+                  points="5,22 30,18 55,14 85,18 115,26 145,32 175,35 200,37 215,38"/>
+                <polygon fill="rgba(255,82,82,0.06)"
+                  points="5,22 30,18 55,14 85,18 115,26 145,32 175,35 200,37 215,38 215,44 5,44"/>
+                <circle cx="55" cy="14" r="3" fill="#4FD68F"/>
+                <circle cx="215" cy="38" r="2.5" fill="#FF5252"/>
+              </svg>
+              <div class="spark-axis">
+                <span class="a-entry">$0.85 entry</span>
+                <span class="a-peak">peak $1.02</span>
+                <span class="a-now down">now $0.65</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 4px;">
+            <div class="prem-row">
+              <span class="px-entry">$0.85</span><span class="arrow">→</span><span class="px-now down">$0.65</span>
+              <span class="stop">stop <span class="stop-val">$0.43</span></span>
+            </div>
+            <div class="entered-row">
+              <span class="lbl">Entered</span><span class="val">4/22 9:45a ET</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="notes">
+    <strong>v13 changes from v12:</strong>
+    <ul style="margin: 6px 0 0; padding-left: 18px;">
+      <li><strong>Conviction promoted</strong> to row 2 (right under header). Bigger blocks (12px tall × 7px wide vs 10×6) so it reads as a primary metric, not a footer detail.</li>
+      <li><strong>Option spec + lifecycle merged</strong> into one row: <em>"Call $110 exp 5/8 · 5d to expiry · Day 24 · Earn 5/7 AH"</em>. Saves a row + reads as one cohesive thought.</li>
+      <li><strong>3-dot axis labels back</strong> under the sparkline: <em>"$4.00 entry · peak $20.23 · now $14.18"</em>. Color-coded (entry secondary, peak green, now amber/red).</li>
+      <li><strong>No more bottom row spanning full width</strong> — premium arrow + entered are part of the left column flow on desktop. Cleaner.</li>
+      <li><strong>Mobile rebuilt:</strong>
+        <ul style="margin:4px 0 0;">
+          <li>Top section: 2-col flex collapses to single column (header → conviction → spot → option/lifecycle in left, then peak/current inline + status + sparkline + axis below)</li>
+          <li>Bottom section: premium arrow + entered as a footer separated by a top border</li>
+          <li>Peak + current go INLINE on mobile ("+406% peak · +254% now") to save a row</li>
+          <li>State badge moves into status row inline</li>
+          <li>No more crazy stacking, no awkward right-column-collapses-below mess</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>

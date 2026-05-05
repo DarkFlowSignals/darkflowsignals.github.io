@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DarkFlow Card Mockups v5 - Peak-Leading (corrected direction)</title>
+<style>
+  :root {
+    --bg-primary: #0A0A0F;
+    --bg-card: #12121B;
+    --bg-card-hover: #18182A;
+    --bg-surface: #0E0E16;
+    --bg-deep: #07070C;
+    --border: #1E1E2E;
+    --border-accent: #2A2A3F;
+    --text-primary: #E8E8ED;
+    --text-secondary: #8B8BA8;
+    --text-muted: #5D5D75;
+    --green: #00E676;
+    --green-soft: #4FD68F;
+    --green-deep: #00B85C;
+    --green-dim: rgba(0, 230, 118, 0.12);
+    --red: #FF5252;
+    --red-soft: #F08585;
+    --red-dim: rgba(255, 82, 82, 0.12);
+    --amber: #FFC107;
+    --amber-soft: #E6B656;
+    --amber-dim: rgba(255, 193, 7, 0.12);
+    --blue: #5B9FFF;
+    --blue-dim: rgba(91, 159, 255, 0.10);
+    --font-mono: 'IBM Plex Mono', 'JetBrains Mono', Consolas, monospace;
+    --font-sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    margin: 0;
+    padding: 32px 24px;
+    line-height: 1.4;
+  }
+  .page-header {
+    max-width: 1080px;
+    margin: 0 auto 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-header h1 {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    margin: 0 0 4px;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .page-header p { margin: 0; color: var(--text-secondary); font-size: 12px; }
+
+  .callout {
+    max-width: 1080px;
+    margin: 0 auto 32px;
+    background: var(--bg-surface);
+    border-left: 3px solid var(--amber);
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .callout strong { color: var(--text-primary); }
+  .callout em { color: var(--amber-soft); font-style: normal; }
+
+  .section {
+    max-width: 1080px;
+    margin: 0 auto 56px;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .section-name {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .section-desc { font-size: 12px; color: var(--text-secondary); }
+
+  .card-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+
+  /* ================================================================
+     CARD BASE
+     ================================================================ */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .card:hover { background: var(--bg-card-hover); border-color: var(--border-accent); }
+  .card.bullish { border-left-color: var(--green); }
+  .card.bearish { border-left-color: var(--red); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 22px;
+    align-items: start;
+  }
+  .col-left { min-width: 0; }
+  .col-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  /* HEADER */
+  .row-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .ticker {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+  }
+  .strike {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text-secondary);
+  }
+  .direction {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 600;
+  }
+  .direction.down { color: var(--red); }
+  .tier {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    background: var(--amber-dim);
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin-left: auto;
+  }
+
+  /* CONVICTION BAR */
+  .conviction {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+  .conviction .label {
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-size: 9px;
+  }
+  .conviction .bar {
+    font-family: var(--font-mono);
+    letter-spacing: -1px;
+    font-size: 10px;
+  }
+  .conviction .bar.high { color: var(--green); }
+  .conviction .bar.mid { color: var(--amber-soft); }
+  .conviction .strength {
+    color: var(--text-secondary);
+    margin-left: 4px;
+    text-transform: uppercase;
+    font-size: 9px;
+    letter-spacing: 0.8px;
+  }
+
+  /* META */
+  .meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+  }
+  .meta .label {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 9.5px;
+    letter-spacing: 0.5px;
+    margin-right: 4px;
+  }
+  .meta .sep { color: var(--text-muted); margin: 0 7px; }
+  .meta .hot { color: var(--amber); }
+  .meta .warn { color: var(--red); }
+  .meta .upcoming { color: var(--amber-soft); font-weight: 500; }
+  .meta strong { color: var(--text-primary); font-weight: 500; }
+
+  /* THESIS */
+  .thesis {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    font-style: italic;
+    padding-left: 11px;
+    border-left: 2px solid rgba(91, 159, 255, 0.25);
+    margin-top: 10px;
+  }
+  .thesis .tag {
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-right: 8px;
+  }
+
+  /* SPARKLINE */
+  .spark {
+    width: 100%;
+    height: 38px;
+    margin-top: 8px;
+  }
+
+  /* ================================================================
+     RIGHT RAIL — PEAK-LEADING VARIANTS
+     ================================================================ */
+
+  /* Variant 1: Pure peak-led (peak huge, current as small live tracker) */
+  .v1-metrics { text-align: right; line-height: 1; }
+  .v1-metrics .peak-val {
+    font-family: var(--font-mono);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--green-soft);
+    letter-spacing: -0.5px;
+  }
+  .v1-metrics .peak-lbl {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+  .v1-metrics .now-row {
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .v1-metrics .now-row .now-val { font-weight: 600; }
+  .v1-metrics .now-row .now-val.up { color: var(--green); }
+  .v1-metrics .now-row .now-val.down { color: var(--red); }
+
+  /* Variant 2: Peak + arrow showing trajectory from peak */
+  .v2-metrics { text-align: right; line-height: 1; }
+  .v2-metrics .peak-val {
+    font-family: var(--font-mono);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--green-soft);
+    letter-spacing: -0.5px;
+  }
+  .v2-metrics .peak-lbl {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+  .v2-metrics .trajectory {
+    margin-top: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    gap: 5px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .v2-metrics .traj-arrow { font-size: 10px; }
+  .v2-metrics .traj-arrow.down { color: var(--red); }
+  .v2-metrics .traj-arrow.up { color: var(--green); }
+  .v2-metrics .traj-arrow.flat { color: var(--text-secondary); }
+  .v2-metrics .traj-val { font-weight: 600; color: var(--text-primary); }
+  .v2-metrics .traj-val.up { color: var(--green); }
+  .v2-metrics .traj-val.down { color: var(--red); }
+
+  /* Variant 3: Peak as headline + current as live ticker badge */
+  .v3-metrics { text-align: right; line-height: 1; }
+  .v3-metrics .peak-val {
+    font-family: var(--font-mono);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--green-soft);
+    letter-spacing: -0.5px;
+  }
+  .v3-metrics .peak-lbl {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+  .v3-metrics .live-badge {
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+  }
+  .v3-metrics .live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px rgba(0, 230, 118, 0.6);
+    animation: pulse 2s infinite;
+  }
+  .v3-metrics .live-dot.down { background: var(--red); box-shadow: 0 0 6px rgba(255, 82, 82, 0.6); }
+  .v3-metrics .live-lbl {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 8.5px;
+    letter-spacing: 0.6px;
+  }
+  .v3-metrics .live-val { font-weight: 600; color: var(--text-primary); }
+  .v3-metrics .live-val.up { color: var(--green); }
+  .v3-metrics .live-val.down { color: var(--red); }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 10px;
+    padding-top: 9px;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: 0.4px;
+  }
+  .footer .left { color: var(--text-secondary); }
+  .footer .left strong { color: var(--text-primary); font-weight: 500; }
+  .footer .right { color: var(--blue); }
+
+  .compare {
+    background: var(--bg-card);
+    border: 1px dashed var(--border-accent);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .compare strong { color: var(--text-primary); }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Card Mockups v5 - Peak-Leading (corrected direction)</h1>
+  <p>Course-correcting from v4. Peak % becomes the lead metric per the IDENTITY RULE: "All subscriber-facing content is about signal QUALITY, not the mechanics of how positions were managed." Peak shows signal quality (the read was correct, market validated it). Current is the live tracker, secondary.</p>
+</div>
+
+<div class="callout">
+  <strong>Why peak leads:</strong> Our brand is signal provider, not P&L tracker. <em>Peak +406%</em> is the headline that proves the read worked. <em>Current +254%</em> is the live state, useful but secondary. Win rate is already peak-based by default. Leading with current would tell the wrong story (P&L service, not signal service). Three variants below for HOW to express that hierarchy on the right rail.
+</div>
+
+<!-- ================================================================
+     VARIANT 1: PURE PEAK-LED
+     ================================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-name">Variant 1 — Pure peak-led</div>
+    <div class="section-desc">Peak is large + accent color. Current is a small monospace line below labeled "now". Cleanest hierarchy.</div>
+  </div>
+  <div class="card-grid">
+
+    <!-- CRWV runner -->
+    <div class="card bullish">
+      <div class="grid">
+        <div class="col-left">
+          <div class="row-header">
+            <span class="ticker">CRWV</span>
+            <span class="strike">$110C 5/8</span>
+            <span class="direction">▲ Bullish</span>
+            <span class="tier">Primary</span>
+          </div>
+          <div class="conviction">
+            <span class="label">Conviction</span>
+            <span class="bar high">█████████████████░░░</span>
+            <span class="strength">strong</span>
+          </div>
+          <div class="meta">
+            <span><span class="label">Entered</span><strong>4/9 @ 9:32 AM PT · $4.00</strong></span>
+            <span class="sep">·</span>
+            <span>Day 24</span>
+            <span class="sep">·</span>
+            <span class="warn">5d to expiry</span>
+          </div>
+          <div class="meta">
+            <span><span class="label">Earnings</span><span class="upcoming">5/7 Wed AH · 4d</span></span>
+            <span class="sep">·</span>
+            <span>🔥 runner</span>
+          </div>
+          <div class="thesis">
+            <span class="tag">why</span>Block buyers building the $110 strike with long-dated calls held + short-dated puts protecting the binary into 5/7 print. AI infra cohort still bid.
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="v1-metrics">
+            <div class="peak-val">+406%</div>
+            <div class="peak-lbl">Peak</div>
+            <div class="now-row">now <span class="now-val up">+254%</span></div>
+          </div>
+          <svg class="spark" viewBox="0 0 200 38" preserveAspectRatio="none">
+            <line x1="0" y1="36" x2="200" y2="36" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+            <polyline fill="none" stroke="#00E676" stroke-width="1.4"
+              points="5,18 22,16 40,12 58,8 76,4 94,3 112,5 130,9 148,12 166,9 184,11 195,13"/>
+            <polygon fill="rgba(0,230,118,0.08)"
+              points="5,18 22,16 40,12 58,8 76,4 94,3 112,5 130,9 148,12 166,9 184,11 195,13 195,38 5,38"/>
+            <!-- peak dot prominent -->
+            <circle cx="94" cy="3" r="3.5" fill="#4FD68F"/>
+            <!-- current dot smaller -->
+            <circle cx="195" cy="13" r="2" fill="#FFC107"/>
+          </svg>
+        </div>
+      </div>
+      <div class="footer">
+        <span class="left">Cohort: <strong>n=11 · won 73% · median peak +94%</strong></span>
+        <span class="right">↓ click for greeks, full thesis, chart</span>
+      </div>
+    </div>
+
+    <!-- COIN underwater -->
+    <div class="card bullish">
+      <div class="grid">
+        <div class="col-left">
+          <div class="row-header">
+            <span class="ticker">COIN</span>
+            <span class="strike">$200C 5/15</span>
+            <span class="direction">▲ Bullish</span>
+            <span class="tier">Primary</span>
+          </div>
+          <div class="conviction">
+            <span class="label">Conviction</span>
+            <span class="bar mid">████████████████░░░░</span>
+            <span class="strength">developing</span>
+          </div>
+          <div class="meta">
+            <span><span class="label">Entered</span><strong>4/25 @ 10:14 AM PT · $8.50</strong></span>
+            <span class="sep">·</span>
+            <span>Day 8</span>
+            <span class="sep">·</span>
+            <span>12d to expiry</span>
+          </div>
+          <div class="meta">
+            <span><span class="label">Earnings</span><span class="upcoming">5/7 Wed AH · 4d</span></span>
+          </div>
+          <div class="thesis">
+            <span class="tag">why</span>Buyers chasing fills on the $200 strike, paying up through the offer. Crypto bid +1.69% BTC overnight reinforces directional setup into 5/7 print.
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="v1-metrics">
+            <div class="peak-val">+11%</div>
+            <div class="peak-lbl">Peak</div>
+            <div class="now-row">now <span class="now-val down">-7%</span></div>
+          </div>
+          <svg class="spark" viewBox="0 0 200 38" preserveAspectRatio="none">
+            <line x1="0" y1="36" x2="200" y2="36" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+            <polyline fill="none" stroke="#FFC107" stroke-width="1.4"
+              points="5,17 30,16 60,14 90,11 120,15 150,19 180,22 195,23"/>
+            <polygon fill="rgba(255,193,7,0.06)"
+              points="5,17 30,16 60,14 90,11 120,15 150,19 180,22 195,23 195,38 5,38"/>
+            <circle cx="90" cy="11" r="3.5" fill="#4FD68F"/>
+            <circle cx="195" cy="23" r="2" fill="#FFC107"/>
+          </svg>
+        </div>
+      </div>
+      <div class="footer">
+        <span class="left">Cohort: <strong>n=8 · won 62% · median peak +127%</strong></span>
+        <span class="right">↓ click for greeks, full thesis, chart</span>
+      </div>
+    </div>
+  </div>
+  <div class="compare">
+    <strong>Read:</strong> Peak dominates the eye. "now" line is monospace small, almost like a stat readout. The hierarchy says: <strong>this signal achieved +406%</strong> (the proof), and you can <em>also</em> see where it sits today.
+  </div>
+</div>
+
+<!-- ================================================================
+     VARIANT 2: PEAK + TRAJECTORY ARROW
+     ================================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-name">Variant 2 — Peak + trajectory arrow</div>
+    <div class="section-desc">Peak large. "now" shown as a directional arrow (▼ from peak / ▲ approaching) + delta from peak. Tells the story of where the position is in its arc.</div>
+  </div>
+  <div class="card-grid">
+
+    <!-- CRWV runner -->
+    <div class="card bullish">
+      <div class="grid">
+        <div class="col-left">
+          <div class="row-header">
+            <span class="ticker">CRWV</span>
+            <span class="strike">$110C 5/8</span>
+            <span class="direction">▲ Bullish</span>
+            <span class="tier">Primary</span>
+          </div>
+          <div class="conviction">
+            <span class="label">Conviction</span>
+            <span class="bar high">█████████████████░░░</span>
+            <span class="strength">strong</span>
+          </div>
+          <div class="meta">
+            <span><span class="label">Entered</span><strong>4/9 @ 9:32 AM PT · $4.00</strong></span>
+            <span class="sep">·</span>
+            <span>Day 24</span>
+            <span class="sep">·</span>
+            <span class="warn">5d to expiry</span>
+          </div>
+          <div class="meta">
+            <span><span class="label">Earnings</span><span class="upcoming">5/7 Wed AH · 4d</span></span>
+            <span class="sep">·</span>
+            <span>🔥 runner</span>
+          </div>
+          <div class="thesis">
+            <span class="tag">why</span>Block buyers building the $110 strike with long-dated calls held + short-dated puts protecting the binary into 5/7 print. AI infra cohort still bid.
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="v2-metrics">
+            <div class="peak-val">+406%</div>
+            <div class="peak-lbl">Peak</div>
+            <div class="trajectory">
+              now <span class="traj-arrow down">▼</span> <span class="traj-val up">+254%</span> <span style="opacity:0.6;">(-152pp)</span>
+            </div>
+          </div>
+          <svg class="spark" viewBox="0 0 200 38" preserveAspectRatio="none">
+            <line x1="0" y1="36" x2="200" y2="36" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+            <polyline fill="none" stroke="#00E676" stroke-width="1.4"
+              points="5,18 22,16 40,12 58,8 76,4 94,3 112,5 130,9 148,12 166,9 184,11 195,13"/>
+            <polygon fill="rgba(0,230,118,0.08)"
+              points="5,18 22,16 40,12 58,8 76,4 94,3 112,5 130,9 148,12 166,9 184,11 195,13 195,38 5,38"/>
+            <circle cx="94" cy="3" r="3.5" fill="#4FD68F"/>
+            <circle cx="195" cy="13" r="2" fill="#FFC107"/>
+          </svg>
+        </div>
+      </div>
+      <div class="footer">
+        <span class="left">Cohort: <strong>n=11 · won 73% · median peak +94%</strong></span>
+        <span class="right">↓ click for greeks, full thesis, chart</span>
+      </div>
+    </div>
+
+    <!-- COIN -->
+    <div class="card bullish">
+      <div class="grid">
+        <div class="col-left">
+          <div class="row-header">
+            <span class="ticker">COIN</span>
+            <span class="strike">$200C 5/15</span>
+            <span class="direction">▲ Bullish</span>
+            <span class="tier">Primary</span>
+          </div>
+          <div class="conviction">
+            <span class="label">Conviction</span>
+            <span class="bar mid">████████████████░░░░</span>
+            <span class="strength">developing</span>
+          </div>
+          <div class="meta">
+            <span><span class="label">Entered</span><strong>4/25 @ 10:14 AM PT · $8.50</strong></span>
+            <span class="sep">·</span>
+            <span>Day 8</span>
+            <span class="sep">·</span>
+            <span>12d to expiry</span>
+          </div>
+          <div class="meta">
+            <span><span class="label">Earnings</span><span class="upcoming">5/7 Wed AH · 4d</span></span>
+          </div>
+          <div class="thesis">
+            <span class="tag">why</span>Buyers chasing fills on the $200 strike, paying up through the offer. Crypto bid +1.69% BTC overnight reinforces directional setup into 5/7 print.
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="v2-metrics">
+            <div class="peak-val">+11%</div>
+            <div class="peak-lbl">Peak</div>
+            <div class="trajectory">
+              now <span class="traj-arrow down">▼</span> <span class="traj-val down">-7%</span> <span style="opacity:0.6;">(-18pp)</span>
+            </div>
+          </div>
+          <svg class="spark" viewBox="0 0 200 38" preserveAspectRatio="none">
+            <line x1="0" y1="36" x2="200" y2="36" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+            <polyline fill="none" stroke="#FFC107" stroke-width="1.4"
+              points="5,17 30,16 60,14 90,11 120,15 150,19 180,22 195,23"/>
+            <polygon fill="rgba(255,193,7,0.06)"
+              points="5,17 30,16 60,14 90,11 120,15 150,19 180,22 195,23 195,38 5,38"/>
+            <circle cx="90" cy="11" r="3.5" fill="#4FD68F"/>
+            <circle cx="195" cy="23" r="2" fill="#FFC107"/>
+          </svg>
+        </div>
+      </div>
+      <div class="footer">
+        <span class="left">Cohort: <strong>n=8 · won 62% · median peak +127%</strong></span>
+        <span class="right">↓ click for greeks, full thesis, chart</span>
+      </div>
+    </div>
+  </div>
+  <div class="compare">
+    <strong>Read:</strong> Same hierarchy as v1 but the trajectory line tells <strong>more story</strong>. "now ▼ +254% (-152pp)" instantly communicates: position peaked, has given some back, but is still up significantly. The -pp delta is the new info that makes "current" feel like meaningful data instead of just a smaller number.
+  </div>
+</div>
+
+<!-- ================================================================
+     VARIANT 3: PEAK + LIVE BADGE
+     ================================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-name">Variant 3 — Peak + live ticker badge</div>
+    <div class="section-desc">Peak as the achievement. Current as a "LIVE" badge with pulsing dot. Visually separates the two metrics so members know peak is the historical record and current is the live state.</div>
+  </div>
+  <div class="card-grid">
+
+    <!-- CRWV -->
+    <div class="card bullish">
+      <div class="grid">
+        <div class="col-left">
+          <div class="row-header">
+            <span class="ticker">CRWV</span>
+            <span class="strike">$110C 5/8</span>
+            <span class="direction">▲ Bullish</span>
+            <span class="tier">Primary</span>
+          </div>
+          <div class="conviction">
+            <span class="label">Conviction</span>
+            <span class="bar high">█████████████████░░░</span>
+            <span class="strength">strong</span>
+          </div>
+          <div class="meta">
+            <span><span class="label">Entered</span><strong>4/9 @ 9:32 AM PT · $4.00</strong></span>
+            <span class="sep">·</span>
+            <span>Day 24</span>
+            <span class="sep">·</span>
+            <span class="warn">5d to expiry</span>
+          </div>
+          <div class="meta">
+            <span><span class="label">Earnings</span><span class="upcoming">5/7 Wed AH · 4d</span></span>
+            <span class="sep">·</span>
+            <span>🔥 runner</span>
+          </div>
+          <div class="thesis">
+            <span class="tag">why</span>Block buyers building the $110 strike with long-dated calls held + short-dated puts protecting the binary into 5/7 print. AI infra cohort still bid.
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="v3-metrics">
+            <div class="peak-val">+406%</div>
+            <div class="peak-lbl">Peak</div>
+            <div class="live-badge">
+              <span class="live-dot"></span>
+              <span class="live-lbl">live</span>
+              <span class="live-val up">+254%</span>
+            </div>
+          </div>
+          <svg class="spark" viewBox="0 0 200 38" preserveAspectRatio="none">
+            <line x1="0" y1="36" x2="200" y2="36" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+            <polyline fill="none" stroke="#00E676" stroke-width="1.4"
+              points="5,18 22,16 40,12 58,8 76,4 94,3 112,5 130,9 148,12 166,9 184,11 195,13"/>
+            <polygon fill="rgba(0,230,118,0.08)"
+              points="5,18 22,16 40,12 58,8 76,4 94,3 112,5 130,9 148,12 166,9 184,11 195,13 195,38 5,38"/>
+            <circle cx="94" cy="3" r="3.5" fill="#4FD68F"/>
+            <circle cx="195" cy="13" r="2" fill="#FFC107"/>
+          </svg>
+        </div>
+      </div>
+      <div class="footer">
+        <span class="left">Cohort: <strong>n=11 · won 73% · median peak +94%</strong></span>
+        <span class="right">↓ click for greeks, full thesis, chart</span>
+      </div>
+    </div>
+
+    <!-- COIN -->
+    <div class="card bullish">
+      <div class="grid">
+        <div class="col-left">
+          <div class="row-header">
+            <span class="ticker">COIN</span>
+            <span class="strike">$200C 5/15</span>
+            <span class="direction">▲ Bullish</span>
+            <span class="tier">Primary</span>
+          </div>
+          <div class="conviction">
+            <span class="label">Conviction</span>
+            <span class="bar mid">████████████████░░░░</span>
+            <span class="strength">developing</span>
+          </div>
+          <div class="meta">
+            <span><span class="label">Entered</span><strong>4/25 @ 10:14 AM PT · $8.50</strong></span>
+            <span class="sep">·</span>
+            <span>Day 8</span>
+            <span class="sep">·</span>
+            <span>12d to expiry</span>
+          </div>
+          <div class="meta">
+            <span><span class="label">Earnings</span><span class="upcoming">5/7 Wed AH · 4d</span></span>
+          </div>
+          <div class="thesis">
+            <span class="tag">why</span>Buyers chasing fills on the $200 strike, paying up through the offer. Crypto bid +1.69% BTC overnight reinforces directional setup into 5/7 print.
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="v3-metrics">
+            <div class="peak-val">+11%</div>
+            <div class="peak-lbl">Peak</div>
+            <div class="live-badge">
+              <span class="live-dot down"></span>
+              <span class="live-lbl">live</span>
+              <span class="live-val down">-7%</span>
+            </div>
+          </div>
+          <svg class="spark" viewBox="0 0 200 38" preserveAspectRatio="none">
+            <line x1="0" y1="36" x2="200" y2="36" stroke="rgba(255,82,82,0.15)" stroke-width="1" stroke-dasharray="2,3"/>
+            <polyline fill="none" stroke="#FFC107" stroke-width="1.4"
+              points="5,17 30,16 60,14 90,11 120,15 150,19 180,22 195,23"/>
+            <polygon fill="rgba(255,193,7,0.06)"
+              points="5,17 30,16 60,14 90,11 120,15 150,19 180,22 195,23 195,38 5,38"/>
+            <circle cx="90" cy="11" r="3.5" fill="#4FD68F"/>
+            <circle cx="195" cy="23" r="2" fill="#FFC107"/>
+          </svg>
+        </div>
+      </div>
+      <div class="footer">
+        <span class="left">Cohort: <strong>n=8 · won 62% · median peak +127%</strong></span>
+        <span class="right">↓ click for greeks, full thesis, chart</span>
+      </div>
+    </div>
+  </div>
+  <div class="compare">
+    <strong>Read:</strong> Visually separates the two metrics into different "container types". Peak is the headline numeral. Current sits in a small badge with a pulsing dot to scream "this is LIVE and updating" - emphasizes the time-distinction explicitly.
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-name">Pick one</div>
+    <div class="section-desc"></div>
+  </div>
+  <table style="width:100%; border-collapse: collapse; font-size: 13px; color: var(--text-secondary);">
+    <thead>
+      <tr style="background: var(--bg-card); color: var(--text-primary);">
+        <th style="padding: 10px; text-align: left; font-family: var(--font-mono); font-size: 11px;">Variant</th>
+        <th style="padding: 10px; text-align: left; font-family: var(--font-mono); font-size: 11px;">Strength</th>
+        <th style="padding: 10px; text-align: left; font-family: var(--font-mono); font-size: 11px;">Trade-off</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 10px;"><strong>V1 Pure peak-led</strong></td>
+        <td style="padding: 10px;">Cleanest hierarchy. Quietest design.</td>
+        <td style="padding: 10px;">"now" line is small, may feel buried for members tracking live moves</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 10px;"><strong>V2 Trajectory arrow</strong></td>
+        <td style="padding: 10px;">Tells the story (peak achieved + giveback). Most informative.</td>
+        <td style="padding: 10px;">Slightly busier visually than v1</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 10px;"><strong>V3 Live badge</strong></td>
+        <td style="padding: 10px;">Strongest visual separation: "achievement" vs "live state". Animation draws eye.</td>
+        <td style="padding: 10px;">Pulsing dot might be distracting at scale (20+ cards on dashboard)</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="compare" style="margin-top: 16px;">
+    <strong>My pick:</strong> <em>V2 (trajectory arrow)</em>. Peak still leads as the headline (signal quality), but the trajectory line "now ▼ +254% (-152pp)" answers a real member question — "where is it now relative to its best moment?" — without burying the peak. V1 is the safe minimal choice; V3 is the most distinctive but the pulsing dot scales poorly.
+  </div>
+</div>
+
+</body>
+</html>

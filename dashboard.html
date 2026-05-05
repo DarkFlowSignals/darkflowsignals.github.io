@@ -824,10 +824,11 @@ body.premium .unlock-badge { display: none; }
 
 .data-table {
   width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
   font-family: var(--font-mono);
   font-size: 11px;
-  table-layout: auto;
+  table-layout: fixed;
 }
 
 .data-table th {
@@ -852,8 +853,12 @@ body.premium .unlock-badge { display: none; }
   color: var(--text-secondary);
   white-space: nowrap;
   font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .data-table .badge { font-size: 9px; padding: 2px 5px; }
+/* Detail row td needs to NOT inherit the truncation; thesis has to wrap. */
+.data-table tr.row-detail td { overflow: visible; text-overflow: clip; white-space: normal; }
 
 .data-table tr:hover td { background: var(--bg-card); }
 

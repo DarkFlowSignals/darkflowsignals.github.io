@@ -1432,6 +1432,40 @@ body.premium .unlock-badge { display: none; }
     </div>
   </div>
 
+  <!-- ACCOUNT SIMULATION (moved to top 2026-05-05 per kate: "first thing a visitor sees") -->
+  <div id="equity-section" style="margin:32px 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:4px;">
+      <h3 id="equity-heading" style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0;">Account Simulation · 1 contract per signal</h3>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+        <div class="filter-group" style="margin:0;" role="tablist" aria-label="Date range">
+          <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.2px;margin-right:8px;">Range</span>
+          <button class="filter-pill active" data-range="all" role="tab" aria-selected="true">All</button>
+          <button class="filter-pill" data-range="1m" role="tab" aria-selected="false">1M</button>
+          <button class="filter-pill" data-range="2w" role="tab" aria-selected="false">2W</button>
+          <button class="filter-pill" data-range="1w" role="tab" aria-selected="false">1W</button>
+        </div>
+        <div class="filter-group" style="margin:0;" role="tablist" aria-label="Equity simulation mode">
+          <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.2px;margin-right:8px;">Sim</span>
+          <button class="filter-pill active" data-sim="contract" role="tab" aria-selected="true">1 Contract</button>
+          <button class="filter-pill" data-sim="dollar" role="tab" aria-selected="false">$100 / Trade</button>
+        </div>
+      </div>
+    </div>
+    <p id="equity-copy-contract" style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:8px 0 10px 0;line-height:1.7;">
+      Realistic simulation: buy exactly one contract of each published signal at the logged entry premium. One option contract controls 100 shares, so the dollar cost per signal = entry premium x 100. No compounding. Scale by your own sizing: 2 contracts = 2x the numbers, 5 contracts = 5x.
+    </p>
+    <p id="equity-copy-dollar" style="display:none;font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:8px 0 10px 0;line-height:1.7;">
+      Flat-dollar simulation: allocate exactly $100 to every signal at entry, regardless of contract price. Cleanest apples-to-apples read on signal quality. No compounding, no winner scaling. Scale by your own sizing: $1,000 per signal, multiply the numbers by 10.
+    </p>
+    <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 12px 0;line-height:1.7;">
+      <span style="color:#00E676;display:inline-block;width:56px;">Peak $:</span>cumulative $ P&L if you exited each trade at its highest point.<br>
+      <span style="color:#F59E0B;display:inline-block;width:56px;">Current $:</span>cumulative $ P&L at calendar expiry (public rule). Respects the 50% stop toggle below.<br>
+      <span style="color:var(--text-secondary);display:inline-block;width:56px;">Tip:</span>each dot = one trading day. Tap a dot to see every trade that fired that day.
+    </p>
+    <canvas id="equity-chart" height="220" aria-label="Account simulation dollar P&L"></canvas>
+    <div id="equity-stats" style="display:flex;gap:28px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:13px;flex-wrap:wrap;justify-content:center;align-items:baseline;"></div>
+  </div>
+
   <!-- TRANSPARENCY NOTE -->
   <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-bottom:20px;padding:12px 16px;border:1px solid var(--border);border-radius:4px;background:var(--bg-card);line-height:1.7;">
     <div style="color:var(--text-secondary);margin-bottom:6px;">Every signal logged with the real option premium at entry, tracked through its expiry date. No cherry-picking, no deleting losers.</div>
@@ -1510,33 +1544,6 @@ body.premium .unlock-badge { display: none; }
     </p>
     <canvas id="growth-chart" height="200"></canvas>
     <div id="growth-stats" style="display:flex;gap:28px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:13px;flex-wrap:wrap;justify-content:center;align-items:baseline;"></div>
-  </div>
-
-  <!-- ACCOUNT SIMULATION -->
-  <div id="equity-section" style="margin:40px 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;">
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:4px;">
-      <h3 id="equity-heading" style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0;">Account Simulation · 1 contract per signal</h3>
-      <div class="filter-group" style="margin:0;" role="tablist" aria-label="Equity simulation mode">
-        <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.2px;margin-right:8px;">Sim</span>
-        <button class="filter-pill active" data-sim="contract" role="tab" aria-selected="true">1 Contract</button>
-        <button class="filter-pill" data-sim="dollar" role="tab" aria-selected="false">$100 / Trade</button>
-      </div>
-    </div>
-    <p id="equity-copy-contract" style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:8px 0 10px 0;line-height:1.7;">
-      Realistic simulation: buy exactly one contract of each published signal at the logged entry premium. One option contract controls 100 shares, so the dollar cost per signal = entry premium x 100. No compounding. Scale by your own sizing: 2 contracts = 2x the numbers, 5 contracts = 5x.
-    </p>
-    <p id="equity-copy-dollar" style="display:none;font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:8px 0 10px 0;line-height:1.7;">
-      Flat-dollar simulation: allocate exactly $100 to every signal at entry, regardless of contract price. Cleanest apples-to-apples read on signal quality. No compounding, no winner scaling. Scale by your own sizing: $1,000 per signal, multiply the numbers by 10.
-    </p>
-    <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;line-height:1.7;padding:10px 12px;background:var(--bg-surface);border-left:2px solid var(--amber);border-radius:0 4px 4px 0;">
-      <strong style="color:var(--text-secondary);">Reading the lines:</strong> Every signal matching your current pill filter contributes. Closed trades lock in realized $P&L at their outcome date; open trades show live unrealized $P&L at their entry date (marked with *, still moving with price). Peak shows best-case exits at each high. Current shows the live rule today, or settled value at calendar expiry.
-    </p>
-    <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:0 0 16px 0;line-height:1.7;">
-      <span style="color:#00E676;display:inline-block;width:56px;">Peak $:</span>cumulative $ P&L if you exited each trade at its highest point.<br>
-      <span style="color:#F59E0B;display:inline-block;width:56px;">Current $:</span>cumulative $ P&L at calendar expiry (public rule). Respects the 50% stop toggle above.
-    </p>
-    <canvas id="equity-chart" height="220" aria-label="Account simulation dollar P&L"></canvas>
-    <div id="equity-stats" style="display:flex;gap:28px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:13px;flex-wrap:wrap;justify-content:center;align-items:baseline;"></div>
   </div>
 
   <!-- FOMO SECTION -->
@@ -3550,6 +3557,26 @@ body.premium .unlock-badge { display: none; }
     });
   })();
 
+  // ---- EVENT: EQUITY DATE-RANGE PILL ----
+  // kate 2026-05-05: filter the equity chart to All / 1M / 2W / 1W. Affects
+  // only the equity chart computation -- doesn't touch the rest of the page.
+  (function() {
+    var grp = document.querySelector('[data-range]') && document.querySelector('[data-range]').parentElement;
+    if (!grp) return;
+    grp.addEventListener('click', function(e) {
+      var pill = e.target.closest('.filter-pill[data-range]');
+      if (!pill) return;
+      grp.querySelectorAll('.filter-pill[data-range]').forEach(function(p) {
+        p.classList.remove('active');
+        p.setAttribute('aria-selected', 'false');
+      });
+      pill.classList.add('active');
+      pill.setAttribute('aria-selected', 'true');
+      EQUITY_DATE_RANGE = pill.dataset.range;
+      if (typeof renderEquityChart === 'function') renderEquityChart();
+    });
+  })();
+
   // ---- EVENT: MEMBER MENU DROPDOWN ----
   // Trigger toggles .open on the wrapper. Click-outside + Escape both close.
   (function() {
@@ -3638,6 +3665,11 @@ body.premium .unlock-badge { display: none; }
   // 'dollar' = $100 flat per signal. Toggled by the Sim filter-pill group.
   var EQUITY_SIM_MODE = 'contract';
   var FLAT_DOLLAR_PER_TRADE = 100;
+  // Date range for the equity curve (kate 2026-05-05). 'all' = entire history.
+  // '1m' / '2w' / '1w' filter trades whose outcome_date or signal_date falls
+  // within the lookback window. Affects only the equity chart, not the rest.
+  var EQUITY_DATE_RANGE = 'all';
+  var EQUITY_RANGE_DAYS = { 'all': null, '1m': 31, '2w': 14, '1w': 7 };
 
   function computeEquityCurve() {
     // All signals that match the current pills contribute. Closed trades (status
@@ -3659,17 +3691,29 @@ body.premium .unlock-badge { display: none; }
       return da.localeCompare(db);
     });
 
+    // Apply date-range filter (kate 2026-05-05). 'all' = no filter; otherwise
+    // keep only trades whose pointDate (outcome or signal) falls within the
+    // lookback window from today.
+    var rangeDays = EQUITY_RANGE_DAYS[EQUITY_DATE_RANGE];
+    if (rangeDays != null) {
+      var cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - rangeDays);
+      var cutoffStr = cutoff.toISOString().slice(0, 10);
+      trades = trades.filter(function(s) {
+        var d = s.outcome_date || s.signal_date || '';
+        return d >= cutoffStr;
+      });
+    }
+
     var mode = EQUITY_SIM_MODE;
-    var labels = ['start'];
-    var curLine = [0];
-    var peakLine = [0];
-    var cumCurDollars = 0;
-    var cumPeakDollars = 0;
-    var cumCost = 0;
-    var tooltipData = [{ ticker: null, date: null, cost: 0, curPct: null, peakPct: null, curDollars: 0, peakDollars: 0, isOpen: false }];
     var missingCount = 0;
     var openCount = 0;
 
+    // Pass 1: per-trade cost + P&L computation, bucketed by date.
+    // Each bucket = one trading day. The chart plots one dot per bucket; the
+    // tooltip lists every trade that fired (or settled) on that day.
+    var byDate = {};
+    var dateOrder = [];
     trades.forEach(function(s) {
       var cPct = currentPct(s);
       var pPct = peakPct(s);
@@ -3680,7 +3724,6 @@ body.premium .unlock-badge { display: none; }
       if (mode === 'contract') {
         var contractCost = (typeof s.contract_cost === 'number') ? s.contract_cost : null;
         if (contractCost == null) {
-          // No verified entry premium -> skip so the contract curve stays honest.
           missingCount += 1;
           return;
         }
@@ -3697,21 +3740,46 @@ body.premium .unlock-badge { display: none; }
       if (stillOpen) openCount += 1;
       var pointDate = s.outcome_date || s.signal_date;
 
-      cumCost += cost;
-      cumCurDollars += cPnl;
-      cumPeakDollars += pPnl;
-      labels.push(shortDate(pointDate) + (stillOpen ? '*' : ''));
+      if (!byDate[pointDate]) {
+        byDate[pointDate] = { date: pointDate, trades: [], totCost: 0, totCPnl: 0, totPPnl: 0, anyOpen: false };
+        dateOrder.push(pointDate);
+      }
+      byDate[pointDate].trades.push({
+        ticker: s.ticker, cost: cost, cPct: cPct, pPct: pPct,
+        cPnl: cPnl, pPnl: pPnl, isOpen: stillOpen,
+        direction: s.direction, strike: s.strike, option_type: s.option_type, expiry: s.expiry,
+      });
+      byDate[pointDate].totCost += cost;
+      byDate[pointDate].totCPnl += cPnl;
+      byDate[pointDate].totPPnl += pPnl;
+      if (stillOpen) byDate[pointDate].anyOpen = true;
+    });
+    dateOrder.sort();
+
+    // Pass 2: build cumulative arrays in date order. One label/point per date.
+    var labels = ['start'];
+    var curLine = [0];
+    var peakLine = [0];
+    var cumCurDollars = 0;
+    var cumPeakDollars = 0;
+    var cumCost = 0;
+    var tooltipData = [{ trades: [], date: null, anyOpen: false }];
+
+    dateOrder.forEach(function(d) {
+      var b = byDate[d];
+      cumCost += b.totCost;
+      cumCurDollars += b.totCPnl;
+      cumPeakDollars += b.totPPnl;
+      labels.push(shortDate(d) + (b.anyOpen ? '*' : ''));
       curLine.push(Math.round(cumCurDollars * 100) / 100);
       peakLine.push(Math.round(cumPeakDollars * 100) / 100);
       tooltipData.push({
-        ticker: s.ticker,
-        date: pointDate,
-        cost: cost,
-        curPct: cPct,
-        peakPct: pPct,
-        curDollars: cPnl,
-        peakDollars: pPnl,
-        isOpen: stillOpen,
+        date: d,
+        anyOpen: b.anyOpen,
+        trades: b.trades,
+        dayCPnl: Math.round(b.totCPnl * 100) / 100,
+        dayPPnl: Math.round(b.totPPnl * 100) / 100,
+        dayCost: b.totCost,
       });
     });
 
@@ -3729,6 +3797,8 @@ body.premium .unlock-badge { display: none; }
       finalPeakDollars: cumPeakDollars,
       totalCost: cumCost,
       perTrade: mode === 'dollar' ? FLAT_DOLLAR_PER_TRADE : null,
+      tradingDays: dateOrder.length,
+      dateRange: EQUITY_DATE_RANGE,
     };
   }
 
@@ -3781,41 +3851,62 @@ body.premium .unlock-badge { display: none; }
       },
       options: {
         responsive: true,
+        // Mobile: lock to a max height so the chart fits on phone screen.
+        maintainAspectRatio: true,
+        // Mobile-friendly hover: snap to nearest x-axis tick on tap, don't
+        // require precise dot intersection. Reported by trillah 2026-05-05:
+        // tooltips were cut off on phone when tapping dots near edges.
+        interaction: { mode: 'index', intersect: false, axis: 'x' },
         plugins: {
           legend: { labels: { color: '#9CA3AF', font: { family: 'monospace', size: 11 } } },
           tooltip: {
+            // Mobile-aware positioning so the box doesn't run off the canvas
+            // edge when tapping dots near the left/right boundaries.
+            position: 'nearest',
+            caretPadding: 8,
+            boxPadding: 6,
+            padding: 10,
+            titleFont: { family: 'monospace', size: 12, weight: '600' },
+            bodyFont: { family: 'monospace', size: 11 },
+            footerFont: { family: 'monospace', size: 10 },
+            displayColors: false,
             callbacks: {
               title: function(items) {
                 if (!items.length) return '';
                 var idx = items[0].dataIndex;
                 var t = e.tooltips[idx];
-                if (!t || !t.ticker) return 'Starting position ($0)';
-                return t.ticker + (t.isOpen ? ' open (entered ' : ' expired ') + t.date + (t.isOpen ? ')' : '');
+                if (!t || !t.date) return 'Starting position';
+                var n = (t.trades || []).length;
+                return t.date + '  ·  ' + n + (n === 1 ? ' trade' : ' trades') + (t.anyOpen ? '  (* still open)' : '');
               },
               label: function(c) {
-                var line = c.dataset.label + ': ' + fmtDollarsShort(c.parsed.y);
-                var idx = c.dataIndex;
+                // Dataset cumulative on this date (Peak or Current line value).
+                return c.dataset.label + ': ' + fmtDollarsShort(c.parsed.y);
+              },
+              afterBody: function(items) {
+                if (!items.length) return [];
+                var idx = items[0].dataIndex;
                 var t = e.tooltips[idx];
-                if (t && t.ticker) {
-                  var dKey = c.datasetIndex === 0 ? 'peakDollars' : 'curDollars';
-                  var pKey = c.datasetIndex === 0 ? 'peakPct' : 'curPct';
-                  var dVal = t[dKey];
-                  var pVal = t[pKey];
-                  if (dVal != null && pVal != null) {
-                    var dSign = dVal >= 0 ? '+$' : '-$';
-                    var pSign = pVal >= 0 ? '+' : '';
-                    var prefix = e.mode === 'contract'
-                      ? '1 ctr cost $' + (t.cost || 0).toFixed(0)
-                      : '$' + (t.cost || 0).toFixed(0) + ' allocated';
-                    line += '  (' + prefix + ' -> ' + dSign + Math.abs(dVal).toFixed(0) + ' / ' + pSign + pVal.toFixed(0) + '%)';
-                  }
-                }
-                return line;
+                if (!t || !t.trades || !t.trades.length) return [];
+                var lines = ['', 'This day:'];
+                t.trades.forEach(function(tr) {
+                  var dirArrow = tr.direction === 'BULLISH' ? '▲' : (tr.direction === 'BEARISH' ? '▼' : '·');
+                  var pSign = tr.pPct >= 0 ? '+' : '';
+                  var cSign = tr.cPct >= 0 ? '+' : '';
+                  var ticker = (tr.ticker || '?');
+                  var openMark = tr.isOpen ? '*' : '';
+                  lines.push('  ' + dirArrow + ' ' + ticker + openMark + '  peak ' + pSign + tr.pPct.toFixed(0) + '%  cur ' + cSign + tr.cPct.toFixed(0) + '%');
+                });
+                var dpSign = t.dayPPnl >= 0 ? '+' : '';
+                var dcSign = t.dayCPnl >= 0 ? '+' : '';
+                lines.push('');
+                lines.push('Day total: peak ' + dpSign + '$' + Math.abs(t.dayPPnl).toFixed(0) + '  ·  cur ' + dcSign + '$' + Math.abs(t.dayCPnl).toFixed(0));
+                return lines;
               },
               footer: function() {
                 return e.mode === 'contract'
-                  ? 'Simulation: 1 option contract per signal (100 shares each).'
-                  : 'Simulation: $' + (e.perTrade || 100) + ' allocated per signal, no compounding.';
+                  ? '1 contract per signal (100 shares each)'
+                  : '$' + (e.perTrade || 100) + ' allocated per signal, no compounding';
               },
             },
           },

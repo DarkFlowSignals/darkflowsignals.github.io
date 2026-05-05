@@ -1594,25 +1594,29 @@ body.premium .unlock-badge { display: none; }
     return true;
   }
 
-  // SIGNAL QUALITY (peak-based). Did the thesis ever work? This is the default
-  // headline metric. Peak > 0% means the option was in profit territory at some
-  // point, regardless of how the position was managed afterward. This is the
-  // signal-provider lens, not a position-management lens.
+  // WIN-rate threshold raised from > 0% to >= 20% on 2026-05-05 per member-lounge
+  // consensus (geoff0962 + duke_nuchem + katebellucci). 1-5% peaks aren't
+  // meaningful wins to a real trader and misrepresent the W/R. 20% is the floor.
+  var WIN_THRESHOLD_PCT = 20;
+
+  // SIGNAL QUALITY (peak-based). Did the thesis ever produce a meaningful move?
+  // Peak >= 20% means the option was in real-trade-worthy profit territory at
+  // some point. This is the signal-provider lens, not a position-management lens.
   function signalResult(s) {
     var p = peakPct(s);
-    if (p != null) return p > 0 ? 'WIN' : 'LOSS';
+    if (p != null) return p >= WIN_THRESHOLD_PCT ? 'WIN' : 'LOSS';
     var c = currentPct(s);
-    if (c != null) return c > 0 ? 'WIN' : 'LOSS';
+    if (c != null) return c >= WIN_THRESHOLD_PCT ? 'WIN' : 'LOSS';
     return null;
   }
 
-  // POSITION OUTCOME (settled-value based). Did the rule make money? Respects
-  // the active Stop Rule toggle: Raw = held to expiry, Applied = capped at -50%
-  // if the signal ever touched the stop. This matches the published two-view
+  // POSITION OUTCOME (settled-value based). Did the rule make meaningful money?
+  // Respects the active Stop Rule toggle: Raw = held to expiry, Applied = capped
+  // at -50% if the signal ever touched the stop. Matches the published two-view
   // scoreboard math (Reddit, Substack, EOD desk close, weekly scorecard).
   function positionResult(s) {
     var c = currentPct(s);
-    if (c != null) return c > 0 ? 'WIN' : 'LOSS';
+    if (c != null) return c >= WIN_THRESHOLD_PCT ? 'WIN' : 'LOSS';
     return null;
   }
 

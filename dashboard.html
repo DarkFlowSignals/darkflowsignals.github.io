@@ -847,40 +847,73 @@ body.premium .unlock-badge { display: none; }
 /* MOBILE: 14-column table doesn't fit a 390px viewport. Switch to
    horizontal scroll + sticky Ticker column so members can swipe through
    the full table while always seeing which row they're on. Reported by
-   kate 2026-05-05 from iPhone screenshot.
-   v2 fix (kate followup): bg-base var was undefined -> sticky cell was
-   transparent -> State badge bled through. Switched to bg-primary, made
-   the divider into a proper wall with both a hard line and drop shadow. */
+   kate 2026-05-05.
+   v2: bg-base var was undefined -> sticky cell was transparent -> State
+   badge bled through. Switched to bg-primary, hard wall + drop shadow.
+   v3 polish: brand-green-tinted wall, wider ticker, tighter score, scroll
+   hint, tighter cell padding to fit more in viewport. */
 @media (max-width: 720px) {
   .table-view.active {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    /* Subtle right-edge gradient hint = "more content this way" affordance. */
+    background:
+      linear-gradient(to right, transparent calc(100% - 28px), rgba(0,230,118,0.04) 100%)
+      no-repeat right top / 100% 100%;
   }
   .table-view.active .data-table {
     table-layout: auto;
     min-width: 920px;
     width: 920px;
   }
+  /* Tighter cell padding on mobile so we fit more horizontally per swipe. */
+  .data-table th, .data-table td {
+    padding: 7px 8px;
+  }
   /* Hide Date column (1st) -- low value on mobile, just clutters scroll. */
   .data-table th:nth-child(1),
   .data-table td:nth-child(1) { display: none; }
-  /* Ticker column (2nd) pinned left. Solid bg + 2px hard wall + soft drop
-     shadow so scrolling content can't bleed through. */
+  /* Ticker column (2nd) pinned left. Solid bg + 2px brand-green wall + soft
+     drop shadow so scrolling content can't bleed through. min-width 84px
+     fits longer tickers (GOOGL, AAPL, NVDA) without truncation. */
   .data-table th:nth-child(2),
   .data-table td:nth-child(2) {
     position: sticky;
     left: 0;
     z-index: 5;
     background: var(--bg-primary);
-    box-shadow: 2px 0 0 var(--border-accent), 6px 0 10px rgba(0,0,0,0.5);
-    min-width: 72px;
+    box-shadow:
+      2px 0 0 rgba(0, 230, 118, 0.35),
+      8px 0 12px rgba(0, 0, 0, 0.55);
+    min-width: 84px;
+    padding-right: 12px;   /* extra breathing room before the wall */
   }
   .data-table tr:hover td:nth-child(2) { background: var(--bg-card); }
-  /* Detail row (expanded thesis) spans full width and shouldn't pin */
+  /* Score column (3rd visible) is just 2 digits -- compact it. */
+  .data-table th:nth-child(3),
+  .data-table td:nth-child(3) {
+    min-width: 38px;
+    padding-left: 12px;    /* extra breathing room after the wall */
+    text-align: center;
+  }
+  /* Current % column (4th) -- extra emphasis since it's the headline cell. */
+  .data-table td:nth-child(4) {
+    font-weight: 700;
+    font-size: 12px;
+  }
+  /* Detail row (expanded thesis) spans full width and shouldn't pin. */
   .data-table tr.row-detail td:nth-child(2) {
     position: static;
     box-shadow: none;
     background: transparent;
+    padding-right: 5px;
+  }
+  .data-table tr.row-detail td:nth-child(3),
+  .data-table tr.row-detail td:nth-child(4) {
+    padding-left: 5px;
+    font-weight: normal;
+    font-size: 11px;
+    text-align: left;
   }
 }
 

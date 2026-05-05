@@ -938,14 +938,12 @@ body.premium .unlock-badge { display: none; }
   /* Table: horizontal scroll instead of hiding */
   /* Mobile: still no side-scroll. Drop low-priority columns to keep it readable. */
   .data-table th, .data-table td { padding: 6px 4px; font-size: 10px; }
-  .data-table th:nth-child(4),  /* Tag */
-  .data-table td:nth-child(4),
-  .data-table th:nth-child(7),  /* Expiry (Strike already shows date in Contract feel) */
-  .data-table td:nth-child(7),
-  .data-table th:nth-child(9),  /* Now $ */
-  .data-table td:nth-child(9),
-  .data-table th:nth-child(15), /* Ern */
-  .data-table td:nth-child(15) { display: none; }
+  .data-table th:nth-child(6),   /* Expiry */
+  .data-table td:nth-child(6),
+  .data-table th:nth-child(8),   /* Now $ */
+  .data-table td:nth-child(8),
+  .data-table th:nth-child(13),  /* Ern */
+  .data-table td:nth-child(13) { display: none; }
 
   /* FOMO */
   .fomo-grid { grid-template-columns: 1fr; }
@@ -1384,8 +1382,6 @@ body.premium .unlock-badge { display: none; }
         <tr>
           <th data-sort="signal_date">Date <span class="sort-arrow"></span></th>
           <th data-sort="ticker">Ticker <span class="sort-arrow"></span></th>
-          <th data-sort="direction">Dir <span class="sort-arrow"></span></th>
-          <th data-sort="category">Tag <span class="sort-arrow"></span></th>
           <th data-sort="conviction_score">Score <span class="sort-arrow"></span></th>
           <th data-sort="state">State <span class="sort-arrow"></span></th>
           <th data-sort="strike">Strike <span class="sort-arrow"></span></th>
@@ -1397,7 +1393,6 @@ body.premium .unlock-badge { display: none; }
           <th data-sort="current_return_pct">Current <span class="sort-arrow"></span></th>
           <th data-sort="peak_return_pct">Peak <span class="sort-arrow"></span></th>
           <th data-sort="earnings_days">Ern <span class="sort-arrow"></span></th>
-          <th data-sort="status">Status <span class="sort-arrow"></span></th>
           <th data-sort="result">Result <span class="sort-arrow"></span></th>
         </tr>
       </thead>
@@ -2895,35 +2890,26 @@ body.premium .unlock-badge { display: none; }
       tdDate.textContent = esc(s.signal_date);
       tr.appendChild(tdDate);
 
-      // Ticker
+      // Ticker (with direction arrow + watchlist marker inline to save columns)
       var tdTicker = document.createElement('td');
       tdTicker.className = 'col-ticker';
-      tdTicker.textContent = esc(s.ticker);
+      var dirArrow = document.createElement('span');
+      dirArrow.style.cssText = 'margin-right:4px;font-size:10px;color:' + (s.direction === 'BULLISH' ? 'var(--green)' : 'var(--red)') + ';';
+      dirArrow.textContent = (s.direction === 'BULLISH' ? '▲' : '▼');
+      tdTicker.appendChild(dirArrow);
+      var tickerText = document.createElement('span');
+      tickerText.textContent = esc(s.ticker);
+      tdTicker.appendChild(tickerText);
+      var catNorm = normalizeCategory(s.category);
+      if (catNorm === 'watchlist') {
+        var wlMark = document.createElement('span');
+        wlMark.style.cssText = 'margin-left:4px;font-size:8px;color:var(--amber);';
+        wlMark.textContent = '◆';
+        wlMark.title = 'Watchlist';
+        tdTicker.appendChild(wlMark);
+      }
       tdTicker.addEventListener('click', function() { window.open('https://www.tradingview.com/chart/?symbol=' + encodeURIComponent(s.ticker), '_blank'); });
       tr.appendChild(tdTicker);
-
-      // Direction
-      var tdDir = document.createElement('td');
-      var dirSpan = document.createElement('span');
-      dirSpan.className = 'badge ' + (s.direction === 'BULLISH' ? 'badge-bullish' : 'badge-bearish');
-      dirSpan.textContent = esc(s.direction);
-      tdDir.appendChild(dirSpan);
-      tr.appendChild(tdDir);
-
-      // Category tag (primary / watchlist). Hedge bucket displays as PRIMARY
-      // for toggle/stat consistency.
-      var tdCat = document.createElement('td');
-      var catNorm = normalizeCategory(s.category);
-      var catBadge = document.createElement('span');
-      if (catNorm === 'watchlist') {
-        catBadge.className = 'badge badge-watchlist';
-        catBadge.textContent = 'WATCH';
-      } else {
-        catBadge.className = 'badge badge-primary';
-        catBadge.textContent = 'PRIMARY';
-      }
-      tdCat.appendChild(catBadge);
-      tr.appendChild(tdCat);
 
       // Score
       var tdScore = document.createElement('td');
@@ -3037,31 +3023,24 @@ body.premium .unlock-badge { display: none; }
       }
       tr.appendChild(tdErn);
 
-      // Status: OPEN or EXPIRED (no STOPPED / PEAK public labels)
-      var tdStatus = document.createElement('td');
-      var statusSpan = document.createElement('span');
-      if (isOpen(s)) {
-        statusSpan.className = 'badge badge-open';
-        statusSpan.textContent = 'OPEN';
-      } else {
-        statusSpan.className = 'badge';
-        statusSpan.style.cssText = 'background:var(--border);color:var(--text-secondary);';
-        statusSpan.textContent = 'EXPIRED';
-      }
-      tdStatus.appendChild(statusSpan);
-      tr.appendChild(tdStatus);
-
-      // Result (signal-quality, peak-based)
+      // Result (merged with status: OPEN if no result yet, else WIN/LOSS).
+      // Saves a column vs separate Status + Result; full status visible in
+      // the expand row.
       var tdResult = document.createElement('td');
       var r = signalResult(s);
+      var resBadge = document.createElement('span');
       if (r) {
-        var resBadge = document.createElement('span');
         resBadge.className = 'badge badge-' + (r === 'WIN' ? 'win' : 'loss');
         resBadge.textContent = r;
-        tdResult.appendChild(resBadge);
+      } else if (isOpen(s)) {
+        resBadge.className = 'badge badge-open';
+        resBadge.textContent = 'OPEN';
       } else {
-        tdResult.textContent = '--';
+        resBadge.className = 'badge';
+        resBadge.style.cssText = 'background:var(--border);color:var(--text-secondary);';
+        resBadge.textContent = 'EXPIRED';
       }
+      tdResult.appendChild(resBadge);
       tr.appendChild(tdResult);
 
       // CLICK-TO-EXPAND: opens a detail row beneath with thesis + cohort +

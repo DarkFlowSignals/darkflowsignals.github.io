@@ -2988,7 +2988,12 @@ body.premium .unlock-badge { display: none; }
       if (col === 'peak_return_pct') return peakPct(s);
       if (col === 'current_return_pct') return currentPct(s);
       if (col === 'status') return isOpen(s) ? 'open' : 'expired';
-      if (col === 'result') return signalResult(s);
+      // Table Result column uses positionResult (current-based) so a position
+      // currently underwater reads as LOSS even if its peak crossed +20%.
+      // The headline Win Rate stat at top stays signalResult (peak-based, the
+       // IDENTITY-RULE-canonical signal-quality view); the Outcome stat already
+      // displays positionResult. Reported by kate 2026-05-05.
+      if (col === 'result') return positionResult(s);
       if (col === 'state') {
         var b = v16StateBadge(s);
         // Numeric ordering: stop=0, faded=1, fading=2, near peak=3, runner=4, none=5
@@ -3185,8 +3190,12 @@ body.premium .unlock-badge { display: none; }
       // Result (merged with status: OPEN if no result yet, else WIN/LOSS).
       // Saves a column vs separate Status + Result; full status visible in
       // the expand row.
+      // 2026-05-05: switched from signalResult (peak-based) to positionResult
+      // (current-based) per kate. A position currently underwater shouldn't
+      // read WIN just because its peak crossed +20%. The headline Win Rate
+      // stat at top stays signalResult (signal-quality lens, IDENTITY RULE).
       var tdResult = document.createElement('td');
-      var r = signalResult(s);
+      var r = positionResult(s);
       var resBadge = document.createElement('span');
       if (r) {
         resBadge.className = 'badge badge-' + (r === 'WIN' ? 'win' : 'loss');

@@ -58,6 +58,78 @@
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Options Trading Signal Service",
+  "provider": { "@type": "Organization", "name": "DarkFlow Signals", "url": "https://darkflowsignals.com" },
+  "areaServed": "Worldwide",
+  "description": "Near-term swing options signals from institutional flow + dark pool prints + multi-timeframe technicals + macro context. Public dashboard tracks every entry, peak, current value, and outcome. 14-day free trial.",
+  "offers": {
+    "@type": "Offer",
+    "name": "DarkFlow Member",
+    "price": "59.00",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": "59.00",
+      "priceCurrency": "USD",
+      "unitText": "MONTH"
+    },
+    "url": "https://whop.com/darkflow-signals",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do DarkFlow signals work?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Every signal is generated from a 6-dimension convergence score combining institutional options flow (Unusual Whales), dark pool block trades, multi-timeframe technicals, macroeconomic context, institutional thesis, and continuation behavior. Setups scoring 75 or above fire as primary signals; 60 to 74 fire as watchlist. Every signal is published with a real timestamp and tracked on a public dashboard through expiry, win or loss." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are losses shown publicly?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every signal we publish is tracked on the public dashboard until calendar expiry. Wins, losses, and signals that round-tripped to zero are all visible. There is no deletion of underperformers and no cherry-picking. The peak return is recorded as the signal-quality metric; the current return updates live every 5 minutes." }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the free dashboard show?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Free users see ticker, direction, conviction score, peak return, current return, full thesis preview, similar-setup history, spot-price context, and earnings indicator on every signal. Signals from the prior week become visible Monday morning (3 to 7 day delay). Aggregate stats including win rate, average peak, and growth chart are visible to everyone with no delay." }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the member tier unlock?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Member tier ($59 per month, 14-day free trial) unlocks real-time alerts at the moment a signal fires, full strike and entry premium, live Greeks (Delta, Gamma, Theta, Vega, Implied Vol, IV Rank, IV Percentile) refreshed every 5 minutes, the what-if exit ladder, on-demand /check TICKER and /pulse TICKER slash commands in Discord, and pre-market briefing plus midday check plus post-market debrief in member channels." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the exit rule?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The single, immutable exit rule is a -50% premium decay hard stop. If the option price falls to half of the entry premium it closes. Otherwise the position rides to expiry. No trailing stops. No breakeven locks. No DTE-based early closes. The methodology trades drawdown exposure for full upside capture." }
+    },
+    {
+      "@type": "Question",
+      "name": "What kind of signals do you publish?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Near-term swing options, typically 7-30 days to expiration with the sweet spot at 7-14 DTE where institutional flow has the strongest predictive edge. Typical holding period is 2 to 10 trading days. Calls and puts both, primarily on liquid US-listed names where dark pool flow is meaningful." }
+    }
+  ]
+}
+</script>
+
+<!-- Twitter Card / X (account removed 2026-04-17 but tags still power LinkedIn / iMessage / Slack previews) -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DarkFlow | Smart Money. Decoded.">
+<meta name="twitter:description" content="Near-term swing options signals from institutional flow + dark pool prints. Every entry, peak, current value, and outcome tracked publicly. 14-day free trial.">
+<meta name="twitter:image" content="https://darkflowsignals.com/og-image.png">
+<meta name="twitter:image:alt" content="DarkFlow Signals public dashboard with every trade tracked through expiry">
+
+<!-- Performance: preload critical fonts so first paint isn't blocked on Google Fonts -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

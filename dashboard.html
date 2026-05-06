@@ -225,6 +225,46 @@ body {
 /* ===========================================================
    ALERTS BUTTON + MODAL (Web Push, added 2026-05-06)
    =========================================================== */
+.alerts-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.alerts-help-btn {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s, color 0.15s;
+}
+.alerts-help-btn:hover {
+  border-color: rgba(0, 230, 118, 0.45);
+  color: var(--text-primary);
+}
+@media (max-width: 720px) {
+  .alerts-help-btn { width: 20px; height: 20px; font-size: 10px; }
+}
+
+/* First-visit pulse animation -- attention-grab without being intrusive.
+   Triggered via .alerts-btn.pulse class. localStorage tracks first-seen so
+   it auto-dismisses after the user interacts. */
+@keyframes alerts-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(0, 230, 118, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
+}
+.alerts-btn.pulse { animation: alerts-pulse 1.6s ease-out infinite; }
+
 .alerts-btn {
   display: inline-flex;
   align-items: center;
@@ -373,6 +413,56 @@ body {
 }
 .alerts-modal-confirm:hover:not(:disabled) { background: rgba(0, 230, 118, 0.85); }
 .alerts-modal-confirm:disabled { opacity: 0.6; cursor: wait; }
+
+/* Help modal -- wider card to accommodate longer copy + sections */
+.alerts-modal-card-wide { max-width: 540px; }
+.alerts-help-section { margin: 16px 0; }
+.alerts-help-h3 {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 6px;
+}
+.alerts-help-p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 0 8px;
+}
+.alerts-help-p strong { color: var(--text-primary); font-weight: 600; }
+.alerts-help-small { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+.alerts-help-mock {
+  display: flex;
+  gap: 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-accent);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-family: var(--font-mono);
+  align-items: flex-start;
+}
+.alerts-help-mock-icon {
+  font-size: 22px;
+  color: var(--green);
+  line-height: 1;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.alerts-help-mock-body { flex: 1; min-width: 0; }
+.alerts-help-mock-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.alerts-help-mock-line {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.alerts-help-mock-cta { color: var(--green); font-weight: 500; }
 
 .member-menu { position: relative; }
 .member-menu-trigger {
@@ -1597,11 +1687,14 @@ body.premium .unlock-badge { display: none; }
     </div>
     <div class="header-right">
       <span class="updated-ago" id="updated-ago"></span>
-      <!-- ALERTS BUTTON (kate ask 2026-05-06) -- visible to all viewers, gated for free tier on click -->
-      <button id="alerts-btn" type="button" class="alerts-btn" aria-label="Enable signal push notifications">
-        <span class="alerts-btn-icon" id="alerts-btn-icon">🔔</span>
-        <span class="alerts-btn-text" id="alerts-btn-text">Enable alerts</span>
-      </button>
+      <!-- ALERTS BUTTON + HELP (kate ask 2026-05-06) -- visible to all, gated on click -->
+      <div class="alerts-wrap">
+        <button id="alerts-btn" type="button" class="alerts-btn" aria-label="Enable signal push notifications">
+          <span class="alerts-btn-icon" id="alerts-btn-icon">🔔</span>
+          <span class="alerts-btn-text" id="alerts-btn-text">Enable alerts</span>
+        </button>
+        <button id="alerts-help-btn" type="button" class="alerts-help-btn" aria-label="What are signal alerts?">?</button>
+      </div>
       <a id="whop-login-btn" href="/auth/whop/login" style="display:none;font-family:var(--font-mono);font-size:12px;padding:6px 12px;border:1px solid var(--green);color:var(--green);border-radius:4px;text-decoration:none;">Member sign in</a>
       <!-- MEMBER MENU (dropdown shown when signed in) -->
       <div id="member-menu" class="member-menu" style="display:none;">
@@ -4684,12 +4777,104 @@ body.premium .unlock-badge { display: none; }
       <p class="alerts-modal-ios-why">iOS only allows web push from installed apps, not from regular Safari tabs. Apple's policy.</p>
     </div>
     <div id="alerts-modal-upgrade" class="alerts-modal-upgrade" style="display:none;">
-      <p>Push alerts are a member-tier perk. Live signals fire pre-market and during the cash session — push lets you act on them in seconds, not minutes.</p>
+      <p>Push alerts are a member-tier perk. Live signals fire pre-market and during the cash session, push lets you act on them in seconds, not minutes.</p>
       <a href="https://whop.com/darkflow-signals" target="_blank" rel="noopener" class="alerts-modal-upgrade-cta">Start the 14-day free trial →</a>
     </div>
     <div class="alerts-modal-actions">
       <button id="alerts-modal-cancel" type="button" class="alerts-modal-cancel">Maybe later</button>
       <button id="alerts-modal-confirm" type="button" class="alerts-modal-confirm">Enable</button>
+    </div>
+  </div>
+</div>
+
+<!-- =================================================================
+     ALERTS HELP MODAL (added 2026-05-06)
+     Opens when user clicks the "?" next to the alerts button. Self-serve
+     "what is this / how does it work / how do I set it up" page.
+     ================================================================= -->
+<div id="alerts-help-modal" class="alerts-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="alerts-help-title">
+  <div class="alerts-modal-card alerts-modal-card-wide" role="document">
+    <button class="alerts-modal-close" type="button" aria-label="Close" data-close="help">&times;</button>
+    <div class="alerts-modal-icon">🔔</div>
+    <h2 id="alerts-help-title" class="alerts-modal-title">Push notifications, explained</h2>
+
+    <div class="alerts-help-section">
+      <h3 class="alerts-help-h3">What is it?</h3>
+      <p class="alerts-help-p">
+        A push notification on your phone or desktop the moment a new
+        signal fires. Same delivery system as Discord, iMessage, or any
+        other app notification. No SMS, no email, no Discord intermediary.
+        Direct from darkflowsignals.com.
+      </p>
+    </div>
+
+    <div class="alerts-help-section">
+      <h3 class="alerts-help-h3">What you'll see</h3>
+      <div class="alerts-help-mock">
+        <div class="alerts-help-mock-icon">▲</div>
+        <div class="alerts-help-mock-body">
+          <div class="alerts-help-mock-title">$MU · Strong</div>
+          <div class="alerts-help-mock-line">Call $530 · May 22</div>
+          <div class="alerts-help-mock-line alerts-help-mock-cta">Tap for full thesis →</div>
+        </div>
+      </div>
+      <p class="alerts-help-p alerts-help-small">
+        Tap → dashboard opens, filtered to that ticker, scrolled to the
+        signal card with full thesis + Greeks + cohort base rate.
+      </p>
+    </div>
+
+    <div class="alerts-help-section">
+      <h3 class="alerts-help-h3">How to enable</h3>
+      <p class="alerts-help-p">
+        <strong>Desktop (Chrome / Firefox / Edge):</strong> Click 🔔 Enable
+        alerts in the header above → tap Allow on the browser prompt. Done.
+      </p>
+      <p class="alerts-help-p">
+        <strong>iPhone:</strong> Open this site in Safari → tap Share → tap
+        "Add to Home Screen" → tap Add. Then open DarkFlow from the new
+        home-screen icon (NOT regular Safari) → tap Enable alerts → Allow.
+        Apple only allows web push from home-screen-installed PWAs, not
+        regular Safari tabs. One-time setup.
+      </p>
+      <p class="alerts-help-p">
+        <strong>Android:</strong> Click → Allow. (Add to Home Screen
+        recommended for icon + cleaner UX, but not required.)
+      </p>
+    </div>
+
+    <div class="alerts-help-section">
+      <h3 class="alerts-help-h3">Multiple signals at once</h3>
+      <p class="alerts-help-p">
+        Each different ticker = its own notification (your phone buzzes
+        once per signal). Same ticker firing twice silently replaces the
+        first (no double-buzz). After 4-5 stack iOS auto-collapses them.
+      </p>
+    </div>
+
+    <div class="alerts-help-section">
+      <h3 class="alerts-help-h3">Turn off / privacy</h3>
+      <p class="alerts-help-p">
+        Click the green 🟢 Alerts on button in the header → cancel out →
+        confirm Disable. Or revoke at the OS level (iOS Settings →
+        Notifications → DarkFlow). We store only the endpoint URL the
+        push provider gives us. We can't see your phone, location, or
+        anything else.
+      </p>
+    </div>
+
+    <div class="alerts-help-section">
+      <h3 class="alerts-help-h3">Free tier?</h3>
+      <p class="alerts-help-p">
+        You'll see the button but it's gated. Member tier ($59/mo, 14-day
+        free trial) unlocks it. Real-time alerts are the conversion moment
+        for the service. Get the signal the instant it fires, not 5-10
+        minutes after on Discord.
+      </p>
+    </div>
+
+    <div class="alerts-modal-actions">
+      <button id="alerts-help-close" type="button" class="alerts-modal-confirm" data-close="help">Got it</button>
     </div>
   </div>
 </div>
@@ -4911,12 +5096,58 @@ body.premium .unlock-badge { display: none; }
   // ---- click handlers ----
   if (btn) {
     btn.addEventListener("click", function() {
+      // Any click stops the first-visit pulse
+      btn.classList.remove("pulse");
+      try { localStorage.setItem("df_alerts_seen", "1"); } catch (_) {}
       if (state === "upgrade")     return openModal("upgrade");
       if (state === "ios-pwa")     return openModal("ios");
       if (state === "blocked")     return openModal("blocked");
       if (state === "on")          return openSettings();
       if (state === "enable")      return openModal("default");
     });
+  }
+
+  // ---- help modal (?  icon next to alerts button) ----
+  var helpBtn = document.getElementById("alerts-help-btn");
+  var helpModal = document.getElementById("alerts-help-modal");
+  function openHelp() {
+    if (!helpModal) return;
+    helpModal.classList.add("open");
+    helpModal.setAttribute("aria-hidden", "false");
+    // Acknowledge the feature exists -- stops the pulse
+    try { localStorage.setItem("df_alerts_seen", "1"); } catch (_) {}
+    btn.classList.remove("pulse");
+  }
+  function closeHelp() {
+    if (!helpModal) return;
+    helpModal.classList.remove("open");
+    helpModal.setAttribute("aria-hidden", "true");
+  }
+  if (helpBtn) helpBtn.addEventListener("click", openHelp);
+  if (helpModal) {
+    helpModal.addEventListener("click", function(e) {
+      if (e.target === helpModal) closeHelp();
+      if (e.target.dataset && e.target.dataset.close === "help") closeHelp();
+    });
+  }
+
+  // ---- first-visit pulse ----
+  // Show a soft green pulse around the alerts button on first dashboard
+  // visit so members notice the feature exists. localStorage flag dismisses
+  // it permanently after first interaction (button click OR help click).
+  function maybePulse() {
+    try {
+      if (localStorage.getItem("df_alerts_seen")) return;
+    } catch (_) { return; }
+    // Only pulse for active states (don't pulse when blocked/unsupported)
+    if (state === "enable" || state === "ios-pwa" || state === "upgrade") {
+      btn.classList.add("pulse");
+      // Auto-dismiss after 30 seconds even if user doesn't click
+      setTimeout(function() {
+        btn.classList.remove("pulse");
+        try { localStorage.setItem("df_alerts_seen", "1"); } catch (_) {}
+      }, 30000);
+    }
   }
   if (modalCancel) modalCancel.addEventListener("click", closeModal);
   if (modalClose)  modalClose.addEventListener("click", closeModal);
@@ -4990,8 +5221,10 @@ body.premium .unlock-badge { display: none; }
     });
   }
 
-  // Kick it off
-  init();
+  // Kick it off. After init resolves the button state, fire the
+  // first-visit pulse so members notice the feature exists. The
+  // localStorage flag prevents repeat pulses on subsequent visits.
+  init().then(maybePulse).catch(function(e) { console.warn("alerts init failed:", e); });
 })();
 </script>
 </body>

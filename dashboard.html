@@ -1328,6 +1328,12 @@ body.premium .unlock-badge { display: none; }
 @media (max-width: 380px) {
   .v16-greeks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+/* Missing Greek (data not returned by chain provider for this signal). Show
+   the card structure so all 7 always render in the same layout, but mute the
+   value to communicate "not available" without hiding the field. */
+.v16-greek-missing { opacity: 0.5; }
+.v16-greek-missing .val { color: var(--text-muted); font-weight: 400; }
+
 .v16-greek-locked {
   opacity: 0.55;
   filter: blur(0.3px);
@@ -1954,6 +1960,23 @@ body.premium .unlock-badge { display: none; }
     if (!TICKER_SEARCH) return true;
     var t = (s.ticker || '').toUpperCase();
     return t.indexOf(TICKER_SEARCH) >= 0;
+  }
+
+  // Update the search-bar count display. Called from renderFeed (which has
+  // the actual filtered length) AND directly by the input handler. Single
+  // source of truth = the data length passed in. Reported drift fixed
+  // 2026-05-06.
+  function updateSearchCount(n) {
+    var countEl = document.getElementById('ticker-search-count');
+    if (!countEl) return;
+    if (!TICKER_SEARCH) {
+      countEl.textContent = '';
+      countEl.classList.remove('has-match', 'no-match');
+      return;
+    }
+    countEl.textContent = n + (n === 1 ? ' match' : ' matches');
+    countEl.classList.toggle('has-match', n > 0);
+    countEl.classList.toggle('no-match', n === 0);
   }
 
   function getFiltered() {
@@ -2589,17 +2612,28 @@ body.premium .unlock-badge { display: none; }
       var gs = document.createElement('div'); gs.className = 'v16-expand-section';
       var gl = document.createElement('div'); gl.className = 'v16-expand-label'; gl.textContent = 'Greeks (live, every 5min)'; gs.appendChild(gl);
       var gg = document.createElement('div'); gg.className = 'v16-greeks';
+      // Always render all 7 cards even when some values are null. Showing
+      // "Δ —" for missing delta is more honest than silently hiding the
+      // field; trillah 2026-05-06 reported partial Greeks panels reading as
+      // broken when Alpaca returned only IVR/IV% for certain chains.
       ['delta','gamma','theta','vega','iv','iv_rank','iv_pct'].forEach(function(k) {
-        if (s.greeks[k] == null) return;
         var meta = GREEK_META[k];
         var v = s.greeks[k];
-        var formatted = (k === 'iv' ? (v*100).toFixed(1) + '%'
-                       : (k === 'iv_pct' || k === 'iv_rank') ? v.toFixed(0)
-                       : v.toFixed(k === 'gamma' ? 3 : 2));
-        var card = document.createElement('div'); card.className = 'v16-greek';
+        var hasVal = (v != null);
+        var formatted;
+        if (!hasVal) {
+          formatted = '—';
+        } else if (k === 'iv') {
+          formatted = (v * 100).toFixed(1) + '%';
+        } else if (k === 'iv_pct' || k === 'iv_rank') {
+          formatted = v.toFixed(0);
+        } else {
+          formatted = v.toFixed(k === 'gamma' ? 3 : 2);
+        }
+        var card = document.createElement('div'); card.className = 'v16-greek' + (hasVal ? '' : ' v16-greek-missing');
         var top = document.createElement('div'); top.className = 'top';
         var sym = document.createElement('span'); sym.className = 'sym'; sym.textContent = meta.sym; top.appendChild(sym);
-        var val = document.createElement('span'); val.className = 'val' + (k === 'theta' ? ' theta' : ''); val.textContent = formatted; top.appendChild(val);
+        var val = document.createElement('span'); val.className = 'val' + (k === 'theta' && hasVal ? ' theta' : ''); val.textContent = formatted; top.appendChild(val);
         card.appendChild(top);
         var name = document.createElement('div'); name.className = 'name'; name.textContent = meta.name; card.appendChild(name);
         var desc = document.createElement('div'); desc.className = 'desc'; desc.textContent = meta.desc; card.appendChild(desc);
@@ -2764,6 +2798,13 @@ body.premium .unlock-badge { display: none; }
     var container = document.getElementById('signal-feed');
     container.textContent = '';
     var data = getFiltered().sort(function(a, b) { return (b.signal_date || '').localeCompare(a.signal_date || ''); });
+
+    // Keep the search-bar count in sync with the actual filtered set every
+    // time renderFeed runs (search input, pill click, initial load). Reported
+    // by trillah 2026-05-06: count was reading 3 while the feed showed 4
+    // because the count update was decoupled from the renders. Tying it to
+    // renderFeed guarantees count = data.length always.
+    updateSearchCount(data.length);
 
     if (!data.length) {
       var empty = document.createElement('div');
@@ -3760,20 +3801,12 @@ body.premium .unlock-badge { display: none; }
       TICKER_SEARCH = raw;
       // Refresh the row-by-row views only. renderStreak / renderStats /
       // renderEquityChart use getVisible() (no search applied) so they
-      // stay whole-book -- search narrows display, not scope.
+      // stay whole-book -- search narrows display, not scope. renderFeed
+      // also updates the search-count display from the actual filtered
+      // length, so count + visible cards always agree (and pill clicks
+      // also refresh the count via the same renderFeed pathway).
       if (typeof renderFeed === 'function') renderFeed();
       if (typeof renderTable === 'function') renderTable();
-
-      if (!countEl) return;
-      if (!raw) {
-        countEl.textContent = '';
-        countEl.classList.remove('has-match', 'no-match');
-        return;
-      }
-      var matches = getFiltered().length;
-      countEl.textContent = matches + (matches === 1 ? ' match' : ' matches');
-      countEl.classList.toggle('has-match', matches > 0);
-      countEl.classList.toggle('no-match', matches === 0);
     }
 
     input.addEventListener('input', updateSearchUI);

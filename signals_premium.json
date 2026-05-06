@@ -13,10 +13,10 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 4.0,
-      "current_premium": 27.85,
-      "peak_premium": 27.98,
-      "current_return_pct": 596.2,
-      "peak_return_pct": 599.5,
+      "current_premium": 28.58,
+      "peak_premium": 28.58,
+      "current_return_pct": 614.5,
+      "peak_return_pct": 614.5,
       "low_return_pct": -55.0,
       "result": "WIN",
       "tracking_type": "system",
@@ -30,8 +30,8 @@
       "thesis_macro": "Tape framework: tightening conditions (yields up, dollar bid, gold weak) pressuring growth multiples. Position holds against this read; thesis depends on idiosyncratic catalyst overcoming the macro headwind.",
       "thesis_risk": "Stop at $2.00 (entry x 0.5, the published rule) \u00b7 Tight DTE (4d), theta decay accelerated and vega risk elevated \u00b7 Earnings 2026-05-07 inside DTE, IV crush risk on print regardless of direction \u00b7 Position closes at -50% or at expiry. Nothing else.",
       "contract_cost": 400,
-      "contract_peak_pnl": 2398,
-      "contract_current_pnl": 2385,
+      "contract_peak_pnl": 2458,
+      "contract_current_pnl": 2458,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -42,16 +42,16 @@
           "trigger_return_pct": -50
         },
         "trail_30": {
-          "trigger_premium": 19.59,
-          "trigger_return_pct": 389.6
+          "trigger_premium": 20.01,
+          "trigger_return_pct": 400.1
         },
         "trail_50": {
-          "trigger_premium": 13.99,
-          "trigger_return_pct": 249.8
+          "trigger_premium": 14.29,
+          "trigger_return_pct": 257.2
         },
         "trail_70": {
-          "trigger_premium": 8.39,
-          "trigger_return_pct": 109.9
+          "trigger_premium": 8.57,
+          "trigger_return_pct": 114.4
         },
         "time_decay": {
           "dte": 2,
@@ -79,11 +79,11 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 137.03,
+      "spot_current": 137.77,
       "spot_today_open": 131.07,
       "spot_at_entry": 92.0,
-      "spot_since_entry_pct": 48.9,
-      "spot_today_pct": 4.5,
+      "spot_since_entry_pct": 49.8,
+      "spot_today_pct": 5.1,
       "greeks": {
         "iv_rank": 20.0,
         "iv_pct": 34.0
@@ -146,11 +146,11 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 274.29,
+      "spot_current": 274.45,
       "spot_today_open": 272.89,
       "spot_at_entry": 233.65,
-      "spot_since_entry_pct": 17.4,
-      "spot_today_pct": 0.5,
+      "spot_since_entry_pct": 17.5,
+      "spot_today_pct": 0.6,
       "earnings_next": {
         "date": "2026-07-30",
         "days_to": 85,
@@ -189,10 +189,10 @@
       "contract_cost": 600,
       "contract_peak_pnl": -97,
       "contract_current_pnl": -596,
-      "spot_current": 133.14,
+      "spot_current": 133.17,
       "spot_today_open": 133.71,
       "spot_at_entry": 130.49,
-      "spot_since_entry_pct": 2.0,
+      "spot_since_entry_pct": 2.1,
       "spot_today_pct": -0.4
     },
     {
@@ -247,11 +247,11 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 69.96,
+      "spot_current": 69.87,
       "spot_today_open": 69.56,
       "spot_at_entry": 68.39,
-      "spot_since_entry_pct": 2.3,
-      "spot_today_pct": 0.6
+      "spot_since_entry_pct": 2.2,
+      "spot_today_pct": 0.4
     },
     {
       "signal_date": "2026-04-10",
@@ -305,7 +305,7 @@
         "win_rate_peak_basis": 100.0,
         "win_rate_settle_basis": 100.0
       },
-      "spot_current": 110.82,
+      "spot_current": 110.87,
       "spot_today_open": 110.97,
       "spot_at_entry": 62.38,
       "spot_since_entry_pct": 77.7,
@@ -363,11 +363,11 @@
         "win_rate_peak_basis": 100.0,
         "win_rate_settle_basis": 100.0
       },
-      "spot_current": 1397.53,
+      "spot_current": 1402.05,
       "spot_today_open": 1437.4,
       "spot_at_entry": 851.77,
-      "spot_since_entry_pct": 64.1,
-      "spot_today_pct": -2.8,
+      "spot_since_entry_pct": 64.6,
+      "spot_today_pct": -2.5,
       "earnings_next": {
         "date": "2026-04-30",
         "days_to": -6,
@@ -426,11 +426,11 @@
         "win_rate_peak_basis": 100.0,
         "win_rate_settle_basis": 100.0
       },
-      "spot_current": 193.28,
+      "spot_current": 192.89,
       "spot_today_open": 179.59,
       "spot_at_entry": 144.97,
-      "spot_since_entry_pct": 33.3,
-      "spot_today_pct": 7.6,
+      "spot_since_entry_pct": 33.1,
+      "spot_today_pct": 7.4,
       "earnings_next": {
         "date": "2026-05-13",
         "days_to": 7,
@@ -489,11 +489,11 @@
         "win_rate_peak_basis": 100.0,
         "win_rate_settle_basis": 100.0
       },
-      "spot_current": 274.29,
+      "spot_current": 274.45,
       "spot_today_open": 272.89,
       "spot_at_entry": 238.38,
       "spot_since_entry_pct": 15.1,
-      "spot_today_pct": 0.5,
+      "spot_today_pct": 0.6,
       "earnings_next": {
         "date": "2026-07-30",
         "days_to": 85,
@@ -579,11 +579,11 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 137.03,
+      "spot_current": 137.77,
       "spot_today_open": 131.07,
       "spot_at_entry": 102.0,
-      "spot_since_entry_pct": 34.3,
-      "spot_today_pct": 4.5,
+      "spot_since_entry_pct": 35.1,
+      "spot_today_pct": 5.1,
       "greeks": {
         "iv_rank": 20.0,
         "iv_pct": 34.0
@@ -646,11 +646,11 @@
         "win_rate_peak_basis": 100.0,
         "win_rate_settle_basis": 100.0
       },
-      "spot_current": 160.37,
+      "spot_current": 161.01,
       "spot_today_open": 157.84,
       "spot_at_entry": 76.39,
-      "spot_since_entry_pct": 109.9,
-      "spot_today_pct": 1.6
+      "spot_since_entry_pct": 110.8,
+      "spot_today_pct": 2.0
     },
     {
       "signal_date": "2026-04-10",
@@ -704,11 +704,11 @@
         "win_rate_peak_basis": 100.0,
         "win_rate_settle_basis": 100.0
       },
-      "spot_current": 25.18,
+      "spot_current": 25.31,
       "spot_today_open": 24.71,
       "spot_at_entry": 18.87,
-      "spot_since_entry_pct": 33.4,
-      "spot_today_pct": 1.9,
+      "spot_since_entry_pct": 34.1,
+      "spot_today_pct": 2.4,
       "earnings_next": {
         "date": "2026-05-08",
         "days_to": 2,
@@ -767,7 +767,7 @@
         "win_rate_peak_basis": 100.0,
         "win_rate_settle_basis": 100.0
       },
-      "spot_current": 110.82,
+      "spot_current": 110.87,
       "spot_today_open": 110.97,
       "spot_at_entry": 62.38,
       "spot_since_entry_pct": 77.7,
@@ -825,11 +825,11 @@
         "win_rate_peak_basis": 100.0,
         "win_rate_settle_basis": 100.0
       },
-      "spot_current": 658.69,
+      "spot_current": 660.16,
       "spot_today_open": 660.37,
       "spot_at_entry": 420.59,
-      "spot_since_entry_pct": 56.6,
-      "spot_today_pct": -0.3,
+      "spot_since_entry_pct": 57.0,
+      "spot_today_pct": -0.0,
       "earnings_next": {
         "date": "2026-06-24",
         "days_to": 49,
@@ -888,11 +888,11 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 168.59,
+      "spot_current": 169.36,
       "spot_today_open": 172.6,
       "spot_at_entry": 131.3,
-      "spot_since_entry_pct": 28.4,
-      "spot_today_pct": -2.3
+      "spot_since_entry_pct": 29.0,
+      "spot_today_pct": -1.9
     },
     {
       "signal_date": "2026-04-14",
@@ -946,11 +946,11 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 1397.53,
+      "spot_current": 1402.05,
       "spot_today_open": 1437.4,
       "spot_at_entry": 944.46,
-      "spot_since_entry_pct": 48.0,
-      "spot_today_pct": -2.8,
+      "spot_since_entry_pct": 48.4,
+      "spot_today_pct": -2.5,
       "earnings_next": {
         "date": "2026-04-30",
         "days_to": -6,
@@ -1009,7 +1009,7 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 189.84,
+      "spot_current": 189.91,
       "spot_today_open": 186.2,
       "spot_at_entry": 163.0,
       "spot_since_entry_pct": 16.5,
@@ -1072,11 +1072,11 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 137.03,
+      "spot_current": 137.77,
       "spot_today_open": 131.07,
       "spot_at_entry": 117.2,
-      "spot_since_entry_pct": 16.9,
-      "spot_today_pct": 4.5,
+      "spot_since_entry_pct": 17.6,
+      "spot_today_pct": 5.1,
       "earnings_next": {
         "date": "2026-05-07",
         "days_to": 1,
@@ -1135,11 +1135,11 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 286.85,
+      "spot_current": 287.27,
       "spot_today_open": 299.0,
       "spot_at_entry": 219.03,
-      "spot_since_entry_pct": 31.0,
-      "spot_today_pct": -4.1
+      "spot_since_entry_pct": 31.2,
+      "spot_today_pct": -3.9
     },
     {
       "signal_date": "2026-04-14",
@@ -1193,11 +1193,11 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 193.28,
+      "spot_current": 192.89,
       "spot_today_open": 179.59,
       "spot_at_entry": 161.94,
-      "spot_since_entry_pct": 19.4,
-      "spot_today_pct": 7.6,
+      "spot_since_entry_pct": 19.1,
+      "spot_today_pct": 7.4,
       "earnings_next": {
         "date": "2026-05-13",
         "days_to": 7,
@@ -1256,11 +1256,11 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 205.0,
+      "spot_current": 204.86,
       "spot_today_open": 199.89,
       "spot_at_entry": 198.87,
-      "spot_since_entry_pct": 3.1,
-      "spot_today_pct": 2.6,
+      "spot_since_entry_pct": 3.0,
+      "spot_today_pct": 2.5,
       "earnings_next": {
         "date": "2026-05-20",
         "days_to": 14,
@@ -1319,7 +1319,7 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 430.87,
+      "spot_current": 430.94,
       "spot_today_open": 430.15,
       "spot_at_entry": 440.46,
       "spot_since_entry_pct": -2.2,
@@ -1338,9 +1338,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 6.5,
-      "current_premium": 40.97,
+      "current_premium": 40.77,
       "peak_premium": 61.15,
-      "current_return_pct": 530.3,
+      "current_return_pct": 527.2,
       "peak_return_pct": 840.8,
       "low_return_pct": 310.5,
       "result": "WIN",
@@ -1356,7 +1356,7 @@
       "thesis_risk": "Stop level $3.25 (50% of entry premium). Position is deep ITM so theta is modest relative to extrinsic-heavy OTM peers; the bigger risk is a sharp NDX drawdown rolling MSFT back toward $390 and compressing the intrinsic. DTE 11 days carries through the AMD print (Tue AH) + ISM Services (Tue AM) + NFP (Fri). Invalidates: spot $395 break with no fast recovery, or any AI capex commentary suggesting deceleration. Position resolves at -50% or expiry. No discretionary trim window before stop trigger.",
       "contract_cost": 650,
       "contract_peak_pnl": 5465,
-      "contract_current_pnl": 3447,
+      "contract_current_pnl": 3427,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1404,12 +1404,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 416.2,
+      "spot_current": 414.96,
       "spot_today_open": 408.0,
       "spot_at_entry": 411.22,
-      "spot_since_entry_pct": 1.2,
-      "spot_today_pct": 2.0,
+      "spot_since_entry_pct": 0.9,
+      "spot_today_pct": 1.7,
       "greeks": {
+        "delta": 0.9536,
+        "gamma": 0.0038,
+        "theta": -0.1741,
+        "vega": 0.0633,
+        "iv": 0.3943,
         "iv_rank": 58.0,
         "iv_pct": 81.0
       },
@@ -1471,7 +1476,7 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 285.28,
+      "spot_current": 285.25,
       "spot_today_open": 281.92,
       "spot_at_entry": 263.4,
       "spot_since_entry_pct": 8.3,
@@ -1534,11 +1539,11 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 413.17,
+      "spot_current": 415.85,
       "spot_today_open": 409.49,
       "spot_at_entry": 278.26,
-      "spot_since_entry_pct": 48.5,
-      "spot_today_pct": 0.9
+      "spot_since_entry_pct": 49.4,
+      "spot_today_pct": 1.6
     },
     {
       "signal_date": "2026-04-16",
@@ -1592,11 +1597,11 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 26.32,
+      "spot_current": 26.38,
       "spot_today_open": 26.86,
       "spot_at_entry": 26.99,
-      "spot_since_entry_pct": -2.5,
-      "spot_today_pct": -2.0
+      "spot_since_entry_pct": -2.3,
+      "spot_today_pct": -1.8
     },
     {
       "signal_date": "2026-04-16",
@@ -1611,9 +1616,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 12.8,
-      "current_premium": 40.88,
+      "current_premium": 40.8,
       "peak_premium": 42.42,
-      "current_return_pct": 219.4,
+      "current_return_pct": 218.7,
       "peak_return_pct": 231.4,
       "low_return_pct": 62.1,
       "result": "WIN",
@@ -1629,7 +1634,7 @@
       "thesis_risk": "Stop level $6.40 (50% of entry premium). DTE 18 days, theta moderate. Invalidates: spot $385 break (gives back the breakout), or any Taiwan-strait headline-driven flush. The longer DTE absorbs IV crush from AMD print well. Position resolves at -50% or expiry.",
       "contract_cost": 1280,
       "contract_peak_pnl": 2962,
-      "contract_current_pnl": 2808,
+      "contract_current_pnl": 2799,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1677,17 +1682,17 @@
         "win_rate_peak_basis": 90.9,
         "win_rate_settle_basis": 72.0
       },
-      "spot_current": 415.48,
+      "spot_current": 415.65,
       "spot_today_open": 402.4,
       "spot_at_entry": 363.35,
-      "spot_since_entry_pct": 14.3,
+      "spot_since_entry_pct": 14.4,
       "spot_today_pct": 3.3,
       "greeks": {
-        "delta": 0.8145,
+        "delta": 0.8186,
         "gamma": 0.006,
-        "theta": -0.4048,
-        "vega": 0.2326,
-        "iv": 0.5162,
+        "theta": -0.3942,
+        "vega": 0.2294,
+        "iv": 0.5082,
         "iv_rank": 57.0,
         "iv_pct": 94.0
       },
@@ -1749,11 +1754,11 @@
         "win_rate_peak_basis": 100.0,
         "win_rate_settle_basis": 100.0
       },
-      "spot_current": 413.17,
+      "spot_current": 415.85,
       "spot_today_open": 409.49,
       "spot_at_entry": 278.39,
-      "spot_since_entry_pct": 48.4,
-      "spot_today_pct": 0.9
+      "spot_since_entry_pct": 49.4,
+      "spot_today_pct": 1.6
     },
     {
       "signal_date": "2026-04-17",
@@ -1807,11 +1812,11 @@
         "win_rate_peak_basis": 100.0,
         "win_rate_settle_basis": 100.0
       },
-      "spot_current": 397.06,
+      "spot_current": 397.64,
       "spot_today_open": 394.25,
       "spot_at_entry": 341.68,
-      "spot_since_entry_pct": 16.2,
-      "spot_today_pct": 0.7,
+      "spot_since_entry_pct": 16.4,
+      "spot_today_pct": 0.9,
       "earnings_next": {
         "date": "2026-07-23",
         "days_to": 78,
@@ -1870,10 +1875,10 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 110.82,
+      "spot_current": 110.87,
       "spot_today_open": 110.97,
       "spot_at_entry": 68.5,
-      "spot_since_entry_pct": 61.8,
+      "spot_since_entry_pct": 61.9,
       "spot_today_pct": -0.1
     },
     {
@@ -1908,11 +1913,11 @@
       "contract_cost": 90,
       "contract_peak_pnl": 118,
       "contract_current_pnl": 37,
-      "spot_current": 113.27,
+      "spot_current": 113.43,
       "spot_today_open": 113.15,
       "spot_at_entry": 119.07,
-      "spot_since_entry_pct": -4.9,
-      "spot_today_pct": 0.1
+      "spot_since_entry_pct": -4.7,
+      "spot_today_pct": 0.2
     },
     {
       "signal_date": "2026-04-20",
@@ -1927,9 +1932,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 10.0,
-      "current_premium": 47.48,
+      "current_premium": 47.6,
       "peak_premium": 48.38,
-      "current_return_pct": 374.8,
+      "current_return_pct": 376.0,
       "peak_return_pct": 383.8,
       "low_return_pct": -2.5,
       "result": "WIN",
@@ -1945,7 +1950,7 @@
       "thesis_risk": "Stop level $5.00 (50% of entry premium). DTE 11 days, theta moderate at this delta. Invalidates: spot $375 break (gives back the post-rotation breakout), or any negative AI Overview engagement data point that puts search monetization at risk. Position resolves at -50% or expiry.",
       "contract_cost": 1000,
       "contract_peak_pnl": 3838,
-      "contract_current_pnl": 3748,
+      "contract_current_pnl": 3760,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -1993,17 +1998,12 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 397.06,
+      "spot_current": 397.64,
       "spot_today_open": 394.25,
       "spot_at_entry": 337.42,
-      "spot_since_entry_pct": 17.7,
-      "spot_today_pct": 0.7,
+      "spot_since_entry_pct": 17.8,
+      "spot_today_pct": 0.9,
       "greeks": {
-        "delta": 0.9874,
-        "gamma": 0.0014,
-        "theta": -0.0755,
-        "vega": 0.0203,
-        "iv": 0.3659,
         "iv_rank": 68.0,
         "iv_pct": 93.0
       },
@@ -2026,9 +2026,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.45,
-      "current_premium": 3.12,
+      "current_premium": 3.02,
       "peak_premium": 12.05,
-      "current_return_pct": -9.6,
+      "current_return_pct": -12.5,
       "peak_return_pct": 249.3,
       "low_return_pct": -75.1,
       "result": "WIN",
@@ -2044,7 +2044,7 @@
       "thesis_risk": "Stop level approximately $6.50 (50% of entry premium), currently spot is around $185 area and option ~$5. Position is mathematically at-or-near closeout. Invalidates: spot $180 break or NDX -1% session that takes NVDA sub-$185. The thesis was correct directionally for the first leg (peaked +249%) but the tape rolled before exit discipline took the win. Position resolves at -50% or expiry.",
       "contract_cost": 345,
       "contract_peak_pnl": 860,
-      "contract_current_pnl": -33,
+      "contract_current_pnl": -43,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2092,17 +2092,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 205.0,
+      "spot_current": 204.86,
       "spot_today_open": 199.89,
       "spot_at_entry": 202.06,
-      "spot_since_entry_pct": 1.5,
-      "spot_today_pct": 2.6,
+      "spot_since_entry_pct": 1.4,
+      "spot_today_pct": 2.5,
       "greeks": {
-        "delta": 0.3664,
-        "gamma": 0.0297,
-        "theta": -0.2719,
-        "vega": 0.1212,
-        "iv": 0.3932,
+        "delta": 0.3605,
+        "gamma": 0.0294,
+        "theta": -0.2722,
+        "vega": 0.1204,
+        "iv": 0.3964,
         "iv_rank": 27.0,
         "iv_pct": 75.0
       },
@@ -2191,17 +2191,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 430.87,
+      "spot_current": 430.94,
       "spot_today_open": 430.15,
       "spot_at_entry": 442.09,
       "spot_since_entry_pct": -2.5,
       "spot_today_pct": 0.2,
       "greeks": {
-        "delta": 0.034,
+        "delta": 0.0341,
         "gamma": 0.0038,
-        "theta": -0.0857,
+        "theta": -0.0856,
         "vega": 0.0511,
-        "iv": 0.2969,
+        "iv": 0.2963,
         "iv_rank": 43.0,
         "iv_pct": 62.0
       }
@@ -2219,9 +2219,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.33,
-      "current_premium": 0.65,
+      "current_premium": 0.63,
       "peak_premium": 3.5,
-      "current_return_pct": -80.5,
+      "current_return_pct": -81.1,
       "peak_return_pct": 5.1,
       "low_return_pct": -94.9,
       "result": "LOSS",
@@ -2237,7 +2237,7 @@
       "thesis_risk": "Stop level approximately $0.75 (50% of entry premium), currently option pennies. Position is at the published rule. Invalidates: confirmed, silver has broken below entry support. Position resolves at -50% or expiry.",
       "contract_cost": 333,
       "contract_peak_pnl": 17,
-      "contract_current_pnl": -268,
+      "contract_current_pnl": -270,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2285,17 +2285,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 69.96,
+      "spot_current": 69.87,
       "spot_today_open": 69.56,
       "spot_at_entry": 72.15,
-      "spot_since_entry_pct": -3.0,
-      "spot_today_pct": 0.6,
+      "spot_since_entry_pct": -3.2,
+      "spot_today_pct": 0.4,
       "greeks": {
-        "delta": 0.208,
-        "gamma": 0.0506,
-        "theta": -0.0916,
-        "vega": 0.0315,
-        "iv": 0.5159,
+        "delta": 0.2056,
+        "gamma": 0.0503,
+        "theta": -0.0908,
+        "vega": 0.0312,
+        "iv": 0.5156,
         "iv_rank": 28.0,
         "iv_pct": 66.0
       }
@@ -2313,9 +2313,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 3.15,
-      "current_premium": 0.28,
+      "current_premium": 0.26,
       "peak_premium": 4.41,
-      "current_return_pct": -91.1,
+      "current_return_pct": -91.7,
       "peak_return_pct": 40.0,
       "low_return_pct": -92.4,
       "result": "WIN",
@@ -2331,7 +2331,7 @@
       "thesis_risk": "Stop level $1.58 (50% of entry premium). DTE 11 days, theta is significant on an OTM put. Invalidates: IWM $282 break (gives back the entire range), or NFP Friday surprise to the upside. The position is mathematically near the stop and will likely close at the published rule unless small caps take a sharp reversal lower. Position resolves at -50% or expiry.",
       "contract_cost": 315,
       "contract_peak_pnl": 126,
-      "contract_current_pnl": -287,
+      "contract_current_pnl": -289,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2359,17 +2359,17 @@
           "label": "9 sessions to settle."
         }
       },
-      "spot_current": 285.31,
+      "spot_current": 285.5,
       "spot_today_open": 285.36,
       "spot_at_entry": 277.35,
       "spot_since_entry_pct": 2.9,
-      "spot_today_pct": -0.0,
+      "spot_today_pct": 0.0,
       "greeks": {
-        "delta": -0.0501,
-        "gamma": 0.0079,
-        "theta": -0.074,
-        "vega": 0.0463,
-        "iv": 0.2935,
+        "delta": -0.0473,
+        "gamma": 0.0076,
+        "theta": -0.0702,
+        "vega": 0.0442,
+        "iv": 0.2913,
         "iv_rank": 24.0,
         "iv_pct": 56.0
       }
@@ -2426,11 +2426,11 @@
         "win_rate_peak_basis": 90.9,
         "win_rate_settle_basis": 72.0
       },
-      "spot_current": 183.43,
+      "spot_current": 183.62,
       "spot_today_open": 184.56,
       "spot_at_entry": 170.81,
-      "spot_since_entry_pct": 7.4,
-      "spot_today_pct": -0.6
+      "spot_since_entry_pct": 7.5,
+      "spot_today_pct": -0.5
     },
     {
       "signal_date": "2026-04-22",
@@ -2484,11 +2484,11 @@
         "win_rate_peak_basis": 90.9,
         "win_rate_settle_basis": 72.0
       },
-      "spot_current": 658.69,
+      "spot_current": 660.16,
       "spot_today_open": 660.37,
       "spot_at_entry": 487.48,
-      "spot_since_entry_pct": 35.1,
-      "spot_today_pct": -0.3,
+      "spot_since_entry_pct": 35.4,
+      "spot_today_pct": -0.0,
       "earnings_next": {
         "date": "2026-06-24",
         "days_to": 49,
@@ -2547,11 +2547,11 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 120.94,
+      "spot_current": 120.48,
       "spot_today_open": 117.6,
       "spot_at_entry": 123.85,
-      "spot_since_entry_pct": -2.3,
-      "spot_today_pct": 2.8
+      "spot_since_entry_pct": -2.7,
+      "spot_today_pct": 2.4
     },
     {
       "signal_date": "2026-04-23",
@@ -2605,11 +2605,11 @@
         "win_rate_peak_basis": 90.9,
         "win_rate_settle_basis": 72.0
       },
-      "spot_current": 77.17,
+      "spot_current": 77.51,
       "spot_today_open": 77.8,
       "spot_at_entry": 83.54,
-      "spot_since_entry_pct": -7.6,
-      "spot_today_pct": -0.8
+      "spot_since_entry_pct": -7.2,
+      "spot_today_pct": -0.4
     },
     {
       "signal_date": "2026-04-24",
@@ -2663,11 +2663,11 @@
         "win_rate_peak_basis": 100.0,
         "win_rate_settle_basis": 100.0
       },
-      "spot_current": 234.2,
+      "spot_current": 233.87,
       "spot_today_open": 232.0,
       "spot_at_entry": 234.81,
-      "spot_since_entry_pct": -0.3,
-      "spot_today_pct": 0.9
+      "spot_since_entry_pct": -0.4,
+      "spot_today_pct": 0.8
     },
     {
       "signal_date": "2026-04-24",
@@ -2721,11 +2721,11 @@
         "win_rate_peak_basis": 100.0,
         "win_rate_settle_basis": 100.0
       },
-      "spot_current": 96.58,
+      "spot_current": 96.77,
       "spot_today_open": 110.2,
       "spot_at_entry": 76.16,
-      "spot_since_entry_pct": 26.8,
-      "spot_today_pct": -12.4,
+      "spot_since_entry_pct": 27.1,
+      "spot_today_pct": -12.2,
       "earnings_next": {
         "date": "2026-07-30",
         "days_to": 85,
@@ -2745,9 +2745,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 1.55,
-      "current_premium": 0.65,
+      "current_premium": 0.68,
       "peak_premium": 1.85,
-      "current_return_pct": -58.1,
+      "current_return_pct": -56.1,
       "peak_return_pct": 19.4,
       "low_return_pct": -58.1,
       "result": "LOSS",
@@ -2763,7 +2763,7 @@
       "thesis_risk": "Stop level $0.78 (50% of entry premium). DTE 11 days. Binary catalyst inside DTE means the position will see significant move on PDUFA decision; sizing was light because the asymmetric outcome is well-understood. Invalidates: any pre-PDUFA setback (manufacturing inspection, late-cycle review delay), or PDUFA decision unfavorable. Position resolves at -50% or expiry.",
       "contract_cost": 155,
       "contract_peak_pnl": 30,
-      "contract_current_pnl": -90,
+      "contract_current_pnl": -87,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2844,9 +2844,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 26.77,
-      "current_premium": 150.43,
+      "current_premium": 151.48,
       "peak_premium": 157.38,
-      "current_return_pct": 461.9,
+      "current_return_pct": 465.9,
       "peak_return_pct": 487.9,
       "low_return_pct": -23.8,
       "result": "WIN",
@@ -2862,7 +2862,7 @@
       "thesis_risk": "Stop level $13.39 (50% of entry premium). DTE 4 days, theta now dominant. Invalidates: AMD miss with bearish HBM commentary, or spot $560 break that gives back the breakout. The mathematical trim case at +160% is real: even an AMD beat sees ~14% IV crush which eats half of any positive directional move. Trim a portion ahead of print, ride residual through Friday. Position resolves at -50% or expiry.",
       "contract_cost": 2677,
       "contract_peak_pnl": 13061,
-      "contract_current_pnl": 12365,
+      "contract_current_pnl": 12472,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -2910,11 +2910,11 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 658.69,
+      "spot_current": 660.16,
       "spot_today_open": 660.37,
       "spot_at_entry": 504.29,
-      "spot_since_entry_pct": 30.6,
-      "spot_today_pct": -0.3,
+      "spot_since_entry_pct": 30.9,
+      "spot_today_pct": -0.0,
       "greeks": {
         "iv_rank": 63.0,
         "iv_pct": 91.0
@@ -2938,9 +2938,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 31.6,
-      "current_premium": 160.2,
+      "current_premium": 161.25,
       "peak_premium": 167.1,
-      "current_return_pct": 407.0,
+      "current_return_pct": 410.3,
       "peak_return_pct": 428.8,
       "low_return_pct": -20.3,
       "result": "WIN",
@@ -2956,7 +2956,7 @@
       "thesis_risk": "Stop level $15.80 (50% of entry premium). DTE 4 days. Invalidates: same as $510C. The $500C deeper-ITM structure is less theta-exposed but the AMD print binary still applies. Position resolves at -50% or expiry.",
       "contract_cost": 3160,
       "contract_peak_pnl": 13550,
-      "contract_current_pnl": 12861,
+      "contract_current_pnl": 12965,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -3004,11 +3004,11 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 658.69,
+      "spot_current": 660.16,
       "spot_today_open": 660.37,
       "spot_at_entry": 504.29,
-      "spot_since_entry_pct": 30.6,
-      "spot_today_pct": -0.3,
+      "spot_since_entry_pct": 30.9,
+      "spot_today_pct": -0.0,
       "greeks": {
         "iv_rank": 63.0,
         "iv_pct": 91.0
@@ -3032,9 +3032,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 13.5,
-      "current_premium": 25.8,
+      "current_premium": 25.6,
       "peak_premium": 25.8,
-      "current_return_pct": 91.1,
+      "current_return_pct": 89.6,
       "peak_return_pct": 91.1,
       "low_return_pct": -19.3,
       "result": "WIN",
@@ -3050,7 +3050,7 @@
       "thesis_risk": "Stop level $6.75 (50% of entry premium). DTE 11 days. Invalidates: spot $165 break (gives back the OCI re-rating), or any commentary suggesting OpenAI-Oracle capacity is overstated. The early underwater drawdown happened on macro flush; the recovery suggests the thesis is intact. Position resolves at -50% or expiry.",
       "contract_cost": 1350,
       "contract_peak_pnl": 1230,
-      "contract_current_pnl": 1230,
+      "contract_current_pnl": 1210,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -3098,17 +3098,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 189.84,
+      "spot_current": 189.91,
       "spot_today_open": 186.2,
       "spot_at_entry": 165.96,
       "spot_since_entry_pct": 14.4,
       "spot_today_pct": 2.0,
       "greeks": {
-        "delta": 0.9248,
-        "gamma": 0.0073,
-        "theta": -0.168,
-        "vega": 0.0423,
-        "iv": 0.6512,
+        "delta": 0.934,
+        "gamma": 0.0069,
+        "theta": -0.1474,
+        "vega": 0.0383,
+        "iv": 0.6219,
         "iv_rank": 42.0,
         "iv_pct": 81.0
       },
@@ -3131,9 +3131,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 17.94,
-      "current_premium": 43.22,
+      "current_premium": 43.28,
       "peak_premium": 43.49,
-      "current_return_pct": 140.9,
+      "current_return_pct": 141.2,
       "peak_return_pct": 142.4,
       "low_return_pct": -3.3,
       "result": "WIN",
@@ -3149,7 +3149,7 @@
       "thesis_risk": "Stop level $8.97 (50% of entry premium). DTE 4 days, theta is now meaningful. Invalidates: NDX -1% session that takes QQQ sub-$650, or AMD miss + cohort drawdown. The 5/8 expiry concentrates the AMD + NFP binary into a tight window. Trim partial ahead of AMD if position runs further. Position resolves at -50% or expiry.",
       "contract_cost": 1794,
       "contract_peak_pnl": 2555,
-      "contract_current_pnl": 2528,
+      "contract_current_pnl": 2533,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -3197,17 +3197,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 691.86,
+      "spot_current": 692.07,
       "spot_today_open": 687.78,
       "spot_at_entry": 657.55,
       "spot_since_entry_pct": 5.2,
       "spot_today_pct": 0.6,
       "greeks": {
-        "delta": 0.982,
-        "gamma": 0.0021,
-        "theta": -0.2996,
-        "vega": 0.0227,
-        "iv": 0.4165,
+        "delta": 0.9783,
+        "gamma": 0.0023,
+        "theta": -0.3514,
+        "vega": 0.0265,
+        "iv": 0.4345,
         "iv_rank": 27.0,
         "iv_pct": 79.0
       }
@@ -3225,9 +3225,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 18.5,
-      "current_premium": 46.67,
+      "current_premium": 47.1,
       "peak_premium": 48.05,
-      "current_return_pct": 152.3,
+      "current_return_pct": 154.6,
       "peak_return_pct": 159.7,
       "low_return_pct": 0.0,
       "result": "WIN",
@@ -3243,7 +3243,7 @@
       "thesis_risk": "Stop level $9.25 (50% of entry premium). DTE 4 days. Invalidates: spot $385 break (gives back the post-print breakout), or AMD miss + cohort drawdown. The 5/8 expiry vs the 5/15 primary means trim discipline is sharper - the close of session Friday is the binary moment. Position resolves at -50% or expiry.",
       "contract_cost": 1850,
       "contract_peak_pnl": 2954,
-      "contract_current_pnl": 2818,
+      "contract_current_pnl": 2860,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -3291,12 +3291,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 397.06,
+      "spot_current": 397.64,
       "spot_today_open": 394.25,
       "spot_at_entry": 384.8,
-      "spot_since_entry_pct": 3.2,
-      "spot_today_pct": 0.7,
+      "spot_since_entry_pct": 3.3,
+      "spot_today_pct": 0.9,
       "greeks": {
+        "delta": 0.9973,
+        "gamma": 0.0005,
+        "theta": -0.0735,
+        "vega": 0.0025,
+        "iv": 0.6255,
         "iv_rank": 68.0,
         "iv_pct": 93.0
       },
@@ -3319,9 +3324,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 5.88,
-      "current_premium": 15.32,
+      "current_premium": 15.53,
       "peak_premium": 19.1,
-      "current_return_pct": 160.5,
+      "current_return_pct": 164.1,
       "peak_return_pct": 224.8,
       "low_return_pct": 0.0,
       "result": "WIN",
@@ -3337,7 +3342,7 @@
       "thesis_risk": "Stop level $2.94 (50% of entry premium). DTE 11 days. Invalidates: spot $250 break (gives back the post-print follow-through), or any AWS growth reversal commentary. Per-ticker DP shows distribution; partial trim already executed, residual position rides through AMD print Tue AH and into Friday NFP. Position resolves at -50% or expiry.",
       "contract_cost": 588,
       "contract_peak_pnl": 1322,
-      "contract_current_pnl": 944,
+      "contract_current_pnl": 965,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -3385,17 +3390,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 274.29,
+      "spot_current": 274.45,
       "spot_today_open": 272.89,
       "spot_at_entry": 265.06,
       "spot_since_entry_pct": 3.5,
-      "spot_today_pct": 0.5,
+      "spot_today_pct": 0.6,
       "greeks": {
-        "delta": 0.8596,
-        "gamma": 0.0158,
-        "theta": -0.1965,
-        "vega": 0.096,
-        "iv": 0.3273,
+        "delta": 0.8607,
+        "gamma": 0.0155,
+        "theta": -0.1981,
+        "vega": 0.0956,
+        "iv": 0.3317,
         "iv_rank": 24.0,
         "iv_pct": 41.0
       },
@@ -3418,9 +3423,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 27.17,
-      "current_premium": 143.15,
+      "current_premium": 143.6,
       "peak_premium": 149.48,
-      "current_return_pct": 426.9,
+      "current_return_pct": 428.5,
       "peak_return_pct": 450.2,
       "low_return_pct": -4.6,
       "result": "WIN",
@@ -3436,7 +3441,7 @@
       "thesis_risk": "Stop level $13.59 (50% of entry premium). DTE 11 days, more theta cushion than the 5/8 expiries. Invalidates: same fundamental risks - AMD miss, HBM oversupply commentary, NDX flush. Trim discipline is less time-sensitive than 5/8 because the longer DTE absorbs IV crush better. Position resolves at -50% or expiry.",
       "contract_cost": 2717,
       "contract_peak_pnl": 12232,
-      "contract_current_pnl": 11599,
+      "contract_current_pnl": 11642,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -3484,17 +3489,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 658.69,
+      "spot_current": 660.16,
       "spot_today_open": 660.37,
       "spot_at_entry": 517.16,
-      "spot_since_entry_pct": 27.4,
-      "spot_today_pct": -0.3,
+      "spot_since_entry_pct": 27.7,
+      "spot_today_pct": -0.0,
       "greeks": {
-        "delta": 0.9473,
+        "delta": 0.9464,
         "gamma": 0.0011,
-        "theta": -0.6525,
-        "vega": 0.1112,
-        "iv": 0.9786,
+        "theta": -0.6719,
+        "vega": 0.1129,
+        "iv": 0.9945,
         "iv_rank": 63.0,
         "iv_pct": 91.0
       },
@@ -3517,9 +3522,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 8.72,
-      "current_premium": 26.04,
+      "current_premium": 26.57,
       "peak_premium": 27.15,
-      "current_return_pct": 198.6,
+      "current_return_pct": 204.7,
       "peak_return_pct": 211.4,
       "low_return_pct": -0.7,
       "result": "WIN",
@@ -3535,7 +3540,7 @@
       "thesis_risk": "Stop level $4.36 (50% of entry premium). DTE 4 days, theta dominant for an OTM 5/8 expiry. The OTM structure means this position needs underlying continuation to maintain - a flat tape erodes premium fast. Invalidates: same as $649C plus a faster timeline since OTM eats theta harder. Position resolves at -50% or expiry.",
       "contract_cost": 872,
       "contract_peak_pnl": 1843,
-      "contract_current_pnl": 1732,
+      "contract_current_pnl": 1785,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -3583,12 +3588,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 691.86,
+      "spot_current": 692.07,
       "spot_today_open": 687.78,
       "spot_at_entry": 667.74,
       "spot_since_entry_pct": 3.6,
       "spot_today_pct": 0.6,
       "greeks": {
+        "delta": 0.9344,
+        "gamma": 0.0072,
+        "theta": -0.6318,
+        "vega": 0.0654,
+        "iv": 0.3486,
         "iv_rank": 27.0,
         "iv_pct": 79.0
       }
@@ -3606,9 +3616,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 11.1,
-      "current_premium": 10.0,
+      "current_premium": 10.05,
       "peak_premium": 19.45,
-      "current_return_pct": -9.9,
+      "current_return_pct": -9.5,
       "peak_return_pct": 75.2,
       "low_return_pct": -62.2,
       "result": "WIN",
@@ -3624,7 +3634,7 @@
       "thesis_risk": "Stop level $5.55 (50% of entry premium). DTE 11 days. Earnings 5/8 inside DTE: IV is currently elevated, post-print IV crush will eat ~15-20% of option premium even on a flat-to-positive print. Invalidates: spot $105 break (pre-print shake-out), or earnings miss + post-print drawdown. Trim discipline ahead of print is the play if position runs further. Position resolves at -50% or expiry.",
       "contract_cost": 1110,
       "contract_peak_pnl": 835,
-      "contract_current_pnl": -110,
+      "contract_current_pnl": -105,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -3672,17 +3682,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 96.58,
+      "spot_current": 96.77,
       "spot_today_open": 110.2,
       "spot_at_entry": 96.0,
-      "spot_since_entry_pct": 0.6,
-      "spot_today_pct": -12.4,
+      "spot_since_entry_pct": 0.8,
+      "spot_today_pct": -12.2,
       "greeks": {
-        "delta": 0.5788,
+        "delta": 0.58,
         "gamma": 0.0169,
-        "theta": -0.5069,
+        "theta": -0.5075,
         "vega": 0.0594,
-        "iv": 1.5219,
+        "iv": 1.5235,
         "iv_rank": 91.0,
         "iv_pct": 92.0
       },
@@ -3705,9 +3715,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 86.4,
-      "current_premium": 305.1,
+      "current_premium": 303.05,
       "peak_premium": 338.7,
-      "current_return_pct": 253.1,
+      "current_return_pct": 250.8,
       "peak_return_pct": 292.0,
       "low_return_pct": -26.0,
       "result": "WIN",
@@ -3723,7 +3733,7 @@
       "thesis_risk": "Stop level $43.20 (50% of entry premium). DTE 11 days. Invalidates: spot $1100 break (gives back the post-print breakout), AMD miss + cohort drawdown that pulls memory cohort down with semis broadly. Less theta-pressured than MU 5/8 because of the longer DTE. Position resolves at -50% or expiry.",
       "contract_cost": 8640,
       "contract_peak_pnl": 25229,
-      "contract_current_pnl": 21868,
+      "contract_current_pnl": 21669,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -3771,17 +3781,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 1397.53,
+      "spot_current": 1402.05,
       "spot_today_open": 1437.4,
       "spot_at_entry": 1187.0,
-      "spot_since_entry_pct": 17.7,
-      "spot_today_pct": -2.8,
+      "spot_since_entry_pct": 18.1,
+      "spot_today_pct": -2.5,
       "greeks": {
-        "delta": 0.8983,
+        "delta": 0.9142,
         "gamma": 0.0006,
-        "theta": -2.8027,
-        "vega": 0.3897,
-        "iv": 1.2509,
+        "theta": -2.3349,
+        "vega": 0.3448,
+        "iv": 1.168,
         "iv_rank": 55.0,
         "iv_pct": 50.0
       },
@@ -3870,17 +3880,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 56.92,
+      "spot_current": 56.91,
       "spot_today_open": 57.29,
       "spot_at_entry": 58.85,
       "spot_since_entry_pct": -3.3,
-      "spot_today_pct": -0.6,
+      "spot_today_pct": -0.7,
       "greeks": {
-        "delta": 0.2917,
-        "gamma": 0.1017,
-        "theta": -0.0378,
-        "vega": 0.0409,
-        "iv": 0.2833,
+        "delta": 0.2909,
+        "gamma": 0.1012,
+        "theta": -0.0379,
+        "vega": 0.0408,
+        "iv": 0.2844,
         "iv_rank": 35.0,
         "iv_pct": 94.0
       }
@@ -3898,9 +3908,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 8.93,
-      "current_premium": 9.07,
+      "current_premium": 9.1,
       "peak_premium": 16.52,
-      "current_return_pct": 1.6,
+      "current_return_pct": 1.9,
       "peak_return_pct": 85.0,
       "low_return_pct": -9.3,
       "result": "WIN",
@@ -3916,7 +3926,7 @@
       "thesis_risk": "Stop level $4.47 (50% of entry premium). DTE 11 days. Earnings 5/8 inside DTE: post-print IV typically drops by ~50%, eating into option premium even on a flat print. Invalidates: BTC sub-$75K, COIN earnings miss with reduced volume guidance, or any regulatory surprise. Trim ahead of print is the discipline. Position resolves at -50% or expiry.",
       "contract_cost": 893,
       "contract_peak_pnl": 759,
-      "contract_current_pnl": 14,
+      "contract_current_pnl": 17,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -3964,17 +3974,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 194.88,
+      "spot_current": 195.25,
       "spot_today_open": 195.78,
       "spot_at_entry": 191.25,
-      "spot_since_entry_pct": 1.9,
-      "spot_today_pct": -0.5,
+      "spot_since_entry_pct": 2.1,
+      "spot_today_pct": -0.3,
       "greeks": {
-        "delta": 0.4588,
-        "gamma": 0.014,
-        "theta": -0.6315,
-        "vega": 0.1214,
-        "iv": 0.9247,
+        "delta": 0.4644,
+        "gamma": 0.0142,
+        "theta": -0.6276,
+        "vega": 0.1218,
+        "iv": 0.9153,
         "iv_rank": 37.0,
         "iv_pct": 29.0
       },
@@ -3997,9 +4007,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 10.82,
-      "current_premium": 8.07,
+      "current_premium": 8.3,
       "peak_premium": 12.88,
-      "current_return_pct": -25.4,
+      "current_return_pct": -23.3,
       "peak_return_pct": 19.0,
       "low_return_pct": -51.9,
       "result": "LOSS",
@@ -4015,7 +4025,7 @@
       "thesis_risk": "Stop level $5.41 (50% of entry premium). DTE 11 days. Invalidates: spot $370 break (gives back the post-earnings hold), or any robotaxi rollout setback news. The position needs an explicit catalyst to recover; flat tape continuation is theta-eroding. Position resolves at -50% or expiry.",
       "contract_cost": 1082,
       "contract_peak_pnl": 206,
-      "contract_current_pnl": -275,
+      "contract_current_pnl": -252,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -4063,17 +4073,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 394.53,
+      "spot_current": 394.32,
       "spot_today_open": 386.25,
       "spot_at_entry": 390.82,
       "spot_since_entry_pct": 0.9,
       "spot_today_pct": 2.1,
       "greeks": {
-        "delta": 0.4372,
+        "delta": 0.4342,
         "gamma": 0.0148,
-        "theta": -0.5981,
-        "vega": 0.2441,
-        "iv": 0.429,
+        "theta": -0.596,
+        "vega": 0.2437,
+        "iv": 0.4283,
         "iv_rank": 18.0,
         "iv_pct": 36.0
       },
@@ -4096,10 +4106,10 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 19.08,
-      "current_premium": 48.52,
-      "peak_premium": 48.58,
-      "current_return_pct": 154.3,
-      "peak_return_pct": 154.6,
+      "current_premium": 48.65,
+      "peak_premium": 48.75,
+      "current_return_pct": 155.0,
+      "peak_return_pct": 155.5,
       "low_return_pct": -41.0,
       "result": "WIN",
       "tracking_type": "system",
@@ -4113,8 +4123,8 @@
       "thesis_macro": "AI cloud pure-plays carry beta to risk-off broadly, but NBIS has the cleanest sovereign-AI angle for European institutional investors who can't or won't buy CRWV. Tightening tape is a headwind, but the geographic + GPU-allocation moat differentiates. AMD print Tue AH provides cohort readthrough.",
       "thesis_risk": "Stop level $9.46 (50% of entry premium). DTE 25 days, theta is moderate. Earnings 5/13 inside DTE creates IV crush risk: implied vol is around 85% on the 5/13 weekly chain, post-print should drop to ~45%. Invalidates: spot $135 break (pre-print failure), or 5/13 earnings miss with capacity guidance reset. Position resolves at -50% or expiry.",
       "contract_cost": 1908,
-      "contract_peak_pnl": 2950,
-      "contract_current_pnl": 2944,
+      "contract_peak_pnl": 2967,
+      "contract_current_pnl": 2957,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -4125,16 +4135,16 @@
           "trigger_return_pct": -50
         },
         "trail_30": {
-          "trigger_premium": 34.01,
-          "trigger_return_pct": 78.2
+          "trigger_premium": 34.12,
+          "trigger_return_pct": 78.9
         },
         "trail_50": {
-          "trigger_premium": 24.29,
-          "trigger_return_pct": 27.3
+          "trigger_premium": 24.38,
+          "trigger_return_pct": 27.8
         },
         "trail_70": {
-          "trigger_premium": 14.57,
-          "trigger_return_pct": -23.6
+          "trigger_premium": 14.63,
+          "trigger_return_pct": -23.3
         },
         "time_decay": {
           "dte": 23,
@@ -4162,17 +4172,17 @@
         "win_rate_peak_basis": 90.0,
         "win_rate_settle_basis": 60.0
       },
-      "spot_current": 193.28,
+      "spot_current": 192.89,
       "spot_today_open": 179.59,
       "spot_at_entry": 154.49,
-      "spot_since_entry_pct": 25.1,
-      "spot_today_pct": 7.6,
+      "spot_since_entry_pct": 24.9,
+      "spot_today_pct": 7.4,
       "greeks": {
-        "delta": 0.8495,
+        "delta": 0.8503,
         "gamma": 0.0042,
-        "theta": -0.2931,
-        "vega": 0.1134,
-        "iv": 1.1428,
+        "theta": -0.2917,
+        "vega": 0.113,
+        "iv": 1.1404,
         "iv_rank": 37.0,
         "iv_pct": 59.0
       },
@@ -4195,9 +4205,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 11.66,
-      "current_premium": 11.25,
+      "current_premium": 11.53,
       "peak_premium": 13.81,
-      "current_return_pct": -3.5,
+      "current_return_pct": -1.1,
       "peak_return_pct": 18.4,
       "low_return_pct": -56.7,
       "result": "LOSS",
@@ -4213,7 +4223,7 @@
       "thesis_risk": "Stop hit at -50% on 5/4 around 11:00 ET. Final close at -53.9% as spot continued to drift toward $213.50 area. Held-to-expiry view: thesis not yet resolved (calendar expiry 5/15). Strict-stop view: closed at the published rule, full loss locked. The position resolved cleanly within the published framework.",
       "contract_cost": 1166,
       "contract_peak_pnl": 215,
-      "contract_current_pnl": -41,
+      "contract_current_pnl": -13,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -4261,17 +4271,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 285.28,
+      "spot_current": 285.25,
       "spot_today_open": 281.92,
       "spot_at_entry": 280.14,
       "spot_since_entry_pct": 1.8,
       "spot_today_pct": 1.2,
       "greeks": {
-        "delta": 0.8339,
-        "gamma": 0.0222,
-        "theta": -0.178,
-        "vega": 0.1117,
-        "iv": 0.2506,
+        "delta": 0.8452,
+        "gamma": 0.0217,
+        "theta": -0.1682,
+        "vega": 0.1067,
+        "iv": 0.2451,
         "iv_rank": 25.0,
         "iv_pct": 54.0
       },
@@ -4294,10 +4304,10 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 1.72,
-      "current_premium": 3.75,
-      "peak_premium": 3.75,
-      "current_return_pct": 118.0,
-      "peak_return_pct": 118.0,
+      "current_premium": 3.9,
+      "peak_premium": 3.9,
+      "current_return_pct": 126.7,
+      "peak_return_pct": 126.7,
       "low_return_pct": -23.8,
       "result": "WIN",
       "tracking_type": "system",
@@ -4311,8 +4321,8 @@
       "thesis_macro": "Small-cap status + crypto correlation = double-headed beta. Tightening tape that pressures small caps and crypto simultaneously hits hard. The offset is the AI-hosting structural story which provides idiosyncratic upside if a contract is announced.",
       "thesis_risk": "Stop level $0.86 (50% of entry premium). DTE 11 days. Invalidates: BTC sub-$75K (legacy mining cash flow risk), or WULF spot $18 break (pre-contract-announcement failure). The 5/8 expiry on related WULF chains expires this week which could remove a flow tailwind. Position resolves at -50% or expiry.",
       "contract_cost": 172,
-      "contract_peak_pnl": 203,
-      "contract_current_pnl": 203,
+      "contract_peak_pnl": 218,
+      "contract_current_pnl": 218,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -4323,16 +4333,16 @@
           "trigger_return_pct": -50
         },
         "trail_30": {
-          "trigger_premium": 2.62,
-          "trigger_return_pct": 52.6
+          "trigger_premium": 2.73,
+          "trigger_return_pct": 58.7
         },
         "trail_50": {
-          "trigger_premium": 1.88,
-          "trigger_return_pct": 9.0
+          "trigger_premium": 1.95,
+          "trigger_return_pct": 13.4
         },
         "trail_70": {
-          "trigger_premium": 1.13,
-          "trigger_return_pct": -34.6
+          "trigger_premium": 1.17,
+          "trigger_return_pct": -32.0
         },
         "time_decay": {
           "dte": 9,
@@ -4360,19 +4370,19 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 25.18,
+      "spot_current": 25.31,
       "spot_today_open": 24.71,
       "spot_at_entry": 21.31,
-      "spot_since_entry_pct": 18.2,
-      "spot_today_pct": 1.9,
+      "spot_since_entry_pct": 18.8,
+      "spot_today_pct": 2.4,
       "greeks": {
-        "delta": 0.7921,
-        "gamma": 0.0605,
-        "theta": -0.077,
-        "vega": 0.0113,
-        "iv": 1.199,
+        "delta": 0.8175,
+        "gamma": 0.059,
+        "theta": -0.0676,
+        "vega": 0.0106,
+        "iv": 1.125,
         "iv_rank": 27.0,
-        "iv_pct": 14.0
+        "iv_pct": 15.0
       },
       "earnings_next": {
         "date": "2026-05-08",
@@ -4393,9 +4403,9 @@
       "status": "open",
       "outcome_date": null,
       "entry_premium": 6.8,
-      "current_premium": 5.62,
+      "current_premium": 5.72,
       "peak_premium": 11.8,
-      "current_return_pct": -17.4,
+      "current_return_pct": -15.9,
       "peak_return_pct": 73.5,
       "low_return_pct": -44.4,
       "result": "WIN",
@@ -4411,7 +4421,7 @@
       "thesis_risk": null,
       "contract_cost": 680,
       "contract_peak_pnl": 500,
-      "contract_current_pnl": -118,
+      "contract_current_pnl": -108,
       "what_if": {
         "hold_to_expiry": {
           "action": "settle",
@@ -4459,17 +4469,17 @@
         "win_rate_peak_basis": 86.7,
         "win_rate_settle_basis": 58.3
       },
-      "spot_current": 422.66,
+      "spot_current": 422.75,
       "spot_today_open": 435.56,
       "spot_at_entry": 421.28,
       "spot_since_entry_pct": 0.3,
-      "spot_today_pct": -3.0,
+      "spot_today_pct": -2.9,
       "greeks": {
-        "delta": 0.3033,
-        "gamma": 0.0116,
-        "theta": -0.5988,
-        "vega": 0.2319,
-        "iv": 0.4553,
+        "delta": 0.3058,
+        "gamma": 0.0115,
+        "theta": -0.6048,
+        "vega": 0.2328,
+        "iv": 0.4581,
         "iv_rank": 30.0,
         "iv_pct": 49.0
       },

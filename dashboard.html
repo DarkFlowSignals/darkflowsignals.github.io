@@ -222,6 +222,158 @@ body {
 /* ============================================================
    MEMBER MENU (signed-in dropdown)
    ============================================================ */
+/* ===========================================================
+   ALERTS BUTTON + MODAL (Web Push, added 2026-05-06)
+   =========================================================== */
+.alerts-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.alerts-btn:hover { border-color: rgba(0, 230, 118, 0.45); color: var(--text-primary); }
+.alerts-btn[data-state="loading"] { cursor: default; opacity: 0.5; }
+.alerts-btn[data-state="enable"] { color: var(--text-secondary); border-color: var(--border-accent); }
+.alerts-btn[data-state="ios-pwa"] { color: var(--amber); border-color: rgba(245, 158, 11, 0.5); }
+.alerts-btn[data-state="blocked"] { color: var(--red); border-color: rgba(239, 68, 68, 0.4); }
+.alerts-btn[data-state="on"] {
+  color: var(--green);
+  border-color: rgba(0, 230, 118, 0.5);
+  background: rgba(0, 230, 118, 0.06);
+}
+.alerts-btn[data-state="upgrade"] { color: var(--text-muted); border-style: dashed; }
+.alerts-btn[data-state="unsupported"] { display: none; }
+.alerts-btn-icon { font-size: 13px; line-height: 1; }
+.alerts-btn-text { white-space: nowrap; }
+@media (max-width: 720px) {
+  .alerts-btn-text { display: none; }
+  .alerts-btn { padding: 6px 8px; }
+}
+
+.alerts-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.alerts-modal.open { display: flex; }
+.alerts-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-accent);
+  border-radius: 12px;
+  padding: 28px 28px 20px;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+.alerts-modal-close {
+  position: absolute;
+  top: 12px; right: 14px;
+  background: transparent; border: none;
+  color: var(--text-muted);
+  font-size: 22px; cursor: pointer;
+  line-height: 1;
+}
+.alerts-modal-close:hover { color: var(--text-primary); }
+.alerts-modal-icon { font-size: 32px; margin-bottom: 8px; }
+.alerts-modal-title {
+  font-size: 17px; font-weight: 700;
+  margin: 0 0 12px;
+  letter-spacing: -0.2px;
+}
+.alerts-modal-body {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+.alerts-modal-ios-help {
+  background: var(--bg-surface);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 4px 4px 0;
+  padding: 12px 14px;
+  margin: 12px 0 14px;
+}
+.alerts-modal-ios-title {
+  font-size: 13px; margin: 0 0 8px;
+  color: var(--amber); font-weight: 600;
+}
+.alerts-modal-ios-steps {
+  font-size: 12px; color: var(--text-secondary);
+  line-height: 1.7; padding-left: 18px; margin: 0 0 8px;
+}
+.alerts-modal-ios-steps li { margin-bottom: 4px; }
+.alerts-modal-ios-why {
+  font-size: 11px; color: var(--text-muted);
+  margin: 0; font-style: italic;
+}
+.alerts-modal-upgrade {
+  background: rgba(0, 230, 118, 0.06);
+  border: 1px solid rgba(0, 230, 118, 0.25);
+  border-radius: 6px;
+  padding: 14px;
+  margin: 12px 0 14px;
+}
+.alerts-modal-upgrade p {
+  font-size: 13px; color: var(--text-secondary);
+  margin: 0 0 10px; line-height: 1.6;
+}
+.alerts-modal-upgrade-cta {
+  display: inline-block;
+  font-size: 12px; font-weight: 600;
+  color: var(--green);
+  text-decoration: none;
+  padding: 8px 14px;
+  border: 1px solid var(--green);
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.alerts-modal-upgrade-cta:hover { background: rgba(0, 230, 118, 0.12); }
+.alerts-modal-actions {
+  display: flex; gap: 10px;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+.alerts-modal-cancel,
+.alerts-modal-confirm {
+  font-family: var(--font-mono);
+  font-size: 12px; font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.alerts-modal-cancel {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+.alerts-modal-cancel:hover { border-color: var(--border-accent); color: var(--text-primary); }
+.alerts-modal-confirm {
+  background: var(--green);
+  border: 1px solid var(--green);
+  color: #0a0a0f;
+}
+.alerts-modal-confirm:hover:not(:disabled) { background: rgba(0, 230, 118, 0.85); }
+.alerts-modal-confirm:disabled { opacity: 0.6; cursor: wait; }
+
 .member-menu { position: relative; }
 .member-menu-trigger {
   display: inline-flex; align-items: center; gap: 8px;
@@ -1445,6 +1597,11 @@ body.premium .unlock-badge { display: none; }
     </div>
     <div class="header-right">
       <span class="updated-ago" id="updated-ago"></span>
+      <!-- ALERTS BUTTON (kate ask 2026-05-06) -- visible to all viewers, gated for free tier on click -->
+      <button id="alerts-btn" type="button" class="alerts-btn" aria-label="Enable signal push notifications">
+        <span class="alerts-btn-icon" id="alerts-btn-icon">🔔</span>
+        <span class="alerts-btn-text" id="alerts-btn-text">Enable alerts</span>
+      </button>
       <a id="whop-login-btn" href="/auth/whop/login" style="display:none;font-family:var(--font-mono);font-size:12px;padding:6px 12px;border:1px solid var(--green);color:var(--green);border-radius:4px;text-decoration:none;">Member sign in</a>
       <!-- MEMBER MENU (dropdown shown when signed in) -->
       <div id="member-menu" class="member-menu" style="display:none;">
@@ -4496,6 +4653,342 @@ body.premium .unlock-badge { display: none; }
   }
 
   loadGrowthChart();
+})();
+</script>
+
+<!-- =================================================================
+     PUSH-NOTIFICATIONS MODAL (added 2026-05-06)
+     Custom pre-prompt that fires before the browser's native permission
+     dialog. Member sees the value-prop card first, clicks Enable, THEN
+     the browser prompt fires. Avoids the "first prompt = block forever"
+     accidental-block trap.
+     ================================================================= -->
+<div id="alerts-modal" class="alerts-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="alerts-modal-title">
+  <div class="alerts-modal-card" role="document">
+    <button class="alerts-modal-close" type="button" aria-label="Close">&times;</button>
+    <div class="alerts-modal-icon">🔔</div>
+    <h2 id="alerts-modal-title" class="alerts-modal-title">Get the moment-of-fire alert</h2>
+    <p class="alerts-modal-body" id="alerts-modal-body">
+      Push notification when a new signal fires, on your phone or desktop.
+      Goes straight to the dashboard, never to Discord. No spam, no marketing.
+      Just signals.
+    </p>
+    <div id="alerts-modal-ios-help" class="alerts-modal-ios-help" style="display:none;">
+      <h3 class="alerts-modal-ios-title">📱 To get alerts on iPhone</h3>
+      <ol class="alerts-modal-ios-steps">
+        <li>Tap the <strong>Share</strong> button at the bottom of Safari</li>
+        <li>Scroll down → tap <strong>Add to Home Screen</strong></li>
+        <li>Open DarkFlow from your home screen icon</li>
+        <li>Come back here and tap Enable again</li>
+      </ol>
+      <p class="alerts-modal-ios-why">iOS only allows web push from installed apps, not from regular Safari tabs. Apple's policy.</p>
+    </div>
+    <div id="alerts-modal-upgrade" class="alerts-modal-upgrade" style="display:none;">
+      <p>Push alerts are a member-tier perk. Live signals fire pre-market and during the cash session — push lets you act on them in seconds, not minutes.</p>
+      <a href="https://whop.com/darkflow-signals" target="_blank" rel="noopener" class="alerts-modal-upgrade-cta">Start the 14-day free trial →</a>
+    </div>
+    <div class="alerts-modal-actions">
+      <button id="alerts-modal-cancel" type="button" class="alerts-modal-cancel">Maybe later</button>
+      <button id="alerts-modal-confirm" type="button" class="alerts-modal-confirm">Enable</button>
+    </div>
+  </div>
+</div>
+
+<!-- =================================================================
+     PUSH NOTIFICATIONS — CLIENT JS (added 2026-05-06)
+     ================================================================= -->
+<script>
+(function(){
+  // ---- state machine ----
+  // Possible states for the alerts button:
+  //   "loading"  -- initial, before we know permission state
+  //   "enable"   -- not yet subscribed; click opens pre-prompt
+  //   "ios-pwa"  -- iOS Safari user, needs Add-to-Home-Screen first
+  //   "blocked"  -- browser-level Notification.permission === "denied"
+  //   "on"       -- subscribed and ready
+  //   "upgrade"  -- free-tier user, gated (button shows "🔒 Enable alerts")
+  //   "unsupported" -- browser lacks PushManager (rare, very old)
+  var state = "loading";
+  var modal = document.getElementById("alerts-modal");
+  var btn = document.getElementById("alerts-btn");
+  var btnIcon = document.getElementById("alerts-btn-icon");
+  var btnText = document.getElementById("alerts-btn-text");
+  var modalBody = document.getElementById("alerts-modal-body");
+  var modalIos = document.getElementById("alerts-modal-ios-help");
+  var modalUpgrade = document.getElementById("alerts-modal-upgrade");
+  var modalConfirm = document.getElementById("alerts-modal-confirm");
+  var modalCancel = document.getElementById("alerts-modal-cancel");
+  var modalClose = modal && modal.querySelector(".alerts-modal-close");
+
+  function setBtnState(newState) {
+    state = newState;
+    btn.dataset.state = newState;
+    btn.disabled = false;
+    if (newState === "loading") {
+      btnIcon.textContent = "🔔";
+      btnText.textContent = "...";
+      btn.disabled = true;
+    } else if (newState === "enable") {
+      btnIcon.textContent = "🔔";
+      btnText.textContent = "Enable alerts";
+    } else if (newState === "ios-pwa") {
+      btnIcon.textContent = "📱";
+      btnText.textContent = "Enable alerts";
+    } else if (newState === "blocked") {
+      btnIcon.textContent = "🔕";
+      btnText.textContent = "Alerts blocked";
+    } else if (newState === "on") {
+      btnIcon.textContent = "🟢";
+      btnText.textContent = "Alerts on";
+    } else if (newState === "upgrade") {
+      btnIcon.textContent = "🔒";
+      btnText.textContent = "Enable alerts";
+    } else if (newState === "unsupported") {
+      btnIcon.textContent = "🔔";
+      btnText.textContent = "Alerts unavailable";
+      btn.disabled = true;
+    }
+  }
+
+  // iOS detection: Safari on iPhone/iPad without standalone PWA mode
+  function isIosNonPwa() {
+    var ua = navigator.userAgent || "";
+    var isIos = /iPhone|iPad|iPod/.test(ua) && !window.MSStream;
+    var isStandalone = window.navigator.standalone === true ||
+                       window.matchMedia("(display-mode: standalone)").matches;
+    return isIos && !isStandalone;
+  }
+
+  function isPushSupported() {
+    return ("serviceWorker" in navigator) && ("PushManager" in window) && ("Notification" in window);
+  }
+
+  function openModal(scenario) {
+    if (!modal) return;
+    // scenarios: "default" | "ios" | "upgrade" | "blocked"
+    if (modalIos) modalIos.style.display = scenario === "ios" ? "block" : "none";
+    if (modalUpgrade) modalUpgrade.style.display = scenario === "upgrade" ? "block" : "none";
+    if (modalConfirm) modalConfirm.style.display = (scenario === "default" || scenario === "blocked") ? "" : "none";
+    if (modalBody) {
+      if (scenario === "blocked") {
+        modalBody.textContent = "Notifications are blocked for this site at the browser level. Click the lock icon in your address bar -> Notifications -> Allow, then refresh and try again.";
+      } else if (scenario === "ios") {
+        modalBody.textContent = "Push notifications work on iPhone, but Apple requires the dashboard to be installed to your home screen first.";
+      } else if (scenario === "upgrade") {
+        modalBody.textContent = "Real-time signal alerts are a member-tier feature.";
+      } else {
+        modalBody.textContent = "Push notification when a new signal fires, on your phone or desktop. Goes straight to the dashboard, never to Discord. No spam, no marketing. Just signals.";
+      }
+    }
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+  }
+
+  // Convert URL-safe base64 -> Uint8Array for PushManager.subscribe
+  function urlBase64ToUint8Array(b64) {
+    var padding = "=".repeat((4 - b64.length % 4) % 4);
+    var base64 = (b64 + padding).replace(/-/g, "+").replace(/_/g, "/");
+    var raw = atob(base64);
+    var arr = new Uint8Array(raw.length);
+    for (var i = 0; i < raw.length; i++) arr[i] = raw.charCodeAt(i);
+    return arr;
+  }
+
+  async function getVapidPublicKey() {
+    var r = await fetch("/api/push/vapid-key", { credentials: "include" });
+    if (!r.ok) throw new Error("vapid-key fetch failed: " + r.status);
+    var d = await r.json();
+    return d.public_key;
+  }
+
+  async function subscribePush() {
+    var registration = await navigator.serviceWorker.ready;
+    var existing = await registration.pushManager.getSubscription();
+    if (existing) return existing;
+    var publicKey = await getVapidPublicKey();
+    var sub = await registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(publicKey),
+    });
+    return sub;
+  }
+
+  async function postSubscribeToServer(sub) {
+    var raw = sub.toJSON();
+    var r = await fetch("/api/push/subscribe", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        endpoint: raw.endpoint,
+        keys: raw.keys,
+      }),
+    });
+    if (!r.ok) {
+      var msg = await r.text();
+      throw new Error("subscribe POST failed: " + r.status + " " + msg.slice(0, 100));
+    }
+    return r.json();
+  }
+
+  async function unsubscribePush() {
+    var registration = await navigator.serviceWorker.ready;
+    var sub = await registration.pushManager.getSubscription();
+    if (sub) await sub.unsubscribe();
+    await fetch("/api/push/unsubscribe", { method: "POST", credentials: "include" });
+  }
+
+  async function sendTestPush() {
+    var r = await fetch("/api/push/test", { method: "POST", credentials: "include" });
+    var d = await r.json().catch(function() { return {}; });
+    return d;
+  }
+
+  // Determine the user's tier via /api/whoami (member info from session cookie)
+  async function getMemberTier() {
+    try {
+      var r = await fetch("/api/whoami", { credentials: "include" });
+      if (!r.ok) return null;
+      var d = await r.json();
+      return d.tier || null;  // "premium" | "founder" | null
+    } catch (_) { return null; }
+  }
+
+  // ---- initial state detection ----
+  async function init() {
+    if (!isPushSupported()) {
+      setBtnState("unsupported");
+      return;
+    }
+    // Register service worker (idempotent; harmless if already registered)
+    try {
+      await navigator.serviceWorker.register("/sw.js");
+    } catch (e) {
+      console.warn("sw register failed:", e);
+      setBtnState("unsupported");
+      return;
+    }
+    // Check tier first -- free tier sees the button but it's gated
+    var tier = await getMemberTier();
+    var isPremium = tier === "premium" || tier === "founder";
+    if (!isPremium) {
+      setBtnState("upgrade");
+      return;
+    }
+    // iOS without PWA = needs install step first
+    if (isIosNonPwa()) {
+      setBtnState("ios-pwa");
+      return;
+    }
+    // Browser-level permission state
+    if (Notification.permission === "denied") {
+      setBtnState("blocked");
+      return;
+    }
+    // Already granted? Confirm there's an active subscription
+    if (Notification.permission === "granted") {
+      try {
+        var registration = await navigator.serviceWorker.ready;
+        var sub = await registration.pushManager.getSubscription();
+        if (sub) {
+          setBtnState("on");
+          return;
+        }
+      } catch (_) {}
+    }
+    setBtnState("enable");
+  }
+
+  // ---- click handlers ----
+  if (btn) {
+    btn.addEventListener("click", function() {
+      if (state === "upgrade")     return openModal("upgrade");
+      if (state === "ios-pwa")     return openModal("ios");
+      if (state === "blocked")     return openModal("blocked");
+      if (state === "on")          return openSettings();
+      if (state === "enable")      return openModal("default");
+    });
+  }
+  if (modalCancel) modalCancel.addEventListener("click", closeModal);
+  if (modalClose)  modalClose.addEventListener("click", closeModal);
+  if (modal) modal.addEventListener("click", function(e) {
+    // Click backdrop -> close
+    if (e.target === modal) closeModal();
+  });
+
+  if (modalConfirm) {
+    modalConfirm.addEventListener("click", async function() {
+      modalConfirm.disabled = true;
+      modalConfirm.textContent = "Working...";
+      try {
+        // This triggers the browser's native permission prompt
+        var perm = await Notification.requestPermission();
+        if (perm !== "granted") {
+          if (perm === "denied") setBtnState("blocked");
+          else setBtnState("enable");
+          closeModal();
+          return;
+        }
+        var sub = await subscribePush();
+        await postSubscribeToServer(sub);
+        setBtnState("on");
+        closeModal();
+        // Send a test notification automatically so user sees it works
+        setTimeout(sendTestPush, 600);
+      } catch (e) {
+        console.error("alerts enable failed:", e);
+        alert("Failed to enable alerts: " + (e.message || e));
+      } finally {
+        modalConfirm.disabled = false;
+        modalConfirm.textContent = "Enable";
+      }
+    });
+  }
+
+  // Settings panel (post-grant): simple inline confirmation
+  function openSettings() {
+    var ok = confirm(
+      "Alerts are on. \n\n" +
+      "Send a test notification? Click OK to test, Cancel to close. \n\n" +
+      "(To turn off, refresh after revoking in browser settings, or click Cancel below to disable now.)"
+    );
+    if (ok) {
+      sendTestPush().then(function(d) {
+        if (!d || !d.ok) {
+          alert("Test failed: " + (d && d.error ? d.error : "unknown error"));
+        }
+      });
+    } else {
+      // User clicked Cancel -- ask whether to disable
+      if (confirm("Disable alerts entirely?")) {
+        unsubscribePush().then(function() { setBtnState("enable"); })
+          .catch(function(e) { alert("Disable failed: " + e); });
+      }
+    }
+  }
+
+  // Service worker -> page click-through messaging (scroll to ticker)
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.addEventListener("message", function(event) {
+      if (event.data && event.data.type === "scroll-to-ticker" && event.data.ticker) {
+        var search = document.getElementById("ticker-search");
+        if (search) {
+          search.value = event.data.ticker;
+          search.dispatchEvent(new Event("input", { bubbles: true }));
+          search.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    });
+  }
+
+  // Kick it off
+  init();
 })();
 </script>
 </body>

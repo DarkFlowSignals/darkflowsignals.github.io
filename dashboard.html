@@ -4862,6 +4862,14 @@ body.premium .unlock-badge { display: none; }
 
   // ---- initial state detection ----
   async function init() {
+    // ORDER MATTERS: iOS Safari without PWA doesn't expose PushManager at all,
+    // so isPushSupported() returns false on iOS Safari. We need to check the
+    // iOS-non-PWA case BEFORE the support check, so iPhone users see the
+    // Add-to-Home-Screen helper instead of the button hiding.
+    if (isIosNonPwa()) {
+      setBtnState("ios-pwa");
+      return;
+    }
     if (!isPushSupported()) {
       setBtnState("unsupported");
       return;
@@ -4874,16 +4882,11 @@ body.premium .unlock-badge { display: none; }
       setBtnState("unsupported");
       return;
     }
-    // Check tier first -- free tier sees the button but it's gated
+    // Check tier -- free tier sees the button but it's gated
     var tier = await getMemberTier();
     var isPremium = tier === "premium" || tier === "founder";
     if (!isPremium) {
       setBtnState("upgrade");
-      return;
-    }
-    // iOS without PWA = needs install step first
-    if (isIosNonPwa()) {
-      setBtnState("ios-pwa");
       return;
     }
     // Browser-level permission state

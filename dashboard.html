@@ -389,6 +389,61 @@ body {
 .streak-block.loss { background: var(--red); }
 .streak-block.open-block { background: var(--border-accent); border: 1px dashed var(--text-muted); }
 
+/* Ticker search bar (kate 2026-05-05). Sits between filter pills and the
+   signal feed/table. Filters the row-by-row views (feed + table + streak),
+   leaves the equity chart and headline stats showing the whole-book story.
+   Native <input type="search"> gets the browser's clear-X for free. */
+.ticker-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 18px;
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  transition: border-color 0.15s;
+}
+.ticker-search-wrap:focus-within {
+  border-color: rgba(0, 230, 118, 0.45);
+}
+.ticker-search-icon {
+  font-size: 13px;
+  opacity: 0.55;
+  user-select: none;
+}
+#ticker-search {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  outline: none;
+  padding: 2px 0;
+  min-width: 0;
+}
+#ticker-search::placeholder {
+  color: var(--text-muted);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  opacity: 0.7;
+}
+#ticker-search:focus { color: var(--green); }
+.ticker-search-count {
+  color: var(--text-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  white-space: nowrap;
+}
+.ticker-search-count.has-match { color: var(--green); }
+.ticker-search-count.no-match { color: var(--red); }
+
 /* Equity chart: explicit container height so the chart doesn't render tall.
    Default Chart.js aspectRatio of 2 made the chart ~480px on a 960 page-wrap;
    reported by trillah 2026-05-05. We wrap in a fixed-height div + flip
@@ -1535,6 +1590,21 @@ body.premium .unlock-badge { display: none; }
     </div>
   </div>
 
+  <!-- TICKER SEARCH (kate 2026-05-05: "Maybe add a search bar for tickers") -->
+  <div class="ticker-search-wrap">
+    <span class="ticker-search-icon" aria-hidden="true">🔍</span>
+    <input
+      type="search"
+      id="ticker-search"
+      placeholder="Search ticker (e.g. MU, AAPL, NVDA)"
+      autocomplete="off"
+      autocapitalize="characters"
+      spellcheck="false"
+      aria-label="Filter signals by ticker"
+    >
+    <span id="ticker-search-count" class="ticker-search-count" aria-live="polite"></span>
+  </div>
+
   <!-- SIGNAL FEED -->
   <div class="signal-feed" id="signal-feed" role="region" aria-label="Signal feed, card layout" aria-live="polite"></div>
 
@@ -1850,16 +1920,29 @@ body.premium .unlock-badge { display: none; }
     return cat === currentCategory;
   }
 
+  // Ticker search query (kate 2026-05-05). Free-text uppercase substring
+  // match against signal.ticker. Empty = no filter. Applied in getFiltered
+  // (feed + table + streak), NOT in getVisible (stats + chart stay
+  // whole-book). The pattern: filter pills define the universe; ticker
+  // search narrows the display.
+  var TICKER_SEARCH = '';
+  function tickerSearchMatches(s) {
+    if (!TICKER_SEARCH) return true;
+    var t = (s.ticker || '').toUpperCase();
+    return t.indexOf(TICKER_SEARCH) >= 0;
+  }
+
   function getFiltered() {
     var cutoff = isPremium ? null : getFreeCutoff();
     return allSignals.filter(function(s) {
       // Free feed/table: 7-day delay on actual signals
       if (!isPremium && cutoff && s.signal_date >= cutoff) return false;
       if (!matchesCategory(s)) return false;
-      if (currentFilter === 'open') return isOpen(s);
-      if (currentFilter === 'expired') return !isOpen(s);
-      if (currentFilter === 'bullish') return s.direction === 'BULLISH';
-      if (currentFilter === 'bearish') return s.direction === 'BEARISH';
+      if (currentFilter === 'open' && !isOpen(s)) return false;
+      if (currentFilter === 'expired' && isOpen(s)) return false;
+      if (currentFilter === 'bullish' && s.direction !== 'BULLISH') return false;
+      if (currentFilter === 'bearish' && s.direction !== 'BEARISH') return false;
+      if (!tickerSearchMatches(s)) return false;
       return true;
     });
   }
@@ -3636,6 +3719,46 @@ body.premium .unlock-badge { display: none; }
         if (cDollar) cDollar.style.display = '';
       }
       if (typeof renderEquityChart === 'function') renderEquityChart();
+    });
+  })();
+
+  // ---- EVENT: TICKER SEARCH ----
+  // kate 2026-05-05: filter the feed + table + streak by ticker substring.
+  // Updates as you type. Doesn't touch the equity chart or headline stats
+  // (those stay whole-book). Esc clears.
+  (function() {
+    var input = document.getElementById('ticker-search');
+    var countEl = document.getElementById('ticker-search-count');
+    if (!input) return;
+
+    function updateSearchUI() {
+      var raw = input.value.trim().toUpperCase();
+      TICKER_SEARCH = raw;
+      // Refresh the row-by-row views only. renderStreak / renderStats /
+      // renderEquityChart use getVisible() (no search applied) so they
+      // stay whole-book -- search narrows display, not scope.
+      if (typeof renderFeed === 'function') renderFeed();
+      if (typeof renderTable === 'function') renderTable();
+
+      if (!countEl) return;
+      if (!raw) {
+        countEl.textContent = '';
+        countEl.classList.remove('has-match', 'no-match');
+        return;
+      }
+      var matches = getFiltered().length;
+      countEl.textContent = matches + (matches === 1 ? ' match' : ' matches');
+      countEl.classList.toggle('has-match', matches > 0);
+      countEl.classList.toggle('no-match', matches === 0);
+    }
+
+    input.addEventListener('input', updateSearchUI);
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        input.value = '';
+        updateSearchUI();
+        input.blur();
+      }
     });
   })();
 

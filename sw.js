@@ -1,77 +1,148 @@
 /**
- * DarkFlow service worker — Web Push handler (added 2026-05-06).
+ * DarkFlow service worker — Web Push handler (v2 polish, 2026-05-06).
  *
- * Registered by dashboard.html on first signed-in visit. Receives encrypted
- * push payloads from the darkflow-gate Worker, decrypts via the browser's
- * built-in machinery (we just read .data.json()), and shows an OS
- * notification. Click → opens the dashboard scrolled to the signal's card.
+ * Receives encrypted push payloads from the darkflow-gate Worker, displays
+ * a polished OS notification with hero image, action buttons, and tighter
+ * title/body. Click → opens the dashboard scrolled to the signal's card.
+ *
+ * Polish over v1:
+ *  - Title gets direction arrow + ticker + strength label (compact, glanceable)
+ *  - Body uses dot-separator format that lock-screen-truncation handles well
+ *  - "image" field shows DarkFlow brand hero on iOS expanded view + Android
+ *  - Action buttons: "View on dashboard" + "Mute alerts" (Android renders;
+ *    iOS shows none but they don't hurt)
+ *  - Custom vibration pattern (Android) for branded buzz
+ *  - Stays muted on tag-replace (no re-buzz on same-ticker continuation)
  */
 
 self.addEventListener("install", (event) => {
-  // Activate immediately on first install -- no waiting for tabs to close.
   self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
-  // Take control of clients on activation so the first push works
-  // without requiring a page reload.
   event.waitUntil(self.clients.claim());
 });
 
+// Map direction → arrow + emoji-ish symbol for the title.
+function dirArrow(direction) {
+  if (direction === "BULLISH") return "▲";
+  if (direction === "BEARISH") return "▼";
+  return "◆";
+}
+
+// Map server-side strength label → polished title-case word.
+function strengthLabel(s) {
+  if (!s) return "";
+  s = String(s).toLowerCase();
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
 self.addEventListener("push", (event) => {
-  // Payload was encrypted server-side via aes128gcm; the browser's push
-  // service decrypts before delivering, so event.data.json() works.
   let payload = {};
   try {
     if (event.data) payload = event.data.json();
   } catch (_) {
-    // Fallback: if no payload (some providers send empty wakeups), show a
-    // generic notification that prompts a dashboard fetch.
-    payload = { headline: "New signal fired", body: "Tap to view dashboard." };
+    payload = { ticker: "DarkFlow", body: "New signal fired. Tap to view dashboard." };
   }
 
-  const title = payload.headline || `${payload.ticker || ""} ${payload.direction || ""}`.trim() || "DarkFlow signal";
-  const body =
-    payload.body ||
-    [
-      payload.option_type && payload.strike ? `${payload.option_type} $${payload.strike}` : "",
-      payload.exp ? `exp ${payload.exp}` : "",
-      payload.conviction_label ? `Conviction ${payload.conviction_label}` : "",
-    ]
-      .filter(Boolean)
-      .join(" · ") || "Tap for full thesis";
+  const ticker = payload.ticker || "DarkFlow";
+  const arrow = dirArrow(payload.direction);
+  const strength = strengthLabel(payload.strength || payload.conviction_label);
 
-  const tag = payload.ticker ? `signal-${payload.ticker}` : "signal";
+  // ---- TITLE ----
+  // Glanceable on lock screen. Format:
+  //   "▲ $MU · Strong"
+  //   "▼ $SPY · Developing"
+  //   "▲ $TEST · Test"
+  // Falls back to payload.headline if explicitly provided.
+  let title;
+  if (payload.headline) {
+    title = payload.headline;
+  } else if (payload.type === "test") {
+    title = `🔔 ${arrow} $${ticker} · Test`;
+  } else {
+    title = `${arrow} $${ticker}` + (strength ? ` · ${strength}` : "");
+  }
+
+  // ---- BODY ----
+  // Two-line format optimized for iOS lock screen (which shows ~2 lines before
+  // truncating). Line 1 = the trade spec. Line 2 = "tap for thesis" CTA.
+  let body;
+  if (payload.body) {
+    body = payload.body;
+  } else {
+    const specBits = [];
+    if (payload.option_type && payload.strike) {
+      specBits.push(`${payload.option_type} $${payload.strike}`);
+    }
+    if (payload.exp) {
+      specBits.push(payload.exp);
+    }
+    const spec = specBits.join(" · ");
+    body = spec ? `${spec}\nTap for full thesis →` : "Tap for full thesis →";
+  }
+
+  // ---- TAG (collapse same-ticker notifications) ----
+  const tag = ticker !== "DarkFlow" ? `signal-${ticker}` : "signal";
+
+  // ---- ACTIONS ----
+  // Android shows up to 2 buttons; iOS only shows them in expanded view if
+  // the user 3D-touches/long-presses. They don't hurt elsewhere.
+  const actions = [
+    { action: "view", title: "View dashboard", icon: "/favicon-32.png" },
+    { action: "mute", title: "Mute alerts" },
+  ];
+
+  // ---- HERO IMAGE ----
+  // iOS shows this when the user pulls the notification down to expand.
+  // Android shows it inline in the body when expanded. Falls back gracefully
+  // when the asset isn't available (legacy clients just skip it).
+  // Uses the og-image (the polished landing-page social card) as a
+  // brand-aligned hero. Future: per-signal generated chart preview.
+  const image = "https://darkflowsignals.com/og-image.png";
+
+  // ---- VIBRATION ----
+  // [buzz, pause, buzz] = double-tap pattern. Android only; iOS uses default.
+  const vibrate = [180, 80, 180];
 
   event.waitUntil(
     self.registration.showNotification(title, {
       body,
-      tag,                              // collapses repeated notifications for the same ticker
-      renotify: false,                  // silent replace; don't re-buzz
+      tag,
+      renotify: false,            // tag-replace silently; don't re-buzz on same ticker
       icon: "/favicon-32.png",
       badge: "/favicon-32.png",
+      image,
+      vibrate,
+      actions,
+      // timestamp: explicit so iOS notification timestamp matches signal-fire time
+      timestamp: payload.ts || Date.now(),
       data: {
         url: payload.url || "https://darkflowsignals.com/dashboard.html",
         ticker: payload.ticker || null,
         ts: Date.now(),
       },
-      // requireInteraction: true makes desktop sticky; left default for now so
-      // the notification dismisses naturally on phone.
     })
   );
 });
 
 self.addEventListener("notificationclick", (event) => {
+  // Action button "mute" -> mark a flag in IDB and ack; the user can re-enable
+  // from the dashboard later. For now we treat it as "close this one"; the
+  // full mute-flow is Phase 2.
+  if (event.action === "mute") {
+    event.notification.close();
+    return;
+  }
+
   event.notification.close();
   const target = (event.notification.data && event.notification.data.url) || "https://darkflowsignals.com/dashboard.html";
-  // Focus an existing dashboard tab if one is open; otherwise open a new one.
   event.waitUntil(
     (async () => {
       const all = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
       for (const c of all) {
         if (c.url.startsWith("https://darkflowsignals.com")) {
           await c.focus();
-          // If a ticker is in the data, ask the page to scroll to it.
           if (event.notification.data && event.notification.data.ticker) {
             c.postMessage({ type: "scroll-to-ticker", ticker: event.notification.data.ticker });
           }

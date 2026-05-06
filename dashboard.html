@@ -389,6 +389,19 @@ body {
 .streak-block.loss { background: var(--red); }
 .streak-block.open-block { background: var(--border-accent); border: 1px dashed var(--text-muted); }
 
+/* Equity chart: explicit container height so the chart doesn't render tall.
+   Default Chart.js aspectRatio of 2 made the chart ~480px on a 960 page-wrap;
+   reported by trillah 2026-05-05. We wrap in a fixed-height div + flip
+   maintainAspectRatio to false in Chart.js options. */
+.equity-chart-wrap {
+  position: relative;
+  width: 100%;
+  height: 320px;
+}
+@media (max-width: 720px) {
+  .equity-chart-wrap { height: 240px; }
+}
+
 /* Per-block tooltip retained as accessible label only -- visual feedback now
    lives in the single .streak-info panel below the bar (mobile-safe, never
    clips at viewport edges). Reported by trillah 2026-05-05. */
@@ -1478,7 +1491,7 @@ body.premium .unlock-badge { display: none; }
       <span style="color:#F59E0B;display:inline-block;width:56px;">Current $:</span>cumulative $ P&L at calendar expiry (public rule). Respects the 50% stop toggle below.<br>
       <span style="color:var(--text-secondary);display:inline-block;width:56px;">Tip:</span>each dot = one trading day. Tap a dot to see every trade that fired that day.
     </p>
-    <canvas id="equity-chart" height="220" aria-label="Account simulation dollar P&L"></canvas>
+    <div class="equity-chart-wrap"><canvas id="equity-chart" aria-label="Account simulation dollar P&L"></canvas></div>
     <div id="equity-stats" style="display:flex;gap:28px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:13px;flex-wrap:wrap;justify-content:center;align-items:baseline;"></div>
   </div>
 
@@ -3991,8 +4004,10 @@ body.premium .unlock-badge { display: none; }
       },
       options: {
         responsive: true,
-        // Mobile: lock to a max height so the chart fits on phone screen.
-        maintainAspectRatio: true,
+        // Container has a fixed height (.equity-chart-wrap CSS) that drives
+        // chart sizing. maintainAspectRatio:false lets the chart fill the
+        // container both ways instead of locking to a width:height ratio.
+        maintainAspectRatio: false,
         // Mobile-friendly hover: snap to nearest x-axis tick on tap, don't
         // require precise dot intersection. Reported by trillah 2026-05-05:
         // tooltips were cut off on phone when tapping dots near edges.

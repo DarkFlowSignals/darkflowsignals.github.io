@@ -389,24 +389,32 @@ body {
 .streak-block.loss { background: var(--red); }
 .streak-block.open-block { background: var(--border-accent); border: 1px dashed var(--text-muted); }
 
+/* Per-block tooltip retained as accessible label only -- visual feedback now
+   lives in the single .streak-info panel below the bar (mobile-safe, never
+   clips at viewport edges). Reported by trillah 2026-05-05. */
 .streak-tooltip {
-  display: none;
   position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1a1a2e;
-  border: 1px solid var(--border-accent);
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  white-space: nowrap;
-  pointer-events: none;
-  margin-bottom: 4px;
-  z-index: 10;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
 }
-.streak-block:hover .streak-tooltip { display: block; }
+
+/* Single info line below the streak bar. Updates on tap (mobile) / hover
+   (desktop). Always centered, never clips, no positioning math required. */
+.streak-info {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 10px 0 0 0;
+  min-height: 18px;
+  width: 100%;
+  opacity: 0.85;
+  transition: opacity 0.15s;
+}
+.streak-info.empty { opacity: 0.45; font-style: italic; }
+.streak-block.active { transform: scale(1.3); z-index: 2; outline: 1px solid var(--green); }
 
 .streak-tally {
   font-family: var(--font-mono);
@@ -1443,6 +1451,7 @@ body.premium .unlock-badge { display: none; }
           <button class="filter-pill" data-range="1m" role="tab" aria-selected="false">1M</button>
           <button class="filter-pill" data-range="2w" role="tab" aria-selected="false">2W</button>
           <button class="filter-pill" data-range="1w" role="tab" aria-selected="false">1W</button>
+          <button class="filter-pill" data-range="custom" role="tab" aria-selected="false">Custom</button>
         </div>
         <div class="filter-group" style="margin:0;" role="tablist" aria-label="Equity simulation mode">
           <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.2px;margin-right:8px;">Sim</span>
@@ -1450,6 +1459,13 @@ body.premium .unlock-badge { display: none; }
           <button class="filter-pill" data-sim="dollar" role="tab" aria-selected="false">$100 / Trade</button>
         </div>
       </div>
+    </div>
+    <div id="equity-custom-range" style="display:none;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0 6px;padding:8px 12px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);">
+      <span style="color:var(--text-muted);text-transform:uppercase;font-size:10px;letter-spacing:1.2px;">From</span>
+      <input type="date" id="equity-custom-from" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-primary);padding:4px 8px;font-family:var(--font-mono);font-size:11px;border-radius:4px;color-scheme:dark;">
+      <span style="color:var(--text-muted);text-transform:uppercase;font-size:10px;letter-spacing:1.2px;">To</span>
+      <input type="date" id="equity-custom-to" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-primary);padding:4px 8px;font-family:var(--font-mono);font-size:11px;border-radius:4px;color-scheme:dark;">
+      <span id="equity-custom-status" style="color:var(--text-muted);font-size:10px;"></span>
     </div>
     <p id="equity-copy-contract" style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin:8px 0 10px 0;line-height:1.7;">
       Realistic simulation: buy exactly one contract of each published signal at the logged entry premium. One option contract controls 100 shares, so the dollar cost per signal = entry premium x 100. No compounding. Scale by your own sizing: 2 contracts = 2x the numbers, 5 contracts = 5x.
@@ -1480,6 +1496,7 @@ body.premium .unlock-badge { display: none; }
     <div class="streak-blocks" id="streak-blocks"></div>
     <span class="streak-tally" id="streak-tally"></span>
   </div>
+  <div id="streak-info" class="streak-info empty" aria-live="polite">tap or hover any block to see what trade it represents</div>
 
   <!-- FILTERS -->
   <div class="filter-block">
@@ -1940,6 +1957,7 @@ body.premium .unlock-badge { display: none; }
   function renderStreak() {
     var container = document.getElementById('streak-blocks');
     var tally = document.getElementById('streak-tally');
+    var infoEl = document.getElementById('streak-info');
     container.textContent = '';
 
     var visible = getVisible();
@@ -1948,6 +1966,33 @@ body.premium .unlock-badge { display: none; }
     });
     var last20 = sorted.slice(-20);
     var wins = 0, losses = 0;
+
+    function setActiveInfo(block, signal) {
+      // Clear previous active state
+      container.querySelectorAll('.streak-block.active').forEach(function(b) {
+        b.classList.remove('active');
+      });
+      if (!block || !signal) {
+        if (infoEl) {
+          infoEl.classList.add('empty');
+          infoEl.textContent = 'tap or hover any block to see what trade it represents';
+        }
+        return;
+      }
+      block.classList.add('active');
+      if (infoEl) {
+        infoEl.classList.remove('empty');
+        var p = peakPct(signal);
+        var c = currentPct(signal);
+        var dir = signal.direction === 'BULLISH' ? '▲' : (signal.direction === 'BEARISH' ? '▼' : '◆');
+        var sd = signal.signal_date || '?';
+        var resultLabel = !hasResult(signal) ? 'open' :
+                          (isSignalWin(signal) ? 'WIN' : 'LOSS');
+        var pkPart = (p != null) ? ' · peak ' + fmtPct(p) : '';
+        var curPart = (c != null) ? ' · cur ' + fmtPct(c) : '';
+        infoEl.textContent = dir + ' ' + esc(signal.ticker) + ' · ' + sd + pkPart + curPart + ' · ' + resultLabel;
+      }
+    }
 
     last20.forEach(function(s) {
       var block = document.createElement('div');
@@ -1959,14 +2004,38 @@ body.premium .unlock-badge { display: none; }
         block.className = 'streak-block loss'; losses++;
       }
 
+      // Accessible label for screen readers (kept as visually-hidden tooltip)
       var tip = document.createElement('span');
       tip.className = 'streak-tooltip';
       var p = peakPct(s);
       var label = (p != null) ? ('peak ' + fmtPct(p)) : 'open';
       tip.textContent = esc(s.ticker) + ' ' + label;
       block.appendChild(tip);
+
+      // Mobile-safe interactions: tap on touch, hover on desktop, both update
+      // the single .streak-info panel below the bar (no edge clipping).
+      block.addEventListener('mouseenter', function() { setActiveInfo(block, s); });
+      block.addEventListener('click', function(e) {
+        e.stopPropagation();
+        setActiveInfo(block, s);
+      });
       container.appendChild(block);
     });
+
+    // Tap outside the streak bar clears the highlight (desktop hover-out only;
+    // mobile tap-state stays sticky). Attach exactly once -- renderStreak
+    // re-runs on filter changes and we don't want listener accumulation.
+    if (!container.__leaveHooked) {
+      container.addEventListener('mouseleave', function() {
+        if (window.matchMedia && !window.matchMedia('(hover: none)').matches) {
+          // Only clear active state, don't reset infoEl text on hover-out
+          container.querySelectorAll('.streak-block.active').forEach(function(b) {
+            b.classList.remove('active');
+          });
+        }
+      });
+      container.__leaveHooked = true;
+    }
 
     var total = wins + losses;
     if (total > 0) {
@@ -3558,11 +3627,55 @@ body.premium .unlock-badge { display: none; }
   })();
 
   // ---- EVENT: EQUITY DATE-RANGE PILL ----
-  // kate 2026-05-05: filter the equity chart to All / 1M / 2W / 1W. Affects
-  // only the equity chart computation -- doesn't touch the rest of the page.
+  // kate 2026-05-05: filter the equity chart to All / 1M / 2W / 1W / Custom.
+  // Affects only the equity chart computation, doesn't touch the rest of
+  // the page. Custom reveals two date inputs that drive EQUITY_CUSTOM_FROM /
+  // EQUITY_CUSTOM_TO; on input change we re-render.
   (function() {
     var grp = document.querySelector('[data-range]') && document.querySelector('[data-range]').parentElement;
     if (!grp) return;
+    var customWrap = document.getElementById('equity-custom-range');
+    var customFrom = document.getElementById('equity-custom-from');
+    var customTo = document.getElementById('equity-custom-to');
+    var customStatus = document.getElementById('equity-custom-status');
+
+    function updateCustomStatus() {
+      if (!customStatus) return;
+      var f = EQUITY_CUSTOM_FROM, t = EQUITY_CUSTOM_TO;
+      if (!f && !t) customStatus.textContent = '(showing all signals; set From and/or To)';
+      else if (f && !t) customStatus.textContent = '(from ' + f + ' to today)';
+      else if (!f && t) customStatus.textContent = '(start to ' + t + ')';
+      else customStatus.textContent = '(' + f + ' through ' + t + ')';
+    }
+
+    // Default the custom date inputs to a sensible window so first interaction
+    // is friendly: from = 2 weeks ago, to = today.
+    if (customFrom && customTo) {
+      var todayObj = new Date();
+      var twoWeeks = new Date();
+      twoWeeks.setDate(twoWeeks.getDate() - 14);
+      customFrom.value = twoWeeks.toISOString().slice(0, 10);
+      customTo.value = todayObj.toISOString().slice(0, 10);
+      // Set max attribute so users can't pick future dates
+      customFrom.max = todayObj.toISOString().slice(0, 10);
+      customTo.max = todayObj.toISOString().slice(0, 10);
+
+      customFrom.addEventListener('change', function() {
+        EQUITY_CUSTOM_FROM = customFrom.value || null;
+        updateCustomStatus();
+        if (EQUITY_DATE_RANGE === 'custom' && typeof renderEquityChart === 'function') {
+          renderEquityChart();
+        }
+      });
+      customTo.addEventListener('change', function() {
+        EQUITY_CUSTOM_TO = customTo.value || null;
+        updateCustomStatus();
+        if (EQUITY_DATE_RANGE === 'custom' && typeof renderEquityChart === 'function') {
+          renderEquityChart();
+        }
+      });
+    }
+
     grp.addEventListener('click', function(e) {
       var pill = e.target.closest('.filter-pill[data-range]');
       if (!pill) return;
@@ -3573,6 +3686,19 @@ body.premium .unlock-badge { display: none; }
       pill.classList.add('active');
       pill.setAttribute('aria-selected', 'true');
       EQUITY_DATE_RANGE = pill.dataset.range;
+
+      // Show / hide the custom inputs row
+      if (customWrap) {
+        if (EQUITY_DATE_RANGE === 'custom') {
+          customWrap.style.display = 'flex';
+          // Sync state from input values on first reveal
+          EQUITY_CUSTOM_FROM = customFrom && customFrom.value || null;
+          EQUITY_CUSTOM_TO = customTo && customTo.value || null;
+          updateCustomStatus();
+        } else {
+          customWrap.style.display = 'none';
+        }
+      }
       if (typeof renderEquityChart === 'function') renderEquityChart();
     });
   })();
@@ -3667,9 +3793,12 @@ body.premium .unlock-badge { display: none; }
   var FLAT_DOLLAR_PER_TRADE = 100;
   // Date range for the equity curve (kate 2026-05-05). 'all' = entire history.
   // '1m' / '2w' / '1w' filter trades whose outcome_date or signal_date falls
-  // within the lookback window. Affects only the equity chart, not the rest.
+  // within the lookback window. 'custom' uses EQUITY_CUSTOM_FROM / _TO.
+  // Affects only the equity chart, not the rest.
   var EQUITY_DATE_RANGE = 'all';
-  var EQUITY_RANGE_DAYS = { 'all': null, '1m': 31, '2w': 14, '1w': 7 };
+  var EQUITY_RANGE_DAYS = { 'all': null, '1m': 31, '2w': 14, '1w': 7, 'custom': 'CUSTOM' };
+  var EQUITY_CUSTOM_FROM = null;  // 'YYYY-MM-DD'
+  var EQUITY_CUSTOM_TO = null;
 
   function computeEquityCurve() {
     // All signals that match the current pills contribute. Closed trades (status
@@ -3691,18 +3820,29 @@ body.premium .unlock-badge { display: none; }
       return da.localeCompare(db);
     });
 
-    // Apply date-range filter (kate 2026-05-05). 'all' = no filter; otherwise
-    // keep only trades whose pointDate (outcome or signal) falls within the
-    // lookback window from today.
-    var rangeDays = EQUITY_RANGE_DAYS[EQUITY_DATE_RANGE];
-    if (rangeDays != null) {
-      var cutoff = new Date();
-      cutoff.setDate(cutoff.getDate() - rangeDays);
-      var cutoffStr = cutoff.toISOString().slice(0, 10);
+    // Apply date-range filter (kate 2026-05-05). 'all' = no filter, 'custom'
+    // = use EQUITY_CUSTOM_FROM / _TO bounds, otherwise keep only trades
+    // whose pointDate falls within the N-day lookback window from today.
+    if (EQUITY_DATE_RANGE === 'custom') {
+      var fromStr = EQUITY_CUSTOM_FROM || '';
+      var toStr = EQUITY_CUSTOM_TO || '';
       trades = trades.filter(function(s) {
         var d = s.outcome_date || s.signal_date || '';
-        return d >= cutoffStr;
+        if (fromStr && d < fromStr) return false;
+        if (toStr && d > toStr) return false;
+        return true;
       });
+    } else {
+      var rangeDays = EQUITY_RANGE_DAYS[EQUITY_DATE_RANGE];
+      if (typeof rangeDays === 'number') {
+        var cutoff = new Date();
+        cutoff.setDate(cutoff.getDate() - rangeDays);
+        var cutoffStr = cutoff.toISOString().slice(0, 10);
+        trades = trades.filter(function(s) {
+          var d = s.outcome_date || s.signal_date || '';
+          return d >= cutoffStr;
+        });
+      }
     }
 
     var mode = EQUITY_SIM_MODE;

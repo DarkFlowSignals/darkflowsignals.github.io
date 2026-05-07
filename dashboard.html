@@ -1297,6 +1297,17 @@ body.premium .unlock-badge { display: none; }
 /* Detail row td needs to NOT inherit the truncation; thesis has to wrap. */
 .data-table tr.row-detail td { overflow: visible; text-overflow: clip; white-space: normal; }
 
+/* Date + expiry: always show full ISO string. martianinvestor 2026-05-07.
+   Members were getting truncated dates like "2026-05-..." on narrow screens.
+   These cells are always 10 chars max so we let them claim the space they
+   need; horizontal scroll on mobile handles overflow. */
+.data-table .col-date,
+.data-table .col-expiry {
+  overflow: visible;
+  text-overflow: clip;
+  min-width: 88px;
+}
+
 .data-table tr:hover td { background: var(--bg-card); }
 
 .data-table .col-ticker {
@@ -1789,10 +1800,16 @@ body.premium .unlock-badge { display: none; }
   </div>
 
   <!-- ACCOUNT SIMULATION (moved to top 2026-05-05 per kate: "first thing a visitor sees") -->
+  <!-- Collapsible header per martianinvestor 2026-05-07 (#member-input):
+       members who use the trades table more can hide the chart with one click.
+       State persists per user via localStorage. -->
   <div id="equity-section" style="margin:32px 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;">
     <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:4px;">
-      <h3 id="equity-heading" style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0;">Account Simulation · 1 contract per signal</h3>
-      <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+      <button id="equity-collapse-btn" type="button" aria-expanded="true" aria-controls="equity-body" style="background:none;border:none;padding:0;display:flex;align-items:center;gap:8px;cursor:pointer;color:inherit;font-family:inherit;">
+        <span id="equity-chevron" style="display:inline-block;font-size:10px;color:var(--text-muted);transition:transform 0.18s ease;transform:rotate(0deg);">▼</span>
+        <h3 id="equity-heading" style="font-family:var(--font-mono);font-size:14px;color:var(--text-primary);margin:0;">Account Simulation · 1 contract per signal</h3>
+      </button>
+      <div id="equity-controls" style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
         <div class="filter-group" style="margin:0;" role="tablist" aria-label="Date range">
           <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.2px;margin-right:8px;">Range</span>
           <button class="filter-pill active" data-range="all" role="tab" aria-selected="true">All</button>
@@ -1808,6 +1825,7 @@ body.premium .unlock-badge { display: none; }
         </div>
       </div>
     </div>
+    <div id="equity-body">
     <div id="equity-custom-range" style="display:none;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0 6px;padding:8px 12px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);">
       <span style="color:var(--text-muted);text-transform:uppercase;font-size:10px;letter-spacing:1.2px;">From</span>
       <input type="date" id="equity-custom-from" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-primary);padding:4px 8px;font-family:var(--font-mono);font-size:11px;border-radius:4px;color-scheme:dark;">
@@ -1828,6 +1846,7 @@ body.premium .unlock-badge { display: none; }
     </p>
     <div class="equity-chart-wrap"><canvas id="equity-chart" aria-label="Account simulation dollar P&L"></canvas></div>
     <div id="equity-stats" style="display:flex;gap:28px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:13px;flex-wrap:wrap;justify-content:center;align-items:baseline;"></div>
+    </div><!-- /equity-body -->
   </div>
 
   <!-- TRANSPARENCY NOTE -->
@@ -2562,8 +2581,21 @@ body.premium .unlock-badge { display: none; }
     if (isNaN(d.getTime())) return null;
     return Math.max(0, Math.ceil((d.getTime() - Date.now()) / 86400000));
   }
+  // True iff the signal would have been stopped under the strict -50% rule
+  // (i.e. low_return_pct touched -50% during the signal's life). Independent
+  // of where current landed - bounce-back signals still register stopped.
+  function wasStopped(s) {
+    return s.low_return_pct != null && s.low_return_pct <= -50;
+  }
   function v16StateBadge(s) {
     var pk = peakPct(s); var cur = currentPct(s); var dte = v16DTE(s.expiry);
+    // Stop-rule view: if the signal touched -50% during life, label it
+    // STOPPED (definitive) rather than the ambiguous "near stop". Fixes
+    // geoff0962 confusion 2026-05-07: AXTI peaked +75% then rebounded to
+    // +58% live, but had touched -62% intraday. Under applied mode we cap
+    // current at -50%, which made the badge read "near stop" while the
+    // chart drew the actual recovery to +58%. STOPPED is unambiguous.
+    if (currentStopMode === 'applied' && wasStopped(s)) return '🛑 stopped';
     // Order matters: most-current-state-relevant labels first.
     if (cur != null && cur <= -40) return '🚨 near stop';
     if (pk != null && cur != null && pk >= 100 && cur < 0) return '📉 faded';
@@ -2812,7 +2844,13 @@ body.premium .unlock-badge { display: none; }
       var ex = document.createElement('span'); ex.className = 'badge'; ex.style.cssText = 'background:var(--border);color:var(--text-secondary);'; ex.textContent = 'EXPIRED'; sr.appendChild(ex);
     }
     if (stateBadge) {
-      var sb = document.createElement('span'); sb.className = 'badge'; sb.style.cssText = 'background:rgba(255,193,7,0.15);color:var(--amber);font-size:9px;'; sb.textContent = stateBadge; sr.appendChild(sb);
+      // Stopped + near-stop tint red so they read as risk markers; everything
+      // else stays amber (informational).
+      var isRisk = stateBadge.indexOf('stopped') >= 0 || stateBadge.indexOf('near stop') >= 0;
+      var sbCss = isRisk
+        ? 'background:rgba(239,68,68,0.15);color:var(--red);font-size:9px;'
+        : 'background:rgba(255,193,7,0.15);color:var(--amber);font-size:9px;';
+      var sb = document.createElement('span'); sb.className = 'badge'; sb.style.cssText = sbCss; sb.textContent = stateBadge; sr.appendChild(sb);
     }
     if (resultLabel) {
       var rb = document.createElement('span'); rb.className = 'badge badge-' + (resultLabel === 'WIN' ? 'win' : 'loss'); rb.textContent = resultLabel; sr.appendChild(rb);
@@ -2822,6 +2860,17 @@ body.premium .unlock-badge { display: none; }
       var crEl = document.createElement('div'); crEl.className = 'v16-current';
       var cl = document.createElement('span'); cl.className = 'v16-lbl'; cl.textContent = 'current '; crEl.appendChild(cl);
       var cv = document.createElement('span'); cv.className = 'v16-val ' + (cur >= 0 ? 'pos' : 'neg'); cv.textContent = fmtPct(cur); crEl.appendChild(cv);
+      // If we're in stop-rule view AND the signal actually rebounded above
+      // -50% live, append a clarifier so the capped -50% number doesn't
+      // contradict the rebound shown on the chart line. Helps members read
+      // the "what the rule gave you" vs "what the signal actually did" split.
+      if (currentStopMode === 'applied' && wasStopped(s) && s.current_return_pct != null && s.current_return_pct > -50) {
+        var rb = document.createElement('span');
+        rb.className = 'v16-lbl';
+        rb.style.cssText = 'margin-left:6px;color:var(--text-muted);font-size:10px;';
+        rb.textContent = '(rebounded to ' + fmtPct(s.current_return_pct) + ' live)';
+        crEl.appendChild(rb);
+      }
       R.appendChild(crEl);
     }
     var sparkSvg = v16BuildSpark(s, isBullish);
@@ -3483,13 +3532,14 @@ body.premium .unlock-badge { display: none; }
       if (col === 'result') return positionResult(s);
       if (col === 'state') {
         var b = v16StateBadge(s);
-        // Numeric ordering: stop=0, faded=1, fading=2, near peak=3, runner=4, none=5
+        // Numeric ordering: stopped=0, near stop=0, faded=1, fading=2, near peak=3, runner=4, none=5
         if (!b) return 5;
         if (b.indexOf('runner') >= 0) return 4;
         if (b.indexOf('near peak') >= 0) return 3;
         if (b.indexOf('fading') >= 0) return 2;
         if (b.indexOf('faded') >= 0) return 1;
         if (b.indexOf('near stop') >= 0) return 0;
+        if (b.indexOf('stopped') >= 0) return 0;
         return 5;
       }
       if (col === 'spot_current') return s.spot_current;
@@ -3532,6 +3582,7 @@ body.premium .unlock-badge { display: none; }
 
       // Date
       var tdDate = document.createElement('td');
+      tdDate.className = 'col-date';
       tdDate.textContent = esc(s.signal_date);
       tr.appendChild(tdDate);
 
@@ -3593,6 +3644,7 @@ body.premium .unlock-badge { display: none; }
 
       // Expiry (premium only)
       var tdExpiry = document.createElement('td');
+      tdExpiry.className = 'col-expiry';
       if (s.expiry && isPremium) { tdExpiry.textContent = s.expiry; }
       else if (s.expiry) { tdExpiry.appendChild(blurWrap(s.expiry, false)); }
       else if (!isPremium) { tdExpiry.appendChild(lockIcon()); }
@@ -4174,6 +4226,31 @@ body.premium .unlock-badge { display: none; }
     });
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') close();
+    });
+  })();
+
+  // ---- EVENT: EQUITY CHART COLLAPSE (martianinvestor 2026-05-07) ----
+  // Members who use the trades table more can hide the chart panel. State
+  // persists per browser via localStorage so the preference sticks.
+  (function() {
+    var btn = document.getElementById('equity-collapse-btn');
+    var body = document.getElementById('equity-body');
+    var ctrls = document.getElementById('equity-controls');
+    var chev = document.getElementById('equity-chevron');
+    if (!btn || !body || !chev) return;
+    function setCollapsed(c) {
+      body.style.display = c ? 'none' : '';
+      if (ctrls) ctrls.style.display = c ? 'none' : '';
+      chev.style.transform = c ? 'rotate(-90deg)' : 'rotate(0deg)';
+      btn.setAttribute('aria-expanded', c ? 'false' : 'true');
+      try { localStorage.setItem('df_equity_collapsed', c ? '1' : '0'); } catch (_) {}
+    }
+    var initial = false;
+    try { initial = localStorage.getItem('df_equity_collapsed') === '1'; } catch (_) {}
+    if (initial) setCollapsed(true);
+    btn.addEventListener('click', function() {
+      var collapsed = btn.getAttribute('aria-expanded') === 'false';
+      setCollapsed(!collapsed);
     });
   })();
 

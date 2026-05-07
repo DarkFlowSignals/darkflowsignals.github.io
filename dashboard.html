@@ -1265,12 +1265,17 @@ body.premium .unlock-badge { display: none; }
   border-collapse: collapse;
   font-family: var(--font-mono);
   font-size: 11px;
-  table-layout: fixed;
+  /* Auto layout (2026-05-07): columns size to content, not equal-width.
+     Was 'fixed' which crammed every column to ~1/13th of the table width
+     making strike + entry + dates pile into each other. Auto + nowrap
+     gives each column the room it actually needs; horizontal scroll on
+     mobile handles overflow. */
+  table-layout: auto;
 }
 
 .data-table th {
   text-align: left;
-  padding: 8px 5px;
+  padding: 9px 12px 9px 8px;
   color: var(--text-muted);
   font-size: 9px;
   text-transform: uppercase;
@@ -1285,27 +1290,25 @@ body.premium .unlock-badge { display: none; }
 .data-table th .sort-arrow { margin-left: 2px; font-size: 8px; }
 
 .data-table td {
-  padding: 7px 5px;
+  /* Right-padding (12px) > left-padding (8px) so values breathe before
+     the next column. Top/bottom 9px gives proper line-height room. */
+  padding: 9px 12px 9px 8px;
   border-bottom: 1px solid var(--border);
   color: var(--text-secondary);
   white-space: nowrap;
   font-size: 11px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  vertical-align: middle;
 }
-.data-table .badge { font-size: 9px; padding: 2px 5px; }
+.data-table .badge { font-size: 9px; padding: 2px 6px; }
 /* Detail row td needs to NOT inherit the truncation; thesis has to wrap. */
-.data-table tr.row-detail td { overflow: visible; text-overflow: clip; white-space: normal; }
+.data-table tr.row-detail td { white-space: normal; }
 
-/* Date + expiry: always show full ISO string. martianinvestor 2026-05-07.
-   Members were getting truncated dates like "2026-05-..." on narrow screens.
-   These cells are always 10 chars max so we let them claim the space they
-   need; horizontal scroll on mobile handles overflow. */
-.data-table .col-date,
-.data-table .col-expiry {
-  overflow: visible;
-  text-overflow: clip;
-  min-width: 88px;
+/* Ticker column gets extra left/right space so the direction arrow + symbol
+   read as one unit, with breathing room from the date and score columns. */
+.data-table th:nth-child(2),
+.data-table td:nth-child(2) {
+  padding-left: 14px;
+  padding-right: 16px;
 }
 
 .data-table tr:hover td { background: var(--bg-card); }

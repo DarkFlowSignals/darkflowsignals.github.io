@@ -7,8 +7,8 @@
     { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
     { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ],
-  "theme_color": "#0d1117",
-  "background_color": "#0d1117",
+  "theme_color": "#0A0A0F",
+  "background_color": "#0A0A0F",
   "display": "standalone",
-  "start_url": "/"
+  "start_url": "/dashboard.html?utm_source=pwa"
 }

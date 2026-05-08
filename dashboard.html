@@ -5352,6 +5352,31 @@ body.premium .unlock-badge { display: none; }
     }, 300);
   }
 
+  // URL-hash deep-link (parses window.location.hash for ?ticker=XXX or #TICKER).
+  // First-line fallback when iOS happens to preserve the notification URL on
+  // PWA launch. Triggers immediately on page load - faster than IDB if it works.
+  function _consumeHashDeepLink() {
+    try {
+      var hash = (window.location.hash || "").replace(/^#/, "");
+      if (!hash) return;
+      // Support either `#TICKER` or `#ticker=TICKER&deeplink=1`
+      var ticker = null;
+      if (hash.indexOf("=") < 0) {
+        // Plain ticker form
+        if (/^[A-Z]{1,8}$/i.test(hash)) ticker = hash;
+      } else {
+        var params = new URLSearchParams(hash);
+        ticker = params.get("ticker");
+      }
+      if (ticker) {
+        _runDeepLink(ticker);
+        // Clear hash so a refresh doesn't re-trigger
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+      }
+    } catch (_) {}
+  }
+  _consumeHashDeepLink();
+
   // Pending deep-link from a push notification tap (iOS PWA cold-launch path).
   // The SW writes the target ticker to IndexedDB before iOS can ignore the
   // notification URL and launch the PWA at start_url. We read + consume it

@@ -5378,6 +5378,19 @@ body.premium .unlock-badge { display: none; }
   var _deepLinkFiredVia = null;
   function _firedVia(path) { _deepLinkFiredVia = _deepLinkFiredVia || path; }
 
+  // Capture debug flag BEFORE the URL deep-link parser clears search+hash.
+  // Persist in sessionStorage so subsequent loads (e.g. after deep-link runs
+  // history.replaceState) keep the panel visible.
+  var _debugMode = (window.location.search.indexOf("debug=1") >= 0) ||
+                    (window.location.hash.indexOf("debug") >= 0);
+  try {
+    if (_debugMode) sessionStorage.setItem("df_debug", "1");
+    else if (sessionStorage.getItem("df_debug") === "1") _debugMode = true;
+  } catch (_) {}
+  // Capture original URL state for the debug panel
+  var _origHash = window.location.hash || "(none)";
+  var _origQuery = window.location.search || "(none)";
+
   // URL-hash + URL-query deep-link (parses #TICKER or ?ticker=XXX).
   // Combined fallback when iOS preserves any part of the notification URL
   // through PWA launch. Triggers immediately - fastest path if it works.
@@ -5489,32 +5502,51 @@ body.premium .unlock-badge { display: none; }
     });
   }
 
-  // Debug panel: ?debug=1 in URL surfaces the deep-link path that fired so
-  // the operator can diagnose iOS routing issues directly from their phone
-  // without needing a desktop console. Updates on every state change.
-  if (window.location.search.indexOf("debug=1") >= 0) {
+  // Debug panel: ?debug=1 (persisted in sessionStorage). Surfaces the
+  // deep-link path that fired so the operator can diagnose iOS routing
+  // issues directly from their phone without needing a desktop console.
+  if (_debugMode) {
     var dbg = document.createElement("div");
     dbg.id = "deeplink-debug";
     dbg.style.cssText = (
       "position:fixed;bottom:8px;left:8px;z-index:99999;padding:8px 12px;" +
       "background:rgba(20,24,32,0.95);color:#42A5F5;border:1px solid #2D3340;" +
       "border-radius:6px;font-family:monospace;font-size:11px;line-height:1.5;" +
-      "max-width:300px;pointer-events:auto;cursor:pointer"
+      "max-width:300px;pointer-events:auto;cursor:pointer;white-space:pre-wrap;"
     );
-    dbg.title = "Tap to copy state to clipboard";
+    dbg.title = "Tap to copy state to clipboard. Tap close to dismiss.";
     function _renderDbg() {
-      var hash = window.location.hash || "(none)";
-      var qs = window.location.search || "(none)";
-      dbg.textContent = "deeplink: " + (_deepLinkFiredVia || "none yet") +
-        "\nhash: " + hash +
-        "\nquery: " + qs +
-        "\ntime: " + new Date().toISOString().slice(11, 19);
+      dbg.textContent =
+        "deeplink-fired: " + (_deepLinkFiredVia || "(none yet)") +
+        "\norig-hash:  " + _origHash +
+        "\norig-query: " + _origQuery +
+        "\ncur-hash:   " + (window.location.hash || "(none)") +
+        "\ncur-query:  " + (window.location.search || "(none)") +
+        "\ntime: " + new Date().toISOString().slice(11, 19) +
+        "\n[tap to copy / clear]";
     }
-    document.body.appendChild(dbg);
-    _renderDbg();
-    setInterval(_renderDbg, 1000);
+    function _attachDbg() {
+      if (document.body) {
+        document.body.appendChild(dbg);
+        _renderDbg();
+        setInterval(_renderDbg, 1000);
+      } else {
+        setTimeout(_attachDbg, 100);
+      }
+    }
+    _attachDbg();
     dbg.addEventListener("click", function() {
-      try { navigator.clipboard.writeText(dbg.textContent); dbg.style.color = "#00E676"; } catch (_) {}
+      try {
+        navigator.clipboard.writeText(dbg.textContent);
+        dbg.style.color = "#00E676";
+      } catch (_) {}
+      // Double-tap clears
+      var now = Date.now();
+      if (dbg._lastTap && now - dbg._lastTap < 500) {
+        sessionStorage.removeItem("df_debug");
+        dbg.remove();
+      }
+      dbg._lastTap = now;
     });
   }
 

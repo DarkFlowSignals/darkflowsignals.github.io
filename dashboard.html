@@ -5374,30 +5374,66 @@ body.premium .unlock-badge { display: none; }
     }, 300);
   }
 
-  // URL-hash deep-link (parses window.location.hash for ?ticker=XXX or #TICKER).
-  // First-line fallback when iOS happens to preserve the notification URL on
-  // PWA launch. Triggers immediately on page load - faster than IDB if it works.
-  function _consumeHashDeepLink() {
+  // Track which deep-link path actually fired (for ?debug=1 visibility).
+  var _deepLinkFiredVia = null;
+  function _firedVia(path) { _deepLinkFiredVia = _deepLinkFiredVia || path; }
+
+  // URL-hash + URL-query deep-link (parses #TICKER or ?ticker=XXX).
+  // Combined fallback when iOS preserves any part of the notification URL
+  // through PWA launch. Triggers immediately - fastest path if it works.
+  function _consumeUrlDeepLink() {
     try {
+      // Hash form: #TICKER or #ticker=TICKER
       var hash = (window.location.hash || "").replace(/^#/, "");
-      if (!hash) return;
-      // Support either `#TICKER` or `#ticker=TICKER&deeplink=1`
       var ticker = null;
-      if (hash.indexOf("=") < 0) {
-        // Plain ticker form
-        if (/^[A-Z]{1,8}$/i.test(hash)) ticker = hash;
-      } else {
-        var params = new URLSearchParams(hash);
-        ticker = params.get("ticker");
+      if (hash) {
+        if (hash.indexOf("=") < 0 && /^[A-Z]{1,8}$/i.test(hash)) {
+          ticker = hash;
+        } else {
+          try { ticker = new URLSearchParams(hash).get("ticker"); } catch (_) {}
+        }
+      }
+      // Query form: ?ticker=TICKER (some iOS PWA versions preserve query but
+      // not hash). Falls through if hash already matched.
+      if (!ticker) {
+        try { ticker = new URLSearchParams(window.location.search).get("ticker"); } catch (_) {}
       }
       if (ticker) {
+        _firedVia("url");
         _runDeepLink(ticker);
-        // Clear hash so a refresh doesn't re-trigger
-        history.replaceState(null, "", window.location.pathname + window.location.search);
+        // Clean URL so refresh doesn't re-trigger
+        history.replaceState(null, "", window.location.pathname);
       }
     } catch (_) {}
   }
-  _consumeHashDeepLink();
+  _consumeUrlDeepLink();
+
+  // Server-side deep-link queue (the iOS-resistant path).
+  // /api/push/recent returns the most-recent push for the authenticated user
+  // if it's within 90s. Worker writes this on every fan-out. Doesn't depend
+  // on SW notificationclick firing or URL preservation - pure server state.
+  // Operator confirmed 2026-05-07: iOS PWA tap opens PWA but NEITHER hash,
+  // SW msg, nor SW-written IDB makes it through. Server queue is the catch.
+  function _consumeServerDeepLink() {
+    try {
+      fetch("/api/push/recent", { credentials: "include", cache: "no-store" })
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(d) {
+          if (d && d.pending && d.pending.ticker && !_deepLinkFiredVia) {
+            // Only honor if recent (<60s) - the worker already filtered to 90s
+            // TTL but the operator may have visited dashboard for unrelated
+            // reasons within that window.
+            if ((d.pending.age_seconds || 0) < 60) {
+              _firedVia("server");
+              _runDeepLink(d.pending.ticker);
+            }
+          }
+        })
+        .catch(function() {});
+    } catch (_) {}
+  }
+  // Delay so the URL/IDB paths have first crack (faster) before server fetch
+  setTimeout(_consumeServerDeepLink, 400);
 
   // Pending deep-link from a push notification tap (iOS PWA cold-launch path).
   // The SW writes the target ticker to IndexedDB before iOS can ignore the
@@ -5424,7 +5460,8 @@ body.premium .unlock-badge { display: none; }
               // Only honor recent (< 60s) deep-links so a stale entry doesn't
               // hijack a normal dashboard visit hours later.
               var age = Date.now() - (rec.fired_at || 0);
-              if (age < 60000) {
+              if (age < 60000 && !_deepLinkFiredVia) {
+                _firedVia("idb");
                 _runDeepLink(rec.ticker);
               }
               store.delete("pending");
@@ -5446,8 +5483,38 @@ body.premium .unlock-badge { display: none; }
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.addEventListener("message", function(event) {
       if (event.data && event.data.type === "scroll-to-ticker" && event.data.ticker) {
+        if (!_deepLinkFiredVia) _firedVia("sw-message");
         _runDeepLink(event.data.ticker);
       }
+    });
+  }
+
+  // Debug panel: ?debug=1 in URL surfaces the deep-link path that fired so
+  // the operator can diagnose iOS routing issues directly from their phone
+  // without needing a desktop console. Updates on every state change.
+  if (window.location.search.indexOf("debug=1") >= 0) {
+    var dbg = document.createElement("div");
+    dbg.id = "deeplink-debug";
+    dbg.style.cssText = (
+      "position:fixed;bottom:8px;left:8px;z-index:99999;padding:8px 12px;" +
+      "background:rgba(20,24,32,0.95);color:#42A5F5;border:1px solid #2D3340;" +
+      "border-radius:6px;font-family:monospace;font-size:11px;line-height:1.5;" +
+      "max-width:300px;pointer-events:auto;cursor:pointer"
+    );
+    dbg.title = "Tap to copy state to clipboard";
+    function _renderDbg() {
+      var hash = window.location.hash || "(none)";
+      var qs = window.location.search || "(none)";
+      dbg.textContent = "deeplink: " + (_deepLinkFiredVia || "none yet") +
+        "\nhash: " + hash +
+        "\nquery: " + qs +
+        "\ntime: " + new Date().toISOString().slice(11, 19);
+    }
+    document.body.appendChild(dbg);
+    _renderDbg();
+    setInterval(_renderDbg, 1000);
+    dbg.addEventListener("click", function() {
+      try { navigator.clipboard.writeText(dbg.textContent); dbg.style.color = "#00E676"; } catch (_) {}
     });
   }
 

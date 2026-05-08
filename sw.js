@@ -97,9 +97,13 @@ self.addEventListener("push", (event) => {
   // iOS shows this when the user pulls the notification down to expand.
   // Android shows it inline in the body when expanded. Falls back gracefully
   // when the asset isn't available (legacy clients just skip it).
-  // Uses the og-image (the polished landing-page social card) as a
-  // brand-aligned hero. Future: per-signal generated chart preview.
-  const image = "https://darkflowsignals.com/og-image.png";
+  //
+  // Per-signal chart preview added 2026-05-07: push_broadcast.py renders a
+  // 30-day underlying-stock chart with entry-date marker and includes the
+  // public URL as payload.image_url. Falls back to the brand og-image when
+  // the chart generator failed (Alpaca/yfinance both unavailable, or render
+  // exception). Test pushes can also pass image_url directly to override.
+  const image = payload.image_url || "https://darkflowsignals.com/og-image.png";
 
   // ---- VIBRATION ----
   // [buzz, pause, buzz] = double-tap pattern. Android only; iOS uses default.

@@ -2901,6 +2901,34 @@ body.premium .unlock-badge { display: none; }
     detail.style.display = 'none';
     var expand = document.createElement('div'); expand.className = 'v16-expand';
 
+    // Underlying chart (TradingView mini widget). Lazy-loaded iframe so it
+    // doesn't fire until card expand makes it visible (display:none parent
+    // + loading="lazy" defers fetch). Free for all tiers; the chart itself
+    // is generic underlying data, no thesis leak. Added 2026-05-07.
+    var chartSec = document.createElement('div'); chartSec.className = 'v16-expand-section';
+    var chartLbl = document.createElement('div'); chartLbl.className = 'v16-expand-label';
+    chartLbl.textContent = 'Underlying chart  ·  ' + esc(s.ticker);
+    chartSec.appendChild(chartLbl);
+    var chartIframe = document.createElement('iframe');
+    var chartConfig = encodeURIComponent(JSON.stringify({
+      symbol: s.ticker,
+      width: '100%',
+      height: 140,
+      locale: 'en',
+      dateRange: '1M',
+      colorTheme: 'dark',
+      isTransparent: true,
+      autosize: false,
+      largeChartUrl: ''
+    }));
+    chartIframe.src = 'https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=en#' + chartConfig;
+    chartIframe.style.cssText = 'width:100%;height:140px;border:0;display:block;margin-top:6px;border-radius:4px;background:transparent;';
+    chartIframe.loading = 'lazy';
+    chartIframe.title = s.ticker + ' price chart';
+    chartIframe.scrolling = 'no';
+    chartSec.appendChild(chartIframe);
+    expand.appendChild(chartSec);
+
     var GREEK_META = {
       delta:   { sym: 'Δ',   name: 'Delta',         desc: 'Move per $1 in underlying.' },
       gamma:   { sym: 'Γ',   name: 'Gamma',         desc: 'How fast delta changes.' },

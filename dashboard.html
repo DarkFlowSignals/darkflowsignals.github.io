@@ -5315,6 +5315,83 @@ body.premium .unlock-badge { display: none; }
     }
   }
 
+  // Common deep-link runner: filters search to ticker, scrolls card into view,
+  // auto-clicks to expand. Used by both the SW message path AND the IDB
+  // pending-deep-link path (iOS PWA cold-launch from a push tap).
+  // Retries up to 5s while signals.json loads + cards render, since on iOS
+  // PWA cold launch the IDB read often beats the data fetch.
+  function _runDeepLink(ticker, attempt) {
+    if (!ticker) return;
+    var t = String(ticker).toUpperCase();
+    var search = document.getElementById("ticker-search");
+    if (search && search.value !== t) {
+      search.value = t;
+      search.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+    attempt = attempt || 0;
+    setTimeout(function() {
+      var cards = document.querySelectorAll(".signal-card");
+      var found = false;
+      for (var i = 0; i < cards.length; i++) {
+        var c = cards[i];
+        // Skip hidden cards (filter may have applied display:none)
+        if (c.offsetParent === null && c.style.display === "none") continue;
+        var tk = c.querySelector(".v16-ticker, .card-ticker");
+        if (tk && tk.textContent.replace(/[^A-Z]/g, "") === t) {
+          found = true;
+          c.scrollIntoView({ behavior: "smooth", block: "center" });
+          setTimeout(function(){ c.click(); }, 200);
+          break;
+        }
+      }
+      // Cards not rendered yet (signals.json still loading on cold launch)?
+      // Retry up to 5 seconds (10 attempts * 500ms).
+      if (!found && attempt < 10) {
+        setTimeout(function() { _runDeepLink(t, attempt + 1); }, 500);
+      }
+    }, 300);
+  }
+
+  // Pending deep-link from a push notification tap (iOS PWA cold-launch path).
+  // The SW writes the target ticker to IndexedDB before iOS can ignore the
+  // notification URL and launch the PWA at start_url. We read + consume it
+  // on every dashboard load.
+  function _consumePendingDeepLink() {
+    try {
+      var req = indexedDB.open("darkflow-pwa", 1);
+      req.onupgradeneeded = function(e) {
+        var db = e.target.result;
+        if (!db.objectStoreNames.contains("deep_links")) {
+          db.createObjectStore("deep_links", { keyPath: "id" });
+        }
+      };
+      req.onsuccess = function(e) {
+        var db = e.target.result;
+        try {
+          var tx = db.transaction("deep_links", "readwrite");
+          var store = tx.objectStore("deep_links");
+          var get = store.get("pending");
+          get.onsuccess = function() {
+            var rec = get.result;
+            if (rec && rec.ticker) {
+              // Only honor recent (< 60s) deep-links so a stale entry doesn't
+              // hijack a normal dashboard visit hours later.
+              var age = Date.now() - (rec.fired_at || 0);
+              if (age < 60000) {
+                _runDeepLink(rec.ticker);
+              }
+              store.delete("pending");
+            }
+            db.close();
+          };
+          get.onerror = function() { db.close(); };
+        } catch (_) { db.close(); }
+      };
+      req.onerror = function() {};
+    } catch (_) {}
+  }
+  _consumePendingDeepLink();
+
   // Service worker -> page click-through messaging (scroll to ticker + expand card).
   // 2026-05-07: auto-expand the matched card after filter so iOS users (where
   // push image rendering is unreliable) immediately see the underlying chart
@@ -5322,26 +5399,7 @@ body.premium .unlock-badge { display: none; }
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.addEventListener("message", function(event) {
       if (event.data && event.data.type === "scroll-to-ticker" && event.data.ticker) {
-        var t = String(event.data.ticker).toUpperCase();
-        var search = document.getElementById("ticker-search");
-        if (search) {
-          search.value = t;
-          search.dispatchEvent(new Event("input", { bubbles: true }));
-        }
-        // Wait for the card to render after filter, then click to expand.
-        setTimeout(function() {
-          var cards = document.querySelectorAll(".signal-card");
-          for (var i = 0; i < cards.length; i++) {
-            var c = cards[i];
-            var tk = c.querySelector(".v16-ticker, .card-ticker");
-            if (tk && tk.textContent.replace(/[^A-Z]/g, "") === t) {
-              c.scrollIntoView({ behavior: "smooth", block: "center" });
-              // Click after the scroll starts so the expanded panel is in view
-              setTimeout(function() { c.click(); }, 200);
-              break;
-            }
-          }
-        }, 300);
+        _runDeepLink(event.data.ticker);
       }
     });
   }

@@ -130,6 +130,37 @@ self.addEventListener("push", (event) => {
   );
 });
 
+// Stash the pending deep-link in IndexedDB so the dashboard can pick it up
+// even when iOS launches the PWA fresh and bypasses the SW's openWindow URL.
+// 2026-05-07: iOS PWA notification taps don't reliably hit the URL field of
+// the notification; they launch the PWA at manifest start_url. The dashboard
+// checks this queue on every load and consumes any pending deep-link.
+async function _stashPendingDeepLink(ticker, ts) {
+  try {
+    const req = indexedDB.open("darkflow-pwa", 1);
+    return await new Promise((resolve, reject) => {
+      req.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains("deep_links")) {
+          db.createObjectStore("deep_links", { keyPath: "id" });
+        }
+      };
+      req.onsuccess = (e) => {
+        const db = e.target.result;
+        const tx = db.transaction("deep_links", "readwrite");
+        const store = tx.objectStore("deep_links");
+        store.put({ id: "pending", ticker, ts, fired_at: Date.now() });
+        tx.oncomplete = () => { db.close(); resolve(true); };
+        tx.onerror = () => { db.close(); reject(tx.error); };
+      };
+      req.onerror = () => reject(req.error);
+    });
+  } catch (e) {
+    // IndexedDB unavailable - not fatal, dashboard will just not auto-scroll.
+    return false;
+  }
+}
+
 self.addEventListener("notificationclick", (event) => {
   // Action button "mute" -> mark a flag in IDB and ack; the user can re-enable
   // from the dashboard later. For now we treat it as "close this one"; the
@@ -140,19 +171,34 @@ self.addEventListener("notificationclick", (event) => {
   }
 
   event.notification.close();
-  const target = (event.notification.data && event.notification.data.url) || "https://darkflowsignals.com/dashboard.html";
+  const data = event.notification.data || {};
+  const target = data.url || "https://darkflowsignals.com/dashboard.html";
+  const ticker = data.ticker || null;
+  const ts = data.ts || Date.now();
+
   event.waitUntil(
     (async () => {
+      // ALWAYS stash the deep-link first so the page can read it regardless
+      // of how it gets opened (focus existing, openWindow, or iOS launching
+      // PWA at start_url and ignoring our URL).
+      if (ticker) {
+        await _stashPendingDeepLink(ticker, ts);
+      }
+
       const all = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
       for (const c of all) {
         if (c.url.startsWith("https://darkflowsignals.com")) {
           await c.focus();
-          if (event.notification.data && event.notification.data.ticker) {
-            c.postMessage({ type: "scroll-to-ticker", ticker: event.notification.data.ticker });
+          // Existing window: also send a live message in case the page is
+          // already loaded and ready (no IDB read needed).
+          if (ticker) {
+            c.postMessage({ type: "scroll-to-ticker", ticker });
           }
           return;
         }
       }
+      // No existing window: open the target. iOS PWA may ignore the URL and
+      // launch at start_url instead - the IDB-stashed ticker covers that case.
       await self.clients.openWindow(target);
     })()
   );

@@ -5315,16 +5315,33 @@ body.premium .unlock-badge { display: none; }
     }
   }
 
-  // Service worker -> page click-through messaging (scroll to ticker)
+  // Service worker -> page click-through messaging (scroll to ticker + expand card).
+  // 2026-05-07: auto-expand the matched card after filter so iOS users (where
+  // push image rendering is unreliable) immediately see the underlying chart
+  // inside the expanded panel without having to tap the card.
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.addEventListener("message", function(event) {
       if (event.data && event.data.type === "scroll-to-ticker" && event.data.ticker) {
+        var t = String(event.data.ticker).toUpperCase();
         var search = document.getElementById("ticker-search");
         if (search) {
-          search.value = event.data.ticker;
+          search.value = t;
           search.dispatchEvent(new Event("input", { bubbles: true }));
-          search.scrollIntoView({ behavior: "smooth", block: "center" });
         }
+        // Wait for the card to render after filter, then click to expand.
+        setTimeout(function() {
+          var cards = document.querySelectorAll(".signal-card");
+          for (var i = 0; i < cards.length; i++) {
+            var c = cards[i];
+            var tk = c.querySelector(".v16-ticker, .card-ticker");
+            if (tk && tk.textContent.replace(/[^A-Z]/g, "") === t) {
+              c.scrollIntoView({ behavior: "smooth", block: "center" });
+              // Click after the scroll starts so the expanded panel is in view
+              setTimeout(function() { c.click(); }, 200);
+              break;
+            }
+          }
+        }, 300);
       }
     });
   }

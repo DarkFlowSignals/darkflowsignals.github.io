@@ -5347,6 +5347,28 @@ body.premium .unlock-badge { display: none; }
       // Cards not rendered yet (signals.json still loading on cold launch)?
       // Retry up to 5 seconds (10 attempts * 500ms).
       if (!found && attempt < 10) {
+        // After 2nd retry, try clearing UI filters in case the target card
+        // is hidden by default view (e.g. watchlist entry while default is
+        // primary-only). Best-effort; safe no-op if buttons don't exist.
+        if (attempt === 3) {
+          try {
+            // Click "All" / "Both" filter buttons to widen the view
+            ["filter-all", "filter-status-all", "filter-category-both",
+             "filter-direction-all"].forEach(function(id) {
+              var b = document.getElementById(id);
+              if (b) b.click();
+            });
+            // Also try the data-filter-value="all" pattern
+            document.querySelectorAll('[data-filter="all"], [data-status="all"], [data-category="both"]').forEach(function(el) {
+              try { el.click(); } catch(_) {}
+            });
+            // Re-set the search after filter buttons may have cleared it
+            if (search) {
+              search.value = t;
+              search.dispatchEvent(new Event("input", { bubbles: true }));
+            }
+          } catch (_) {}
+        }
         setTimeout(function() { _runDeepLink(t, attempt + 1); }, 500);
       }
     }, 300);
